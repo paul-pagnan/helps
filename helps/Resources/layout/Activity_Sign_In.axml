@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@drawable/bg"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#44ffffff"
+        android:id="@+id/relativeLayout6"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:text="Don't have an account? Sign Up"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:padding="15dp"
+            android:textSize="13dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/relativeLayout6"
+        android:background="#44ffffff"
+        android:id="@+id/relativeLayout1">
+        <Button
+            android:text="Sign In"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signin"
+            android:background="#6563a4"
+            android:textColor="@android:color/background_light"
+            android:typeface="normal"
+            android:height="60dp"
+            android:textAllCaps="false" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/relativeLayout1"
+        android:background="#44ffffff"
+        android:padding="10dp"
+        android:id="@+id/relativeLayout2">
+        <eightbot.droid.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:password="true"
+            android:id="@+id/txt_password"
+            android:layout_margin="8dp"
+            style="@style/whiteEditText" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/relativeLayout2"
+        android:background="#44ffffff"
+        android:padding="10dp"
+        android:id="@+id/relativeLayout3">
+        <requestFocus />
+        <eightbot.droid.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Student ID"
+            android:id="@+id/txt_studentId"
+            android:layout_margin="8dp"
+            style="@style/whiteEditText" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout3"
+        android:id="@+id/relativeLayout4">
+        <TextView
+            android:text="Get Started"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView1"
+            android:gravity="center_horizontal"
+            android:textColor="#fff"
+            android:textSize="25dp" />
+    </RelativeLayout>
+</RelativeLayout>
