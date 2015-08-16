@@ -26,7 +26,7 @@ namespace helps
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Activity_Register);
 
-            var t = FindViewById<Toolbar>(Resource.Id.toolbar);
+            var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
 
             //Toolbar will now take on default actionbar characteristics
        
@@ -35,7 +35,7 @@ namespace helps
             client = new MobileServiceClient(applicationURL, applicationKey);
 
 
-           // amvMenu = t.FindViewById<ActionMenuView>(Resource.Id.t);
+           amvMenu = t.FindViewById<ActionMenuView>(Resource.Id.amvMenu);
 
             //        amvMenu.SetOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
             //  @Override

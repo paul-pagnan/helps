@@ -106,6 +106,12 @@ namespace helps
 			// aapt resource value: 0x7f08000f
 			public const int LinearLayout1 = 2131230735;
 			
+			// aapt resource value: 0x7f080001
+			public const int Ttoolbar = 2131230721;
+			
+			// aapt resource value: 0x7f080015
+			public const int amvMenu = 2131230741;
+			
 			// aapt resource value: 0x7f080012
 			public const int buttonAddToDo = 2131230738;
 			
@@ -118,11 +124,11 @@ namespace helps
 			// aapt resource value: 0x7f080013
 			public const int listViewToDo = 2131230739;
 			
-			// aapt resource value: 0x7f080016
-			public const int menu_refresh = 2131230742;
+			// aapt resource value: 0x7f080017
+			public const int menu_refresh = 2131230743;
 			
-			// aapt resource value: 0x7f080015
-			public const int menu_share = 2131230741;
+			// aapt resource value: 0x7f080016
+			public const int menu_share = 2131230742;
 			
 			// aapt resource value: 0x7f080006
 			public const int register = 2131230726;
@@ -159,9 +165,6 @@ namespace helps
 			
 			// aapt resource value: 0x7f080010
 			public const int textViewTitle = 2131230736;
-			
-			// aapt resource value: 0x7f080001
-			public const int toolbar = 2131230721;
 			
 			// aapt resource value: 0x7f080004
 			public const int txt_firstName = 2131230724;

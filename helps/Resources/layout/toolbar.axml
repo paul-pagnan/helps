@@ -4,13 +4,13 @@
     android:id="@+id/Ttoolbar"
     android:layout_height="200dp"
     android:layout_width="match_parent"
-    android:minHeight="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:minHeight="?android:attr/actionBarSize"
+    android:background="?android:attr/colorPrimary"
     android:gravity="top|start"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+    android:popupTheme="@android:style/ThemeOverlay.Material.Light">
     <ActionMenuView
         android:id="@+id/amvMenu"
         android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?android:attr/actionBarSize" />
 </Toolbar>
