@@ -23,30 +23,16 @@ namespace helps
     [Activity(MainLauncher = true,
                Icon = "@drawable/ic_launcher", Label = "@string/app_name",
                Theme = "@style/AppTheme")]
-    public class SignInActivity : Activity
+    public class SignInActivity : Main
     {
-        private MobileServiceClient client;
-
-        const string applicationURL = @"https://helps.azure-mobile.net/";
-        const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
-
+        
         protected override async void OnCreate(Bundle bundle)
         {
-
-                      // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Activity_Sign_In);
 
             CurrentPlatform.Init();
-
-            // Create the Mobile Service Client instance, using the provided
-            // Mobile Service URL and key
             client = new MobileServiceClient(applicationURL, applicationKey);
-
-         
-
             base.OnCreate(bundle);
-
-            // Create your application here
         }
 
         [Java.Interop.Export()]
@@ -63,6 +49,13 @@ namespace helps
 
             var intent = new Intent(this, typeof(ToDoActivity));
             //StartActivity(intent);
+        }
+
+        [Java.Interop.Export()]
+        public async void gotoRegister(View view)
+        {
+            var intent = new Intent(this, typeof(RegisterActivity));
+            StartActivity(intent);
         }
     }
 }

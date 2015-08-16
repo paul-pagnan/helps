@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    p1:orientation="vertical"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="fill_parent"
+    p1:layout_height="fill_parent"
+    p1:id="@+id/relativeLayout1"
+    tools:menu="activity_main">
+    <include
+        p1:id="@+id/Ttoolbar"
+        p1:layout_height="wrap_content"
+        p1:layout_width="match_parent"
+        layout="@layout/toolbar" />
+    <ImageView
+        p1:src="@drawable/register"
+        p1:layout_width="match_parent"
+        p1:layout_height="148.6dp"
+        p1:id="@+id/imageView1"
+        p1:scaleType="centerCrop"
+        p1:layout_marginBottom="10.6dp"
+        p1:layout_below="@id/toolbar" />
+    <ScrollView
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:layout_below="@id/imageView1"
+        p1:id="@+id/scrollView1">
+        <eightbot.droid.floatlabelededittext.FloatLabeledEditText
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:hint="First Name"
+            p1:password="true"
+            p1:id="@+id/txt_firstName"
+            p1:layout_margin="8dp"
+            p1:layout_marginBottom="5dp"
+            style="@style/standardEditText"
+            p1:background="@drawable/textlines" />
+    </ScrollView>
+    <RelativeLayout
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/relativeLayout2"
+        p1:layout_alignParentBottom="true">
+        <Button
+            p1:text="Continue"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/register"
+            p1:background="#6563a4"
+            p1:textColor="@android:color/background_light"
+            p1:typeface="normal"
+            p1:height="60dp"
+            p1:textAllCaps="false" />
+    </RelativeLayout>
+</RelativeLayout>

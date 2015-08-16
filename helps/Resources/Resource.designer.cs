@@ -84,6 +84,12 @@ namespace helps
 			// aapt resource value: 0x7f020007
 			public const int ic_launcher = 2130837511;
 			
+			// aapt resource value: 0x7f020008
+			public const int register = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int textlines = 2130837513;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -97,56 +103,74 @@ namespace helps
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08000a
-			public const int LinearLayout1 = 2131230730;
-			
-			// aapt resource value: 0x7f08000d
-			public const int buttonAddToDo = 2131230733;
-			
 			// aapt resource value: 0x7f08000f
-			public const int checkToDoItem = 2131230735;
+			public const int LinearLayout1 = 2131230735;
 			
-			// aapt resource value: 0x7f08000e
-			public const int listViewToDo = 2131230734;
+			// aapt resource value: 0x7f080012
+			public const int buttonAddToDo = 2131230738;
 			
-			// aapt resource value: 0x7f080010
-			public const int menu_refresh = 2131230736;
+			// aapt resource value: 0x7f080014
+			public const int checkToDoItem = 2131230740;
 			
 			// aapt resource value: 0x7f080002
-			public const int relativeLayout1 = 2131230722;
+			public const int imageView1 = 2131230722;
 			
-			// aapt resource value: 0x7f080004
-			public const int relativeLayout2 = 2131230724;
+			// aapt resource value: 0x7f080013
+			public const int listViewToDo = 2131230739;
+			
+			// aapt resource value: 0x7f080016
+			public const int menu_refresh = 2131230742;
+			
+			// aapt resource value: 0x7f080015
+			public const int menu_share = 2131230741;
 			
 			// aapt resource value: 0x7f080006
-			public const int relativeLayout3 = 2131230726;
-			
-			// aapt resource value: 0x7f080008
-			public const int relativeLayout4 = 2131230728;
+			public const int register = 2131230726;
 			
 			// aapt resource value: 0x7f080000
-			public const int relativeLayout6 = 2131230720;
-			
-			// aapt resource value: 0x7f080003
-			public const int signin = 2131230723;
-			
-			// aapt resource value: 0x7f08000c
-			public const int textNewToDo = 2131230732;
-			
-			// aapt resource value: 0x7f080009
-			public const int textView1 = 2131230729;
-			
-			// aapt resource value: 0x7f080001
-			public const int textView2 = 2131230721;
-			
-			// aapt resource value: 0x7f08000b
-			public const int textViewTitle = 2131230731;
+			public const int relativeLayout1 = 2131230720;
 			
 			// aapt resource value: 0x7f080005
-			public const int txt_password = 2131230725;
+			public const int relativeLayout2 = 2131230725;
+			
+			// aapt resource value: 0x7f08000b
+			public const int relativeLayout3 = 2131230731;
+			
+			// aapt resource value: 0x7f08000d
+			public const int relativeLayout4 = 2131230733;
 			
 			// aapt resource value: 0x7f080007
-			public const int txt_studentId = 2131230727;
+			public const int relativeLayout6 = 2131230727;
+			
+			// aapt resource value: 0x7f080003
+			public const int scrollView1 = 2131230723;
+			
+			// aapt resource value: 0x7f080009
+			public const int signin = 2131230729;
+			
+			// aapt resource value: 0x7f080011
+			public const int textNewToDo = 2131230737;
+			
+			// aapt resource value: 0x7f08000e
+			public const int textView1 = 2131230734;
+			
+			// aapt resource value: 0x7f080008
+			public const int textView2 = 2131230728;
+			
+			// aapt resource value: 0x7f080010
+			public const int textViewTitle = 2131230736;
+			
+			// aapt resource value: 0x7f080001
+			public const int toolbar = 2131230721;
+			
+			// aapt resource value: 0x7f080004
+			public const int txt_firstName = 2131230724;
+			
+			// aapt resource value: 0x7f08000a
+			public const int txt_password = 2131230730;
+			
+			// aapt resource value: 0x7f08000c
+			public const int txt_studentId = 2131230732;
 			
 			static Id()
 			{
@@ -173,6 +197,9 @@ namespace helps
 			// aapt resource value: 0x7f030003
 			public const int Row_List_To_Do = 2130903043;
 			
+			// aapt resource value: 0x7f030004
+			public const int toolbar = 2130903044;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -188,6 +215,9 @@ namespace helps
 			
 			// aapt resource value: 0x7f070000
 			public const int activity_main = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int simple = 2131165185;
 			
 			static Menu()
 			{
@@ -236,20 +266,26 @@ namespace helps
 			// aapt resource value: 0x7f060000
 			public const int AppBaseTheme = 2131099648;
 			
-			// aapt resource value: 0x7f060004
-			public const int AppTheme = 2131099652;
-			
-			// aapt resource value: 0x7f060002
-			public const int RobotoButtonStyle = 2131099650;
+			// aapt resource value: 0x7f060006
+			public const int AppTheme = 2131099654;
 			
 			// aapt resource value: 0x7f060001
-			public const int RobotoTextViewStyle = 2131099649;
-			
-			// aapt resource value: 0x7f060005
-			public const int _AppTheme = 2131099653;
+			public const int NoStatus = 2131099649;
 			
 			// aapt resource value: 0x7f060003
-			public const int whiteEditText = 2131099651;
+			public const int RobotoButtonStyle = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int RobotoTextViewStyle = 2131099650;
+			
+			// aapt resource value: 0x7f060007
+			public const int _AppTheme = 2131099655;
+			
+			// aapt resource value: 0x7f060005
+			public const int standardEditText = 2131099653;
+			
+			// aapt resource value: 0x7f060004
+			public const int whiteEditText = 2131099652;
 			
 			static Style()
 			{
