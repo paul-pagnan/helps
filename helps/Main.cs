@@ -20,7 +20,7 @@ namespace helps
     {
         public MobileServiceClient client;
 
-        public const string applicationURL = @"https://helps.azure-mobile.net/";
+        public const string applicationURL = @"https://helps25.azure-mobile.net/";
         public const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
 
         public void setPadding(Toolbar toolbar)

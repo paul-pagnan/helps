@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EightBot.Droid.FloatLabeledEditText">
-      <HintPath>..\..\Float\EightBot.Droid.FloatLabeledEditText\bin\Debug\EightBot.Droid.FloatLabeledEditText.dll</HintPath>
+      <HintPath>..\..\EightBot.Droid.FloatLabeledEditText-master\EightBot.Droid.FloatLabeledEditText\bin\Debug\EightBot.Droid.FloatLabeledEditText.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile">
       <HintPath>..\packages\WindowsAzure.MobileServices.1.3.2\lib\monoandroid\Microsoft.WindowsAzure.Mobile.dll</HintPath>
@@ -214,5 +214,20 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\simple.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_social_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_action_social_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-ldpi\ic_action_social_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_social_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_social_share.png" />
   </ItemGroup>
 </Project>

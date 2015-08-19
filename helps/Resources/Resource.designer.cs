@@ -82,13 +82,16 @@ namespace helps
 			public const int bg = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int ic_launcher = 2130837511;
+			public const int ic_action_social_share = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int register = 2130837512;
+			public const int ic_launcher = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int textlines = 2130837513;
+			public const int register = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int textlines = 2130837514;
 			
 			static Drawable()
 			{
@@ -126,6 +129,9 @@ namespace helps
 			
 			// aapt resource value: 0x7f080017
 			public const int menu_refresh = 2131230743;
+			
+			// aapt resource value: 0x7f080018
+			public const int menu_settings = 2131230744;
 			
 			// aapt resource value: 0x7f080016
 			public const int menu_share = 2131230742;
@@ -269,26 +275,29 @@ namespace helps
 			// aapt resource value: 0x7f060000
 			public const int AppBaseTheme = 2131099648;
 			
-			// aapt resource value: 0x7f060006
-			public const int AppTheme = 2131099654;
+			// aapt resource value: 0x7f060007
+			public const int AppTheme = 2131099655;
+			
+			// aapt resource value: 0x7f060002
+			public const int MyToolbar = 2131099650;
 			
 			// aapt resource value: 0x7f060001
 			public const int NoStatus = 2131099649;
 			
+			// aapt resource value: 0x7f060004
+			public const int RobotoButtonStyle = 2131099652;
+			
 			// aapt resource value: 0x7f060003
-			public const int RobotoButtonStyle = 2131099651;
+			public const int RobotoTextViewStyle = 2131099651;
 			
-			// aapt resource value: 0x7f060002
-			public const int RobotoTextViewStyle = 2131099650;
+			// aapt resource value: 0x7f060008
+			public const int _AppTheme = 2131099656;
 			
-			// aapt resource value: 0x7f060007
-			public const int _AppTheme = 2131099655;
+			// aapt resource value: 0x7f060006
+			public const int standardEditText = 2131099654;
 			
 			// aapt resource value: 0x7f060005
-			public const int standardEditText = 2131099653;
-			
-			// aapt resource value: 0x7f060004
-			public const int whiteEditText = 2131099652;
+			public const int whiteEditText = 2131099653;
 			
 			static Style()
 			{
