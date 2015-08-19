@@ -45,7 +45,8 @@
             android:textColor="@android:color/background_light"
             android:typeface="normal"
             android:height="60dp"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:onClick="Login" />
     </RelativeLayout>
     <RelativeLayout
         android:minWidth="25px"

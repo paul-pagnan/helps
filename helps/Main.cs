@@ -23,6 +23,8 @@ namespace helps
         public const string applicationURL = @"https://helps.azure-mobile.net/";
         public const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
 
+
+
         public void setPadding(Toolbar toolbar)
         {
             // Set the padding to match the Status Bar height
