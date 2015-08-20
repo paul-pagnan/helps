@@ -22,7 +22,7 @@ namespace helps
 {
     [Activity(MainLauncher = true,
                Icon = "@drawable/ic_launcher", Label = "@string/app_name",
-               Theme = "@style/AppTheme.NoStatus")]
+               Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
         
@@ -52,7 +52,7 @@ namespace helps
         }
 
         [Java.Interop.Export()]
-        public async void gotoRegister(View view)
+        public async void ShowRegister(View view)
         {
             var intent = new Intent(this, typeof(RegisterActivity));
             StartActivity(intent);

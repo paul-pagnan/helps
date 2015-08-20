@@ -38,7 +38,6 @@ namespace helps
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            Toast.MakeText(this, "Top ActionBar pressed: " + item.TitleFormatted, ToastLength.Short).Show();
             Finish();
             return base.OnOptionsItemSelected(item);
         }

@@ -13,15 +13,31 @@
         p1:layout_height="wrap_content"
         p1:layout_width="match_parent"
         layout="@layout/toolbar" />
-    <LinearLayout
-        p1:orientation="vertical"
+    <ScrollView
+        p1:layout_width="fill_parent"
+        p1:layout_height="fill_parent"
+        p1:paddingLeft="25dp"
+        p1:paddingRight="25dp"
         p1:minWidth="25px"
         p1:minHeight="25px"
-        p1:layout_width="fill_parent"
-        p1:layout_height="wrap_content"
         p1:layout_below="@id/Ttoolbar"
-        p1:id="@+id/linearLayout1"
-        p1:layout_marginTop="15dp" />
+        p1:layout_marginTop="15dp">
+        <LinearLayout
+            p1:orientation="vertical"
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="fill_parent"
+            p1:layout_height="wrap_content"
+            p1:layout_below="@id/Ttoolbar"
+            p1:id="@+id/linearLayout1">
+            <EditText
+                p1:inputType="textEmailAddress"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/editText1"
+                p1:hint="Email" />
+        </LinearLayout>
+    </ScrollView>
     <RelativeLayout
         p1:minWidth="25px"
         p1:minHeight="25px"
@@ -34,6 +50,7 @@
             p1:layout_width="match_parent"
             p1:layout_height="wrap_content"
             p1:id="@+id/register"
-            p1:background="@color/accent" />
+            p1:background="@drawable/flat_selector"
+            style="?android:attr/borderlessButtonStyle" />
     </RelativeLayout>
 </RelativeLayout>

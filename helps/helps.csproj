@@ -230,4 +230,16 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_social_share.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\dimen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rect_pressed.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rect_normal.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\flat_selector.xml" />
+  </ItemGroup>
 </Project>

@@ -47,6 +47,9 @@ namespace helps
 			// aapt resource value: 0x7f040002
 			public const int accent = 2130968578;
 			
+			// aapt resource value: 0x7f040003
+			public const int accentPressed = 2130968579;
+			
 			// aapt resource value: 0x7f040000
 			public const int primary = 2130968576;
 			
@@ -59,6 +62,25 @@ namespace helps
 			}
 			
 			private Color()
+			{
+			}
+		}
+		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int corner_radius = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int layer_padding = 2131034113;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
 			{
 			}
 		}
@@ -88,16 +110,25 @@ namespace helps
 			public const int bg = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int ic_action_social_share = 2130837511;
+			public const int flat_selector = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int ic_launcher = 2130837512;
+			public const int ic_action_social_share = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int register = 2130837513;
+			public const int ic_launcher = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int textlines = 2130837514;
+			public const int rect_normal = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int rect_pressed = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int register = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int textlines = 2130837517;
 			
 			static Drawable()
 			{
@@ -112,74 +143,77 @@ namespace helps
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08000d
-			public const int LinearLayout1 = 2131230733;
+			// aapt resource value: 0x7f09000e
+			public const int LinearLayout1 = 2131296270;
 			
-			// aapt resource value: 0x7f080001
-			public const int Ttoolbar = 2131230721;
+			// aapt resource value: 0x7f090001
+			public const int Ttoolbar = 2131296257;
 			
-			// aapt resource value: 0x7f080013
-			public const int amvMenu = 2131230739;
+			// aapt resource value: 0x7f090014
+			public const int amvMenu = 2131296276;
 			
-			// aapt resource value: 0x7f08000a
-			public const int button1 = 2131230730;
+			// aapt resource value: 0x7f09000b
+			public const int button1 = 2131296267;
 			
-			// aapt resource value: 0x7f080010
-			public const int buttonAddToDo = 2131230736;
+			// aapt resource value: 0x7f090011
+			public const int buttonAddToDo = 2131296273;
 			
-			// aapt resource value: 0x7f080012
-			public const int checkToDoItem = 2131230738;
+			// aapt resource value: 0x7f090013
+			public const int checkToDoItem = 2131296275;
 			
-			// aapt resource value: 0x7f080007
-			public const int imageView1 = 2131230727;
+			// aapt resource value: 0x7f090003
+			public const int editText1 = 2131296259;
 			
-			// aapt resource value: 0x7f080002
-			public const int linearLayout1 = 2131230722;
+			// aapt resource value: 0x7f090008
+			public const int imageView1 = 2131296264;
 			
-			// aapt resource value: 0x7f080011
-			public const int listViewToDo = 2131230737;
+			// aapt resource value: 0x7f090002
+			public const int linearLayout1 = 2131296258;
 			
-			// aapt resource value: 0x7f080005
-			public const int mainlayout = 2131230725;
+			// aapt resource value: 0x7f090012
+			public const int listViewToDo = 2131296274;
 			
-			// aapt resource value: 0x7f080015
-			public const int menu_refresh = 2131230741;
+			// aapt resource value: 0x7f090006
+			public const int mainlayout = 2131296262;
 			
-			// aapt resource value: 0x7f080016
-			public const int menu_settings = 2131230742;
+			// aapt resource value: 0x7f090016
+			public const int menu_refresh = 2131296278;
 			
-			// aapt resource value: 0x7f080014
-			public const int menu_share = 2131230740;
+			// aapt resource value: 0x7f090017
+			public const int menu_settings = 2131296279;
 			
-			// aapt resource value: 0x7f080009
-			public const int password = 2131230729;
+			// aapt resource value: 0x7f090015
+			public const int menu_share = 2131296277;
 			
-			// aapt resource value: 0x7f080004
-			public const int register = 2131230724;
+			// aapt resource value: 0x7f09000a
+			public const int password = 2131296266;
 			
-			// aapt resource value: 0x7f080000
-			public const int relativeLayout1 = 2131230720;
+			// aapt resource value: 0x7f090005
+			public const int register = 2131296261;
 			
-			// aapt resource value: 0x7f080003
-			public const int relativeLayout2 = 2131230723;
+			// aapt resource value: 0x7f090000
+			public const int relativeLayout1 = 2131296256;
 			
-			// aapt resource value: 0x7f08000b
-			public const int relativeLayout6 = 2131230731;
+			// aapt resource value: 0x7f090004
+			public const int relativeLayout2 = 2131296260;
 			
-			// aapt resource value: 0x7f080006
-			public const int signInLayout = 2131230726;
+			// aapt resource value: 0x7f09000c
+			public const int relativeLayout6 = 2131296268;
 			
-			// aapt resource value: 0x7f080008
-			public const int studentId = 2131230728;
+			// aapt resource value: 0x7f090007
+			public const int signInLayout = 2131296263;
 			
-			// aapt resource value: 0x7f08000f
-			public const int textNewToDo = 2131230735;
+			// aapt resource value: 0x7f090009
+			public const int studentId = 2131296265;
 			
-			// aapt resource value: 0x7f08000c
-			public const int textView2 = 2131230732;
+			// aapt resource value: 0x7f090010
+			public const int textNewToDo = 2131296272;
 			
-			// aapt resource value: 0x7f08000e
-			public const int textViewTitle = 2131230734;
+			// aapt resource value: 0x7f09000d
+			public const int textView2 = 2131296269;
+			
+			// aapt resource value: 0x7f09000f
+			public const int textViewTitle = 2131296271;
 			
 			static Id()
 			{
@@ -222,11 +256,11 @@ namespace helps
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int activity_main = 2131165184;
+			// aapt resource value: 0x7f080000
+			public const int activity_main = 2131230720;
 			
-			// aapt resource value: 0x7f070001
-			public const int simple = 2131165185;
+			// aapt resource value: 0x7f080001
+			public const int simple = 2131230721;
 			
 			static Menu()
 			{
@@ -241,23 +275,23 @@ namespace helps
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int add_button_text = 2131034114;
+			// aapt resource value: 0x7f060002
+			public const int add_button_text = 2131099650;
 			
-			// aapt resource value: 0x7f050001
-			public const int add_textbox_hint = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int add_textbox_hint = 2131099649;
 			
-			// aapt resource value: 0x7f050000
-			public const int app_name = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int app_name = 2131099648;
 			
-			// aapt resource value: 0x7f050005
-			public const int checkbox_text = 2131034117;
+			// aapt resource value: 0x7f060005
+			public const int checkbox_text = 2131099653;
 			
-			// aapt resource value: 0x7f050004
-			public const int menu_refresh = 2131034116;
+			// aapt resource value: 0x7f060004
+			public const int menu_refresh = 2131099652;
 			
-			// aapt resource value: 0x7f050003
-			public const int mobile_services = 2131034115;
+			// aapt resource value: 0x7f060003
+			public const int mobile_services = 2131099651;
 			
 			static String()
 			{
@@ -272,26 +306,29 @@ namespace helps
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int AppBaseTheme = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int AppBaseTheme = 2131165184;
 			
-			// aapt resource value: 0x7f060001
-			public const int AppTheme = 2131099649;
+			// aapt resource value: 0x7f070001
+			public const int AppTheme = 2131165185;
 			
-			// aapt resource value: 0x7f060003
-			public const int AppTheme_MyToolbar = 2131099651;
+			// aapt resource value: 0x7f070002
+			public const int AppTheme_MyToolbar = 2131165186;
 			
-			// aapt resource value: 0x7f060002
-			public const int AppTheme_NoStatus = 2131099650;
+			// aapt resource value: 0x7f070006
+			public const int AppTheme_NoStatus = 2131165190;
 			
-			// aapt resource value: 0x7f060006
-			public const int _AppTheme = 2131099654;
+			// aapt resource value: 0x7f070003
+			public const int AppTheme_SignIn = 2131165187;
 			
-			// aapt resource value: 0x7f060005
-			public const int standardEditText = 2131099653;
+			// aapt resource value: 0x7f070007
+			public const int _AppTheme = 2131165191;
 			
-			// aapt resource value: 0x7f060004
-			public const int whiteEditText = 2131099652;
+			// aapt resource value: 0x7f070005
+			public const int standardEditText = 2131165189;
+			
+			// aapt resource value: 0x7f070004
+			public const int whiteEditText = 2131165188;
 			
 			static Style()
 			{
