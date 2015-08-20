@@ -15,7 +15,7 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
 
-namespace helps
+namespace helps.Droid
 {
     [Activity(Label = "Register", Icon = "@drawable/ic_launcher", Theme = "@style/AppTheme.MyToolbar")]
     public class RegisterActivity : Main
@@ -27,7 +27,7 @@ namespace helps
             SetContentView(Resource.Layout.Activity_Register);
 
             var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-            
+
             //t.InflateMenu(Resource.Menu.simple);
 
             SetActionBar(t);

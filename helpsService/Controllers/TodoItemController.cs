@@ -4,11 +4,11 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
-using helpsService.DataObjects;
-using helpsService.Models;
+using helps.Service.DataObjects;
+using helps.Service.Models;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
 
-namespace helpsService.Controllers
+namespace helps.ServiceControllers
 {
     [AuthorizeLevel(AuthorizationLevel.User)]
     public class TodoItemController : TableController<TodoItem>

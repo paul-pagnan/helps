@@ -12,7 +12,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 
 
-namespace helps
+namespace helps.Droid
 {
     [Activity(Label = "@string/app_name")]
     public class ToDoActivity : Activity

@@ -16,9 +16,9 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using helps.Shared;
 
-
-namespace helps
+namespace helps.Droid
 {
     [Activity(MainLauncher = true,
                Icon = "@drawable/ic_launcher", Label = "@string/app_name",
@@ -29,7 +29,7 @@ namespace helps
         protected override async void OnCreate(Bundle bundle)
         {
             SetContentView(Resource.Layout.Activity_Sign_In);
-
+            
             CurrentPlatform.Init();
             client = new MobileServiceClient(applicationURL, applicationKey);
             base.OnCreate(bundle);

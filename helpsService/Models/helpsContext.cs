@@ -3,10 +3,10 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.WindowsAzure.Mobile.Service;
 using Microsoft.WindowsAzure.Mobile.Service.Tables;
-using helpsService.DataObjects;
-using helpsService.Utils;
+using helps.Service.DataObjects;
+using helps.Service.Utils;
 
-namespace helpsService.Models
+namespace helps.Service.Models
 {
     public class helpsContext : DbContext
     {

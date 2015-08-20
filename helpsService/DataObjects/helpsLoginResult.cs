@@ -1,4 +1,4 @@
-﻿namespace helpsService.DataObjects
+﻿namespace helps.Service.DataObjects
 {
     public class helpsLoginResult
     {

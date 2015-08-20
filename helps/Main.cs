@@ -14,7 +14,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
-namespace helps
+namespace helps.Droid
 {
     public class Main : Activity
     {

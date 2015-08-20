@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Mobile.Service;
 
-namespace helpsService.DataObjects
+namespace helps.Service.DataObjects
 {
     public class TodoItem : EntityData
     {

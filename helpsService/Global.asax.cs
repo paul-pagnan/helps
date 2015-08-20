@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Routing;
 
-namespace helpsService
+namespace helps.Service
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

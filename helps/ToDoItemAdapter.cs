@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
 
-namespace helps
+namespace helps.Droid
 {
 	public class ToDoItemAdapter : BaseAdapter<ToDoItem>
 	{

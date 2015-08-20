@@ -7,11 +7,11 @@ using System.Web.Http;
 using Microsoft.WindowsAzure.Mobile.Service;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
 using System.Security.Claims;
-using helpsService.DataObjects;
-using helpsService.Models;
-using helpsService.Utils;
+using helps.Service.DataObjects;
+using helps.Service.Models;
+using helps.Service.Utils;
 
-namespace helpsService.Controllers
+namespace helps.ServiceControllers
 {
     [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class SignInController : ApiController

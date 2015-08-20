@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.Http;
 using Microsoft.WindowsAzure.Mobile.Service;
-using helpsService.DataObjects;
-using helpsService.Models;
-using helpsService.Utils;
+using helps.Service.DataObjects;
+using helps.Service.Models;
+using helps.Service.Utils;
 using System.Data.Entity.Migrations;
-using helpsService.Migrations;
+using helps.Service.Migrations;
 
-namespace helpsService
+namespace helps.Service
 {
     public static class WebApiConfig
     {

@@ -1,4 +1,4 @@
-namespace helpsService.Migrations
+namespace helps.ServiceMigrations
 {
     using System;
     using System.Collections.Generic;

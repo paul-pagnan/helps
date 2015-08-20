@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using Owin;
 using System.Security.Claims;
 
-namespace helpsService.Models
+namespace helps.Service.Models
 {
     class helpsLoginProvider : LoginProvider
     {
