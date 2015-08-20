@@ -5,44 +5,28 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
   
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+
+    </style>
+
+  <style name="AppTheme" parent="AppBaseTheme">
+    
+  </style>
+
+  <style name="AppTheme.NoStatus" parent="android:Theme.Material.Light.NoActionBar">
+      <item name="android:windowTranslucentStatus">true</item>
+  </style>
+
+   <style name="AppTheme.MyToolbar" parent="android:Theme.Material.Light.DarkActionBar">
       <item name="android:windowNoTitle">true</item>
       <!--We will be using the toolbar so no need to show ActionBar-->
       <item name="android:windowActionBar">false</item>
-      <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
-      <!-- colorPrimary is used for the default action bar background -->
-      <item name="android:colorPrimary">#2196F3</item>
-      <!-- colorPrimaryDark is used for the status bar -->
-      <item name="android:colorPrimaryDark">#1976D2</item>
-      <!-- colorAccent is used as the default value for colorControlActivated
-         which is used to tint widgets -->
-      <item name="android:colorAccent">#FF4081</item>
-      <!-- You can also set colorControlNormal, colorControlActivated
-         colorControlHighlight and colorSwitchThumbNormal. -->
-
-      <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-      <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-    </style>
-
-  <style name="NoStatus" parent="android:Theme.Material.Light.NoActionBar">
-      <item name="android:windowTranslucentStatus">true</item>
-
-      <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-      <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-  </style>
+     <item name="android:windowTranslucentStatus">true</item>
+   </style>
   
-
-  <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-    <item name="android:fontFamily">sans-serif-light</item>
-  </style>
-
-  <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
-    <item name="android:fontFamily">sans-serif-light</item>
-  </style>
-
   <style name="whiteEditText" parent="android:Widget.EditText">
     <item name="android:textColor">#fff</item>
-    <item name="android:textSize">13dp</item>
+    <item name="android:textSize">16dp</item>
     <item name="android:textColorHint">#aaffffff</item>
   </style>
 
@@ -51,10 +35,5 @@
     <item name="android:textSize">13dp</item>
     <item name="android:textColorHint">#a8a8aa</item>
   </style>
-  
-  <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
+ 
 </resources>

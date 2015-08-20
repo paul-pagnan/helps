@@ -5,15 +5,54 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@drawable/bg"
+    android:background="@color/primaryDark"
     android:fitsSystemWindows="true"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:id="@+id/mainlayout">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_below="@id/mainlayout"
+        android:id="@+id/signInLayout"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView1"
+            android:layout_marginBottom="49.4dp" />
+        <EditText
+            android:inputType="number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/studentId"
+            android:layout_marginBottom="20dp"
+            android:hint="Student Id"
+            android:gravity="center" />
+        <EditText
+            android:inputType="textPassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:layout_marginBottom="20dp"
+            android:hint="Password"
+            android:gravity="center" />
+        <Button
+            android:text="Sign In"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1"
+            android:background="@color/accent" />
+    </LinearLayout>
     <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#44ffffff"
         android:id="@+id/relativeLayout6"
         android:layout_alignParentBottom="true">
         <TextView
@@ -27,78 +66,5 @@
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:onClick="gotoRegister" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/relativeLayout6"
-        android:background="#44ffffff"
-        android:id="@+id/relativeLayout1">
-        <Button
-            android:text="Sign In"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/signin"
-            android:background="#6563a4"
-            android:textColor="@android:color/background_light"
-            android:typeface="normal"
-            android:height="60dp"
-            android:textAllCaps="false"
-            android:onClick="Login" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/relativeLayout1"
-        android:background="#44ffffff"
-        android:padding="10dp"
-        android:id="@+id/relativeLayout2">
-        <eightbot.droid.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:password="true"
-            android:id="@+id/txt_password"
-            android:layout_margin="8dp"
-            style="@style/whiteEditText" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/relativeLayout2"
-        android:background="#44ffffff"
-        android:padding="10dp"
-        android:id="@+id/relativeLayout3">
-        <requestFocus />
-        <eightbot.droid.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Student ID"
-            android:id="@+id/txt_studentId"
-            android:layout_margin="8dp"
-            style="@style/whiteEditText" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayout3"
-        android:id="@+id/relativeLayout4">
-        <TextView
-            android:text="Get Started"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/textView1"
-            android:gravity="center_horizontal"
-            android:textColor="#fff"
-            android:textSize="25dp" />
     </RelativeLayout>
 </RelativeLayout>

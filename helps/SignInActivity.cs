@@ -22,7 +22,7 @@ namespace helps
 {
     [Activity(MainLauncher = true,
                Icon = "@drawable/ic_launcher", Label = "@string/app_name",
-               Theme = "@style/AppTheme")]
+               Theme = "@style/AppTheme.NoStatus")]
     public class SignInActivity : Main
     {
         

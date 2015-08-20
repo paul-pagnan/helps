@@ -31,7 +31,7 @@ namespace helps
     
         private MobileServiceUser user;
 
-        const string applicationURL = @"https://helps.azure-mobile.net/";
+        const string applicationURL = @"https://helps25.azure-mobile.net";
         const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
 
         const string localDbFilename = "localstore.db";

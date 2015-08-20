@@ -5,12 +5,19 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="NoStatus" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="AppTheme.NoStatus" parent="android:Theme.Material.Light.NoActionBar">
         <!-- API 14 theme customizations can go here. -->
       <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar">
-    </style>
+  <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+    <item name="android:colorPrimary">#2196F3</item>
+    <item name="android:colorPrimaryDark">#1976D2</item>
+    <item name="android:colorAccent">#FF4081</item>
+  </style>
+
+  <style name="AppTheme" parent="AppBaseTheme">
+
+  </style>
 
 </resources>
