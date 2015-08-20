@@ -2,15 +2,17 @@
 <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Ttoolbar"
-    android:layout_height="200dp"
     android:layout_width="match_parent"
     android:minHeight="?android:attr/actionBarSize"
-    android:background="?android:attr/colorPrimary"
-    android:gravity="top|start"
+    android:background="@color/primary"
+    android:gravity="center_vertical"
     android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
-    android:popupTheme="@android:style/ThemeOverlay.Material.Light">
+    android:popupTheme="@android:style/ThemeOverlay.Material.Light"
+    android:layout_height="?android:attr/actionBarSize">
     <ActionMenuView
         android:id="@+id/amvMenu"
         android:layout_width="wrap_content"
-        android:layout_height="?android:attr/actionBarSize" />
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/actionBarSize"
+        android:gravity="center_vertical" />
 </Toolbar>

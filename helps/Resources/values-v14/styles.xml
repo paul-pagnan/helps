@@ -7,9 +7,12 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 14 theme customizations can go here. -->
+
     </style>
   
-    <style name="NoStatus" parent="android:Theme.Holo.Light.NoActionBar">
+    <style name="AppTheme.NoStatus" parent="android:Theme.Holo.Light.NoActionBar">
     </style>
+
+
 
 </resources>

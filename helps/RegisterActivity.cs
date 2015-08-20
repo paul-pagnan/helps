@@ -17,10 +17,10 @@ using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
 namespace helps
 {
-    [Activity(Label = "Register", Icon = "@drawable/ic_launcher", Theme = "@style/MyToolbar")]
+    [Activity(Label = "Register", Icon = "@drawable/ic_launcher", Theme = "@style/AppTheme.MyToolbar")]
     public class RegisterActivity : Main
     {
-        private ActionMenuView amvMenu;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -32,16 +32,14 @@ namespace helps
 
             SetActionBar(t);
             setPadding(t);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetDisplayShowHomeEnabled(true);
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.simple, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             Toast.MakeText(this, "Top ActionBar pressed: " + item.TitleFormatted, ToastLength.Short).Show();
+            Finish();
             return base.OnOptionsItemSelected(item);
         }
 
