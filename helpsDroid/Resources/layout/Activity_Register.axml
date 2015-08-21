@@ -16,12 +16,9 @@
     <ScrollView
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent"
-        p1:paddingLeft="25dp"
-        p1:paddingRight="25dp"
         p1:minWidth="25px"
         p1:minHeight="25px"
-        p1:layout_below="@id/Ttoolbar"
-        p1:layout_marginTop="15dp">
+        p1:layout_below="@id/Ttoolbar">
         <LinearLayout
             p1:orientation="vertical"
             p1:minWidth="25px"
@@ -29,13 +26,87 @@
             p1:layout_width="fill_parent"
             p1:layout_height="wrap_content"
             p1:layout_below="@id/Ttoolbar"
-            p1:id="@+id/linearLayout1">
-            <EditText
-                p1:inputType="textEmailAddress"
+            p1:id="@+id/linearLayout1"
+            p1:paddingLeft="25dp"
+            p1:paddingRight="25dp"
+            p1:paddingTop="40dp"
+            p1:paddingBottom="40dp">
+            <LinearLayout
+                p1:orientation="horizontal"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/editText1"
-                p1:hint="Email" />
+                p1:id="@+id/linearLayout3"
+                p1:layout_marginBottom="35dp">
+                <ImageView
+                    p1:src="@android:drawable/ic_menu_gallery"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/imageView1"
+                    p1:layout_marginRight="10dp" />
+                <EditText
+                    p1:inputType="text"
+                    p1:id="@+id/firstName"
+                    p1:hint="First Name"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                p1:orientation="horizontal"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout6"
+                p1:layout_marginBottom="35dp">
+                <ImageView
+                    p1:src="@android:drawable/ic_menu_gallery"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/imageView5"
+                    p1:layout_marginRight="10dp" />
+                <EditText
+                    p1:inputType="text"
+                    p1:id="@+id/lastName"
+                    p1:hint="Last Name"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                p1:orientation="horizontal"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout4"
+                p1:layout_marginBottom="35dp">
+                <ImageView
+                    p1:src="@android:drawable/ic_menu_gallery"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/imageView2"
+                    p1:layout_marginRight="10dp" />
+                <EditText
+                    p1:inputType="number"
+                    p1:id="@+id/studentId"
+                    p1:hint="Student Id"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                p1:orientation="horizontal"
+                p1:id="@+id/linearLayout5"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:layout_marginBottom="35dp">
+                <ImageView
+                    p1:src="@android:drawable/ic_menu_gallery"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/imageView3"
+                    p1:layout_marginRight="10dp" />
+                <EditText
+                    p1:inputType="textPassword"
+                    p1:id="@+id/password"
+                    p1:hint="Password"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
@@ -51,6 +122,7 @@
             p1:layout_height="wrap_content"
             p1:id="@+id/register"
             p1:background="@drawable/flat_selector"
+            p1:textColor="#fff"
             style="?android:attr/borderlessButtonStyle" />
     </RelativeLayout>
 </RelativeLayout>

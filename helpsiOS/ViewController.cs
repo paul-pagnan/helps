@@ -2,7 +2,7 @@
 
 using UIKit;
 
-namespace helpsShared.iOS
+namespace helps.iOS
 {
 	public partial class ViewController : UIViewController
 	{

@@ -201,13 +201,13 @@ namespace helps.Droid
             CreateAndShowDialog (exception.Message, title);
         }
 
-        private void CreateAndShowDialog (string message, string title)
+        private void CreateAndShowDialog(string message, string title)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder (this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.SetMessage (message);
-            builder.SetTitle (title);
-            builder.Create ().Show ();
+            builder.SetMessage(message);
+            builder.SetTitle(title);
+            builder.Create().Show();
         }
     }
 }

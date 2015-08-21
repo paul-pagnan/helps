@@ -243,7 +243,7 @@
     <AndroidResource Include="Resources\drawable\flat_selector.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\helpsShared\helpsShared\helps.Shared.csproj">
+    <ProjectReference Include="..\helpsShared\helps.Shared.csproj">
       <Project>{a23c7bd5-dd5f-4467-b114-e01a3c51e633}</Project>
       <Name>helps.Shared</Name>
     </ProjectReference>

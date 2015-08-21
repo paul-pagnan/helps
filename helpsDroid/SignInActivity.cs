@@ -16,7 +16,6 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using System.IO;
 using Newtonsoft.Json.Linq;
-using helps.Shared;
 
 namespace helps.Droid
 {
@@ -38,16 +37,18 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Login(View view)
         {
+            string studentId = "11972080";
+            string password = "password";
 
             try { 
-                JToken response = await client.InvokeApiAsync("SignIn", "{ 'studentId': '11972080', 'password': 'sample string 2'}");
+                JToken response = await client.InvokeApiAsync("SignIn", String.Format("{ 'studentId': '{0}', 'password': '{1}'}", studentId, password));
             }
             catch (Exception ex)
             {
-
+                ShowDialog("error", "Lofin Failure");
             }
 
-            var intent = new Intent(this, typeof(ToDoActivity));
+            //var intent = new Intent(this, typeof(ToDoActivity));
             //StartActivity(intent);
         }
 

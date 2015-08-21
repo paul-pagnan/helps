@@ -43,5 +43,13 @@ namespace helps.Droid
             return result;
         }
 
+        public void ShowDialog(string message, string title)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.SetMessage(message);
+            builder.SetTitle(title);
+            builder.Create().Show();
+        }
     }
 }

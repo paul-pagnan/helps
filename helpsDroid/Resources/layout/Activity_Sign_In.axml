@@ -46,11 +46,12 @@
             android:text="Log In"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button1"
+            android:id="@+id/login"
             android:textStyle="normal"
             android:textAllCaps="false"
             android:background="@drawable/flat_selector"
-            style="?android:attr/borderlessButtonStyle" />
+            style="?android:attr/borderlessButtonStyle"
+            android:onClick="Login" />
     </LinearLayout>
     <RelativeLayout
         android:minWidth="25px"

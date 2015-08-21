@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.Service", "helpsServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.Droid", "helpsDroid\helps.Droid.csproj", "{8E1FCCF4-1FA7-4C23-86B0-19C78B155AA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.Shared", "helpsShared\helpsShared\helps.Shared.csproj", "{A23C7BD5-DD5F-4467-B114-E01A3C51E633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.Shared", "helpsShared\helps.Shared.csproj", "{A23C7BD5-DD5F-4467-B114-E01A3C51E633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.iOS", "helpsShared\helpsShared.iOS\helps.iOS.csproj", "{FDF82EE2-2507-4979-9E36-AF4A805929F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "helps.iOS", "helpsiOS\helps.iOS.csproj", "{FDF82EE2-2507-4979-9E36-AF4A805929F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
