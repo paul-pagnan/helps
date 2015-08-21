@@ -11,11 +11,9 @@ using Android.Views;
 using Android.Widget;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using helps.Shared;
 
 namespace helps.Droid
 {
@@ -29,27 +27,25 @@ namespace helps.Droid
         {
             SetContentView(Resource.Layout.Activity_Sign_In);
             
-            CurrentPlatform.Init();
-            client = new MobileServiceClient(applicationURL, applicationKey);
             base.OnCreate(bundle);
         }
 
         [Java.Interop.Export()]
         public async void Login(View view)
         {
-            string studentId = "11972080";
-            string password = "password";
-
-            try { 
-                JToken response = await client.InvokeApiAsync("SignIn", String.Format("{ 'studentId': '{0}', 'password': '{1}'}", studentId, password));
+            EditText studentId = FindViewById<EditText>(Resource.Id.loginStudentId); 
+            EditText password = FindViewById<EditText>(Resource.Id.loginPassword);
+            AuthService LoginService = new AuthService();
+            try
+            {
+                JToken response = await LoginService.Login(studentId.Text, password.Text);
+                var intent = new Intent(this, typeof(ToDoActivity));
+                StartActivity(intent);
             }
             catch (Exception ex)
             {
-                ShowDialog("error", "Lofin Failure");
+                ShowDialog(ex.Message, "Login Failure");
             }
-
-            //var intent = new Intent(this, typeof(ToDoActivity));
-            //StartActivity(intent);
         }
 
         [Java.Interop.Export()]

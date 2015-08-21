@@ -9,11 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-using Microsoft.WindowsAzure.MobileServices;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-
+using helps.Shared;
 
 namespace helps.Droid
 {

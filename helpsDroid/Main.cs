@@ -10,20 +10,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-using Microsoft.WindowsAzure.MobileServices;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-
 namespace helps.Droid
 {
     public class Main : Activity
     {
-        public MobileServiceClient client;
-
-        public const string applicationURL = @"https://helps25.azure-mobile.net/";
-        public const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
-
-
 
         public void setPadding(Toolbar toolbar)
         {

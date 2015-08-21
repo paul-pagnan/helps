@@ -32,21 +32,21 @@
             android:inputType="number"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/studentId"
+            android:id="@+id/loginStudentId"
             android:layout_marginBottom="30dp"
             android:hint="Student Id" />
         <EditText
             android:inputType="textPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/password"
+            android:id="@+id/loginPassword"
             android:layout_marginBottom="30dp"
             android:hint="Password" />
         <Button
             android:text="Log In"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/login"
+            android:id="@+id/loginBtn"
             android:textStyle="normal"
             android:textAllCaps="false"
             android:background="@drawable/flat_selector"
