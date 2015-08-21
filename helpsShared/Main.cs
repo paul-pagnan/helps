@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using helps.Shared.DataObjects;
 
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
@@ -18,7 +18,7 @@ namespace helps.Shared
         public MobileServiceClient client;
 
         public const string applicationURL = @"https://helps25.azure-mobile.net/";
-        public const string applicationKey = @"kHDdsuIrdkMYobtTRBwJLqFzhBOHFJ90";
+        public const string applicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
 
         public async void Init()
         {

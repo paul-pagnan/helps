@@ -158,9 +158,6 @@ namespace helps.Droid
 			// aapt resource value: 0x7f09001d
 			public const int checkToDoItem = 2131296285;
 			
-			// aapt resource value: 0x7f090005
-			public const int firstName = 2131296261;
-			
 			// aapt resource value: 0x7f090004
 			public const int imageView1 = 2131296260;
 			
@@ -172,9 +169,6 @@ namespace helps.Droid
 			
 			// aapt resource value: 0x7f090007
 			public const int imageView5 = 2131296263;
-			
-			// aapt resource value: 0x7f090008
-			public const int lastName = 2131296264;
 			
 			// aapt resource value: 0x7f090002
 			public const int linearLayout1 = 2131296258;
@@ -215,11 +209,20 @@ namespace helps.Droid
 			// aapt resource value: 0x7f09001f
 			public const int menu_share = 2131296287;
 			
-			// aapt resource value: 0x7f09000e
-			public const int password = 2131296270;
-			
 			// aapt resource value: 0x7f090010
 			public const int register = 2131296272;
+			
+			// aapt resource value: 0x7f090005
+			public const int registerFirstName = 2131296261;
+			
+			// aapt resource value: 0x7f090008
+			public const int registerLastName = 2131296264;
+			
+			// aapt resource value: 0x7f09000e
+			public const int registerPassword = 2131296270;
+			
+			// aapt resource value: 0x7f09000b
+			public const int registerStudentId = 2131296267;
 			
 			// aapt resource value: 0x7f090000
 			public const int relativeLayout1 = 2131296256;
@@ -232,9 +235,6 @@ namespace helps.Droid
 			
 			// aapt resource value: 0x7f090012
 			public const int signInLayout = 2131296274;
-			
-			// aapt resource value: 0x7f09000b
-			public const int studentId = 2131296267;
 			
 			// aapt resource value: 0x7f09001a
 			public const int textNewToDo = 2131296282;

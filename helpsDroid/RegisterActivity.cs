@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using helps.Shared;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
@@ -30,6 +31,27 @@ namespace helps.Droid
             setPadding(t);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
+        }
+
+        [Java.Interop.Export()]
+        public async void Register(View view)
+        {
+            EditText FirstName = FindViewById<EditText>(Resource.Id.registerFirstName);
+            EditText LastName = FindViewById<EditText>(Resource.Id.registerLastName);
+            EditText StudentId = FindViewById<EditText>(Resource.Id.registerStudentId);
+            EditText Password = FindViewById<EditText>(Resource.Id.registerPassword);
+            AuthService RegisterService = new AuthService();
+
+            AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, StudentId.Text, Password.Text);
+
+            if (Response.Success)
+            {
+                ShowDialog("DO SOMETHING NOW", "DO");
+            }
+            else
+            {
+                ShowDialog(Response.Message, Response.Title);
+            }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

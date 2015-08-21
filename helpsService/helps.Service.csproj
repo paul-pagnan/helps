@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201508160235300_Add_users.Designer.cs">
       <DependentUpon>201508160235300_Add_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508211402129_blah.cs" />
+    <Compile Include="Migrations\201508211402129_blah.Designer.cs">
+      <DependentUpon>201508211402129_blah.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
     <Compile Include="Utils\LoginProviderUtil.cs" />
@@ -233,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508160235300_Add_users.resx">
       <DependentUpon>201508160235300_Add_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508211402129_blah.resx">
+      <DependentUpon>201508211402129_blah.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

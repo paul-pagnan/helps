@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using helps.Shared;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
@@ -33,18 +34,20 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Login(View view)
         {
-            EditText studentId = FindViewById<EditText>(Resource.Id.loginStudentId); 
-            EditText password = FindViewById<EditText>(Resource.Id.loginPassword);
+            EditText StudentId = FindViewById<EditText>(Resource.Id.loginStudentId); 
+            EditText Password = FindViewById<EditText>(Resource.Id.loginPassword);
             AuthService LoginService = new AuthService();
-            try
+
+            AuthResult Response = await LoginService.Login(StudentId.Text, Password.Text);
+
+            if(Response.Success)
             {
-                JToken response = await LoginService.Login(studentId.Text, password.Text);
                 var intent = new Intent(this, typeof(ToDoActivity));
                 StartActivity(intent);
             }
-            catch (Exception ex)
+            else
             {
-                ShowDialog(ex.Message, "Login Failure");
+                ShowDialog(Response.Message, "Login Failure");
             }
         }
 

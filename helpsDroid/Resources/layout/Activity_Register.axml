@@ -45,7 +45,7 @@
                     p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="text"
-                    p1:id="@+id/firstName"
+                    p1:id="@+id/registerFirstName"
                     p1:hint="First Name"
                     p1:layout_width="match_parent"
                     p1:layout_height="match_parent" />
@@ -64,7 +64,7 @@
                     p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="text"
-                    p1:id="@+id/lastName"
+                    p1:id="@+id/registerLastName"
                     p1:hint="Last Name"
                     p1:layout_width="match_parent"
                     p1:layout_height="match_parent" />
@@ -83,7 +83,7 @@
                     p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="number"
-                    p1:id="@+id/studentId"
+                    p1:id="@+id/registerStudentId"
                     p1:hint="Student Id"
                     p1:layout_width="match_parent"
                     p1:layout_height="match_parent" />
@@ -102,7 +102,7 @@
                     p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="textPassword"
-                    p1:id="@+id/password"
+                    p1:id="@+id/registerPassword"
                     p1:hint="Password"
                     p1:layout_width="match_parent"
                     p1:layout_height="match_parent" />
@@ -123,6 +123,7 @@
             p1:id="@+id/register"
             p1:background="@drawable/flat_selector"
             p1:textColor="#fff"
-            style="?android:attr/borderlessButtonStyle" />
+            style="?android:attr/borderlessButtonStyle"
+            p1:onClick="Register" />
     </RelativeLayout>
 </RelativeLayout>
