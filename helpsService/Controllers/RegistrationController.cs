@@ -11,7 +11,7 @@ using helps.Service.DataObjects;
 using helps.Service.Models;
 using helps.Service.Utils;
 
-namespace helps.ServiceControllers
+namespace helps.Service.Controllers
 {
     [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class RegistrationController : ApiController
@@ -42,15 +42,23 @@ namespace helps.ServiceControllers
                 User newUser = new User
                 {
                     Id = Guid.NewGuid().ToString(),
+                    FirstName = registrationRequest.FirstName,
+                    LastName = registrationRequest.LastName,
                     StudentId = registrationRequest.StudentId,
                     Salt = salt,
+                    Email = registrationRequest.Email,
+                    Confirmed = false,
+                    ConfirmToken = Guid.NewGuid().ToString(),
                     SaltedAndHashedPassword = LoginProviderUtil.hash(registrationRequest.Password, salt)
                 };
+                EmailProviderUtil mail = new EmailProviderUtil();
+                var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ConfirmEmail", Token = newUser.ConfirmToken });
+                mail.SendConfirmationEmail(newUser, url);
+                
                 context.Users.Add(newUser);
                 context.SaveChanges();
                 return this.Request.CreateResponse(HttpStatusCode.Created);
             }
         }
-
     }
 }

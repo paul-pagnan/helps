@@ -8,7 +8,7 @@ using helps.Service.DataObjects;
 using helps.Service.Models;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
 
-namespace helps.ServiceControllers
+namespace helps.Service.Controllers
 {
     [AuthorizeLevel(AuthorizationLevel.User)]
     public class TodoItemController : TableController<TodoItem>

@@ -7,7 +7,7 @@ using helps.Service.DataObjects;
 using helps.Service.Models;
 using helps.Service.Utils;
 using System.Data.Entity.Migrations;
-using helps.Service.Migrations;
+
 
 namespace helps.Service
 {
@@ -31,9 +31,15 @@ namespace helps.Service
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
             config.SetIsHosted(true);
 
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
             Database.SetInitializer(new helpsInitializer());
-            // var migrator = new DbMigrator(new Configuration());
-            // migrator.Update();
+            //var migrator = new DbMigrator(new Configuration());
+            //migrator.Update();
         }
     }
 
@@ -41,18 +47,18 @@ namespace helps.Service
     {
         protected override void Seed(helpsContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-            };
+            //List<TodoItem> todoItems = new List<TodoItem>
+            //{
+            //    new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
+            //    new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+            //};
 
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
+            //foreach (TodoItem todoItem in todoItems)
+            //{
+            //    context.Set<TodoItem>().Add(todoItem);
+            //}
 
-            base.Seed(context);
+            //base.Seed(context);
         }
     }
 }

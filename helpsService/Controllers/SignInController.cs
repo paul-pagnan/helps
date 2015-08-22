@@ -11,7 +11,7 @@ using helps.Service.DataObjects;
 using helps.Service.Models;
 using helps.Service.Utils;
 
-namespace helps.ServiceControllers
+namespace helps.Service.Controllers
 {
     [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class SignInController : ApiController
@@ -29,6 +29,11 @@ namespace helps.ServiceControllers
             {
                 byte[] incoming = LoginProviderUtil
                     .hash(loginRequest.Password, account.Salt);
+
+                if (!account.Confirmed)
+                {
+                    return this.Request.CreateResponse(HttpStatusCode.Unauthorized, "Email has not been confirmed");
+                }
 
                 if (LoginProviderUtil.slowEquals(incoming, account.SaltedAndHashedPassword))
                 {

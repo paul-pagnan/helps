@@ -36,10 +36,10 @@ namespace helps.Shared
             return result;
         }
 
-        public async Task<AuthResult> Register(string FirstName, string LastName, string StudentId, string Password)
+        public async Task<AuthResult> Register(string FirstName, string LastName, string Email, string StudentId, string Password)
         {
             AuthResult result;
-            string input = "{ 'firstName': '" +  FirstName + "', 'lastName': '" + LastName + "','studentId': '" + StudentId + "', 'password': '" + Password + "'}";
+            string input = "{ 'firstName': '" +  FirstName + "', 'lastName': '" + LastName + "','studentId': '" + StudentId + "', 'password': '" + Password + "', 'email': '" + Email + "'}";
             try
             {
                 JToken response = await client.InvokeApiAsync("Registration", input);

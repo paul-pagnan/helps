@@ -39,10 +39,11 @@ namespace helps.Droid
             EditText FirstName = FindViewById<EditText>(Resource.Id.registerFirstName);
             EditText LastName = FindViewById<EditText>(Resource.Id.registerLastName);
             EditText StudentId = FindViewById<EditText>(Resource.Id.registerStudentId);
+            EditText Email = FindViewById<EditText>(Resource.Id.registerEmail);
             EditText Password = FindViewById<EditText>(Resource.Id.registerPassword);
             AuthService RegisterService = new AuthService();
 
-            AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, StudentId.Text, Password.Text);
+            AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, Email.Text, StudentId.Text, Password.Text);
 
             if (Response.Success)
             {
