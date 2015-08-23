@@ -261,7 +261,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mail\Templates\ConfirmEmail.cshtml">
+    <Content Include="Mail\Templates\ConfirmEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\mobile-helps.pubxml" />

@@ -13,6 +13,7 @@ using System.IO;
 using helps.Service.Mail.ViewModels;
 using System.Web.Configuration;
 using System.Reflection;
+using System.Text;
 
 namespace helps.Service.Utils
 {
@@ -29,44 +30,19 @@ namespace helps.Service.Utils
             templateFolderPath = Path.Combine(WebConfigurationManager.AppSettings["AppDir"], "Mail", "Templates");
         }
 
-        public string SendConfirmationEmail(User user, string url)
+        public void SendConfirmationEmail(User user, string url)
         {
-            var template = "";
-            try { 
-                template = File.ReadAllText(Path.Combine(templateFolderPath, "ConfirmEmail.cshtml"));
-            }
-            catch(Exception ex)
-            {
-                return ex.ToString();
-            }
+            var template = File.ReadAllText(Path.Combine(templateFolderPath, "ConfirmEmail.html"));            
+            var body = string.Format(template, user.FirstName, url, url);
+            
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(FromAddress);
+            message.To.Add(new MailAddress(user.Email));
+            message.Subject = "UTS HELPS - Please confirm your email";
+            message.IsBodyHtml = true;
+            message.Body = body;
 
-            var viewModel = new ConfirmEmailViewModel
-            {
-                FirstName = user.FirstName,
-                Url = url
-            };
-
-
-            var body = "failed";
-            try
-            {
-                body = Razor.Parse(template, viewModel);
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-            return body;
-
-
-            //MailMessage message = new MailMessage();
-            //message.From = new MailAddress(FromAddress);
-            //message.To.Add(new MailAddress(user.Email));
-            //message.Subject = "UTS HELPS - Please confirm your email";
-            //message.IsBodyHtml = true;
-            //message.Body = body;
-
-            //Send(message);
+            Send(message);
         }
 
         private void Send(MailMessage message)
