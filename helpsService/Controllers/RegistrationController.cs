@@ -53,7 +53,7 @@ namespace helps.Service.Controllers
                 };
                 EmailProviderUtil mail = new EmailProviderUtil();
                 var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ConfirmEmail", Token = newUser.ConfirmToken });
-                mail.SendConfirmationEmail(newUser, url);
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, mail.SendConfirmationEmail(newUser, url));
                 
                 context.Users.Add(newUser);
                 context.SaveChanges();

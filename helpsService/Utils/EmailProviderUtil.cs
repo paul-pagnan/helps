@@ -11,6 +11,8 @@ using System.Web.Http;
 using RazorEngine;
 using System.IO;
 using helps.Service.Mail.ViewModels;
+using System.Web.Configuration;
+using System.Reflection;
 
 namespace helps.Service.Utils
 {
@@ -20,24 +22,49 @@ namespace helps.Service.Utils
         private string UserName = "utshelps25@gmail.com";
         private string Password = "Password!23";
         private string Host = "smtp.gmail.com";
+        private string templateFolderPath;
 
-        public void SendConfirmationEmail(User user, string url)
+        public EmailProviderUtil()
         {
-            //ERROR: in this method. I suspect something to do with file loading
-            var template = File.ReadAllText(HttpContext.Current.Server.MapPath("~/Mail/Templates/ConfirmEmail.cshtml"));
+            templateFolderPath = Path.Combine(WebConfigurationManager.AppSettings["AppDir"], "Mail", "Templates");
+        }
+
+        public string SendConfirmationEmail(User user, string url)
+        {
+            var template = "";
+            try { 
+                template = File.ReadAllText(Path.Combine(templateFolderPath, "ConfirmEmail.cshtml"));
+            }
+            catch(Exception ex)
+            {
+                return ex.ToString();
+            }
+
             var viewModel = new ConfirmEmailViewModel
             {
                 FirstName = user.FirstName,
                 Url = url
             };
-            var body = Razor.Parse(template, viewModel);
 
-            MailMessage message = new MailMessage();
-            message.From = new MailAddress(FromAddress);
-            message.To.Add(new MailAddress(user.Email));
-            message.Subject = "UTS HELPS - Please confirm your email";
-            message.IsBodyHtml = true;
-            message.Body = body;
+
+            var body = "failed";
+            try
+            {
+                body = Razor.Parse(template, viewModel);
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            return body;
+
+
+            //MailMessage message = new MailMessage();
+            //message.From = new MailAddress(FromAddress);
+            //message.To.Add(new MailAddress(user.Email));
+            //message.Subject = "UTS HELPS - Please confirm your email";
+            //message.IsBodyHtml = true;
+            //message.Body = body;
 
             //Send(message);
         }
