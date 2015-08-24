@@ -36,6 +36,9 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Register(View view)
         {
+            ProgressDialog dialog = CreateProgressDialog("Registering...", this);
+            dialog.Show();
+
             EditText FirstName = FindViewById<EditText>(Resource.Id.registerFirstName);
             EditText LastName = FindViewById<EditText>(Resource.Id.registerLastName);
             EditText StudentId = FindViewById<EditText>(Resource.Id.registerStudentId);
@@ -44,10 +47,17 @@ namespace helps.Droid
             AuthService RegisterService = new AuthService();
 
             AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, Email.Text, StudentId.Text, Password.Text);
+            dialog.Hide();
 
             if (Response.Success)
             {
-                ShowDialog("DO SOMETHING NOW", "DO");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.SetTitle("Successfully Registered");
+                builder.SetMessage("Please check your emails to confirm your email address");
+                builder.SetCancelable(false);
+                builder.SetPositiveButton("OK", delegate { Finish(); });
+                builder.Show();
             }
             else
             {

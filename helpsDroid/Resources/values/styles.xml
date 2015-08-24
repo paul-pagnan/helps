@@ -13,6 +13,12 @@
     
   </style>
 
+
+  <style name="LightDialog" parent="android:Theme.Material.Light.Dialog">
+
+  </style>
+
+
   <style name="AppTheme.MyToolbar" parent="android:Theme.Material.Light.DarkActionBar">
     <item name="android:windowNoTitle">true</item>
     <!--We will be using the toolbar so no need to show ActionBar-->

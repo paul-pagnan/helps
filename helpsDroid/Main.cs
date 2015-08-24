@@ -35,11 +35,19 @@ namespace helps.Droid
 
         public void ShowDialog(string message, string title)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, Resource.Style.LightDialog);
             builder.SetMessage(message);
             builder.SetTitle(title);
             builder.Create().Show();
+        }
+
+
+        public ProgressDialog CreateProgressDialog(string message, Activity activity)
+        {
+            ProgressDialog mProgressDialog = new ProgressDialog(activity, Resource.Style.LightDialog);
+            mProgressDialog.SetMessage(message);
+            mProgressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+            return mProgressDialog; 
         }
     }
 }

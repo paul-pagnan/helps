@@ -34,13 +34,17 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Login(View view)
         {
+            ProgressDialog dialog = CreateProgressDialog("Logging In...", this);
+            dialog.Show();
+
             EditText StudentId = FindViewById<EditText>(Resource.Id.loginStudentId); 
             EditText Password = FindViewById<EditText>(Resource.Id.loginPassword);
             AuthService LoginService = new AuthService();
 
             AuthResult Response = await LoginService.Login(StudentId.Text, Password.Text);
+            dialog.Dismiss();
 
-            if(Response.Success)
+            if (Response.Success)
             {
                 var intent = new Intent(this, typeof(ToDoActivity));
                 StartActivity(intent);
