@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="ForgotPasswordActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +110,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\toolbar.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_ForgotPassword.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -191,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\drawable\Icons\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\themes_apptheme.xml" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.Mobile.Service;
+using System;
 
 namespace helps.Service.DataObjects
 {
@@ -12,5 +13,7 @@ namespace helps.Service.DataObjects
         public byte[] SaltedAndHashedPassword { get; set; }
         public string ConfirmToken { get; set; }
         public bool Confirmed { get; set; }
+        public string ForgotPasswordToken { get; set; }
+        public DateTime ResetTokenSentAt { get; set; }
     }
 }

@@ -49,6 +49,7 @@ namespace helps.Service.Controllers
                     Email = registrationRequest.Email,
                     Confirmed = false,
                     ConfirmToken = Guid.NewGuid().ToString(),
+                    ForgotPasswordToken = Guid.NewGuid().ToString(),
                     SaltedAndHashedPassword = LoginProviderUtil.hash(registrationRequest.Password, salt)
                 };
                 EmailProviderUtil mail = new EmailProviderUtil();

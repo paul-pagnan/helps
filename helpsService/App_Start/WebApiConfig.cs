@@ -31,12 +31,6 @@ namespace helps.Service
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
             config.SetIsHosted(true);
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
             Database.SetInitializer(new helpsInitializer());
             //var migrator = new DbMigrator(new Configuration());
             //migrator.Update();

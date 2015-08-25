@@ -15,17 +15,15 @@ using helps.Shared.DataObjects;
 namespace helps.Droid
 {
     [Activity(Label = "Register", Icon = "@drawable/ic_launcher", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
-    public class RegisterActivity : Main
+    public class ForgotPasswordActivity : Main
     {
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Activity_Register);
+            SetContentView(Resource.Layout.Activity_ForgotPassword);
 
             var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-
-            //t.InflateMenu(Resource.Menu.simple);
 
             SetActionBar(t);
             setPadding(t);
@@ -34,27 +32,22 @@ namespace helps.Droid
         }
 
         [Java.Interop.Export()]
-        public async void Register(View view)
+        public async void ForgotPassword(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Registering...", this);
+            ProgressDialog dialog = CreateProgressDialog("Please wait...", this);
             dialog.Show();
 
-            EditText FirstName = FindViewById<EditText>(Resource.Id.registerFirstName);
-            EditText LastName = FindViewById<EditText>(Resource.Id.registerLastName);
-            EditText StudentId = FindViewById<EditText>(Resource.Id.registerStudentId);
-            EditText Email = FindViewById<EditText>(Resource.Id.registerEmail);
-            EditText Password = FindViewById<EditText>(Resource.Id.registerPassword);
-            AuthService RegisterService = new AuthService();
-
-            AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, Email.Text, StudentId.Text, Password.Text);
+            EditText StudentId = FindViewById<EditText>(Resource.Id.forgotStudentId);
+            AuthService ForgotPasswordService = new AuthService();
+            AuthResult Response = await ForgotPasswordService.ForgotPassword(StudentId.Text);
             dialog.Hide();
 
             if (Response.Success)
             {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.SetTitle("Successfully Registered");
-                builder.SetMessage("Please check your emails to confirm your email address");
+                builder.SetTitle("Password Reset Sent");
+                builder.SetMessage("Please check your emails to reset your password");
                 builder.SetCancelable(false);
                 builder.SetPositiveButton("OK", delegate { Finish(); });
                 builder.Show();

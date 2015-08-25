@@ -220,15 +220,17 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConfirmEmailController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="DataObjects\helpsLoginResult.cs" />
+    <Compile Include="DataObjects\ForgotPasswordRequest.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />
     <Compile Include="DataObjects\RegistrationRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
-    <Compile Include="Mail\ViewModels\ConfirmEmailViewModel.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -246,6 +248,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Mail\Templates\ResetPassword.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

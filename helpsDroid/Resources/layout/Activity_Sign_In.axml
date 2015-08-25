@@ -68,8 +68,21 @@
             android:id="@+id/textView2"
             android:padding="15dp"
             android:textSize="13dp"
+            android:layout_marginBottom="5dp"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:onClick="ShowRegister" />
+        <TextView
+            android:text="Forgot Password? "
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:padding="15dp"
+            android:textSize="13dp"
+            android:layout_below="@id/textView2"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:onClick="ShowForgotPassword" />
     </RelativeLayout>
 </RelativeLayout>

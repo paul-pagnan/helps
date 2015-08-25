@@ -61,5 +61,12 @@ namespace helps.Droid
             var intent = new Intent(this, typeof(RegisterActivity));
             StartActivity(intent);
         }
+
+        [Java.Interop.Export()]
+        public async void ShowForgotPassword(View view)
+        {
+            var intent = new Intent(this, typeof(ForgotPasswordActivity));
+            StartActivity(intent);
+        }
     }
 }

@@ -10,7 +10,6 @@ using System.Net.Http;
 using System.Web.Http;
 using RazorEngine;
 using System.IO;
-using helps.Service.Mail.ViewModels;
 using System.Web.Configuration;
 using System.Reflection;
 using System.Text;
@@ -44,6 +43,22 @@ namespace helps.Service.Utils
 
             Send(message);
         }
+
+        public void SendPasswordResetEmail(User user, string url)
+        {
+            var template = File.ReadAllText(Path.Combine(templateFolderPath, "ResetPassword.html"));
+            var body = string.Format(template, user.FirstName, url, url);
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(FromAddress);
+            message.To.Add(new MailAddress(user.Email));
+            message.Subject = "UTS HELPS - Password reset";
+            message.IsBodyHtml = true;
+            message.Body = body;
+
+            Send(message);
+        }
+
 
         private void Send(MailMessage message)
         {

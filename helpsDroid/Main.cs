@@ -46,6 +46,7 @@ namespace helps.Droid
         {
             ProgressDialog mProgressDialog = new ProgressDialog(activity, Resource.Style.LightDialog);
             mProgressDialog.SetMessage(message);
+            mProgressDialog.SetCancelable(false);
             mProgressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
             return mProgressDialog; 
         }
