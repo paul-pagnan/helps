@@ -231,7 +231,6 @@
     <Compile Include="DataObjects\RegistrationRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
-    <Compile Include="Mail\ViewModels\ConfirmEmailViewModel.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

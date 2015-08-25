@@ -14,7 +14,11 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
+<<<<<<< HEAD
     [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+=======
+    [Activity(Label = "Register", Icon = "@drawable/ic_launcher", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+>>>>>>> 14fb71a... Add forgot password module. TODO: create web gui for forgot password
     public class ForgotPasswordActivity : Main
     {
 

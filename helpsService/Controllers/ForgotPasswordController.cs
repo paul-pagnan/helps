@@ -26,8 +26,14 @@ namespace helps.Service.Controllers
                 // Found the user
                 user.ResetTokenSentAt = DateTime.Now;
             
+<<<<<<< HEAD
                 var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ResetPassword", Token = user.ForgotPasswordToken });
                 EmailProviderUtil.SendPasswordResetEmail(user, url);
+=======
+                EmailProviderUtil mail = new EmailProviderUtil();
+                var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ResetPassword", Token = user.ForgotPasswordToken });
+                mail.SendPasswordResetEmail(user, url);
+>>>>>>> 14fb71a... Add forgot password module. TODO: create web gui for forgot password
 
                 return this.Request.CreateResponse(HttpStatusCode.OK);
             }

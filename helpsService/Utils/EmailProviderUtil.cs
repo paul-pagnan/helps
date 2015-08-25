@@ -79,7 +79,11 @@ namespace helps.Service.Utils
             Send(message);
         }
 
+<<<<<<< HEAD
         public static void SendPasswordResetEmail(User user, string url)
+=======
+        public void SendPasswordResetEmail(User user, string url)
+>>>>>>> 14fb71a... Add forgot password module. TODO: create web gui for forgot password
         {
             var template = File.ReadAllText(Path.Combine(templateFolderPath, "ResetPassword.html"));
             var body = string.Format(template, user.FirstName, url, url);
@@ -95,7 +99,11 @@ namespace helps.Service.Utils
         }
 
 
+<<<<<<< HEAD
         private static void Send(MailMessage message)
+=======
+        private void Send(MailMessage message)
+>>>>>>> 14fb71a... Add forgot password module. TODO: create web gui for forgot password
         {
             SmtpClient client = new SmtpClient();
             client.Credentials = new System.Net.NetworkCredential(UserName, Password);
