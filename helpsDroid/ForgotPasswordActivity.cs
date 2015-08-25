@@ -14,7 +14,7 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
-    [Activity(Label = "Register", Icon = "@drawable/ic_launcher", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class ForgotPasswordActivity : Main
     {
 

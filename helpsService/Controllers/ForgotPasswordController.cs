@@ -26,9 +26,8 @@ namespace helps.Service.Controllers
                 // Found the user
                 user.ResetTokenSentAt = DateTime.Now;
             
-                EmailProviderUtil mail = new EmailProviderUtil();
                 var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ResetPassword", Token = user.ForgotPasswordToken });
-                mail.SendPasswordResetEmail(user, url);
+                EmailProviderUtil.SendPasswordResetEmail(user, url);
 
                 return this.Request.CreateResponse(HttpStatusCode.OK);
             }
