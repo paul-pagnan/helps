@@ -150,10 +150,7 @@
     <AndroidResource Include="Resources\layout\Activity_ForgotPassword.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\raw\helps_db.db3" />
-=======
->>>>>>> 14fb71a... Add forgot password module. TODO: create web gui for forgot password
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
