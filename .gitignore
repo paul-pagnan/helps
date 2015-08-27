@@ -210,3 +210,9 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+helpsService/Web.config
+helpsService/Web.Debug.config
+helpsService/Web.Release.config
+
+

@@ -19,7 +19,7 @@ namespace helps.Droid
 		}
 
 		//Returns the view for a specific item on the list
-		public override View GetView (int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
+		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			var row = convertView;
 			var currentItem = this [position];

@@ -10,7 +10,6 @@ using helps.Service.DataObjects;
 using helps.Service.Utils;
 using helps.Service.Models;
 
-
 namespace helps.Service.Controllers
 {
     public class ResetPasswordController : ApiController
