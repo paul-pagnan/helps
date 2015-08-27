@@ -17,7 +17,7 @@ namespace helps.Shared
 
         public MobileServiceClient client;
 
-        public const string applicationURL = @"https://helps25.azure-mobile.net/";
+        public const string applicationURL = @"http://54.153.240.143/";
         public const string applicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
 
         public async void Init()

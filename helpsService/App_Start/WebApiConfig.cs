@@ -7,6 +7,7 @@ using helps.Service.DataObjects;
 using helps.Service.Models;
 using helps.Service.Utils;
 using System.Data.Entity.Migrations;
+using helps.Service.Migrations;
 
 
 namespace helps.Service
@@ -31,9 +32,15 @@ namespace helps.Service
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
             config.SetIsHosted(true);
 
-            Database.SetInitializer(new helpsInitializer());
-            //var migrator = new DbMigrator(new Configuration());
-            //migrator.Update();
+            config.Routes.MapHttpRoute(
+               name: "DefaultApi",
+               routeTemplate: "api/{controller}/{id}",
+               defaults: new { id = RouteParameter.Optional }
+            );
+
+            //Database.SetInitializer(new helpsInitializer());
+            var migrator = new DbMigrator(new Configuration());
+            migrator.Update();
         }
     }
 

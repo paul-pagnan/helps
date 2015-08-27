@@ -47,7 +47,7 @@ namespace helps.Service.Utils
                     Url = url
                 };
 
-                body = Razor.Parse("safasfasfas");
+                body = Razor.Parse(template, model);
             } catch (Exception ex)
             {
                 return ex.ToString();
