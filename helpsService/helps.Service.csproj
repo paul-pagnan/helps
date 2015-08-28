@@ -218,23 +218,27 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConfirmEmailController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataObjects\helpsLoginResult.cs" />
     <Compile Include="DataObjects\ForgotPasswordRequest.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />
     <Compile Include="DataObjects\RegistrationRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
-    <Compile Include="Mail\ViewModels\ConfirmEmailViewModel.cs" />
-    <Compile Include="Migrations\201508271338424_Initial.cs" />
-    <Compile Include="Migrations\201508271338424_Initial.Designer.cs">
-      <DependentUpon>201508271338424_Initial.cs</DependentUpon>
+    <Compile Include="Mail\ViewModels\NameUrlViewModel.cs" />
+    <Compile Include="Migrations\201508272354241_Initial.cs" />
+    <Compile Include="Migrations\201508272354241_Initial.Designer.cs">
+      <DependentUpon>201508272354241_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508280028424_New.cs" />
+    <Compile Include="Migrations\201508280028424_New.Designer.cs">
+      <DependentUpon>201508280028424_New.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
@@ -254,7 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Mail\Templates\ResetPassword.html">
+    <Content Include="Mail\Templates\ResetPassword.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.config">
@@ -272,9 +276,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mail\Templates\ConfirmEmail.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Mail\Templates\ConfirmEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -283,8 +284,11 @@
     <None Include="Properties\PublishProfiles\mobile-helps25.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508271338424_Initial.resx">
-      <DependentUpon>201508271338424_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508272354241_Initial.resx">
+      <DependentUpon>201508272354241_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508280028424_New.resx">
+      <DependentUpon>201508280028424_New.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
