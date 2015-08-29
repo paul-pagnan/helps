@@ -8,7 +8,7 @@ using helps.Service.Models;
 using helps.Service.Utils;
 using System.Data.Entity.Migrations;
 using helps.Service.Migrations;
-
+using Owin;
 
 namespace helps.Service
 {
@@ -40,7 +40,7 @@ namespace helps.Service
 
             //Database.SetInitializer(new helpsInitializer());
             var migrator = new DbMigrator(new Configuration());
-            migrator.Update();
+            //migrator.Update();
         }
     }
 

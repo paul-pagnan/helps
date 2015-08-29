@@ -9,25 +9,24 @@ using System.Net.Http.Headers;
 using helps.Service.DataObjects;
 using helps.Service.Utils;
 using helps.Service.Models;
+using helps.Service.Helpers;
+
 
 namespace helps.Service.Controllers
 {
     public class ResetPasswordController : ApiController
     {
-        public ApiServices Services { get; set; }
-
         // GET api/ResetPassword
-
         public HttpResponseMessage Get(string Token)
         {
-            var response = new HttpResponseMessage();
-            response.Content = new StringContent("<html><body>Here is the password reset</body></html>");
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-            return response;
+            ResetPasswordRequest model = new ResetPasswordRequest();
+            model.Errors = "8 characters minimum";
+            model.ResetToken = Token;
+            return ViewHelper.View("ResetPassword/Index", model);
         }
 
         // GET api/ForgotPassword
-        public HttpResponseMessage Post(ForgotPasswordRequest request)
+        public HttpResponseMessage Post(ResetPasswordRequest request)
         {
             helpsContext context = new helpsContext();
             // Find the User with the token which was emailed to them
@@ -37,8 +36,8 @@ namespace helps.Service.Controllers
             {
                 if (request.Password != request.ConfirmPassword)
                 {
-                    // FAILED - Return Error
-                    return null;
+                    request.Errors = "Passwords do not match";
+                    return ViewHelper.View("ResetPassword/Index", request);
                 }
 
                 byte[] salt = LoginProviderUtil.generateSalt();
@@ -49,11 +48,11 @@ namespace helps.Service.Controllers
                 context.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
-                //RENDER SUCCESS
+                return ViewHelper.View("ResetPassword/Success");
             }
 
-            //RENDER USER NOT FOUND
-            return null;
+            request.Errors = "An error occured";
+            return ViewHelper.View("ResetPassword/Index", request);
         }
 
     }

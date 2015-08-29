@@ -27,17 +27,17 @@ namespace helps.Service.Utils
         private static string UserName = "utshelps25@gmail.com";
         private static string Password = "Password!23";
         private static string Host = "smtp.gmail.com";
-        private static string templateFolderPath = Path.Combine(WebConfigurationManager.AppSettings["AppDir"], "Mail", "Templates");
+        private static string templateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mail", "Templates");
 
 
         public static void SendConfirmationEmail(User user, string url)
         {
-            SendNameUrlEmail("ConfirmEmail.cshtml", user, url, "UTS HELPS - Confirm Your Email");
+            SendNameUrlEmail("ConfirmEmail", user, url, "UTS HELPS - Confirm Your Email");
         }
        
         public static void SendPasswordResetEmail(User user, string url)
         {
-            SendNameUrlEmail("ResetPassword.cshtml", user, url, "UTS HELPS - Password Reset");
+            SendNameUrlEmail("ResetPassword", user, url, "UTS HELPS - Password Reset");
         }
 
         #region helpers
@@ -70,7 +70,7 @@ namespace helps.Service.Utils
 
         private static void SendNameUrlEmail(string Layout, User User, string Url, string Subject)
         {
-            var template = File.ReadAllText(Path.Combine(templateFolderPath, Layout));
+            var template = File.ReadAllText(Path.Combine(templateFolderPath, Layout + ".cshtml"));
             NameUrlViewModel model = new NameUrlViewModel
             {
                 FirstName = User.FirstName,

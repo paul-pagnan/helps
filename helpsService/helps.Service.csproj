@@ -215,7 +215,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ConfirmEmailController.cs" />
@@ -226,20 +225,13 @@
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataObjects\helpsLoginResult.cs" />
-    <Compile Include="DataObjects\ForgotPasswordRequest.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />
     <Compile Include="DataObjects\RegistrationRequest.cs" />
+    <Compile Include="DataObjects\ResetPasswordRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Mail\ViewModels\NameUrlViewModel.cs" />
-    <Compile Include="Migrations\201508272354241_Initial.cs" />
-    <Compile Include="Migrations\201508272354241_Initial.Designer.cs">
-      <DependentUpon>201508272354241_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508280028424_New.cs" />
-    <Compile Include="Migrations\201508280028424_New.Designer.cs">
-      <DependentUpon>201508280028424_New.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -282,14 +274,12 @@
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\mobile-helps.pubxml" />
     <None Include="Properties\PublishProfiles\mobile-helps25.pubxml" />
+    <Content Include="Views\ResetPassword\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\ResetPassword\Success.cshtml" />
+    <Content Include="Views\ConfirmEmail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508272354241_Initial.resx">
-      <DependentUpon>201508272354241_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508280028424_New.resx">
-      <DependentUpon>201508280028424_New.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

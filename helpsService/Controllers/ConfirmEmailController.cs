@@ -8,6 +8,7 @@ using Microsoft.WindowsAzure.Mobile.Service;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
 using helps.Service.DataObjects;
 using helps.Service.Models;
+using helps.Service.Helpers;
 
 namespace helps.Service.Controllers
 {
@@ -33,9 +34,9 @@ namespace helps.Service.Controllers
                 context.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 //Return success
-                return this.Request.CreateResponse(HttpStatusCode.OK, "Email confirmed successfully. Please login");
+                return ViewHelper.View("ConfirmEmail/Index", new { Message = "Email confirmed! Please log in" });
             }
-            return this.Request.CreateResponse(HttpStatusCode.BadRequest, "User not found");
+            return ViewHelper.View("ConfirmEmail/Index", new { Message = "An error occured" });
         }
 
     }

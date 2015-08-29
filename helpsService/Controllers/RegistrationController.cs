@@ -50,6 +50,7 @@ namespace helps.Service.Controllers
                     Confirmed = false,
                     ConfirmToken = Guid.NewGuid().ToString(),
                     ForgotPasswordToken = Guid.NewGuid().ToString(),
+                    ResetTokenSentAt = DateTime.Now,
                     SaltedAndHashedPassword = LoginProviderUtil.hash(registrationRequest.Password, salt)
                 };
 

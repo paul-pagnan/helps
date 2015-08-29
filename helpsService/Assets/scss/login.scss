@@ -1,0 +1,148 @@
+//@import "foundation_and_overrides";
+@import "foundation";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,600);
+
+//$background: #2b333e;
+$background: #017fd6;
+$placeholder-color: #bbb;
+
+
+body {
+  background-color: $background;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 200;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: white;
+  font-weight: 600;
+
+  &:hover {
+    color: #eee;
+  }
+}
+
+.card {
+  background-color: white;
+  border: 1px;
+  border-radius: 5px;
+  padding: 35px;
+  margin-bottom: 15px;
+
+
+  h2 {
+    font-weight: 100;
+    color: #555;
+    letter-spacing: 1px;
+    font-size: 2.2rem;
+    margin-bottom: 35px;
+  }
+
+  a {
+    color: #bbb;
+    font-weight: 600;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: #999;
+    }
+  }
+
+  input[type='text'], input[type='email'], input[type='password'] {
+    background: #fcfcfc;
+    border: 2px solid #e7e7e7;
+    margin: 20px auto;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    border-radius: 3px;
+    font-size: 18px;
+    transition: opacity 0.4s;
+    text-align: left;
+    height: auto;
+  }
+}
+
+input[type='submit'] {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.center  {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::-webkit-input-placeholder {
+  color: $placeholder-color;
+  font-weight: 200;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: $placeholder-color;
+  font-weight: 200;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: $placeholder-color;
+  font-weight: 200;
+}
+
+:-ms-input-placeholder {
+  color: $placeholder-color;
+  font-weight: 200;
+}
+
+#error_explanation {
+  padding: 10px;
+  background-color: #de2d0f;
+  border-color: #de2d0f;
+  color: white;
+  text-align: left;
+
+  h2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: white;
+  }
+
+  ul {
+    margin-bottom: 10px;
+    li {
+      font-weight: 200;
+
+      color: white;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.alert {
+  color: #de2d0f;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 620px;
+}
