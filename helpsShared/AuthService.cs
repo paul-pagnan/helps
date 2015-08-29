@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using helps.Shared.DataObjects;
 using System.Net.Http;
-
 
 namespace helps.Shared
 {

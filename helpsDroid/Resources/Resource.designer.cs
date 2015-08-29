@@ -58,6 +58,9 @@ namespace helps.Droid
 			// aapt resource value: 0x7f060001
 			public const int primaryDark = 2131099649;
 			
+			// aapt resource value: 0x7f060004
+			public const int primaryMuted = 2131099652;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
