@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@color/primaryDark"
+    android:background="@color/primary"
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
     android:id="@+id/mainlayout">

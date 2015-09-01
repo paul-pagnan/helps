@@ -272,9 +272,6 @@
     <AndroidResource Include="Resources\values\dimen.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rect_pressed.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\rect_normal.xml" />
   </ItemGroup>
   <ItemGroup>

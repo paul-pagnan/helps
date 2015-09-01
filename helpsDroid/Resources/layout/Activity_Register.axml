@@ -136,10 +136,10 @@
         p1:id="@+id/relativeLayout2"
         p1:layout_alignParentBottom="true">
         <Button
-            p1:text="Continue"
+            p1:text="Register"
             p1:layout_width="match_parent"
-            p1:layout_height="wrap_content"
-            p1:id="@+id/register"
+            p1:layout_height="60dp"
+            p1:id="@+id/forgotPassword"
             p1:background="@drawable/flat_selector"
             p1:textColor="#fff"
             style="?android:attr/borderlessButtonStyle"

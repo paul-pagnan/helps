@@ -61,6 +61,9 @@ namespace helps.Droid
 			// aapt resource value: 0x7f060004
 			public const int primaryMuted = 2131099652;
 			
+			// aapt resource value: 0x7f060005
+			public const int primaryMutedPressed = 2131099653;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -127,13 +130,10 @@ namespace helps.Droid
 			public const int rect_normal = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int rect_pressed = 2130837515;
+			public const int register = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int register = 2130837516;
-			
-			// aapt resource value: 0x7f02000d
-			public const int textlines = 2130837517;
+			public const int textlines = 2130837516;
 			
 			static Drawable()
 			{
@@ -151,20 +151,20 @@ namespace helps.Droid
 			// aapt resource value: 0x7f0a0004
 			public const int ForgotStudentIdIcon = 2131361796;
 			
-			// aapt resource value: 0x7f0a001f
-			public const int LinearLayout1 = 2131361823;
+			// aapt resource value: 0x7f0a001e
+			public const int LinearLayout1 = 2131361822;
 			
 			// aapt resource value: 0x7f0a0001
 			public const int Ttoolbar = 2131361793;
 			
-			// aapt resource value: 0x7f0a0025
-			public const int amvMenu = 2131361829;
-			
-			// aapt resource value: 0x7f0a0022
-			public const int buttonAddToDo = 2131361826;
-			
 			// aapt resource value: 0x7f0a0024
-			public const int checkToDoItem = 2131361828;
+			public const int amvMenu = 2131361828;
+			
+			// aapt resource value: 0x7f0a0021
+			public const int buttonAddToDo = 2131361825;
+			
+			// aapt resource value: 0x7f0a0023
+			public const int checkToDoItem = 2131361827;
 			
 			// aapt resource value: 0x7f0a0003
 			public const int forgotLayout = 2131361795;
@@ -202,32 +202,29 @@ namespace helps.Droid
 			// aapt resource value: 0x7f0a000c
 			public const int linearLayout6 = 2131361804;
 			
-			// aapt resource value: 0x7f0a0023
-			public const int listViewToDo = 2131361827;
-			
-			// aapt resource value: 0x7f0a001b
-			public const int loginBtn = 2131361819;
+			// aapt resource value: 0x7f0a0022
+			public const int listViewToDo = 2131361826;
 			
 			// aapt resource value: 0x7f0a001a
-			public const int loginPassword = 2131361818;
+			public const int loginBtn = 2131361818;
 			
 			// aapt resource value: 0x7f0a0019
-			public const int loginStudentId = 2131361817;
+			public const int loginPassword = 2131361817;
 			
-			// aapt resource value: 0x7f0a0017
-			public const int mainlayout = 2131361815;
-			
-			// aapt resource value: 0x7f0a0027
-			public const int menu_refresh = 2131361831;
-			
-			// aapt resource value: 0x7f0a0028
-			public const int menu_settings = 2131361832;
-			
-			// aapt resource value: 0x7f0a0026
-			public const int menu_share = 2131361830;
+			// aapt resource value: 0x7f0a0018
+			public const int loginStudentId = 2131361816;
 			
 			// aapt resource value: 0x7f0a0016
-			public const int register = 2131361814;
+			public const int mainlayout = 2131361814;
+			
+			// aapt resource value: 0x7f0a0026
+			public const int menu_refresh = 2131361830;
+			
+			// aapt resource value: 0x7f0a0027
+			public const int menu_settings = 2131361831;
+			
+			// aapt resource value: 0x7f0a0025
+			public const int menu_share = 2131361829;
 			
 			// aapt resource value: 0x7f0a0011
 			public const int registerEmail = 2131361809;
@@ -250,26 +247,26 @@ namespace helps.Droid
 			// aapt resource value: 0x7f0a0006
 			public const int relativeLayout2 = 2131361798;
 			
-			// aapt resource value: 0x7f0a001c
-			public const int relativeLayout6 = 2131361820;
+			// aapt resource value: 0x7f0a001b
+			public const int relativeLayout6 = 2131361819;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int relativeLayout66 = 2131361792;
 			
-			// aapt resource value: 0x7f0a0018
-			public const int signInLayout = 2131361816;
-			
-			// aapt resource value: 0x7f0a0021
-			public const int textNewToDo = 2131361825;
-			
-			// aapt resource value: 0x7f0a001d
-			public const int textView2 = 2131361821;
-			
-			// aapt resource value: 0x7f0a001e
-			public const int textView4 = 2131361822;
+			// aapt resource value: 0x7f0a0017
+			public const int signInLayout = 2131361815;
 			
 			// aapt resource value: 0x7f0a0020
-			public const int textViewTitle = 2131361824;
+			public const int textNewToDo = 2131361824;
+			
+			// aapt resource value: 0x7f0a001c
+			public const int textView2 = 2131361820;
+			
+			// aapt resource value: 0x7f0a001d
+			public const int textView4 = 2131361821;
+			
+			// aapt resource value: 0x7f0a001f
+			public const int textViewTitle = 2131361823;
 			
 			static Id()
 			{

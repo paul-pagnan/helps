@@ -4,6 +4,6 @@
   <color name="primaryDark">#9c180b</color>
   <color name="accent">#116189</color>
   <color name="accentPressed">#094D6F</color>
-
-  <color name="primaryMuted">#E5293D</color>
+  <color name="primaryMuted">#C22A1B</color>
+  <color name="primaryMutedPressed">#DB4132</color>
 </resources>
