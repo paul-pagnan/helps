@@ -36,7 +36,7 @@ namespace helps.Service.Controllers
                 context.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 //Return success
-                return ViewHelper.View("ConfirmEmail/Index", new { Message = "Email confirmed! Please log in" });
+                return ViewHelper.View("ConfirmEmail/Index", new { Message = "Email confirmed! Please navigate back to the app to log in" });
             }
             return ViewHelper.View("ConfirmEmail/Index", new { Message = "An error occured" });
         }

@@ -15,6 +15,6 @@ namespace helps.Service.DataObjects
         public bool Confirmed { get; set; }
         public string ForgotPasswordToken { get; set; }
         public DateTime ResetTokenSentAt { get; set; }
-       
+        public bool HasLoggedIn { get; set; }
     }
 }

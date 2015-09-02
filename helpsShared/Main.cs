@@ -8,6 +8,8 @@ using helps.Shared.DataObjects;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using helps.Shared.Database;
+
 
 
 namespace helps.Shared
@@ -16,6 +18,7 @@ namespace helps.Shared
     {
 
         public MobileServiceClient client;
+        public helpsDatabase database;
 
         public const string applicationURL = @"http://54.153.240.143/";
         public const string applicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
@@ -24,6 +27,7 @@ namespace helps.Shared
         {
             //CurrentPlatform.Init();
             client = new MobileServiceClient(applicationURL, applicationKey);
+            database = new helpsDatabase();
         }
     }
 }

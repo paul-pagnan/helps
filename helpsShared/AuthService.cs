@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using helps.Shared.DataObjects;
 using System.Net.Http;
+using System.Linq;
+using helps.Shared.Helpers;
 
 namespace helps.Shared
 {
@@ -18,9 +20,13 @@ namespace helps.Shared
         {
             AuthResult result;
             string input = "{ 'studentId': '" + StudentId + "', 'password': '" + Password + "'}";
+
             try
-            {
-                await client.InvokeApiAsync("SignIn", input);
+            {   
+                var response = await client.InvokeApiAsync("SignIn", input);
+
+                //JSONHelper<LoginResponse>.DeSerialize(response.);
+
                 result = new AuthResult { Success = true };
             }
             catch (Exception ex)
@@ -32,8 +38,12 @@ namespace helps.Shared
                     Title = "Login Failure"
                 };
             }
-
             return result;
+        }
+
+        public User Current_User()
+        {
+            return database.GetCurrentUser();
         }
 
         public async Task<AuthResult> Register(string FirstName, string LastName, string Email, string StudentId, string Password)
@@ -42,6 +52,7 @@ namespace helps.Shared
             string input = "{ 'firstName': '" + FirstName + "', 'lastName': '" + LastName + "','studentId': '" + StudentId + "', 'password': '" + Password + "', 'email': '" + Email + "'}";
             try
             {
+                database.SetUser(new User { FirstName = FirstName, LastName = LastName, Email = Email });
                 JToken response = await client.InvokeApiAsync("Registration", input);
                 result = new AuthResult { Success = true };
             }

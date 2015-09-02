@@ -35,8 +35,10 @@
   <ItemGroup>
     <Compile Include="Database\helpsDatabase.cs" />
     <Compile Include="Database\ISQLite.cs" />
+    <Compile Include="DataObjects\LoginResponse.cs" />
     <Compile Include="DataObjects\AuthResponse.cs" />
     <Compile Include="DataObjects\User.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

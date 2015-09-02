@@ -26,6 +26,10 @@ namespace helps.Service.Controllers
             {
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Student Id");
             }
+            else if (!Regex.IsMatch(registrationRequest.Email, "^[A-Za-z0-9._%+-]+@+(.*?.)?uts.edu.au$"))
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Email must be a UTS email address");
+            }
             else if (registrationRequest.Password.Length < 8)
             {
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Password (at least 8 chars required)");

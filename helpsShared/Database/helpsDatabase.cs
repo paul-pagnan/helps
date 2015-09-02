@@ -22,5 +22,15 @@ namespace helps.Shared.Database
         {
             return database.Table<User>().FirstOrDefault(x => x.StudentId == StudentId);
         }
+
+        public int SetUser(User user)
+        {
+            return database.Insert(user);
+        }
+
+        internal User GetCurrentUser()
+        {
+            return database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
+        }
     }
 }
