@@ -16,6 +16,7 @@ namespace helps.Service.Controllers
 {
     public class ResetPasswordController : ApiController
     {
+        [AllowAnonymous]
         // GET api/ResetPassword
         public HttpResponseMessage Get(string Token)
         {
@@ -25,6 +26,7 @@ namespace helps.Service.Controllers
             return ViewHelper.View("ResetPassword/Index", model);
         }
 
+        [AllowAnonymous]
         // GET api/ForgotPassword
         public HttpResponseMessage Post(ResetPasswordRequest request)
         {
@@ -37,6 +39,9 @@ namespace helps.Service.Controllers
                 if (request.Password != request.ConfirmPassword)
                 {
                     request.Errors = "Passwords do not match";
+                    return ViewHelper.View("ResetPassword/Index", request);
+                } else if (request.Password.Length < 8) {
+                    request.Errors = "Password must be minimum 8 characters";
                     return ViewHelper.View("ResetPassword/Index", request);
                 }
 

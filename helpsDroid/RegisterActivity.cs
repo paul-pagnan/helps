@@ -14,7 +14,7 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
-    [Activity(Label = "Register", Icon = "@drawable/ic_launcher", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "Register", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class RegisterActivity : Main
     {
 
@@ -23,10 +23,8 @@ namespace helps.Droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Activity_Register);
 
-            var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-
-            //t.InflateMenu(Resource.Menu.simple);
-
+            var t = FindViewById<Toolbar>(Resource.Id.TtoolbarTransparent);
+            
             SetActionBar(t);
             setPadding(t);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
@@ -52,7 +50,7 @@ namespace helps.Droid
             if (Response.Success)
             {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, Resource.Style.LightDialog);
                 builder.SetTitle("Successfully Registered");
                 builder.SetMessage("Please check your emails to confirm your email address");
                 builder.SetCancelable(false);

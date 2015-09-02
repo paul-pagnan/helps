@@ -64,6 +64,9 @@ namespace helps.Droid
 			// aapt resource value: 0x7f060005
 			public const int primaryMutedPressed = 2131099653;
 			
+			// aapt resource value: 0x7f060006
+			public const int transparent = 2131099654;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -121,19 +124,22 @@ namespace helps.Droid
 			public const int flat_selector = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int ic_action_social_share = 2130837512;
+			public const int helps_icon = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int ic_launcher = 2130837513;
+			public const int ic_action_social_share = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int rect_normal = 2130837514;
+			public const int ic_launcher = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int register = 2130837515;
+			public const int rect_normal = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int textlines = 2130837516;
+			public const int register = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int textlines = 2130837517;
 			
 			static Drawable()
 			{
@@ -148,125 +154,116 @@ namespace helps.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0004
-			public const int ForgotStudentIdIcon = 2131361796;
+			// aapt resource value: 0x7f0a0019
+			public const int LinearLayout1 = 2131361817;
 			
-			// aapt resource value: 0x7f0a001e
-			public const int LinearLayout1 = 2131361822;
+			// aapt resource value: 0x7f0a001f
+			public const int Ttoolbar = 2131361823;
 			
 			// aapt resource value: 0x7f0a0001
-			public const int Ttoolbar = 2131361793;
+			public const int TtoolbarTransparent = 2131361793;
 			
-			// aapt resource value: 0x7f0a0024
-			public const int amvMenu = 2131361828;
+			// aapt resource value: 0x7f0a0020
+			public const int amvMenu = 2131361824;
 			
 			// aapt resource value: 0x7f0a0021
-			public const int buttonAddToDo = 2131361825;
+			public const int amvMenu2 = 2131361825;
 			
-			// aapt resource value: 0x7f0a0023
-			public const int checkToDoItem = 2131361827;
+			// aapt resource value: 0x7f0a001c
+			public const int buttonAddToDo = 2131361820;
 			
-			// aapt resource value: 0x7f0a0003
-			public const int forgotLayout = 2131361795;
+			// aapt resource value: 0x7f0a001e
+			public const int checkToDoItem = 2131361822;
 			
-			// aapt resource value: 0x7f0a0007
-			public const int forgotPassword = 2131361799;
+			// aapt resource value: 0x7f0a0004
+			public const int forgotLayout = 2131361796;
+			
+			// aapt resource value: 0x7f0a0006
+			public const int forgotPassword = 2131361798;
 			
 			// aapt resource value: 0x7f0a0005
 			public const int forgotStudentId = 2131361797;
 			
-			// aapt resource value: 0x7f0a000a
-			public const int imageView1 = 2131361802;
-			
-			// aapt resource value: 0x7f0a0010
-			public const int imageView2 = 2131361808;
-			
-			// aapt resource value: 0x7f0a0014
-			public const int imageView3 = 2131361812;
-			
-			// aapt resource value: 0x7f0a000d
-			public const int imageView5 = 2131361805;
+			// aapt resource value: 0x7f0a0012
+			public const int imageView1 = 2131361810;
 			
 			// aapt resource value: 0x7f0a0002
 			public const int linearLayout1 = 2131361794;
 			
-			// aapt resource value: 0x7f0a0009
-			public const int linearLayout3 = 2131361801;
-			
-			// aapt resource value: 0x7f0a000f
-			public const int linearLayout4 = 2131361807;
-			
-			// aapt resource value: 0x7f0a0013
-			public const int linearLayout5 = 2131361811;
-			
-			// aapt resource value: 0x7f0a000c
-			public const int linearLayout6 = 2131361804;
-			
-			// aapt resource value: 0x7f0a0022
-			public const int listViewToDo = 2131361826;
-			
-			// aapt resource value: 0x7f0a001a
-			public const int loginBtn = 2131361818;
-			
-			// aapt resource value: 0x7f0a0019
-			public const int loginPassword = 2131361817;
-			
-			// aapt resource value: 0x7f0a0018
-			public const int loginStudentId = 2131361816;
-			
-			// aapt resource value: 0x7f0a0016
-			public const int mainlayout = 2131361814;
-			
-			// aapt resource value: 0x7f0a0026
-			public const int menu_refresh = 2131361830;
-			
-			// aapt resource value: 0x7f0a0027
-			public const int menu_settings = 2131361831;
-			
-			// aapt resource value: 0x7f0a0025
-			public const int menu_share = 2131361829;
-			
-			// aapt resource value: 0x7f0a0011
-			public const int registerEmail = 2131361809;
+			// aapt resource value: 0x7f0a0008
+			public const int linearLayout3 = 2131361800;
 			
 			// aapt resource value: 0x7f0a000b
-			public const int registerFirstName = 2131361803;
+			public const int linearLayout4 = 2131361803;
 			
 			// aapt resource value: 0x7f0a000e
-			public const int registerLastName = 2131361806;
+			public const int linearLayout5 = 2131361806;
+			
+			// aapt resource value: 0x7f0a001d
+			public const int listViewToDo = 2131361821;
 			
 			// aapt resource value: 0x7f0a0015
-			public const int registerPassword = 2131361813;
+			public const int loginBtn = 2131361813;
 			
-			// aapt resource value: 0x7f0a0012
-			public const int registerStudentId = 2131361810;
+			// aapt resource value: 0x7f0a0014
+			public const int loginPassword = 2131361812;
 			
-			// aapt resource value: 0x7f0a0008
-			public const int relativeLayout1 = 2131361800;
+			// aapt resource value: 0x7f0a0013
+			public const int loginStudentId = 2131361811;
 			
-			// aapt resource value: 0x7f0a0006
-			public const int relativeLayout2 = 2131361798;
+			// aapt resource value: 0x7f0a0010
+			public const int mainlayout = 2131361808;
 			
-			// aapt resource value: 0x7f0a001b
-			public const int relativeLayout6 = 2131361819;
+			// aapt resource value: 0x7f0a0023
+			public const int menu_refresh = 2131361827;
+			
+			// aapt resource value: 0x7f0a0024
+			public const int menu_settings = 2131361828;
+			
+			// aapt resource value: 0x7f0a0022
+			public const int menu_share = 2131361826;
+			
+			// aapt resource value: 0x7f0a000c
+			public const int registerEmail = 2131361804;
+			
+			// aapt resource value: 0x7f0a0009
+			public const int registerFirstName = 2131361801;
+			
+			// aapt resource value: 0x7f0a000a
+			public const int registerLastName = 2131361802;
+			
+			// aapt resource value: 0x7f0a000f
+			public const int registerPassword = 2131361807;
+			
+			// aapt resource value: 0x7f0a000d
+			public const int registerStudentId = 2131361805;
+			
+			// aapt resource value: 0x7f0a0007
+			public const int relativeLayout1 = 2131361799;
+			
+			// aapt resource value: 0x7f0a0016
+			public const int relativeLayout6 = 2131361814;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int relativeLayout66 = 2131361792;
 			
+			// aapt resource value: 0x7f0a0011
+			public const int signInLayout = 2131361809;
+			
+			// aapt resource value: 0x7f0a001b
+			public const int textNewToDo = 2131361819;
+			
+			// aapt resource value: 0x7f0a0003
+			public const int textView1 = 2131361795;
+			
 			// aapt resource value: 0x7f0a0017
-			public const int signInLayout = 2131361815;
+			public const int textView2 = 2131361815;
 			
-			// aapt resource value: 0x7f0a0020
-			public const int textNewToDo = 2131361824;
+			// aapt resource value: 0x7f0a0018
+			public const int textView4 = 2131361816;
 			
-			// aapt resource value: 0x7f0a001c
-			public const int textView2 = 2131361820;
-			
-			// aapt resource value: 0x7f0a001d
-			public const int textView4 = 2131361821;
-			
-			// aapt resource value: 0x7f0a001f
-			public const int textViewTitle = 2131361823;
+			// aapt resource value: 0x7f0a001a
+			public const int textViewTitle = 2131361818;
 			
 			static Id()
 			{
@@ -298,6 +295,9 @@ namespace helps.Droid
 			
 			// aapt resource value: 0x7f030005
 			public const int toolbar = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int toolbarTransparent = 2130903046;
 			
 			static Layout()
 			{

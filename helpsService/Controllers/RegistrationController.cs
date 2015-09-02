@@ -18,6 +18,7 @@ namespace helps.Service.Controllers
     {
         public ApiServices Services { get; set; }
 
+        [AllowAnonymous]
         // POST api/CustomRegistration
         public HttpResponseMessage Post(RegistrationRequest registrationRequest)
         {

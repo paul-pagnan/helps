@@ -6,26 +6,27 @@
     p1:minHeight="25px"
     p1:layout_width="fill_parent"
     p1:layout_height="fill_parent"
+    p1:background="@color/primary"
     p1:id="@+id/relativeLayout1"
     tools:menu="simple">
     <include
-        p1:id="@+id/Ttoolbar"
+        p1:id="@+id/TtoolbarTransparent"
         p1:layout_height="wrap_content"
         p1:layout_width="match_parent"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbarTransparent" />
     <ScrollView
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent"
         p1:minWidth="25px"
         p1:minHeight="25px"
-        p1:layout_below="@id/Ttoolbar">
+        p1:layout_below="@id/TtoolbarTransparent">
         <LinearLayout
             p1:orientation="vertical"
             p1:minWidth="25px"
             p1:minHeight="25px"
             p1:layout_width="fill_parent"
             p1:layout_height="wrap_content"
-            p1:layout_below="@id/Ttoolbar"
+            p1:layout_below="@id/TtoolbarTransparent"
             p1:id="@+id/linearLayout1"
             p1:paddingLeft="25dp"
             p1:paddingRight="25dp"
@@ -36,37 +37,21 @@
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout3"
-                p1:layout_marginBottom="35dp">
-                <ImageView
-                    p1:src="@android:drawable/ic_menu_gallery"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/imageView1"
-                    p1:layout_marginRight="10dp" />
+                p1:layout_marginBottom="35dp"
+                p1:weightSum="1">
                 <EditText
                     p1:inputType="text"
                     p1:id="@+id/registerFirstName"
                     p1:hint="First Name"
-                    p1:layout_width="match_parent"
+                    p1:layout_width="0dip"
+                    p1:layout_weight="0.5"
                     p1:layout_height="match_parent" />
-            </LinearLayout>
-            <LinearLayout
-                p1:orientation="horizontal"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout6"
-                p1:layout_marginBottom="35dp">
-                <ImageView
-                    p1:src="@android:drawable/ic_menu_gallery"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/imageView5"
-                    p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="text"
                     p1:id="@+id/registerLastName"
                     p1:hint="Last Name"
-                    p1:layout_width="match_parent"
+                    p1:layout_width="0dip"
+                    p1:layout_weight="0.5"
                     p1:layout_height="match_parent" />
             </LinearLayout>
             <LinearLayout
@@ -75,12 +60,6 @@
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout4"
                 p1:layout_marginBottom="35dp">
-                <ImageView
-                    p1:src="@android:drawable/ic_menu_gallery"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/imageView2"
-                    p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="textEmailAddress"
                     p1:id="@+id/registerEmail"
@@ -94,12 +73,6 @@
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout4"
                 p1:layout_marginBottom="35dp">
-                <ImageView
-                    p1:src="@android:drawable/ic_menu_gallery"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/imageView2"
-                    p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="number"
                     p1:id="@+id/registerStudentId"
@@ -113,12 +86,6 @@
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:layout_marginBottom="35dp">
-                <ImageView
-                    p1:src="@android:drawable/ic_menu_gallery"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/imageView3"
-                    p1:layout_marginRight="10dp" />
                 <EditText
                     p1:inputType="textPassword"
                     p1:id="@+id/registerPassword"
@@ -126,23 +93,15 @@
                     p1:layout_width="match_parent"
                     p1:layout_height="match_parent" />
             </LinearLayout>
+            <Button
+                p1:text="Register"
+                p1:id="@+id/forgotPassword"
+                p1:background="@drawable/flat_selector"
+                p1:textColor="#fff"
+                style="?android:attr/borderlessButtonStyle"
+                p1:onClick="Register"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        p1:minWidth="25px"
-        p1:minHeight="25px"
-        p1:layout_width="match_parent"
-        p1:layout_height="wrap_content"
-        p1:id="@+id/relativeLayout2"
-        p1:layout_alignParentBottom="true">
-        <Button
-            p1:text="Register"
-            p1:layout_width="match_parent"
-            p1:layout_height="60dp"
-            p1:id="@+id/forgotPassword"
-            p1:background="@drawable/flat_selector"
-            p1:textColor="#fff"
-            style="?android:attr/borderlessButtonStyle"
-            p1:onClick="Register" />
-    </RelativeLayout>
 </RelativeLayout>

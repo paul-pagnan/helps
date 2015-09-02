@@ -18,6 +18,8 @@ namespace helps.Service.Controllers
     {
         public ApiServices Services { get; set; }
 
+
+        [AllowAnonymous]
         // GET api/ConfirmEmail
         public HttpResponseMessage Get(string Token)
         {

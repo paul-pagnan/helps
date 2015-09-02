@@ -15,7 +15,7 @@ using helps.Shared.DataObjects;
 namespace helps.Droid
 {
 
-    [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class ForgotPasswordActivity : Main
     {
 
@@ -24,7 +24,7 @@ namespace helps.Droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Activity_ForgotPassword);
 
-            var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
+            var t = FindViewById<Toolbar>(Resource.Id.TtoolbarTransparent);
 
             SetActionBar(t);
             setPadding(t);
@@ -46,7 +46,7 @@ namespace helps.Droid
             if (Response.Success)
             {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, Resource.Style.LightDialog);
                 builder.SetTitle("Password Reset Sent");
                 builder.SetMessage("Please check your emails to reset your password");
                 builder.SetCancelable(false);

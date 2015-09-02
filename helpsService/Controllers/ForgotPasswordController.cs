@@ -16,6 +16,7 @@ namespace helps.Service.Controllers
     {
         public ApiServices Services { get; set; }
 
+        [AllowAnonymous]
         public HttpResponseMessage Get(string studentId)
         {
             helpsContext context = new helpsContext();

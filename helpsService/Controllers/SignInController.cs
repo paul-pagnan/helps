@@ -19,6 +19,7 @@ namespace helps.Service.Controllers
         public ApiServices Services { get; set; }
         public IServiceTokenHandler handler { get; set; }
 
+        [AllowAnonymous]
         // POST api/SignIn
         public HttpResponseMessage Post(LoginRequest loginRequest)
         {
