@@ -89,5 +89,28 @@ namespace helps.Shared
             }
             return result;
         }
+
+        public async Task<AuthResult> ResendConfirmation(string StudentId)
+        {
+            AuthResult result;
+            Dictionary<string, string> paramaters = new Dictionary<string, string>();
+            paramaters.Add("StudentId", StudentId);
+            paramaters.Add("Resend", "true");
+            try
+            {
+                JToken response = await client.InvokeApiAsync("ConfirmEmail", HttpMethod.Get, paramaters);
+                result = new AuthResult { Success = true };
+            }
+            catch (Exception ex)
+            {
+                result = new AuthResult
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    Title = "Failure"
+                };
+            }
+            return result;
+        }
     }
 }

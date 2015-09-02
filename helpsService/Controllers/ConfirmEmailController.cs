@@ -9,6 +9,7 @@ using Microsoft.WindowsAzure.Mobile.Service.Security;
 using helps.Service.DataObjects;
 using helps.Service.Models;
 using helps.Service.Helpers;
+using helps.Service.Utils;
 
 namespace helps.Service.Controllers
 {
@@ -17,9 +18,26 @@ namespace helps.Service.Controllers
     public class ConfirmEmailController : ApiController
     {
         public ApiServices Services { get; set; }
+        public HttpResponseMessage Get(string StudentId, string Resend)
+        {
+            helpsContext context = new helpsContext();
+            // Find the User with the token which was emailed to them
+            User user = context.Users.Where(a => a.StudentId == StudentId).SingleOrDefault();
 
+            if (user != null)
+            {
+                if (user.Confirmed)
+                    return this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Email already confirmed");
 
-        [AllowAnonymous]
+                var url = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("DefaultApi", new { controller = "ConfirmEmail", Token = user.ConfirmToken });
+                EmailProviderUtil.SendConfirmationEmail(user, url);
+
+                //Return success
+                return this.Request.CreateResponse(HttpStatusCode.OK, "Email confirmation sent");
+            }
+            return this.Request.CreateResponse(HttpStatusCode.NotFound, "User not found");
+        }
+
         // GET api/ConfirmEmail
         public HttpResponseMessage Get(string Token)
         {
@@ -40,6 +58,5 @@ namespace helps.Service.Controllers
             }
             return ViewHelper.View("ConfirmEmail/Index", new { Message = "An error occured" });
         }
-
     }
 }

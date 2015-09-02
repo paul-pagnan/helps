@@ -10,13 +10,13 @@ using helps.Service.DataObjects;
 using helps.Service.Utils;
 using helps.Service.Models;
 using helps.Service.Helpers;
-
+using Microsoft.WindowsAzure.Mobile.Service.Security;
 
 namespace helps.Service.Controllers
 {
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class ResetPasswordController : ApiController
     {
-        [AllowAnonymous]
         // GET api/ResetPassword
         public HttpResponseMessage Get(string Token)
         {
@@ -26,7 +26,6 @@ namespace helps.Service.Controllers
             return ViewHelper.View("ResetPassword/Index", model);
         }
 
-        [AllowAnonymous]
         // GET api/ForgotPassword
         public HttpResponseMessage Post(ResetPasswordRequest request)
         {

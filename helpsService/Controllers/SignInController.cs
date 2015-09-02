@@ -19,7 +19,6 @@ namespace helps.Service.Controllers
         public ApiServices Services { get; set; }
         public IServiceTokenHandler handler { get; set; }
 
-        [AllowAnonymous]
         // POST api/SignIn
         public HttpResponseMessage Post(LoginRequest loginRequest)
         {
@@ -49,8 +48,7 @@ namespace helps.Service.Controllers
                     return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
                 }
             }
-            return this.Request.CreateResponse(HttpStatusCode.Unauthorized,
-                "Invalid username or password");
+            return this.Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid username or password");
         }
     }
 }

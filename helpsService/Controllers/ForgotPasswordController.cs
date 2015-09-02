@@ -9,14 +9,15 @@ using helps.Service.Models;
 using helps.Service.DataObjects;
 using helps.Service.Utils;
 using System.Net.Http.Headers;
+using Microsoft.WindowsAzure.Mobile.Service.Security;
 
 namespace helps.Service.Controllers
 {
+    [AuthorizeLevel(AuthorizationLevel.Anonymous)]
     public class ForgotPasswordController : ApiController
     {
         public ApiServices Services { get; set; }
 
-        [AllowAnonymous]
         public HttpResponseMessage Get(string studentId)
         {
             helpsContext context = new helpsContext();
