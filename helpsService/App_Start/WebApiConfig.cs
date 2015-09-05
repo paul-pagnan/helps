@@ -38,7 +38,7 @@ namespace helps.Service
                defaults: new { id = RouteParameter.Optional }
             );
 
-            //Database.SetInitializer(new helpsInitializer());
+            Database.SetInitializer(new helpsInitializer());
             var migrator = new DbMigrator(new Configuration());
             //migrator.Update();
         }

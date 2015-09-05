@@ -232,6 +232,14 @@
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Mail\ViewModels\NameUrlViewModel.cs" />
+    <Compile Include="Migrations\201509051039085_Initial.cs" />
+    <Compile Include="Migrations\201509051039085_Initial.Designer.cs">
+      <DependentUpon>201509051039085_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509051052306_Initial1.cs" />
+    <Compile Include="Migrations\201509051052306_Initial1.Designer.cs">
+      <DependentUpon>201509051052306_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\helpsLoginProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -256,6 +264,7 @@
     <Content Include="Mail\Templates\ResetPassword.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Resources\Style.css.txt" />
     <None Include="Resources\style.css" />
     <Content Include="Web.config">
@@ -276,15 +285,18 @@
     <Content Include="Mail\Templates\ConfirmEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\AWS.pubxml" />
-    <None Include="Properties\PublishProfiles\mobile-helps.pubxml" />
-    <None Include="Properties\PublishProfiles\mobile-helps25.pubxml" />
     <Content Include="Views\ResetPassword\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\ResetPassword\Success.cshtml" />
     <Content Include="Views\ConfirmEmail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509051039085_Initial.resx">
+      <DependentUpon>201509051039085_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509051052306_Initial1.resx">
+      <DependentUpon>201509051052306_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
