@@ -83,8 +83,14 @@ namespace helps.Droid
 			// aapt resource value: 0x7f070000
 			public const int corner_radius = 2131165184;
 			
+			// aapt resource value: 0x7f070003
+			public const int form_margin = 2131165187;
+			
 			// aapt resource value: 0x7f070001
 			public const int layer_padding = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int layout_padding = 2131165186;
 			
 			static Dimension()
 			{
@@ -154,116 +160,134 @@ namespace helps.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0019
-			public const int LinearLayout1 = 2131361817;
-			
 			// aapt resource value: 0x7f0a001f
-			public const int Ttoolbar = 2131361823;
+			public const int LinearLayout1 = 2131361823;
+			
+			// aapt resource value: 0x7f0a0004
+			public const int PreferredContactNumber = 2131361796;
+			
+			// aapt resource value: 0x7f0a0003
+			public const int PreferredFirstName = 2131361795;
+			
+			// aapt resource value: 0x7f0a0025
+			public const int Ttoolbar = 2131361829;
 			
 			// aapt resource value: 0x7f0a0001
 			public const int TtoolbarTransparent = 2131361793;
 			
-			// aapt resource value: 0x7f0a0020
-			public const int amvMenu = 2131361824;
+			// aapt resource value: 0x7f0a0026
+			public const int amvMenu = 2131361830;
 			
-			// aapt resource value: 0x7f0a0021
-			public const int amvMenu2 = 2131361825;
+			// aapt resource value: 0x7f0a0027
+			public const int amvMenu2 = 2131361831;
 			
-			// aapt resource value: 0x7f0a001c
-			public const int buttonAddToDo = 2131361820;
+			// aapt resource value: 0x7f0a0022
+			public const int buttonAddToDo = 2131361826;
 			
-			// aapt resource value: 0x7f0a001e
-			public const int checkToDoItem = 2131361822;
+			// aapt resource value: 0x7f0a0024
+			public const int checkToDoItem = 2131361828;
 			
-			// aapt resource value: 0x7f0a0004
-			public const int forgotLayout = 2131361796;
+			// aapt resource value: 0x7f0a000a
+			public const int forgotLayout = 2131361802;
 			
-			// aapt resource value: 0x7f0a0006
-			public const int forgotPassword = 2131361798;
+			// aapt resource value: 0x7f0a000c
+			public const int forgotPassword = 2131361804;
 			
-			// aapt resource value: 0x7f0a0005
-			public const int forgotStudentId = 2131361797;
+			// aapt resource value: 0x7f0a000b
+			public const int forgotStudentId = 2131361803;
 			
-			// aapt resource value: 0x7f0a0012
-			public const int imageView1 = 2131361810;
+			// aapt resource value: 0x7f0a0018
+			public const int imageView1 = 2131361816;
 			
 			// aapt resource value: 0x7f0a0002
 			public const int linearLayout1 = 2131361794;
 			
-			// aapt resource value: 0x7f0a0008
-			public const int linearLayout3 = 2131361800;
-			
-			// aapt resource value: 0x7f0a000b
-			public const int linearLayout4 = 2131361803;
+			// aapt resource value: 0x7f0a0006
+			public const int linearLayout2 = 2131361798;
 			
 			// aapt resource value: 0x7f0a000e
-			public const int linearLayout5 = 2131361806;
+			public const int linearLayout3 = 2131361806;
 			
-			// aapt resource value: 0x7f0a001d
-			public const int listViewToDo = 2131361821;
-			
-			// aapt resource value: 0x7f0a0015
-			public const int loginBtn = 2131361813;
+			// aapt resource value: 0x7f0a0011
+			public const int linearLayout4 = 2131361809;
 			
 			// aapt resource value: 0x7f0a0014
-			public const int loginPassword = 2131361812;
-			
-			// aapt resource value: 0x7f0a0013
-			public const int loginStudentId = 2131361811;
-			
-			// aapt resource value: 0x7f0a0010
-			public const int mainlayout = 2131361808;
+			public const int linearLayout5 = 2131361812;
 			
 			// aapt resource value: 0x7f0a0023
-			public const int menu_refresh = 2131361827;
+			public const int listViewToDo = 2131361827;
 			
-			// aapt resource value: 0x7f0a0024
-			public const int menu_settings = 2131361828;
+			// aapt resource value: 0x7f0a001b
+			public const int loginBtn = 2131361819;
 			
-			// aapt resource value: 0x7f0a0022
-			public const int menu_share = 2131361826;
+			// aapt resource value: 0x7f0a001a
+			public const int loginPassword = 2131361818;
 			
-			// aapt resource value: 0x7f0a000c
-			public const int registerEmail = 2131361804;
-			
-			// aapt resource value: 0x7f0a0009
-			public const int registerFirstName = 2131361801;
-			
-			// aapt resource value: 0x7f0a000a
-			public const int registerLastName = 2131361802;
-			
-			// aapt resource value: 0x7f0a000f
-			public const int registerPassword = 2131361807;
-			
-			// aapt resource value: 0x7f0a000d
-			public const int registerStudentId = 2131361805;
-			
-			// aapt resource value: 0x7f0a0007
-			public const int relativeLayout1 = 2131361799;
+			// aapt resource value: 0x7f0a0019
+			public const int loginStudentId = 2131361817;
 			
 			// aapt resource value: 0x7f0a0016
-			public const int relativeLayout6 = 2131361814;
+			public const int mainlayout = 2131361814;
+			
+			// aapt resource value: 0x7f0a0029
+			public const int menu_refresh = 2131361833;
+			
+			// aapt resource value: 0x7f0a002a
+			public const int menu_settings = 2131361834;
+			
+			// aapt resource value: 0x7f0a0028
+			public const int menu_share = 2131361832;
+			
+			// aapt resource value: 0x7f0a0007
+			public const int radioButton1 = 2131361799;
+			
+			// aapt resource value: 0x7f0a0008
+			public const int radioButton2 = 2131361800;
+			
+			// aapt resource value: 0x7f0a0012
+			public const int registerEmail = 2131361810;
+			
+			// aapt resource value: 0x7f0a000f
+			public const int registerFirstName = 2131361807;
+			
+			// aapt resource value: 0x7f0a0010
+			public const int registerLastName = 2131361808;
+			
+			// aapt resource value: 0x7f0a0015
+			public const int registerPassword = 2131361813;
+			
+			// aapt resource value: 0x7f0a0013
+			public const int registerStudentId = 2131361811;
+			
+			// aapt resource value: 0x7f0a000d
+			public const int relativeLayout1 = 2131361805;
+			
+			// aapt resource value: 0x7f0a001c
+			public const int relativeLayout6 = 2131361820;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int relativeLayout66 = 2131361792;
 			
-			// aapt resource value: 0x7f0a0011
-			public const int signInLayout = 2131361809;
-			
-			// aapt resource value: 0x7f0a001b
-			public const int textNewToDo = 2131361819;
-			
-			// aapt resource value: 0x7f0a0003
-			public const int textView1 = 2131361795;
-			
 			// aapt resource value: 0x7f0a0017
-			public const int textView2 = 2131361815;
+			public const int signInLayout = 2131361815;
 			
-			// aapt resource value: 0x7f0a0018
-			public const int textView4 = 2131361816;
+			// aapt resource value: 0x7f0a0009
+			public const int spinner1 = 2131361801;
 			
-			// aapt resource value: 0x7f0a001a
-			public const int textViewTitle = 2131361818;
+			// aapt resource value: 0x7f0a0021
+			public const int textNewToDo = 2131361825;
+			
+			// aapt resource value: 0x7f0a0005
+			public const int textView1 = 2131361797;
+			
+			// aapt resource value: 0x7f0a001d
+			public const int textView2 = 2131361821;
+			
+			// aapt resource value: 0x7f0a001e
+			public const int textView4 = 2131361822;
+			
+			// aapt resource value: 0x7f0a0020
+			public const int textViewTitle = 2131361824;
 			
 			static Id()
 			{
@@ -279,25 +303,28 @@ namespace helps.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Activity_ForgotPassword = 2130903040;
+			public const int Activity_DetailsInput = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Activity_Register = 2130903041;
+			public const int Activity_ForgotPassword = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Activity_Sign_In = 2130903042;
+			public const int Activity_Register = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Activity_To_Do = 2130903043;
+			public const int Activity_Sign_In = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Row_List_To_Do = 2130903044;
+			public const int Activity_To_Do = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int toolbar = 2130903045;
+			public const int Row_List_To_Do = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int toolbarTransparent = 2130903046;
+			public const int toolbar = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int toolbarTransparent = 2130903047;
 			
 			static Layout()
 			{

@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetailsInputActivity.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ForgotPasswordActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
@@ -148,6 +149,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\raw\helps_db.db3" />
     <AndroidResource Include="Resources\layout\toolbarTransparent.axml" />
+    <AndroidResource Include="Resources\layout\Activity_DetailsInput.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

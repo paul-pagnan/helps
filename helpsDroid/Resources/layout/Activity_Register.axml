@@ -28,8 +28,8 @@
             p1:layout_height="wrap_content"
             p1:layout_below="@id/TtoolbarTransparent"
             p1:id="@+id/linearLayout1"
-            p1:paddingLeft="25dp"
-            p1:paddingRight="25dp"
+            p1:paddingLeft="@dimen/layout_padding"
+            p1:paddingRight="@dimen/layout_padding"
             p1:paddingTop="40dp"
             p1:paddingBottom="40dp">
             <LinearLayout

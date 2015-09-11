@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    p1:orientation="vertical"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="fill_parent"
+    p1:layout_height="fill_parent"
+    p1:id="@+id/relativeLayout66"
+    tools:menu="simple">
+    <include
+        p1:id="@+id/TtoolbarTransparent"
+        p1:layout_height="wrap_content"
+        p1:layout_width="match_parent"
+        p1:background="@color/primary"
+        layout="@layout/toolbarTransparent" />
+    <ScrollView
+        p1:layout_width="fill_parent"
+        p1:layout_height="fill_parent"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_below="@id/TtoolbarTransparent">
+        <LinearLayout
+            p1:orientation="vertical"
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="fill_parent"
+            p1:layout_height="wrap_content"
+            p1:layout_below="@id/TtoolbarTransparent"
+            p1:padding="@dimen/layout_padding"
+            p1:id="@+id/linearLayout1">
+            <EditText
+                p1:inputType="text"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/PreferredFirstName"
+                p1:hint="Preferred First Name"
+                p1:layout_marginBottom="@dimen/form_margin" />
+            <EditText
+                p1:inputType="number"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/PreferredContactNumber"
+                p1:hint="Preferred Contact Number"
+                p1:layout_marginBottom="@dimen/form_margin" />
+            <TextView
+                p1:text="Gender"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textView1" />
+            <RadioGroup
+                p1:orientation="horizontal"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout2"
+                p1:layout_marginBottom="@dimen/form_margin">
+                <RadioButton
+                    p1:text="Male"
+                    p1:id="@+id/radioButton1"
+                    p1:layout_width="143.1dp"
+                    p1:layout_height="match_parent" />
+                <RadioButton
+                    p1:text="Female"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/radioButton2" />
+            </RadioGroup>
+            <TextView
+                p1:text="Degree"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textView1" />
+            <RadioGroup
+                p1:orientation="horizontal"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout2"
+                p1:layout_marginBottom="@dimen/form_margin">
+                <RadioButton
+                    p1:text="Undergraduate"
+                    p1:id="@+id/radioButton1"
+                    p1:layout_width="143.1dp"
+                    p1:layout_height="match_parent" />
+                <RadioButton
+                    p1:text="Postgraduate"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/radioButton2" />
+            </RadioGroup>
+            <TextView
+                p1:text="Year"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textView1" />
+            <Spinner
+                p1:layout_width="match_parent"
+                p1:layout_height="match_parent"
+                p1:id="@+id/spinner1" />
+            <TextView
+                p1:text="Status"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textView1" />
+            <RadioGroup
+                p1:orientation="horizontal"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout2"
+                p1:layout_marginBottom="@dimen/form_margin">
+                <RadioButton
+                    p1:text="Local"
+                    p1:id="@+id/radioButton1"
+                    p1:layout_width="143.1dp"
+                    p1:layout_height="match_parent" />
+                <RadioButton
+                    p1:text="International"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="match_parent"
+                    p1:id="@+id/radioButton2" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
