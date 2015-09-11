@@ -16,7 +16,7 @@ namespace helps.Shared
             Init();
         }
 
-        public async Task<AuthResult> Login(string StudentId, string Password)
+        public async Task<object> Login(string StudentId, string Password)
         {
             AuthResult result;
             string input = "{ 'studentId': '" + StudentId + "', 'password': '" + Password + "'}";
@@ -26,8 +26,9 @@ namespace helps.Shared
                 var response = await client.InvokeApiAsync("SignIn", input);
 
                 //JSONHelper<LoginResponse>.DeSerialize(response.);
-
-                result = new AuthResult { Success = true };
+                return response;
+                //result = new AuthResult { Success = true, Message = };
+                
             }
             catch (Exception ex)
             {

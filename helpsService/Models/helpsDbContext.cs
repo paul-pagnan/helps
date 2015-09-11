@@ -8,7 +8,7 @@ using helps.Service.Utils;
 
 namespace helps.Service.Models
 {
-    public class helpsContext : DbContext
+    public class helpsDbContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -23,7 +23,7 @@ namespace helps.Service.Models
         //private const string connectionStringName = "Name=MS_TableConnectionString";
         private const string connectionStringName = "Name=DefaultConnection";
 
-        public helpsContext() : base(connectionStringName)
+        public helpsDbContext() : base(connectionStringName)
         {
         } 
 
@@ -32,7 +32,8 @@ namespace helps.Service.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            string schema = ServiceSettingsDictionary.GetSchemaName();
+            //base.OnModelCreating(modelBuilder);
+            string schema = "helps";
             if (!string.IsNullOrEmpty(schema))
             {
                 modelBuilder.HasDefaultSchema(schema);

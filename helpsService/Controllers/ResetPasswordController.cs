@@ -29,7 +29,7 @@ namespace helps.Service.Controllers
         // GET api/ForgotPassword
         public HttpResponseMessage Post(ResetPasswordRequest request)
         {
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             // Find the User with the token which was emailed to them
             User user = context.Users.Where(a => a.ForgotPasswordToken == request.ResetToken).SingleOrDefault();
 

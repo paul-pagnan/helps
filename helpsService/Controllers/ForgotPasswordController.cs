@@ -20,7 +20,7 @@ namespace helps.Service.Controllers
 
         public HttpResponseMessage Get(string studentId)
         {
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             User user = context.Users.Where(a => a.StudentId == studentId).SingleOrDefault();
 
             if (user != null)

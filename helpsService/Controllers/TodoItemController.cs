@@ -16,7 +16,7 @@ namespace helps.Service.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             DomainManager = new EntityDomainManager<TodoItem>(context, Request, Services);
         }
 

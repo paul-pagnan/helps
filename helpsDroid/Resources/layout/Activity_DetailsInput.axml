@@ -9,24 +9,23 @@
     p1:id="@+id/relativeLayout66"
     tools:menu="simple">
     <include
-        p1:id="@+id/TtoolbarTransparent"
+        p1:id="@+id/Ttoolbar"
         p1:layout_height="wrap_content"
         p1:layout_width="match_parent"
-        p1:background="@color/primary"
-        layout="@layout/toolbarTransparent" />
+        layout="@layout/toolbar" />
     <ScrollView
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent"
         p1:minWidth="25px"
         p1:minHeight="25px"
-        p1:layout_below="@id/TtoolbarTransparent">
+        p1:layout_below="@id/Ttoolbar">
         <LinearLayout
             p1:orientation="vertical"
             p1:minWidth="25px"
             p1:minHeight="25px"
             p1:layout_width="fill_parent"
             p1:layout_height="wrap_content"
-            p1:layout_below="@id/TtoolbarTransparent"
+            p1:layout_below="@id/Ttoolbar"
             p1:padding="@dimen/layout_padding"
             p1:id="@+id/linearLayout1">
             <EditText
@@ -98,7 +97,7 @@
             <Spinner
                 p1:layout_width="match_parent"
                 p1:layout_height="match_parent"
-                p1:id="@+id/spinner1" />
+                p1:id="@+id/spinnerYear" />
             <TextView
                 p1:text="Status"
                 p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -122,6 +121,12 @@
                     p1:layout_height="match_parent"
                     p1:id="@+id/radioButton2" />
             </RadioGroup>
+            <AutoCompleteTextView
+                p1:layout_height="wrap_content"
+                p1:layout_width="fill_parent"
+                p1:hint="Country"
+                p1:id="@+id/country"
+                p1:layout_marginBottom="@dimen/form_margin" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

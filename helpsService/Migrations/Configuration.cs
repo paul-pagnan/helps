@@ -5,14 +5,14 @@ namespace helps.Service.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<helps.Service.Models.helpsContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<helps.Service.Models.helpsDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(helps.Service.Models.helpsContext context)
+        protected override void Seed(helps.Service.Models.helpsDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

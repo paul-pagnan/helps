@@ -18,41 +18,46 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
-    [Activity(MainLauncher = true,
-               Icon = "@drawable/helps_icon", Label = "@string/app_name",
+    [Activity(
+                Label = "@string/app_name",
                Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
-        
         protected override async void OnCreate(Bundle bundle)
         {
             SetContentView(Resource.Layout.Activity_Sign_In);
-            
             base.OnCreate(bundle);
         }
 
         [Java.Interop.Export()]
         public async void Login(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Logging In...", this);
-            dialog.Show();
-
-            EditText StudentId = FindViewById<EditText>(Resource.Id.loginStudentId); 
-            EditText Password = FindViewById<EditText>(Resource.Id.loginPassword);
-            AuthService LoginService = new AuthService();
-
-            AuthResult Response = await LoginService.Login(StudentId.Text, Password.Text);
-            dialog.Dismiss();
-
-            if (Response.Success)
+            try
             {
-                var intent = new Intent(this, typeof(ToDoActivity));
-                StartActivity(intent);
-            }
-            else
+                ProgressDialog dialog = CreateProgressDialog("Logging In...", this);
+                dialog.Show();
+               
+                EditText StudentId = FindViewById<EditText>(Resource.Id.loginStudentId);
+                EditText Password = FindViewById<EditText>(Resource.Id.loginPassword);
+                //AuthService LoginService = new AuthService();
+
+                //var Response = await LoginService.Login(StudentId.Text, Password.Text);
+                dialog.Dismiss();
+            } catch (Exception ex)
             {
-                ShowDialog(Response.Message, "Login Failure");
+                var a = "asfasf";
             }
+
+
+            //if (Response.Success)
+            //{
+            //    var intent = new Intent(this, typeof(ToDoActivity));
+            //    StartActivity(intent);
+            //}
+            //else
+            //{
+            //    ShowDialog(Response.Message, "Login Failure");
+            //}
         }
 
         [Java.Interop.Export()]

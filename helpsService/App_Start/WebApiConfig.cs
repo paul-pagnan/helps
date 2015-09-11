@@ -9,6 +9,7 @@ using helps.Service.Utils;
 using System.Data.Entity.Migrations;
 using helps.Service.Migrations;
 using Owin;
+using Exceptionless;
 
 namespace helps.Service
 {
@@ -32,6 +33,8 @@ namespace helps.Service
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
             config.SetIsHosted(true);
 
+            ExceptionlessClient.Default.RegisterWebApi(config);
+
             config.Routes.MapHttpRoute(
                name: "DefaultApi",
                routeTemplate: "api/{controller}/{id}",
@@ -44,9 +47,9 @@ namespace helps.Service
         }
     }
 
-    public class helpsInitializer : ClearDatabaseSchemaIfModelChanges<helpsContext>
+    public class helpsInitializer : ClearDatabaseSchemaIfModelChanges<helpsDbContext>
     {
-        protected override void Seed(helpsContext context)
+        protected override void Seed(helpsDbContext context)
         {
             //List<TodoItem> todoItems = new List<TodoItem>
             //{

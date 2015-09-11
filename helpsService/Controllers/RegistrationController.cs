@@ -34,7 +34,7 @@ namespace helps.Service.Controllers
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Password (at least 8 chars required)");
             }
 
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             User account = context.Users.Where(a => a.StudentId == registrationRequest.StudentId).SingleOrDefault();
             if (account != null)
             {

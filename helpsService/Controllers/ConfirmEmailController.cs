@@ -20,7 +20,7 @@ namespace helps.Service.Controllers
         public ApiServices Services { get; set; }
         public HttpResponseMessage Get(string StudentId, string Resend)
         {
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             // Find the User with the token which was emailed to them
             User user = context.Users.Where(a => a.StudentId == StudentId).SingleOrDefault();
 
@@ -42,7 +42,7 @@ namespace helps.Service.Controllers
         public HttpResponseMessage Get(string Token)
         {
             
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             // Find the User with the token which was emailed to them
             User user = context.Users.Where(a => a.ConfirmToken == Token).SingleOrDefault();
 

@@ -22,7 +22,7 @@ namespace helps.Service.Controllers
         // POST api/SignIn
         public HttpResponseMessage Post(LoginRequest loginRequest)
         {
-            helpsContext context = new helpsContext();
+            helpsDbContext context = new helpsDbContext();
             User account = context.Users
                 .Where(a => a.StudentId == loginRequest.StudentId).SingleOrDefault();
             if (account != null)
