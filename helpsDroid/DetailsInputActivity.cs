@@ -9,7 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Java.Util;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace helps.Droid
 {
@@ -39,23 +40,29 @@ namespace helps.Droid
             spinnerYear.Adapter = arr;
 
             country = FindViewById<AutoCompleteTextView>(Resource.Id.country);
-            country.Adapter = arr;
+            country.Adapter = GetCountries();
         }
 
-        //private ArrayAdapter GetCountries()
-        //{
-        //    Locale[] locales = Locale.GetAvailableLocales();
-        //    string[] countries = new String();
 
-        //    foreach (Locale locale in locales)
-        //    {
-        //        string country = locale.GetDisplayCountry(locale);
-        //        countries.AddLast(country);
-        //    }
+        private ArrayAdapter GetCountries()
+        {
+            
+            CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+            LinkedList<string> countries = new LinkedList<string>();
+            foreach (CultureInfo culture in cultures)
+            {
+                try
+                {
+                    RegionInfo regionInfo = new RegionInfo(culture.LCID);
+                    if (!(countries.Contains(regionInfo.EnglishName)))
+                        countries.AddLast(regionInfo.EnglishName);
+                }
+                catch { }
+            }
 
-        //    ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, );
-        //    arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
-        //    return arr;
-        //}
+            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, countries.ToArray<string>());
+            arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
+            return arr;
+        }
     }
 }
