@@ -230,9 +230,7 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable\Icons\" />
-    <Folder Include="Resources\raw\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\themes_apptheme.xml" />
@@ -289,16 +287,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\helps_icon.jpg" />
+    <AndroidResource Include="Resources\raw\blank" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\helps_icon.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\helps_icon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\helps_icon.jpg" />
+    <AndroidResource Include="Resources\drawable\helps_logo.png" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

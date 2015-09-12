@@ -42,8 +42,12 @@ namespace helps.Service.Controllers
                     LoginResult loginResult = new helpsLoginProvider(handler).CreateLoginResult(claimsIdentity, Services.Settings.MasterKey);
                     var customLoginResult = new helpsLoginResult()
                     {
-                        UserId = loginResult.User.UserId,
-                        MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                        StudentId = account.StudentId,
+                        FirstName = account.FirstName,
+                        LastName = account.LastName,
+                        Email = account.Email,
+                        HasLoggedIn = account.HasLoggedIn,
+                        AuthToken = loginResult.AuthenticationToken
                     };
                     return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
                 }
