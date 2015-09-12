@@ -49,7 +49,6 @@ namespace helps.Droid
             language.Adapter = GetLanguages();
         }
 
-
         private ArrayAdapter GetCountries()
         {
             
@@ -78,7 +77,9 @@ namespace helps.Droid
             {
                 try
                 {
-                    languages.AddLast(culture.EnglishName);
+                    
+                    if(culture.IsNeutralCulture)
+                        languages.AddLast(culture.DisplayName);
 
                 }
                 catch { }

@@ -60,7 +60,7 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="35.5dp"
-                p1:id="@+id/textView1" />
+                p1:id="@+id/textViewGender" />
             <RadioGroup
                 p1:orientation="horizontal"
                 p1:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="35.5dp"
-                p1:id="@+id/textView1" />
+                p1:id="@+id/textViewDegree" />
             <RadioGroup
                 p1:orientation="horizontal"
                 p1:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="35.5dp"
-                p1:id="@+id/textView1" />
+                p1:id="@+id/textViewYear" />
             <Spinner
                 p1:layout_width="match_parent"
                 p1:layout_height="match_parent"
@@ -117,7 +117,7 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="35.5dp"
-                p1:id="@+id/textView1" />
+                p1:id="@+id/textViewStatus" />
             <RadioGroup
                 p1:orientation="horizontal"
                 p1:layout_width="match_parent"
@@ -152,7 +152,7 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="35.5dp"
-                p1:id="@+id/textViewCountry" />
+                p1:id="@+id/textViewLanguage" />
             <Spinner
                 p1:layout_height="wrap_content"
                 p1:layout_width="fill_parent"
