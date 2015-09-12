@@ -28,7 +28,12 @@ namespace helps.Droid
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
-            AuthSvc = new AuthService();     
+            AuthSvc = new AuthService();  
+
+            //Check if the user has an active session
+            if(AuthSvc.CurrentUser() != null)
+                SwitchActivity();                          
+
             SetContentView(Resource.Layout.Activity_Sign_In);
             base.OnCreate(bundle);
         }
@@ -50,8 +55,7 @@ namespace helps.Droid
 
             if (Response.Success)
             {
-                var intent = new Intent(this, typeof(ToDoActivity));
-                StartActivity(intent);
+                SwitchActivity();
             }
             else
                 ShowDialog(Response.Message, "Login Failure");
@@ -69,6 +73,15 @@ namespace helps.Droid
         {
             var intent = new Intent(this, typeof(ForgotPasswordActivity));
             StartActivity(intent);
+        }
+
+        private void SwitchActivity()
+        {
+            var intent = new Intent(this, typeof(ToDoActivity));
+            if (!AuthSvc.CurrentUser().HasLoggedIn)
+                intent = new Intent(this, typeof(DetailsInputActivity));
+            StartActivity(intent);
+            Finish();
         }
     }
 }
