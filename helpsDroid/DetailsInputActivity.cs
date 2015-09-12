@@ -18,6 +18,7 @@ namespace helps.Droid
         Spinner spinnerYear;
         Spinner country;
         Spinner language;
+        TextView name;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,6 +39,8 @@ namespace helps.Droid
             ArrayAdapter arr = ArrayAdapter.CreateFromResource(this, Resource.Array.year, Android.Resource.Layout.SimpleDropDownItem1Line);
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             spinnerYear.Adapter = arr;
+            name = FindViewById<TextView>(Resource.Id.textViewNameValue);
+            name.Text = AuthSvc.CurrentUser().FirstName + " " + AuthSvc.CurrentUser().LastName;
 
             country = FindViewById<Spinner>(Resource.Id.country);
             country.Adapter = GetCountries();

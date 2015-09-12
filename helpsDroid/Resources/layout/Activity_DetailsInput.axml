@@ -159,6 +159,13 @@
                 p1:hint="Language"
                 p1:id="@+id/language"
                 p1:layout_marginBottom="@dimen/form_margin" />
+            <Button
+                p1:text="Submit"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/FinishDetailsInput"
+                p1:background="@drawable/flat_selector"
+                style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
