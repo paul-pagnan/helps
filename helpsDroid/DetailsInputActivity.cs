@@ -16,7 +16,7 @@ namespace helps.Droid
     public class DetailsInputActivity : Main
     {
         Spinner spinnerYear;
-        AutoCompleteTextView country;
+        Spinner country;
                 
         protected override void OnCreate(Bundle bundle)
         {
@@ -37,7 +37,7 @@ namespace helps.Droid
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             spinnerYear.Adapter = arr;
 
-            country = FindViewById<AutoCompleteTextView>(Resource.Id.country);
+            country = FindViewById<Spinner>(Resource.Id.country);
             country.Adapter = GetCountries();
         }
 
@@ -57,8 +57,10 @@ namespace helps.Droid
                 }
                 catch { }
             }
-
-            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, countries.ToArray<string>());
+            List<string> sortedCountries = countries.ToList();
+            sortedCountries.Sort();
+            sortedCountries.Insert(0, "Australia");
+            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, sortedCountries.ToArray<string>());
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             return arr;
         }

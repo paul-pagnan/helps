@@ -97,7 +97,8 @@
             <Spinner
                 p1:layout_width="match_parent"
                 p1:layout_height="match_parent"
-                p1:id="@+id/spinnerYear" />
+                p1:id="@+id/spinnerYear"
+                p1:text="1st Year" />
             <TextView
                 p1:text="Status"
                 p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -121,10 +122,10 @@
                     p1:layout_height="match_parent"
                     p1:id="@+id/radioButton2" />
             </RadioGroup>
-            <AutoCompleteTextView
+            <Spinner
                 p1:layout_height="wrap_content"
                 p1:layout_width="fill_parent"
-                p1:hint="Country"
+                p1:text="Australia"
                 p1:id="@+id/country"
                 p1:layout_marginBottom="@dimen/form_margin" />
         </LinearLayout>
