@@ -22,44 +22,20 @@ namespace helps.Droid
     public class SQLite_Android : ISQLite
     {
         public SQLite_Android() { }
-        public SQLiteConnection GetConnection() 
+        public SQLiteConnection GetConnection()
         {
-        //    var sqliteFilename = "helps_db.db3";
-        //    string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
-        //    var path = Path.Combine(documentsPath, sqliteFilename);
-
-        //    // This is where we copy in the prepopulated database
-        //    Console.WriteLine(path);
-        //    if (!File.Exists(path))
-        //    {
-        //        //var s = Forms.Context.Resources.OpenRawResource(Resource.Raw.helps_db);  // RESOURCE NAME ###
-
-        //        // create a write stream
-        //        FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-        //        // write to the stream
-        //        ReadWriteStream(s, writeStream);
-        //    }
-
-        //    var conn = new SQLite.SQLiteConnection(path);
-
-        //    // Return the database connection 
-        //    return conn;
-            return null;
-        }
-
-        void ReadWriteStream(Stream readStream, Stream writeStream)
-        {
-            int Length = 256;
-            Byte[] buffer = new Byte[Length];
-            int bytesRead = readStream.Read(buffer, 0, Length);
-            // write the required bytes
-            while (bytesRead > 0)
+            var sqliteFilename = "helps_db.db3";
+            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
+            var path = Path.Combine(documentsPath, sqliteFilename);
+            try
             {
-                writeStream.Write(buffer, 0, bytesRead);
-                bytesRead = readStream.Read(buffer, 0, Length);
+                var connection = new SQLiteConnection(path);
+                return connection;
             }
-            readStream.Close();
-            writeStream.Close();
+            catch (SQLiteException ex)
+            {
+                return null;
+            }
         }
     }
 }

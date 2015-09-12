@@ -8,13 +8,13 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Xamarin.Forms;
 using Android.Widget;
 
 namespace helps.Droid
 {
     public class Main : Activity
     {
-
         public void setPadding(Toolbar toolbar)
         {
             // Set the padding to match the Status Bar height

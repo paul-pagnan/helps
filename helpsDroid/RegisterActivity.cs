@@ -17,11 +17,12 @@ namespace helps.Droid
     [Activity(Label = "Register", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class RegisterActivity : Main
     {
-
+        private AuthService AuthSvc;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Activity_Register);
+            AuthSvc = new AuthService();
 
             var t = FindViewById<Toolbar>(Resource.Id.TtoolbarTransparent);
             
@@ -37,19 +38,20 @@ namespace helps.Droid
             ProgressDialog dialog = CreateProgressDialog("Registering...", this);
             dialog.Show();
 
-            EditText FirstName = FindViewById<EditText>(Resource.Id.registerFirstName);
-            EditText LastName = FindViewById<EditText>(Resource.Id.registerLastName);
-            EditText StudentId = FindViewById<EditText>(Resource.Id.registerStudentId);
-            EditText Email = FindViewById<EditText>(Resource.Id.registerEmail);
-            EditText Password = FindViewById<EditText>(Resource.Id.registerPassword);
-            AuthService RegisterService = new AuthService();
-
-            AuthResult Response = await RegisterService.Register(FirstName.Text, LastName.Text, Email.Text, StudentId.Text, Password.Text);
+            RegisterRequest request = new RegisterRequest
+            {
+                FirstName = FindViewById<EditText>(Resource.Id.registerFirstName).Text,
+                LastName = FindViewById<EditText>(Resource.Id.registerLastName).Text,
+                StudentId = FindViewById<EditText>(Resource.Id.registerStudentId).Text,
+                Email = FindViewById<EditText>(Resource.Id.registerEmail).Text,
+                Password = FindViewById<EditText>(Resource.Id.registerPassword).Text
+            };
+            
+            AuthResult Response = await AuthSvc.Register(request);
             dialog.Hide();
 
             if (Response.Success)
             {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, Resource.Style.LightDialog);
                 builder.SetTitle("Successfully Registered");
                 builder.SetMessage("Please check your emails to confirm your email address");

@@ -25,10 +25,10 @@ namespace helps.Shared.Database
 
         public int SetUser(User user)
         {
-            return database.Insert(user);
+            return database.InsertOrReplace(user);
         }
 
-        internal User GetCurrentUser()
+        public User CurrentUser()
         {
             return database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
         }

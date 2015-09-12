@@ -35,10 +35,11 @@
   <ItemGroup>
     <Compile Include="Database\helpsDatabase.cs" />
     <Compile Include="Database\ISQLite.cs" />
-    <Compile Include="DataObjects\LoginResponse.cs" />
+    <Compile Include="DataObjects\DefaultResponse.cs" />
+    <Compile Include="DataObjects\LoginRequest.cs" />
     <Compile Include="DataObjects\AuthResponse.cs" />
+    <Compile Include="DataObjects\RegisterRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
-    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +96,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

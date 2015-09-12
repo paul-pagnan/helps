@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,11 +9,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Globalization;
-using System.Collections.Generic;
 
 namespace helps.Droid
 {
-    [Activity(MainLauncher = true, Icon = "@drawable/helps_icon", Label = "Details Input", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Icon = "@drawable/helps_icon", Label = "Details Input", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class DetailsInputActivity : Main
     {
         Spinner spinnerYear;
