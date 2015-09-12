@@ -17,16 +17,22 @@ namespace helps.Shared
     public class Main
     {
 
-        public MobileServiceClient client;
+        public MobileServiceClient authClient;
+        public MobileServiceClient helpsClient;
+
         public helpsDatabase database;
 
-        public const string applicationURL = @"http://54.153.240.143/";
-        public const string applicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
+        public const string servicesApplicationURL = @"http://54.153.240.143/";
+        public const string servicesApplicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
+
+        public const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
+        public const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
 
         public async void Init()
         {
             //CurrentPlatform.Init();
-            client = new MobileServiceClient(applicationURL, applicationKey);
+            authClient = new MobileServiceClient(servicesApplicationURL, servicesApplicationKey);
+            helpsClient = new MobileServiceClient(helpsApplicationURL, helpsApplicationKey);
             database = new helpsDatabase();
         }
     }

@@ -20,7 +20,7 @@ namespace helps.Shared
         {
             try
             {   
-                var response = await client.InvokeApiAsync<LoginRequest, User>("SignIn", request);
+                var response = await authClient.InvokeApiAsync<LoginRequest, User>("SignIn", request);
                 database.SetUser(response);
                 return Success();
             }
@@ -40,7 +40,7 @@ namespace helps.Shared
             try
             {
                 database.SetUser(new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, StudentId = request.StudentId });
-                var response = await client.InvokeApiAsync<RegisterRequest, DefaultResponse>("Registration", request);
+                var response = await authClient.InvokeApiAsync<RegisterRequest, DefaultResponse>("Registration", request);
                 return Success();
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace helps.Shared
             {
                 Dictionary<string, string> paramaters = new Dictionary<string, string>();
                 paramaters.Add("studentId", StudentId);
-                JToken response = await client.InvokeApiAsync("ForgotPassword", HttpMethod.Get, paramaters);
+                JToken response = await authClient.InvokeApiAsync("ForgotPassword", HttpMethod.Get, paramaters);
                 return Success();
             }
             catch (Exception ex)
@@ -71,13 +71,19 @@ namespace helps.Shared
                 Dictionary<string, string> paramaters = new Dictionary<string, string>();
                 paramaters.Add("StudentId", StudentId);
                 paramaters.Add("Resend", "true");
-                JToken response = await client.InvokeApiAsync("ConfirmEmail", HttpMethod.Get, paramaters);
+                JToken response = await authClient.InvokeApiAsync("ConfirmEmail", HttpMethod.Get, paramaters);
                 return Success();
             }
             catch (Exception ex)
             {
                 return CreateErrorResponse("Failure", ex);
             }    
+        }
+
+        public async Task<AuthResult> RegisterHelps(DetailsInputRequest request)
+        {
+
+            return Success();
         }
 
         private AuthResult Success()

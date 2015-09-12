@@ -12,16 +12,12 @@ using Android.Widget;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
-using Newtonsoft.Json.Linq;
 using helps.Shared;
 using helps.Shared.DataObjects;
-using helps.Shared.Database;
 
 namespace helps.Droid
 {
-    [Activity(MainLauncher = true,
-               Label = "@string/app_name",
-               Theme = "@style/AppTheme.SignIn")]
+    [Activity(MainLauncher = true, Icon = "@drawable/ic_launcher", Label = "@string/app_name", Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
         private AuthService AuthSvc;

@@ -36,6 +36,7 @@
     <Compile Include="Database\helpsDatabase.cs" />
     <Compile Include="Database\ISQLite.cs" />
     <Compile Include="DataObjects\DefaultResponse.cs" />
+    <Compile Include="DataObjects\DetailsInputRequest.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />
     <Compile Include="DataObjects\AuthResponse.cs" />
     <Compile Include="DataObjects\RegisterRequest.cs" />

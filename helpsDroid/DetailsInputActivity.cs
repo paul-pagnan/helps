@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace helps.Droid
 {
-    [Activity(Icon = "@drawable/helps_icon", Label = "Details Input", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "Details Input", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class DetailsInputActivity : Main
     {
         Spinner spinnerYear;

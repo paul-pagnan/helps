@@ -13,8 +13,7 @@ using helps.Shared;
 using helps.Shared.DataObjects;
 
 namespace helps.Droid
-{
-
+{ 
     [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class ForgotPasswordActivity : Main
     {

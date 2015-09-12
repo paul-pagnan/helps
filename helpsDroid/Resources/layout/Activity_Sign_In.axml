@@ -3,8 +3,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px"
     android:background="@color/primary"
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
@@ -15,7 +13,7 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="55dp"
         android:layout_below="@id/mainlayout"
         android:id="@+id/signInLayout"
         android:gravity="center_horizontal"
@@ -23,24 +21,26 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
         <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="fill_parent"
+            android:src="@drawable/helps_logo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView1"
-            android:layout_marginBottom="49.4dp" />
+            android:id="@+id/helpsLogo"
+            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
         <EditText
             android:inputType="number"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loginStudentId"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/form_margin"
             android:hint="Student Id" />
         <EditText
             android:inputType="textPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loginPassword"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/form_margin"
             android:hint="Password" />
         <Button
             android:text="Log In"
@@ -66,9 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textSize="13dp"
-            android:layout_marginBottom="5dp"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:onClick="ShowRegister" />
@@ -78,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textSize="13dp"
             android:layout_below="@id/textView2"
             android:textColor="#ffffff"

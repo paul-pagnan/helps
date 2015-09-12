@@ -3,5 +3,5 @@
   <dimen name="corner_radius">0dp</dimen>
   <dimen name="layer_padding">0dp</dimen>
   <dimen name="layout_padding">25dp</dimen>
-  <dimen name="form_margin">25dp</dimen>
+  <dimen name="form_margin">30dp</dimen>
 </resources>

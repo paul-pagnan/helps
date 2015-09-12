@@ -146,7 +146,7 @@ namespace helps.Droid
 			public const int flat_selector = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int helps_icon = 2130837512;
+			public const int helps_logo = 2130837512;
 			
 			// aapt resource value: 0x7f020009
 			public const int ic_action_social_share = 2130837513;
@@ -216,7 +216,7 @@ namespace helps.Droid
 			public const int forgotStudentId = 2131427341;
 			
 			// aapt resource value: 0x7f0b001a
-			public const int imageView1 = 2131427354;
+			public const int helpsLogo = 2131427354;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int linearLayout1 = 2131427330;
