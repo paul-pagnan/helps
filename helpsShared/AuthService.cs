@@ -16,7 +16,7 @@ namespace helps.Shared
             Init();
         }
 
-        public async Task<AuthResult> Login(LoginRequest request)
+        public async Task<GenericResponse> Login(LoginRequest request)
         {
             try
             {   
@@ -35,12 +35,12 @@ namespace helps.Shared
             return database.CurrentUser();
         }
 
-        public async Task<AuthResult> Register(RegisterRequest request)
+        public async Task<GenericResponse> Register(RegisterRequest request)
         {
             try
             {
                 database.SetUser(new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, StudentId = request.StudentId });
-                var response = await authClient.InvokeApiAsync<RegisterRequest, DefaultResponse>("Registration", request);
+                var response = await authClient.InvokeApiAsync<RegisterRequest, GenericResponse>("Registration", request);
                 return Success();
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace helps.Shared
             }
         }
 
-        public async Task<AuthResult> ForgotPassword(string StudentId)
+        public async Task<GenericResponse> ForgotPassword(string StudentId)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace helps.Shared
             }
         }
 
-        public async Task<AuthResult> ResendConfirmation(string StudentId)
+        public async Task<GenericResponse> ResendConfirmation(string StudentId)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace helps.Shared
             }    
         }
 
-        public async Task<AuthResult> RegisterHelps(DetailsInputRequest request)
+        public async Task<GenericResponse> RegisterHelps(DetailsInputRequest request)
         {
             return Success();
         }
@@ -89,24 +89,6 @@ namespace helps.Shared
         {
             database.ClearCurrentUser();
         }
-
-
-        private AuthResult Success()
-        {
-            return new AuthResult {
-                Success = true
-            };
-        }
-        private AuthResult CreateErrorResponse(string Title, Exception ex)
-        {
-            return new AuthResult
-            {
-                Success = false,
-                Message = ex.Message,
-                Title = Title
-            };
-        }
-
         
     }
 }

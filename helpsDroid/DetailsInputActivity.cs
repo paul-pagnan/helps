@@ -15,12 +15,10 @@ namespace helps.Droid
     [Activity(Label = "My Information", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class DetailsInputActivity : Main
     {
-        private Spinner spinnerYear;
         private Spinner country;
         private Spinner language;
         private TextView name;
         private ViewFlipper viewFlipper;
-
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -36,11 +34,7 @@ namespace helps.Droid
 
         private void InitComponents()
         {
-            //init 
-            spinnerYear = FindViewById<Spinner>(Resource.Id.spinnerYear);
-            ArrayAdapter arr = ArrayAdapter.CreateFromResource(this, Resource.Array.year, Android.Resource.Layout.SimpleDropDownItem1Line);
-            arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
-            spinnerYear.Adapter = arr;
+
             name = FindViewById<TextView>(Resource.Id.textViewNameValue);
             name.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
 
@@ -61,6 +55,13 @@ namespace helps.Droid
             viewFlipper.SetOutAnimation(this, Resource.Animation.slide_out_to_left);
             viewFlipper.ShowNext();
         }
+
+        [Java.Interop.Export()]
+        public async void Submit(View view)
+        {
+
+        }
+
 
         private ArrayAdapter GetCountries()
         {

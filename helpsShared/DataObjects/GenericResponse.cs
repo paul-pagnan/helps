@@ -1,6 +1,6 @@
 ﻿namespace helps.Shared.DataObjects
 {
-    public class AuthResult
+    public class GenericResponse
     {
         public string Message { get; set; }
         public string Title { get; set; }

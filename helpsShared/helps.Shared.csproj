@@ -33,14 +33,18 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Consts\Status.cs" />
+    <Compile Include="Consts\Degree.cs" />
     <Compile Include="Database\helpsDatabase.cs" />
     <Compile Include="Database\ISQLite.cs" />
-    <Compile Include="DataObjects\DefaultResponse.cs" />
     <Compile Include="DataObjects\DetailsInputRequest.cs" />
+    <Compile Include="DataObjects\HelpsResponse.cs" />
+    <Compile Include="DataObjects\HelpsRegisterRequest.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />
-    <Compile Include="DataObjects\AuthResponse.cs" />
+    <Compile Include="DataObjects\GenericResponse.cs" />
     <Compile Include="DataObjects\RegisterRequest.cs" />
     <Compile Include="DataObjects\User.cs" />
+    <Compile Include="HelpsService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

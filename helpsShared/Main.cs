@@ -33,7 +33,23 @@ namespace helps.Shared
             //CurrentPlatform.Init();
             authClient = new MobileServiceClient(servicesApplicationURL, servicesApplicationKey);
             helpsClient = new MobileServiceClient(helpsApplicationURL, helpsApplicationKey);
-            database = new helpsDatabase();
+            database = new helpsDatabase();            
+        }
+        public GenericResponse Success()
+        {
+            return new GenericResponse
+            {
+                Success = true
+            };
+        }
+        public GenericResponse CreateErrorResponse(string Title, Exception ex)
+        {
+            return new GenericResponse
+            {
+                Success = false,
+                Message = ex.Message,
+                Title = Title
+            };
         }
     }
 }

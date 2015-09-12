@@ -39,7 +39,7 @@ namespace helps.Droid
 
             EditText StudentId = FindViewById<EditText>(Resource.Id.forgotStudentId);
             AuthService ForgotPasswordService = new AuthService();
-            AuthResult Response = await ForgotPasswordService.ForgotPassword(StudentId.Text);
+            GenericResponse Response = await ForgotPasswordService.ForgotPassword(StudentId.Text);
             dialog.Hide();
 
             if (Response.Success)

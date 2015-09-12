@@ -12,17 +12,45 @@ using Xamarin.Forms;
 using Android.Widget;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using helps.Shared.Consts;
 
 namespace helps.Droid
 {
     public class Main : Activity
     {
         public AuthService AuthSvc;
+        public HelpsService HelpsSvc;
         public User CurrentUser;
         public void Init()
         {
             AuthSvc = new AuthService();
+            HelpsSvc = new HelpsService();
             CurrentUser = AuthSvc.CurrentUser();
+
+            //test();            
+           
+        }
+
+        public async void test()
+        {
+            var request = new HelpsRegisterRequest
+            {
+                StudentId = "11972080",
+                DateOfBirth = DateTime.Now,
+                Degree = Degree.UG,
+                Status = Status.International,
+                FirstLanguage = "English",
+                CountryOrigin = "Australia"
+            };
+            try
+            {
+                var response = await HelpsSvc.RegisterStudent(request);
+                var a = response.Message;
+            }
+            catch (Exception ex)
+            {
+                var e = ex;
+            }
         }
 
         public void setPadding(Toolbar toolbar)
