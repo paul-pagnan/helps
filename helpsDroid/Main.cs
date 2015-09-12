@@ -10,11 +10,19 @@ using Android.Runtime;
 using Android.Views;
 using Xamarin.Forms;
 using Android.Widget;
+using helps.Shared;
 
 namespace helps.Droid
 {
     public class Main : Activity
     {
+        public AuthService AuthSvc;
+
+        public void Init()
+        {
+            AuthSvc = new AuthService();
+        }
+
         public void setPadding(Toolbar toolbar)
         {
             // Set the padding to match the Status Bar height
@@ -49,6 +57,14 @@ namespace helps.Droid
             mProgressDialog.SetCancelable(false);
             mProgressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
             return mProgressDialog; 
+        }
+
+        public void Logout()
+        {
+            
+            var intent = new Intent(this, typeof(SignInActivity));
+            StartActivity(intent);
+            Finish();
         }
     }
 }

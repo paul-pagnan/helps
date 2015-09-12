@@ -20,12 +20,11 @@ namespace helps.Droid
     [Activity(MainLauncher = true, Icon = "@drawable/ic_launcher", Label = "@string/app_name", Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
-        private AuthService AuthSvc;
+        
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
-            AuthSvc = new AuthService();  
-
+            Init();
             //Check if the user has an active session
             if(AuthSvc.CurrentUser() != null)
                 SwitchActivity();                          

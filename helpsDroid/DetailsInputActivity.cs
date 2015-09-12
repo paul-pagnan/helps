@@ -17,13 +17,15 @@ namespace helps.Droid
     {
         Spinner spinnerYear;
         Spinner country;
-                
+        Spinner language;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            Init();
             SetContentView(Resource.Layout.Activity_DetailsInput);
             var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
+            t.InflateMenu(Resource.Menu.logout);
             SetActionBar(t);
             setPadding(t);
             InitComponents();
@@ -39,6 +41,9 @@ namespace helps.Droid
 
             country = FindViewById<Spinner>(Resource.Id.country);
             country.Adapter = GetCountries();
+
+            language = FindViewById<Spinner>(Resource.Id.language);
+            language.Adapter = GetLanguages();
         }
 
 
@@ -54,15 +59,47 @@ namespace helps.Droid
                     RegionInfo regionInfo = new RegionInfo(culture.LCID);
                     if (!(countries.Contains(regionInfo.EnglishName)))
                         countries.AddLast(regionInfo.EnglishName);
+
                 }
                 catch { }
             }
-            List<string> sortedCountries = countries.ToList();
-            sortedCountries.Sort();
-            sortedCountries.Insert(0, "Australia");
-            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, sortedCountries.ToArray<string>());
+            return SortAndAssign(countries, "Australia");
+        }
+
+        private ArrayAdapter GetLanguages()
+        {
+
+            CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+            LinkedList<string> languages = new LinkedList<string>();
+            foreach (CultureInfo culture in cultures)
+            {
+                try
+                {
+                    languages.AddLast(culture.EnglishName);
+
+                }
+                catch { }
+            }
+            return SortAndAssign(languages, "English");
+        }
+
+
+        private ArrayAdapter SortAndAssign(LinkedList<string> list, string DefaultValue)
+        {
+            List<string> sortedList = list.ToList();
+            sortedList.Sort();
+            sortedList.Insert(0, DefaultValue);
+            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, sortedList.ToArray<string>());
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             return arr;
+        }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+
+            Toast.MakeText(this, "Top ActionBar pressed: " + item.TitleFormatted, ToastLength.Short).Show();
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

@@ -32,5 +32,10 @@ namespace helps.Shared.Database
         {
             return database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
         }
+
+        public void ClearCurrentUser()
+        {
+            CurrentUser().AuthToken = null;
+        }
     }
 }

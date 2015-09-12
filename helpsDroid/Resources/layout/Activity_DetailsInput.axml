@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    p1:orientation="vertical"
-    p1:minWidth="25px"
-    p1:minHeight="25px"
     p1:layout_width="fill_parent"
     p1:layout_height="fill_parent"
     p1:id="@+id/relativeLayout66"
@@ -127,6 +124,11 @@
                 p1:layout_width="fill_parent"
                 p1:text="Australia"
                 p1:id="@+id/country"
+                p1:layout_marginBottom="@dimen/form_margin" />
+            <Spinner
+                p1:layout_height="wrap_content"
+                p1:layout_width="fill_parent"
+                p1:id="@+id/language"
                 p1:layout_marginBottom="@dimen/form_margin" />
         </LinearLayout>
     </ScrollView>

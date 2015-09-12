@@ -17,9 +17,9 @@ namespace helps.Droid
     [Activity(Label = "Register", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class RegisterActivity : Main
     {
-        private AuthService AuthSvc;
         protected override void OnCreate(Bundle bundle)
         {
+            Init();
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Activity_Register);
             AuthSvc = new AuthService();

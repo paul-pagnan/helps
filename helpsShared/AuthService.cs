@@ -82,9 +82,14 @@ namespace helps.Shared
 
         public async Task<AuthResult> RegisterHelps(DetailsInputRequest request)
         {
-
             return Success();
         }
+
+        public void Logout()
+        {
+            database.ClearCurrentUser();
+        }
+
 
         private AuthResult Success()
         {
@@ -101,5 +106,7 @@ namespace helps.Shared
                 Title = Title
             };
         }
+
+        
     }
 }
