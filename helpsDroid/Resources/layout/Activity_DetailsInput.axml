@@ -28,20 +28,33 @@
             p1:layout_below="@id/Ttoolbar"
             p1:padding="@dimen/layout_padding"
             p1:id="@+id/linearLayout1">
-            <EditText
-                p1:inputType="text"
+            <LinearLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/PreferredFirstName"
-                p1:hint="Preferred First Name"
-                p1:layout_marginBottom="@dimen/form_margin" />
-            <EditText
-                p1:inputType="number"
+                p1:id="@+id/linearLayout3">
+                <TextView
+                    p1:text="Name :"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewName"
+                    p1:layout_width="100dp"
+                    p1:layout_height="35.5dp" />
+                <TextView
+                    p1:text="Gender"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:textColor="#555555"
+                    p1:id="@+id/textViewNameValue" />
+            </LinearLayout>
+            <TextView
+                p1:text="Please fill up all the details"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/PreferredContactNumber"
-                p1:hint="Preferred Contact Number"
-                p1:layout_marginBottom="@dimen/form_margin" />
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textViewFillUp" />
             <TextView
                 p1:text="Gender"
                 p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -121,6 +134,12 @@
                     p1:layout_height="match_parent"
                     p1:id="@+id/radioButton2" />
             </RadioGroup>
+            <TextView
+                p1:text="Country"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textViewCountry" />
             <AutoCompleteTextView
                 p1:layout_height="wrap_content"
                 p1:layout_width="fill_parent"
