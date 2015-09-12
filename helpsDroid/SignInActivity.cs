@@ -26,7 +26,7 @@ namespace helps.Droid
             Xamarin.Forms.Forms.Init(this, bundle);
             Init();
             //Check if the user has an active session
-            if(AuthSvc.CurrentUser() != null)
+            if(CurrentUser != null)
                 SwitchActivity();                          
 
             SetContentView(Resource.Layout.Activity_Sign_In);

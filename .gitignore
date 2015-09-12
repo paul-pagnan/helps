@@ -211,14 +211,10 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-<<<<<<< HEAD
-helpsService/Web.Debug.config
-helpsService/Web.Release.config
-helpsService/Web.config
-=======
+
 helpsService/Web.config
 helpsService/Web.Debug.config
 helpsService/Web.Release.config
 
+helpsDroid/Resources/Resource.designer.cs
 
->>>>>>> 209d2c933856a7df769e420192a5476b22a14a55

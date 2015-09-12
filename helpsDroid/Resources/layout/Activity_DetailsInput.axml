@@ -7,165 +7,230 @@
     p1:layout_width="fill_parent"
     p1:layout_height="fill_parent"
     p1:id="@+id/relativeLayout66"
-    tools:menu="simple">
-    <include
-        p1:id="@+id/Ttoolbar"
-        p1:layout_height="wrap_content"
-        p1:layout_width="match_parent"
-        layout="@layout/toolbar" />
-    <ScrollView
+    tools:actionBarNavMode="tabs"
+    tools:menu="logout">
+    <ViewFlipper
+        p1:id="@+id/welcomeviewflipper"
         p1:layout_width="fill_parent"
-        p1:layout_height="fill_parent"
-        p1:minWidth="25px"
-        p1:minHeight="25px"
-        p1:layout_below="@id/Ttoolbar">
-        <LinearLayout
+        p1:layout_height="fill_parent">
+        <RelativeLayout
             p1:orientation="vertical"
-            p1:minWidth="25px"
-            p1:minHeight="25px"
             p1:layout_width="fill_parent"
-            p1:layout_height="wrap_content"
-            p1:layout_below="@id/Ttoolbar"
+            p1:layout_height="fill_parent"
+            p1:id="@+id/LayoutWelcome"
             p1:padding="@dimen/layout_padding"
-            p1:id="@+id/linearLayout1">
-            <LinearLayout
-                p1:orientation="horizontal"
+            p1:background="@color/primary"
+            p1:gravity="center_vertical">
+            <RelativeLayout
+                p1:orientation="vertical"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/LayoutWelcomeSub"
+                p1:background="@color/primary"
+                p1:gravity="center_vertical">
+                <TextView
+                    p1:text="Welcome"
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textViewWelcome"
+                    p1:gravity="center"
+                    p1:textColor="@color/text_white"
+                    p1:textSize="35dp"
+                    p1:layout_marginBottom="15.1dp" />
+                <TextView
+                    p1:text="@string/welcome_text"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:layout_below="@id/textViewWelcome"
+                    p1:textColor="@color/text_white"
+                    p1:gravity="center"
+                    p1:id="@+id/textViewWelcomeText"
+                    p1:layout_marginBottom="5.0dp" />
+                <Button
+                    p1:text="Get Started"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/showDetailsInput"
+                    p1:textColor="@color/text_white"
+                    p1:layout_below="@id/textViewWelcomeText"
+                    p1:background="@drawable/flat_selector"
+                    style="?android:attr/borderlessButtonStyle"
+                    p1:layout_marginTop="50.0dp"
+                    p1:onClick="Flip" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            p1:orientation="vertical"
+            p1:layout_width="fill_parent"
+            p1:layout_height="fill_parent"
+            p1:id="@+id/LayoutDetailsInput"
+            tools:menu="simple">
+            <include
+                p1:id="@+id/Ttoolbar"
+                p1:layout_height="wrap_content"
+                p1:layout_width="match_parent"
+                layout="@layout/toolbar" />
+            <ScrollView
+                p1:layout_width="fill_parent"
+                p1:layout_height="fill_parent"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout3">
-                <TextView
-                    p1:text="Name :"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewName"
-                    p1:layout_width="100dp"
-                    p1:layout_height="35.5dp" />
-                <TextView
-                    p1:text="Gender"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:textColor="#555555"
-                    p1:id="@+id/textViewNameValue" />
-            </LinearLayout>
-            <TextView
-                p1:text="Please fill up all the details"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewFillUp" />
-            <TextView
-                p1:text="Gender"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewGender" />
-            <RadioGroup
-                p1:orientation="horizontal"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout2"
-                p1:layout_marginBottom="@dimen/form_margin">
-                <RadioButton
-                    p1:text="Male"
-                    p1:id="@+id/radioButton1"
-                    p1:layout_width="143.1dp"
-                    p1:layout_height="match_parent" />
-                <RadioButton
-                    p1:text="Female"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/radioButton2" />
-            </RadioGroup>
-            <TextView
-                p1:text="Degree"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewDegree" />
-            <RadioGroup
-                p1:orientation="horizontal"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout2"
-                p1:layout_marginBottom="@dimen/form_margin">
-                <RadioButton
-                    p1:text="Undergraduate"
-                    p1:id="@+id/radioButton1"
-                    p1:layout_width="143.1dp"
-                    p1:layout_height="match_parent" />
-                <RadioButton
-                    p1:text="Postgraduate"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/radioButton2" />
-            </RadioGroup>
-            <TextView
-                p1:text="Year"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewYear" />
-            <Spinner
-                p1:layout_width="match_parent"
-                p1:layout_height="match_parent"
-                p1:id="@+id/spinnerYear"
-                p1:layout_marginBottom="@dimen/form_margin" />
-            <TextView
-                p1:text="Status"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewStatus" />
-            <RadioGroup
-                p1:orientation="horizontal"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout2"
-                p1:layout_marginBottom="@dimen/form_margin">
-                <RadioButton
-                    p1:text="Local"
-                    p1:id="@+id/radioButton1"
-                    p1:layout_width="143.1dp"
-                    p1:layout_height="match_parent" />
-                <RadioButton
-                    p1:text="International"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="match_parent"
-                    p1:id="@+id/radioButton2" />
-            </RadioGroup>
-            <TextView
-                p1:text="Country of Origin"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewCountry" />
-            <Spinner
-                p1:layout_height="wrap_content"
-                p1:layout_width="fill_parent"
-                p1:hint="Country"
-                p1:id="@+id/country"
-                p1:layout_marginBottom="@dimen/form_margin" />
-            <TextView
-                p1:text="First Language"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="match_parent"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewLanguage" />
-            <Spinner
-                p1:layout_height="wrap_content"
-                p1:layout_width="fill_parent"
-                p1:hint="Language"
-                p1:id="@+id/language"
-                p1:layout_marginBottom="@dimen/form_margin" />
-            <Button
-                p1:text="Submit"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/FinishDetailsInput"
-                p1:background="@drawable/flat_selector"
-                style="?android:attr/borderlessButtonStyle" />
-        </LinearLayout>
-    </ScrollView>
+                p1:layout_below="@id/Ttoolbar">
+                <LinearLayout
+                    p1:orientation="vertical"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:layout_below="@id/Ttoolbar"
+                    p1:padding="@dimen/layout_padding"
+                    p1:id="@+id/linearLayout1">
+                    <TextView
+                        p1:text="@string/my_information_header"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:layout_marginBottom="15dp"
+                        p1:id="@+id/textViewFillUp" />
+                    <LinearLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/linearLayout3">
+                        <TextView
+                            p1:text="Name:"
+                            p1:textAppearance="?android:attr/textAppearanceMedium"
+                            p1:id="@+id/textViewName"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginRight="10dp"/>
+                        <TextView
+                            p1:text="Gender"
+                            p1:textAppearance="?android:attr/textAppearanceMedium"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="35.5dp"
+                            p1:textColor="#555555"
+                            p1:id="@+id/textViewNameValue" />
+                    </LinearLayout>
+                    <TextView
+                        p1:text="Gender"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewGender" />
+                    <RadioGroup
+                        p1:orientation="horizontal"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/linearLayout2"
+                        p1:layout_marginBottom="@dimen/form_margin">
+                        <RadioButton
+                            p1:text="Male"
+                            p1:id="@+id/radioButton1"
+                            p1:layout_width="143.1dp"
+                            p1:layout_height="match_parent"
+                            p1:checked="true" />
+                        <RadioButton
+                            p1:text="Female"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="match_parent"
+                            p1:id="@+id/radioButton2" />
+                    </RadioGroup>
+                    <TextView
+                        p1:text="Degree"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewDegree" />
+                    <RadioGroup
+                        p1:orientation="horizontal"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/linearLayout2"
+                        p1:layout_marginBottom="@dimen/form_margin">
+                        <RadioButton
+                            p1:text="Undergraduate"
+                            p1:id="@+id/radioButton1"
+                            p1:layout_width="143.1dp"
+                            p1:layout_height="match_parent"
+                            p1:checked="true" />
+                        <RadioButton
+                            p1:text="Postgraduate"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="match_parent"
+                            p1:id="@+id/radioButton2" />
+                    </RadioGroup>
+                    <TextView
+                        p1:text="Year"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewYear" />
+                    <Spinner
+                        p1:layout_width="match_parent"
+                        p1:layout_height="match_parent"
+                        p1:id="@+id/spinnerYear" />
+                    <TextView
+                        p1:text="Status"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewStatus" />
+                    <RadioGroup
+                        p1:orientation="horizontal"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/linearLayout2"
+                        p1:layout_marginBottom="@dimen/form_margin">
+                        <RadioButton
+                            p1:text="Local"
+                            p1:id="@+id/radioButton1"
+                            p1:layout_width="143.1dp"
+                            p1:layout_height="match_parent"
+                            p1:checked="true" />
+                        <RadioButton
+                            p1:text="International"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="match_parent"
+                            p1:id="@+id/radioButton2" />
+                    </RadioGroup>
+                    <TextView
+                        p1:text="Country of Origin"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewCountry" />
+                    <Spinner
+                        p1:layout_height="wrap_content"
+                        p1:layout_width="fill_parent"
+                        p1:hint="Country"
+                        p1:id="@+id/country" />
+                    <TextView
+                        p1:text="First Language"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="35.5dp"
+                        p1:id="@+id/textViewLanguage" />
+                    <Spinner
+                        p1:layout_height="wrap_content"
+                        p1:layout_width="fill_parent"
+                        p1:hint="Language"
+                        p1:id="@+id/language"
+                        p1:layout_marginBottom="@dimen/form_margin" />
+                    <Button
+                        p1:text="Submit"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/FinishDetailsInput"
+                        p1:textColor="#FFFFFF"
+                        p1:background="@drawable/flat_selector"
+                        style="?android:attr/borderlessButtonStyle" />
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </ViewFlipper>
 </RelativeLayout>

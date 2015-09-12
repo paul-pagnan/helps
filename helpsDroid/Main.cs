@@ -11,16 +11,18 @@ using Android.Views;
 using Xamarin.Forms;
 using Android.Widget;
 using helps.Shared;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
     public class Main : Activity
     {
         public AuthService AuthSvc;
-
+        public User CurrentUser;
         public void Init()
         {
             AuthSvc = new AuthService();
+            CurrentUser = AuthSvc.CurrentUser();
         }
 
         public void setPadding(Toolbar toolbar)
@@ -48,8 +50,7 @@ namespace helps.Droid
             builder.SetTitle(title);
             builder.Create().Show();
         }
-
-
+        
         public ProgressDialog CreateProgressDialog(string message, Activity activity)
         {
             ProgressDialog mProgressDialog = new ProgressDialog(activity, Resource.Style.LightDialog);
@@ -61,7 +62,8 @@ namespace helps.Droid
 
         public void Logout()
         {
-            
+            AuthSvc.Logout();
+            CurrentUser = null;
             var intent = new Intent(this, typeof(SignInActivity));
             StartActivity(intent);
             Finish();

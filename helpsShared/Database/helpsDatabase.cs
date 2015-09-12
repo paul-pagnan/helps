@@ -35,7 +35,9 @@ namespace helps.Shared.Database
 
         public void ClearCurrentUser()
         {
-            CurrentUser().AuthToken = null;
+            var user = CurrentUser();
+            user.AuthToken = null;
+            database.Update(user);
         }
     }
 }

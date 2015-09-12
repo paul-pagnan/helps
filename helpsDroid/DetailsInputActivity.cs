@@ -12,13 +12,15 @@ using System.Globalization;
 
 namespace helps.Droid
 {
-    [Activity(Label = "Details Input", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "My Information", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class DetailsInputActivity : Main
     {
-        Spinner spinnerYear;
-        Spinner country;
-        Spinner language;
-        TextView name;
+        private Spinner spinnerYear;
+        private Spinner country;
+        private Spinner language;
+        private TextView name;
+        private ViewFlipper viewFlipper;
+
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -26,8 +28,8 @@ namespace helps.Droid
             Init();
             SetContentView(Resource.Layout.Activity_DetailsInput);
             var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-            t.InflateMenu(Resource.Menu.logout);
             SetActionBar(t);
+
             setPadding(t);
             InitComponents();
         }
@@ -40,13 +42,24 @@ namespace helps.Droid
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             spinnerYear.Adapter = arr;
             name = FindViewById<TextView>(Resource.Id.textViewNameValue);
-            name.Text = AuthSvc.CurrentUser().FirstName + " " + AuthSvc.CurrentUser().LastName;
+            name.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
 
             country = FindViewById<Spinner>(Resource.Id.country);
             country.Adapter = GetCountries();
 
             language = FindViewById<Spinner>(Resource.Id.language);
             language.Adapter = GetLanguages();
+
+            viewFlipper = FindViewById<ViewFlipper>(Resource.Id.welcomeviewflipper);
+        }
+
+
+        [Java.Interop.Export()]
+        public async void Flip(View view)
+        {
+            viewFlipper.SetInAnimation(this, Resource.Animation.slide_in_from_right);
+            viewFlipper.SetOutAnimation(this, Resource.Animation.slide_out_to_left);
+            viewFlipper.ShowNext();
         }
 
         private ArrayAdapter GetCountries()
@@ -67,6 +80,7 @@ namespace helps.Droid
             }
             return SortAndAssign(countries, "Australia");
         }
+
 
         private ArrayAdapter GetLanguages()
         {
@@ -98,11 +112,15 @@ namespace helps.Droid
             return arr;
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.logout, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-
-            Toast.MakeText(this, "Top ActionBar pressed: " + item.TitleFormatted, ToastLength.Short).Show();
+            Logout();
             return base.OnOptionsItemSelected(item);
         }
     }

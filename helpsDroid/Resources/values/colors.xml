@@ -7,4 +7,5 @@
   <color name="primaryMuted">#C22A1B</color>
   <color name="primaryMutedPressed">#DB4132</color>
   <color name="transparent">#00000000</color>
+  <color name="text_white">#FFFFFF</color>
 </resources>
