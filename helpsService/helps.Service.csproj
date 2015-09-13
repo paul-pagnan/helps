@@ -222,6 +222,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CompleteSetupController.cs" />
     <Compile Include="Controllers\ConfirmEmailController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />

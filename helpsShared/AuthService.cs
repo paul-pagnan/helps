@@ -80,6 +80,21 @@ namespace helps.Shared
             }    
         }
 
+        public async Task<GenericResponse> CompleteSetup(string StudentId)
+        {
+            try
+            {
+                Dictionary<string, string> paramaters = new Dictionary<string, string>();
+                paramaters.Add("StudentId", StudentId);
+                var response = await authClient.InvokeApiAsync("CompleteSetup", HttpMethod.Get, paramaters);
+                return Success();
+            }
+            catch (Exception ex)
+            {
+                return CreateErrorResponse("Failure", ex);
+            }
+        }
+
         public async Task<GenericResponse> RegisterHelps(DetailsInputRequest request)
         {
             return Success();

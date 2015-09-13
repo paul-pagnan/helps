@@ -73,17 +73,17 @@ namespace helps.Droid
                 CountryOrigin = "Australia"
             };
             var Response = await HelpsSvc.RegisterStudent(request);
-            dialog.Hide();
+            dialog.Dismiss();
             if (Response.Success)
             {
-                var intent = new Intent(this, typeof(ToDoActivity));
+                var intent = new Intent(this, typeof(DashboardActivity));
                 StartActivity(intent);
                 Finish();
             }
             else
                 ShowDialog(Response.Message, Response.Title);
-        }
 
+        }
 
         private ArrayAdapter GetCountries()
         {

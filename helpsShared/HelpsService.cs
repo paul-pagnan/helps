@@ -24,7 +24,17 @@ namespace helps.Shared
             if (response.IsSuccessStatusCode) {
                 HelpsResponse decodedResponse = response.Content.ReadAsAsync<HelpsResponse>().Result;
                 if (decodedResponse.IsSuccess)
-                    return Success();
+                {
+                    var user = database.CurrentUser();
+                    user.HasLoggedIn = true;
+                    AuthService auth = new AuthService();
+                    GenericResponse Response = await auth.CompleteSetup(database.CurrentUser().StudentId);
+                    if (Response.Success)
+                    {
+                        database.SetUser(user);
+                        return Success();
+                    }
+                }
                 else
                     return CreateErrorResponse("Registration Failed", decodedResponse.DisplayMessage);
             }

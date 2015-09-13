@@ -7,7 +7,6 @@
     p1:layout_width="fill_parent"
     p1:layout_height="fill_parent"
     p1:id="@+id/relativeLayout66"
-    tools:actionBarNavMode="tabs"
     tools:menu="logout">
     <ViewFlipper
         p1:id="@+id/welcomeviewflipper"

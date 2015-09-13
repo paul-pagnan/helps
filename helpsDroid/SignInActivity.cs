@@ -71,7 +71,7 @@ namespace helps.Droid
 
         private void SwitchActivity()
         {
-            var intent = new Intent(this, typeof(ToDoActivity));
+            var intent = new Intent(this, typeof(DashboardActivity));
             if (!AuthSvc.CurrentUser().HasLoggedIn)
                 intent = new Intent(this, typeof(DetailsInputActivity));
             StartActivity(intent);
