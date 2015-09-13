@@ -107,7 +107,7 @@
                             p1:id="@+id/textViewName"
                             p1:layout_width="wrap_content"
                             p1:layout_height="wrap_content"
-                            p1:layout_marginRight="10dp"/>
+                            p1:layout_marginRight="10dp" />
                         <TextView
                             p1:text="Gender"
                             p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -116,7 +116,6 @@
                             p1:textColor="#555555"
                             p1:id="@+id/textViewNameValue" />
                     </LinearLayout>
-                   
                     <TextView
                         p1:text="Degree"
                         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -141,7 +140,6 @@
                             p1:layout_height="match_parent"
                             p1:id="@+id/radioButton2" />
                     </RadioGroup>
-                   
                     <TextView
                         p1:text="Status"
                         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -155,7 +153,7 @@
                         p1:id="@+id/linearLayout2"
                         p1:layout_marginBottom="@dimen/form_margin">
                         <RadioButton
-                            p1:text="Local"
+                            p1:text="Permanent"
                             p1:id="@+id/radioButton1"
                             p1:layout_width="143.1dp"
                             p1:layout_height="match_parent"
@@ -197,7 +195,7 @@
                         p1:textColor="#FFFFFF"
                         p1:background="@drawable/flat_selector"
                         style="?android:attr/borderlessButtonStyle"
-                        p1:onClick="Submit"/>
+                        p1:onClick="Submit" />
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>
