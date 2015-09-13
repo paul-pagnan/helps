@@ -21,6 +21,11 @@ namespace helps.Droid
         private Spinner language;
         private TextView name;
         private ViewFlipper viewFlipper;
+        private EditText date;
+        private EditText month;
+        private EditText year;
+        private RadioGroup degree;
+        private RadioGroup status;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -46,6 +51,16 @@ namespace helps.Droid
             language = FindViewById<Spinner>(Resource.Id.language);
             language.Adapter = GetLanguages();
 
+            date = FindViewById<EditText>(Resource.Id.studentDateDOB);
+
+            month = FindViewById<EditText>(Resource.Id.studentMonthDOB);
+
+            year = FindViewById<EditText>(Resource.Id.studentYearDOB);
+
+            degree = (RadioGroup)FindViewById(Resource.Id.radioGroupDegree);
+
+            status = (RadioGroup)FindViewById(Resource.Id.radioGroupStatus);
+
             viewFlipper = FindViewById<ViewFlipper>(Resource.Id.welcomeviewflipper);
         }
 
@@ -63,25 +78,35 @@ namespace helps.Droid
         {
             ProgressDialog dialog = CreateProgressDialog("Registering...", this);
             dialog.Show();
-            var request = new HelpsRegisterRequest
+            RadioButton degreeIndex = (RadioButton)FindViewById(degree.CheckedRadioButtonId);
+            RadioButton statusIndex = (RadioButton)FindViewById(status.CheckedRadioButtonId);
+            try
             {
-                StudentId = "11972080",
-                DateOfBirth = DateTime.Now,
-                Degree = Degree.UG,
-                Status = Status.International,
-                FirstLanguage = "English",
-                CountryOrigin = "Australia"
-            };
-            var Response = await HelpsSvc.RegisterStudent(request);
-            dialog.Hide();
-            if (Response.Success)
-            {
-                var intent = new Intent(this, typeof(ToDoActivity));
-                StartActivity(intent);
-                Finish();
+                var dob = DateTime.ParseExact(year.Text + month.Text + date.Text, "yyyyMMdd", CultureInfo.InvariantCulture);
+                var request = new HelpsRegisterRequest
+                {
+                    StudentId = CurrentUser.StudentId,
+                    DateOfBirth = dob,
+                    Degree = degree.IndexOfChild(degreeIndex) + 1,
+                    Status = status.IndexOfChild(statusIndex),
+                    FirstLanguage = language.SelectedItem.ToString(),
+                    CountryOrigin = country.SelectedItem.ToString()
+                };
+                var Response = await HelpsSvc.RegisterStudent(request);
+                dialog.Hide();
+                if (Response.Success)
+                {
+                    var intent = new Intent(this, typeof(ToDoActivity));
+                    StartActivity(intent);
+                    Finish();
+                }
+                else
+                    ShowDialog(Response.Message, Response.Title);
             }
-            else
-                ShowDialog(Response.Message, Response.Title);
+            catch (Exception ex)
+            {
+                ShowDialog("Error", "Please enter a valid date of birth");
+            }
         }
 
 
