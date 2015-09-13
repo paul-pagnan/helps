@@ -12,6 +12,7 @@
         p1:id="@+id/welcomeviewflipper"
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent">
+    <!--
         <RelativeLayout
             p1:orientation="vertical"
             p1:layout_width="fill_parent"
@@ -60,6 +61,7 @@
                     p1:onClick="Flip" />
             </RelativeLayout>
         </RelativeLayout>
+        -->
         <RelativeLayout
             p1:orientation="vertical"
             p1:layout_width="fill_parent"
@@ -115,6 +117,37 @@
                             p1:textColor="#555555"
                             p1:id="@+id/textViewNameValue" />
                     </LinearLayout>
+                    <LinearLayout
+                        p1:orientation="horizontal"
+                        p1:layout_width="match_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/linearLayout3">
+                        <TextView
+                            p1:text="Date of Birth :"
+                            p1:textAppearance="?android:attr/textAppearanceMedium"
+                            p1:id="@+id/textViewDOB"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginRight="10dp" />
+                        <EditText
+                            p1:inputType="number"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/studentDateDOB"
+                            p1:hint="DD" />
+                        <EditText
+                            p1:inputType="number"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/studentMonthDOB"
+                            p1:hint="MM" />
+                        <EditText
+                            p1:inputType="number"
+                            p1:layout_width="wrap_content"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/studentYearDOB"
+                            p1:hint="YYYY" />
+                    </LinearLayout>
                     <TextView
                         p1:text="Degree"
                         p1:textAppearance="?android:attr/textAppearanceMedium"
@@ -125,7 +158,7 @@
                         p1:orientation="horizontal"
                         p1:layout_width="match_parent"
                         p1:layout_height="wrap_content"
-                        p1:id="@+id/linearLayout2"
+                        p1:id="@+id/radioGroupDegree"
                         p1:layout_marginBottom="@dimen/form_margin">
                         <RadioButton
                             p1:text="Undergraduate"
@@ -149,11 +182,11 @@
                         p1:orientation="horizontal"
                         p1:layout_width="match_parent"
                         p1:layout_height="wrap_content"
-                        p1:id="@+id/linearLayout2"
+                        p1:id="@+id/radioGroupStatus"
                         p1:layout_marginBottom="@dimen/form_margin">
                         <RadioButton
                             p1:text="Permanent"
-                            p1:id="@+id/radioButton1"
+                            p1:id="@+id/radioButton3"
                             p1:layout_width="143.1dp"
                             p1:layout_height="match_parent"
                             p1:checked="true" />
@@ -161,7 +194,7 @@
                             p1:text="International"
                             p1:layout_width="wrap_content"
                             p1:layout_height="match_parent"
-                            p1:id="@+id/radioButton2" />
+                            p1:id="@+id/radioButton4" />
                     </RadioGroup>
                     <TextView
                         p1:text="Country of Origin"
