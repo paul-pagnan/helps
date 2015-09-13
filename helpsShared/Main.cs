@@ -9,6 +9,8 @@ using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using helps.Shared.Database;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 
 
@@ -18,7 +20,7 @@ namespace helps.Shared
     {
 
         public MobileServiceClient authClient;
-        public MobileServiceClient helpsClient;
+        public HttpClient helpsClient;
 
         public helpsDatabase database;
 
@@ -32,7 +34,10 @@ namespace helps.Shared
         {
             //CurrentPlatform.Init();
             authClient = new MobileServiceClient(servicesApplicationURL, servicesApplicationKey);
-            helpsClient = new MobileServiceClient(helpsApplicationURL, helpsApplicationKey);
+            helpsClient = new HttpClient();
+            helpsClient.BaseAddress = new Uri(helpsApplicationURL);
+            helpsClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            helpsClient.DefaultRequestHeaders.Add("AppKey", helpsApplicationKey);
             database = new helpsDatabase();            
         }
         public GenericResponse Success()
@@ -48,6 +53,16 @@ namespace helps.Shared
             {
                 Success = false,
                 Message = ex.Message,
+                Title = Title
+            };
+        }
+
+        public GenericResponse CreateErrorResponse(string Title, string Message)
+        {
+            return new GenericResponse
+            {
+                Success = false,
+                Message = Message,
                 Title = Title
             };
         }

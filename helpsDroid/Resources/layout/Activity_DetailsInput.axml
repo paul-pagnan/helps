@@ -196,7 +196,8 @@
                         p1:id="@+id/FinishDetailsInput"
                         p1:textColor="#FFFFFF"
                         p1:background="@drawable/flat_selector"
-                        style="?android:attr/borderlessButtonStyle" />
+                        style="?android:attr/borderlessButtonStyle"
+                        p1:onClick="Submit"/>
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>

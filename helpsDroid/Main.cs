@@ -26,31 +26,6 @@ namespace helps.Droid
             AuthSvc = new AuthService();
             HelpsSvc = new HelpsService();
             CurrentUser = AuthSvc.CurrentUser();
-
-            //test();            
-           
-        }
-
-        public async void test()
-        {
-            var request = new HelpsRegisterRequest
-            {
-                StudentId = "11972080",
-                DateOfBirth = DateTime.Now,
-                Degree = Degree.UG,
-                Status = Status.International,
-                FirstLanguage = "English",
-                CountryOrigin = "Australia"
-            };
-            try
-            {
-                var response = await HelpsSvc.RegisterStudent(request);
-                var a = response.Message;
-            }
-            catch (Exception ex)
-            {
-                var e = ex;
-            }
         }
 
         public void setPadding(Toolbar toolbar)

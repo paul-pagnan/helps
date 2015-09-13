@@ -9,6 +9,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Globalization;
+using helps.Shared.DataObjects;
+using helps.Shared.Consts;
 
 namespace helps.Droid
 {
@@ -59,7 +61,27 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Submit(View view)
         {
-
+            ProgressDialog dialog = CreateProgressDialog("Registering...", this);
+            dialog.Show();
+            var request = new HelpsRegisterRequest
+            {
+                StudentId = "11972080",
+                DateOfBirth = DateTime.Now,
+                Degree = Degree.UG,
+                Status = Status.International,
+                FirstLanguage = "English",
+                CountryOrigin = "Australia"
+            };
+            var Response = await HelpsSvc.RegisterStudent(request);
+            dialog.Hide();
+            if (Response.Success)
+            {
+                var intent = new Intent(this, typeof(ToDoActivity));
+                StartActivity(intent);
+                Finish();
+            }
+            else
+                ShowDialog(Response.Message, Response.Title);
         }
 
 
