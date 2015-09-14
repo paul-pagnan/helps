@@ -18,12 +18,15 @@
             android:layout_height="fill_parent"
             android:layout_below="@id/Ttoolbar"
             android:id="@+id/relativeLayout1">
-            <ImageButton
+            <Button
+                android:text="My Bookings"
+                android:gravity="bottom"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="175dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bookings"
-                android:background="?android:attr/selectableItemBackground" />
+                android:background="@drawable/booking_item" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

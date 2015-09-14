@@ -25,11 +25,32 @@ namespace helps.Droid
             Xamarin.Forms.Forms.Init(this, bundle);
             Init();
             //Check if the user has an active session
+           
             if(CurrentUser != null)
-                SwitchActivity();                          
+                SwitchActivity();
+
+            SkipLogin();
 
             SetContentView(Resource.Layout.Activity_Sign_In);
             base.OnCreate(bundle);
+        }
+
+        public async void SkipLogin()
+        {
+            LoginRequest request = new LoginRequest
+            {
+                StudentId = "11972080",
+                Password = "password123"
+            };
+
+            var Response = await AuthSvc.Login(request);
+
+            if (Response.Success)
+            {
+                SwitchActivity();
+            }
+            else
+                ShowDialog(Response.Message, "Login Failure");
         }
 
         [Java.Interop.Export()]

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="primary">#bc0517</color>
+
+  <color name="tint_primary">#33bc0517</color>
+  
   <color name="primaryDark">#9c180b</color>
   <color name="accent">#116189</color>
+  
+  
   <color name="accentPressed">#094D6F</color>
   <color name="primaryMuted">#C22A1B</color>
   <color name="primaryMutedPressed">#DB4132</color>
