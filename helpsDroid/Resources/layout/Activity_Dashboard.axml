@@ -19,14 +19,43 @@
             android:layout_below="@id/Ttoolbar"
             android:id="@+id/relativeLayout1">
             <Button
-                android:text="My Bookings"
+                android:text="Make Bookings"
                 android:gravity="bottom"
                 android:textColor="@color/text_white"
                 android:padding="25dp"
+                android:textSize="@dimen/dashboard_text_size"
+                android:id="@+id/btnMakeBooking"
                 android:layout_width="fill_parent"
-                android:layout_height="175dp"
+                android:layout_height="@dimen/dashboard_item_height"
                 android:scaleType="centerCrop"
-                android:background="@drawable/booking_item" />
+                android:background="@drawable/make_booking_item"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif-light" />
+            <Button
+                android:text="My Bookings"
+                android:gravity="bottom"
+                android:layout_below="@id/btnMakeBooking"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:id="@+id/btnMyBooking"
+                android:textSize="@dimen/dashboard_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/my_booking_item"
+                android:fontFamily="sans-serif-light" />
+            <Button
+                android:text="Settings"
+                android:gravity="bottom"
+                android:layout_below="@id/btnMyBooking"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:textSize="@dimen/dashboard_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/settings_item"
+                android:fontFamily="sans-serif-light" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

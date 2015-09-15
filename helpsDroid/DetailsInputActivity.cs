@@ -105,6 +105,7 @@ namespace helps.Droid
             }
             catch (Exception ex)
             {
+                dialog.Hide();
                 ShowDialog("Error", "Please enter a valid date of birth");
             }
         }

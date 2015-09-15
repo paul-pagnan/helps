@@ -12,7 +12,6 @@
         p1:id="@+id/welcomeviewflipper"
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent">
-    <!--
         <RelativeLayout
             p1:orientation="vertical"
             p1:layout_width="fill_parent"
@@ -61,7 +60,6 @@
                     p1:onClick="Flip" />
             </RelativeLayout>
         </RelativeLayout>
-        -->
         <RelativeLayout
             p1:orientation="vertical"
             p1:layout_width="fill_parent"
