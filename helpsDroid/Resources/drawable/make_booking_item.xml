@@ -1,5 +1,5 @@
 ﻿<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:color="@color/dark_overlay">
+                      android:color="@color/light_overlay">
   <item android:drawable="@drawable/makeBookings"></item>
 
 </ripple>

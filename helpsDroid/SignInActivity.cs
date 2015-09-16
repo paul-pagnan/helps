@@ -29,7 +29,7 @@ namespace helps.Droid
             if(CurrentUser != null)
                 SwitchActivity();
 
-            //SkipLogin();
+            SkipLogin();
 
             SetContentView(Resource.Layout.Activity_Sign_In);
             base.OnCreate(bundle);

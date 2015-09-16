@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.IO;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using Android.Graphics;
 
 namespace helps.Droid
 {
@@ -28,7 +29,11 @@ namespace helps.Droid
             var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
             SetActionBar(t);
             setPadding(t);
-            
+
+            Color color = Resources.GetColor(Resource.Color.tint);
+            FindViewById<Button>(Resource.Id.btnMakeBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
+            FindViewById<Button>(Resource.Id.btnMyBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
+            FindViewById<Button>(Resource.Id.btnSettings).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
         }
 
 
