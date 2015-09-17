@@ -12,16 +12,15 @@ using Android.Widget;
 using Android.Support.V4.View;
 using com.refractored;
 using Java.Interop;
-using Android.Support.V4.App;
 using Fragment = Android.Support.V4.App.Fragment;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 using Java.Lang;
-using Android.Support.V7.App;
+
 
 namespace helps.Droid
 {
-    [Activity(MainLauncher = true, Icon = "@drawable/ic_launcher", Label = "My Bookings", Theme = "@style/AppTheme.MyToolbar")]
-    public class MyBookingsActivity : Bookings 
+    [Activity(Label = "My Bookings", Theme = "@style/AppTheme.MyToolbar")]
+    public class MyBookingsActivity : MyBookingsFragment
     {
         private MyPagerAdapter adapter;
         private ViewPager pager;
@@ -36,32 +35,25 @@ namespace helps.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);
-            //Init();            
-            //setPadding(t);
+            base.OnCreate(bundle);          
 
-            //adapter = new MyPagerAdapter(SupportFragmentManager);
-            //pager = FindViewById<ViewPager>(Resource.Id.pager);
-            //tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
-            //pager.Adapter = adapter;
-            //tabs.SetViewPager(pager);
-
-
-            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-            SupportActionBar.SetHomeButtonEnabled(false);
+            adapter = new MyPagerAdapter(SupportFragmentManager);
+            pager = FindViewById<ViewPager>(Resource.Id.pager);
+            tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
+            pager.Adapter = adapter;
+            tabs.SetViewPager(pager);
         }
 
     }
 
-    public class MyPagerAdapter : FragmentPagerAdapter
+    public class MyPagerAdapter : Android.Support.V4.App.FragmentPagerAdapter
     {
         private readonly string[] Titles =
         {
-            "Categories", "Home", "Top Paid", "Top Free", "Top Grossing", "Top New Paid",
-            "Top New Free", "Trending"
+            "Current", "Past"
         };
 
-        public MyPagerAdapter(Android.Support.V4.App.FragmentManager fm) : base(fm)
+        public MyPagerAdapter(FragmentManager fm) : base(fm)
         {
         }
 

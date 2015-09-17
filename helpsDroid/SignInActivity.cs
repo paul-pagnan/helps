@@ -17,7 +17,7 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.SignIn")]
+    [Activity(MainLauncher = true, Icon = "@drawable/ic_launcher", Label = "@string/app_name", Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
         protected override async void OnCreate(Bundle bundle)
