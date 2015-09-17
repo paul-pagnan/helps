@@ -59,5 +59,6 @@ namespace helps.Droid
                 ActionBar.SetDisplayShowHomeEnabled(true);
             }
         }
+
     }
 }
