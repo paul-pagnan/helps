@@ -45,7 +45,8 @@
                 android:scaleType="centerCrop"
                 android:background="@drawable/my_booking_item"
                 android:fontFamily="sans-serif-light"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:onClick="MyBookings" />
             <Button
                 android:text="Settings"
                 android:gravity="bottom"

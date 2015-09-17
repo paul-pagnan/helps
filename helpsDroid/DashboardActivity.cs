@@ -48,5 +48,12 @@ namespace helps.Droid
             Logout();
             return base.OnOptionsItemSelected(item);
         }
+
+        [Java.Interop.Export()]
+        public async void MyBookings(View view)
+        {
+            var intent = new Intent(this, typeof(MyBookingsActivity));
+            StartActivity(intent);
+        }
     }
 }
