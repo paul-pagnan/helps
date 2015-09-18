@@ -30,11 +30,13 @@ namespace helps.Droid
         {
             Xamarin.Forms.Forms.Init(this, bundle);
             base.OnCreate(bundle);
+            
             //Check if the user has an active session
             if(CurrentUser != null )
                 SwitchActivity();
 
-           // SkipLogin();
+            if(bundle == null)
+                SkipLogin();
         }
 
         public async void SkipLogin()

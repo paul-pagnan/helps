@@ -15,6 +15,8 @@ using Java.Interop;
 using Fragment = Android.Support.V4.App.Fragment;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 using Java.Lang;
+using helps.Droid.Helpers;
+using helps.Droid.Adapters;
 
 
 namespace helps.Droid
@@ -37,12 +39,11 @@ namespace helps.Droid
         {
             base.OnCreate(bundle);          
 
-            adapter = new MyPagerAdapter(SupportFragmentManager);
+            adapter = new MyPagerAdapter(SupportFragmentManager, this.LayoutInflater);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
             tabs.SetViewPager(pager);
-
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
@@ -56,8 +57,11 @@ namespace helps.Droid
             "Current", "Past"
         };
 
-        public MyPagerAdapter(FragmentManager fm) : base(fm)
+        private LayoutInflater layoutInflater;
+
+        public MyPagerAdapter(FragmentManager fm, LayoutInflater layoutInflater) : base(fm)
         {
+            this.layoutInflater = layoutInflater;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)
@@ -76,5 +80,4 @@ namespace helps.Droid
             return TabFragment.NewInstance(position);
         }
     }
-
 }

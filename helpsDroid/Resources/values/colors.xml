@@ -14,4 +14,21 @@
 
   <color name="dark_overlay">#22000000</color>
   <color name="light_overlay">#AAFFFFFF</color>
+
+  <color name="text_dark">#333333</color>
+
+  <color name="cat_1">#FA7921</color>
+  <color name="cat_2">#E55934</color>
+  <color name="cat_3">#9BC53D</color>
+  <color name="cat_4">#FDE74C</color>
+  <color name="cat_5">#5BC0EB</color>
+  <color name="cat_6">#513B56</color>
+  <color name="cat_6">#348AA7</color>
+  <color name="cat_7">#5DD39E</color>
+  <color name="cat_8">#00A896</color>
+  <color name="cat_9">#DB5B3B</color>
+  <color name="cat_10">#4C4C4C</color>
+  <color name="cat_11">#A30B37</color>
+  <color name="cat_12">#2D2D2A</color>
+  <color name="cat_12">#4E6777</color>
 </resources>

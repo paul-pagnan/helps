@@ -1,16 +1,17 @@
-using Android.Support.V4.App;
 using Android.OS;
-using Android.Support.V4.View;
 
-
+using Android.App;
 using Android.Widget;
 using Android;
+using helps.Droid.Adapters;
+using Android.Support.V4.View;
 
 namespace helps.Droid
 {
-    public class TabFragment : Fragment
+    public class TabFragment : Android.Support.V4.App.Fragment
     {
         private int position;
+        private Activity activity;
         public static TabFragment NewInstance(int position)
         {
 
@@ -24,7 +25,6 @@ namespace helps.Droid
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             position = Arguments.GetInt("position");
         }
 
@@ -32,6 +32,11 @@ namespace helps.Droid
         public override Android.Views.View OnCreateView(Android.Views.LayoutInflater inflater, Android.Views.ViewGroup container, Bundle savedInstanceState)
         {
             var root = inflater.Inflate(GetLayout(), container, false);
+
+            var contactsAdapter = new BookingsListAdapter(inflater);
+            var bookingsListView = root.FindViewById<ListView>(GetListView());
+            bookingsListView.Adapter = contactsAdapter;
+
             ViewCompat.SetElevation(root, 50);
             return root;
         }
@@ -42,6 +47,16 @@ namespace helps.Droid
                 case 0:
                     return Resource.Layout.Fragment_CurrentBookings;
                 case 1: return Resource.Layout.Fragment_PastBookings;
+                default: return -1;
+            }
+        }
+
+        private int GetListView()
+        {
+            switch (position)
+            {
+                case 0: return Resource.Id.currentBookingsList;
+                case 1: return Resource.Id.pastBookingsList;
                 default: return -1;
             }
         }
