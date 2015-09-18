@@ -8,13 +8,13 @@ using Android;
 
 namespace helps.Droid
 {
-    public class CardFragment : Fragment
+    public class TabFragment : Fragment
     {
         private int position;
-        public static CardFragment NewInstance(int position)
+        public static TabFragment NewInstance(int position)
         {
 
-            var f = new CardFragment();
+            var f = new TabFragment();
             var b = new Bundle();
             b.PutInt("position", position);
             f.Arguments = b;

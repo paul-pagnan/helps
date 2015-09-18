@@ -11,22 +11,21 @@ using Android.Views;
 using Android.Widget;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 { 
     [Activity(Label = "Forgot Password", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class ForgotPasswordActivity : Main
     {
+        protected override int LayoutResource
+        {
+            get { return Resource.Layout.Activity_ForgotPassword; }
+        }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Activity_ForgotPassword);
-
-            var t = FindViewById<Toolbar>(Resource.Id.TtoolbarTransparent);
-
-            SetActionBar(t);
-            setPadding(t);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
         }
@@ -34,7 +33,7 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void ForgotPassword(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Please wait...", this);
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
 
             EditText StudentId = FindViewById<EditText>(Resource.Id.forgotStudentId);
@@ -54,15 +53,13 @@ namespace helps.Droid
             }
             else
             {
-                ShowDialog(Response.Message, Response.Title);
+                DialogHelper.ShowDialog(this, Response.Message, Response.Title);
             }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            Finish();
             return base.OnOptionsItemSelected(item);
         }
-
     }
 }

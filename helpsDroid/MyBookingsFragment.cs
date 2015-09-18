@@ -2,6 +2,7 @@ using Android;
 using Android.App;
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Views;
 using Android.Widget;
 using helps.Shared;
 using helps.Shared.DataObjects;
@@ -55,10 +56,16 @@ namespace helps.Droid
             {
                 setPadding(Toolbar);
                 SetActionBar(Toolbar);
-                ActionBar.SetDisplayHomeAsUpEnabled(true);
-                ActionBar.SetDisplayShowHomeEnabled(true);
+                Toolbar.NavigationOnClick += (sender, e) =>
+                {
+                    Finish();
+                };
             }
         }
 
+        public bool OnOptionsItemSelected(IMenuItem item)
+        {
+            return base.OnOptionsItemSelected(item);
+        }
     }
 }

@@ -14,25 +14,27 @@ using System.Threading.Tasks;
 using System.IO;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 {
     [Activity(MainLauncher = true, Icon = "@drawable/ic_launcher", Label = "@string/app_name", Theme = "@style/AppTheme.SignIn")]
     public class SignInActivity : Main
     {
+        protected override int LayoutResource
+        {
+            get { return Resource.Layout.Activity_Sign_In; }
+        }
+
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
-            Init();
+            base.OnCreate(bundle);
             //Check if the user has an active session
-           
-            if(CurrentUser != null)
+            if(CurrentUser != null )
                 SwitchActivity();
 
-            SkipLogin();
-
-            SetContentView(Resource.Layout.Activity_Sign_In);
-            base.OnCreate(bundle);
+           // SkipLogin();
         }
 
         public async void SkipLogin()
@@ -50,13 +52,13 @@ namespace helps.Droid
                 SwitchActivity();
             }
             else
-                ShowDialog(Response.Message, "Login Failure");
+                DialogHelper.ShowDialog(this, Response.Message, "Login Failure");
         }
 
         [Java.Interop.Export()]
         public async void Login(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Logging In...", this);
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Logging In...", this);
             dialog.Show();
                
             LoginRequest request = new LoginRequest
@@ -73,7 +75,7 @@ namespace helps.Droid
                 SwitchActivity();
             }
             else
-                ShowDialog(Response.Message, "Login Failure");
+                DialogHelper.ShowDialog(this, Response.Message, "Login Failure");
         }
 
         [Java.Interop.Export()]

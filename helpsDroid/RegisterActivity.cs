@@ -11,23 +11,22 @@ using Android.Views;
 using Android.Widget;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 {
     [Activity(Label = "Register", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.SignIn")]
     public class RegisterActivity : Main
     {
+        protected override int LayoutResource
+        {
+            get { return Resource.Layout.Activity_Register; }
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
-            Init();
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Activity_Register);
-            AuthSvc = new AuthService();
 
-            var t = FindViewById<Toolbar>(Resource.Id.TtoolbarTransparent);
-            
-            SetActionBar(t);
-            setPadding(t);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
         }
@@ -35,7 +34,7 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Register(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Registering...", this);
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Registering...", this);
             dialog.Show();
 
             RegisterRequest request = new RegisterRequest
@@ -61,15 +60,8 @@ namespace helps.Droid
             }
             else
             {
-                ShowDialog(Response.Message, Response.Title);
+                DialogHelper.ShowDialog(this, Response.Message, Response.Title);
             }
         }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            Finish();
-            return base.OnOptionsItemSelected(item);
-        }
-
     }
 }

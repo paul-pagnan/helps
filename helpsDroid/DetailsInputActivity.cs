@@ -11,6 +11,7 @@ using Android.Widget;
 using System.Globalization;
 using helps.Shared.DataObjects;
 using helps.Shared.Consts;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 {
@@ -27,15 +28,16 @@ namespace helps.Droid
         private RadioGroup degree;
         private RadioGroup status;
 
+        protected override int LayoutResource
+        {
+            get { return Resource.Layout.Activity_DetailsInput; }
+        }
+
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Init();
-            SetContentView(Resource.Layout.Activity_DetailsInput);
-            var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-            SetActionBar(t);
-
-            setPadding(t);
+           
             InitComponents();
         }
 
@@ -76,7 +78,7 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public async void Submit(View view)
         {
-            ProgressDialog dialog = CreateProgressDialog("Registering...", this);
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Registering...", this);
             dialog.Show();
             RadioButton degreeIndex = (RadioButton)FindViewById(degree.CheckedRadioButtonId);
             RadioButton statusIndex = (RadioButton)FindViewById(status.CheckedRadioButtonId);
@@ -96,17 +98,17 @@ namespace helps.Droid
                 dialog.Hide();
                 if (Response.Success)
                 {
-                    var intent = new Intent(this, typeof(ToDoActivity));
+                    var intent = new Intent(this, typeof(DashboardActivity));
                     StartActivity(intent);
                     Finish();
                 }
                 else
-                    ShowDialog(Response.Message, Response.Title);
+                    DialogHelper.ShowDialog(this, Response.Message, Response.Title);
             }
             catch (Exception ex)
             {
                 dialog.Hide();
-                ShowDialog("Error", "Please enter a valid date of birth");
+                DialogHelper.ShowDialog(this, "Error", "Please enter a valid date of birth");
             }
         }
 
@@ -166,10 +168,5 @@ namespace helps.Droid
             return base.OnCreateOptionsMenu(menu);
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            Logout();
-            return base.OnOptionsItemSelected(item);
-        }
     }
 }

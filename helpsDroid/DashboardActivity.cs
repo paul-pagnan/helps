@@ -21,14 +21,14 @@ namespace helps.Droid
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.MyToolbar")]
     public class DashboardActivity : Main
     {
+        protected override int LayoutResource
+        {
+            get { return Resource.Layout.Activity_Dashboard; }
+        }
+
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Init();
-            SetContentView(Resource.Layout.Activity_Dashboard);
-            var t = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
-            SetActionBar(t);
-            setPadding(t);
 
             Color color = Resources.GetColor(Resource.Color.tint);
             FindViewById<Button>(Resource.Id.btnMakeBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
@@ -43,11 +43,6 @@ namespace helps.Droid
             return base.OnCreateOptionsMenu(menu);
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            Logout();
-            return base.OnOptionsItemSelected(item);
-        }
 
         [Java.Interop.Export()]
         public async void MyBookings(View view)

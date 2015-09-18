@@ -125,7 +125,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardFragment.cs" />
+    <Compile Include="Helpers\DialogHelper.cs" />
+    <Compile Include="TabFragment.cs" />
     <Compile Include="DetailsInputActivity.cs" />
     <Compile Include="MyBookingsFragment.cs" />
     <Compile Include="Main.cs" />
@@ -137,9 +138,6 @@
     <Compile Include="DashboardActivity.cs" />
     <Compile Include="SignInActivity.cs" />
     <Compile Include="SQLite_Android.cs" />
-    <Compile Include="ToDoActivity.cs" />
-    <Compile Include="ToDoItem.cs" />
-    <Compile Include="ToDoItemAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -175,12 +173,15 @@
     <AndroidResource Include="Resources\layout\Fragment_PastBookings.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListItem_MyBookings.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\layout\Activity_To_Do.axml" />
-    <AndroidResource Include="Resources\layout\Row_List_To_Do.axml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />

@@ -228,7 +228,6 @@
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataObjects\helpsLoginResult.cs" />
     <Compile Include="DataObjects\LoginRequest.cs" />

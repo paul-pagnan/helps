@@ -42,11 +42,14 @@ namespace helps.Droid
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
             tabs.SetViewPager(pager);
-        }
 
+
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetDisplayShowHomeEnabled(true);
+        }
     }
 
-    public class MyPagerAdapter : Android.Support.V4.App.FragmentPagerAdapter
+    class MyPagerAdapter : Android.Support.V4.App.FragmentPagerAdapter
     {
         private readonly string[] Titles =
         {
@@ -70,7 +73,8 @@ namespace helps.Droid
 
         public override Android.Support.V4.App.Fragment GetItem(int position)
         {
-            return CardFragment.NewInstance(position);
+            return TabFragment.NewInstance(position);
         }
     }
+
 }
