@@ -31,7 +31,8 @@
                 android:background="@drawable/make_booking_item"
                 android:textStyle="normal"
                 android:fontFamily="sans-serif-light"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:onClick="MakeBooking" />
             <Button
                 android:text="My Bookings"
                 android:gravity="bottom"

@@ -50,5 +50,12 @@ namespace helps.Droid
             var intent = new Intent(this, typeof(MyBookingsActivity));
             StartActivity(intent);
         }
+
+        [Java.Interop.Export()]
+        public async void MakeBooking(View view)
+        {
+            var intent = new Intent(this, typeof(MakeBookingActivity));
+            StartActivity(intent);
+        }
     }
 }

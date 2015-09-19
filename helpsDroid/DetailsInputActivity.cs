@@ -33,7 +33,6 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_DetailsInput; }
         }
 
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -131,7 +130,6 @@ namespace helps.Droid
             return SortAndAssign(countries, "Australia");
         }
 
-
         private ArrayAdapter GetLanguages()
         {
 
@@ -150,7 +148,6 @@ namespace helps.Droid
             }
             return SortAndAssign(languages, "English");
         }
-
 
         private ArrayAdapter SortAndAssign(LinkedList<string> list, string DefaultValue)
         {

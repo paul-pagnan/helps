@@ -33,8 +33,7 @@ namespace helps.Droid
         {
             get { return Resource.Layout.Activity_MyBookings; }
         }
-
-
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);          

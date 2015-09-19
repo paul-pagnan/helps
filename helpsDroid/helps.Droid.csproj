@@ -129,6 +129,7 @@
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\SessionListBaseAdapter.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
+    <Compile Include="MakeBookingActivity.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
     <Compile Include="TabFragment.cs" />
     <Compile Include="DetailsInputActivity.cs" />
@@ -179,6 +180,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ListItem_MyBookings.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_MakeBooking.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
