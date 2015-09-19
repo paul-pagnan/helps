@@ -12,6 +12,7 @@ using Android.Widget;
 using helps.Shared;
 using helps.Shared.DataObjects;
 using helps.Droid.Helpers;
+using helps.Droid.Adapters;
 
 namespace helps.Droid
 { 
@@ -28,10 +29,28 @@ namespace helps.Droid
         {
             base.OnCreate(bundle);
 
+            InitMenu();
+
             viewFlipper = FindViewById<ViewFlipper>(Resource.Id.bookingflipper);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
+        }
+
+        private void InitMenu()
+        {
+            var workshopCategoryAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater);
+            var workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
+            workshopSetListView.Adapter = workshopCategoryAdapter;
+            workshopSetListView.ItemClick += (sender, e) =>
+            {
+                InitWorkshopList(e.Id);
+            };
+        }
+
+        private void InitWorkshopList(long id)
+        {
             FlipView();
+            DialogHelper.ShowDialog(this, "You clicked " + id, "Click Event");
         }
 
         public override void OnBackPressed()
@@ -46,10 +65,10 @@ namespace helps.Droid
         {
             if (viewFlipper.DisplayedChild > 0)
                 return FlipView();
+
             return false;
         }
 
-        [Java.Interop.Export()]
         public bool FlipView()
         {
             int index = viewFlipper.DisplayedChild;

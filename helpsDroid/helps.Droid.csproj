@@ -125,9 +125,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\DataObjects\WorkshopCategory.cs" />
+    <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\DataObjects\Session.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
-    <Compile Include="Adapters\SessionListBaseAdapter.cs" />
+    <Compile Include="Adapters\DataObjects\MyList.cs" />
+    <Compile Include="Adapters\ListBaseAdapter.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
     <Compile Include="MakeBookingActivity.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
@@ -183,6 +186,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_MakeBooking.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListItem_WorkshopCategory.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

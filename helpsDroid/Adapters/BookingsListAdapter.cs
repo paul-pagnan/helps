@@ -7,13 +7,27 @@ using Android.Views;
 using Android.Widget;
 using helps.Droid.Adapters.DataObjects;
 using Android.Graphics;
+using System.Linq;
 
 namespace helps.Droid.Adapters
 {
-    public class BookingsListAdapter : SessionListBaseAdapter
-    { 
-        public BookingsListAdapter(LayoutInflater inflater) : base(inflater)
+    public class BookingsListAdapter : ListBaseAdapter
+    {
+        private LayoutInflater inflater;
+        private int ItemLayout = Resource.Layout.ListItem_MyBookings;
+        private List<Session> SessionList;
+
+        private ImageView ImgColor;
+        private TextView TxtName;
+        private TextView TxtWorkshopSetName;
+        private TextView TxtDate;
+        private TextView TxtTime;
+        private TextView TxtLocation;
+
+        public BookingsListAdapter(LayoutInflater inflater) 
         {
+            this.inflater = inflater;
+            SessionList = new List<Session>();
             PopulateList();
         }
 
@@ -54,6 +68,37 @@ namespace helps.Droid.Adapters
                 });
             }
             //Shuffle<Session>(SessionList);
-        }        
+            base.PopulateList(SessionList.Select(x => new MyList() { Id = x.Id }).ToList());
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
+
+            base.InitColors(view);
+            InitComponents(view);
+            SetComponents(position);
+            return view;
+        }
+
+        private void SetComponents(int position)
+        {
+            ImgColor.SetBackgroundColor(GetColor(SessionList[position].WorkshopSet));
+            TxtName.Text = SessionList[position].Name;
+            TxtWorkshopSetName.Text = SessionList[position].WorkshopSetName;
+            TxtDate.Text = SessionList[position].DateHumanFriendly;
+            TxtTime.Text = SessionList[position].Time;
+            TxtLocation.Text = SessionList[position].Location;
+        }
+
+        private void InitComponents(View view)
+        {
+            ImgColor = view.FindViewById<ImageView>(Resource.Id.BookingColor);
+            TxtName = view.FindViewById<TextView>(Resource.Id.BookingName);
+            TxtWorkshopSetName = view.FindViewById<TextView>(Resource.Id.BookingWorkshopSetName);
+            TxtDate = view.FindViewById<TextView>(Resource.Id.BookingDate);
+            TxtTime = view.FindViewById<TextView>(Resource.Id.BookingTime);
+            TxtLocation = view.FindViewById<TextView>(Resource.Id.BookingLocation);
+        }
     }
 }

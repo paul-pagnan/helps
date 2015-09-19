@@ -11,29 +11,17 @@
     <ViewFlipper
         android:id="@+id/bookingflipper"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_below="@id/Ttoolbar">
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/SessionCategoryLayout"
-            android:padding="@dimen/layout_padding"
-            android:gravity="center_vertical"
-            android:minWidth="25px"
-            android:minHeight="25px">
-        <!--
+            android:id="@+id/SessionCategoryLayout">
             <ListView
                 android:id="@+id/workshopSetList"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
-                
-                -->
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:onClick="FlipView" />
         </RelativeLayout>
         <RelativeLayout
             android:orientation="vertical"
@@ -48,12 +36,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:onClick="FlipView" />
-        <!--
             <ListView
                 android:id="@+id/workshopList"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
-                -->
         </RelativeLayout>
     </ViewFlipper>
 </RelativeLayout>

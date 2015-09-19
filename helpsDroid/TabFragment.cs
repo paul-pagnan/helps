@@ -33,9 +33,9 @@ namespace helps.Droid
         {
             var root = inflater.Inflate(GetLayout(), container, false);
 
-            var contactsAdapter = new BookingsListAdapter(inflater);
+            var bookingsAdapter = new BookingsListAdapter(inflater);
             var bookingsListView = root.FindViewById<ListView>(GetListView());
-            bookingsListView.Adapter = contactsAdapter;
+            bookingsListView.Adapter = bookingsAdapter;
 
             ViewCompat.SetElevation(root, 50);
             return root;
