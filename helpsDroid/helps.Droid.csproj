@@ -125,8 +125,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\DataObjects\Booking.cs" />
+    <Compile Include="Adapters\DataObjects\Session.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
+    <Compile Include="Adapters\SessionListBaseAdapter.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
     <Compile Include="TabFragment.cs" />

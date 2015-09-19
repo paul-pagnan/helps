@@ -1,6 +1,6 @@
 namespace helps.Droid.Adapters.DataObjects
 {
-    public class Booking
+    public class Session
     {
         public int Id { get; set; }
         public string Name { get; set; }
