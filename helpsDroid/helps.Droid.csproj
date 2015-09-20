@@ -134,6 +134,7 @@
     <Compile Include="Adapters\DataObjects\MyList.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
+    <Compile Include="Services.cs" />
     <Compile Include="MakeBookingActivity.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
     <Compile Include="TabFragment.cs" />

@@ -17,22 +17,23 @@ namespace helps.Droid
 {
     public abstract class Main : Activity
     {
-        public AuthService AuthSvc;
-        public StudentService StudentSvc;
-        public WorkshopService WorkshopSvc;
         public User CurrentUser;
 
         public Toolbar Toolbar { get; set; }
 
         protected abstract int LayoutResource { get; }
 
+        public Main()
+        {
+            Init();
+        }
         public void Init()
         {
-            AuthSvc = new AuthService();
-            StudentSvc = new StudentService();
-            WorkshopSvc = new WorkshopService();
-
-            CurrentUser = AuthSvc.CurrentUser();
+            try
+            {
+                CurrentUser = Services.Auth.CurrentUser();
+            }
+            catch (Exception ex) { }
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -53,7 +54,8 @@ namespace helps.Droid
                 };
             }
         }
-        
+
+
         public void setPadding(Toolbar toolbar)
         {
             toolbar.SetPadding(0, getStatusBarHeight(), 0, 0);
@@ -69,7 +71,7 @@ namespace helps.Droid
 
         public void Logout()
         {
-            AuthSvc.Logout();
+            Services.Auth.Logout();
             CurrentUser = null;
             var intent = new Intent(this, typeof(SignInActivity));
             StartActivity(intent);

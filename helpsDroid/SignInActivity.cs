@@ -29,7 +29,7 @@ namespace helps.Droid
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
-
+            base.Init();
             base.OnCreate(bundle);
             
             //Check if the user has an active session
@@ -48,7 +48,7 @@ namespace helps.Droid
                 Password = "password123"
             };
 
-            var Response = await AuthSvc.Login(request);
+            var Response = await Services.Auth.Login(request);
 
             if (Response.Success)
             {
@@ -70,7 +70,7 @@ namespace helps.Droid
                 Password = FindViewById<EditText>(Resource.Id.loginPassword).Text
             };
 
-            var Response = await AuthSvc.Login(request);
+            var Response = await Services.Auth.Login(request);
             dialog.Dismiss();
 
             if (Response.Success)
@@ -98,7 +98,7 @@ namespace helps.Droid
         private void SwitchActivity()
         {
             var intent = new Intent(this, typeof(DashboardActivity));
-            if (!AuthSvc.CurrentUser().HasLoggedIn)
+            if (!Services.Auth.CurrentUser().HasLoggedIn)
                 intent = new Intent(this, typeof(DetailsInputActivity));
             StartActivity(intent);
             Finish();

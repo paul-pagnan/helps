@@ -93,7 +93,7 @@ namespace helps.Droid
                     FirstLanguage = language.SelectedItem.ToString(),
                     CountryOrigin = country.SelectedItem.ToString()
                 };
-                var Response = await StudentSvc.RegisterStudent(request);
+                var Response = await Services.Student.RegisterStudent(request);
                 dialog.Hide();
                 if (Response.Success)
                 {

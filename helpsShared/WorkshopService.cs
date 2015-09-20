@@ -22,20 +22,12 @@ namespace helps.Shared
         {
             if (workshopSetTable.NeedsUpdating() || ForceUpdate)
             {
-                Stopwatch sw1 = new Stopwatch();
-                sw1.Start();
                 var response = helpsClient.GetAsync("api/workshop/workshopSets/true").Result;
-                sw1.Stop();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Stopwatch sw2 = new Stopwatch();
-                    sw2.Start();
-
                     List<WorkshopSet> decodedResponse = response.Content.ReadAsAsync<GetResponse<WorkshopSet>>().Result.Results;
                     workshopSetTable.SetAll(decodedResponse);
-                    sw2.Stop();
-                    var finaltime = sw2;
                     return decodedResponse;
                 }
             }
