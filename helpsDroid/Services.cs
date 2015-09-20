@@ -1,4 +1,5 @@
 using helps.Shared;
+using System.Threading.Tasks;
 
 namespace helps.Droid
 {
@@ -13,6 +14,7 @@ namespace helps.Droid
             Auth = new AuthService();
             Student = new StudentService();
             Workshop = new WorkshopService();
+            Task.Factory.StartNew(HelpsService.Purge);
         }
     }
 }

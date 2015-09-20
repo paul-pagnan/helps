@@ -22,7 +22,7 @@ namespace helps.Shared
         {
             if (workshopSetTable.NeedsUpdating() || ForceUpdate)
             {
-                var response = helpsClient.GetAsync("api/workshop/workshopSets/true").Result
+                var response = helpsClient.GetAsync("api/workshop/workshopSets/true").Result;
 
                 if (response.IsSuccessStatusCode)
                 {

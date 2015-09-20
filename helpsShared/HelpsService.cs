@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace helps.Shared
 {
-    public class HelpsService
+    public class HelpsService : Main
     {
         public static HttpClient helpsClient;
         
@@ -30,7 +30,6 @@ namespace helps.Shared
             helpsClient.BaseAddress = new Uri(helpsApplicationURL);
             helpsClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             helpsClient.DefaultRequestHeaders.Add("AppKey", helpsApplicationKey);
-            Task.Factory.StartNew(Purge);
         }
 
         public static async void Purge()
