@@ -46,7 +46,7 @@ namespace helps.Droid
                 Password = FindViewById<EditText>(Resource.Id.registerPassword).Text
             };
             
-            GenericResponse Response = await AuthSvc.Register(request);
+            GenericResponse Response = await Services.Auth.Register(request);
             dialog.Hide();
 
             if (Response.Success)

@@ -76,7 +76,7 @@ namespace helps.Droid
         }
         private async void LoadData(bool force = false)
         {
-            workshopSetListAdapter.AddAll(await WorkshopSvc.GetWorkshopSets(force));
+            workshopSetListAdapter.AddAll(await Services.Workshop.GetWorkshopSets(force));
         }
 
         private void UpdateLists()

@@ -17,9 +17,6 @@ namespace helps.Droid
 {
     public abstract class Main : Activity
     {
-        public AuthService AuthSvc;
-        public StudentService StudentSvc;
-        public WorkshopService WorkshopSvc;
         public User CurrentUser;
 
         public Toolbar Toolbar { get; set; }
@@ -28,11 +25,7 @@ namespace helps.Droid
 
         public Main()
         {
-            AuthSvc = new AuthService();
-            StudentSvc = new StudentService();
-            WorkshopSvc = new WorkshopService();
-
-            CurrentUser = AuthSvc.CurrentUser();
+            CurrentUser = Services.Auth.CurrentUser();
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -68,7 +61,7 @@ namespace helps.Droid
 
         public void Logout()
         {
-            AuthSvc.Logout();
+            Services.Auth.Logout();
             CurrentUser = null;
             var intent = new Intent(this, typeof(SignInActivity));
             StartActivity(intent);
