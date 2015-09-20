@@ -21,11 +21,11 @@ namespace helps.Droid
         }
 
         public AuthService AuthSvc;
-        public HelpsService HelpsSvc;
+        public StudentService HelpsSvc;
         public void Init()
         {
             AuthSvc = new AuthService();
-            HelpsSvc = new HelpsService();
+            HelpsSvc = new StudentService();
         }
 
         public void setPadding(Toolbar toolbar)

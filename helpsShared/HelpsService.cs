@@ -4,41 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using helps.Shared.DataObjects;
+
+using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.Sync;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using helps.Shared.Database;
+
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Formatting;
+
+
 
 namespace helps.Shared
 {
     public class HelpsService : Main
     {
-        public HelpsService()
+        public HttpClient helpsClient;
+        
+        public const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
+        public const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
+
+        public HelpsService() : base()
         {
-            Init();
+            //CurrentPlatform.Init();
+            helpsClient = new HttpClient();
+            helpsClient.BaseAddress = new Uri(helpsApplicationURL);
+            helpsClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            helpsClient.DefaultRequestHeaders.Add("AppKey", helpsApplicationKey);
+            Purge();
         }
 
-        public async Task<GenericResponse> RegisterStudent(HelpsRegisterRequest request)
+        private async void Purge()
         {
-            var response = helpsClient.PostAsJsonAsync("api/student/register", request).Result;
-
-            if (response.IsSuccessStatusCode) {
-                HelpsResponse decodedResponse = response.Content.ReadAsAsync<HelpsResponse>().Result;
-                if (decodedResponse.IsSuccess)
-                {
-                    var user = database.CurrentUser();
-                    user.HasLoggedIn = true;
-                    AuthService auth = new AuthService();
-                    GenericResponse Response = await auth.CompleteSetup(database.CurrentUser().StudentId);
-                    if (Response.Success)
-                    {
-                        database.SetUser(user);
-                        return Success();
-                    }
-                }
-                else
-                    return CreateErrorResponse("Registration Failed", decodedResponse.DisplayMessage);
-            }
-            return CreateErrorResponse("Registration Failed", "An unknown error occurred");            
+            var result = helpsClient.GetAsync("api/workshop/workshopSets/as").Result;
+            
         }
     }
 }

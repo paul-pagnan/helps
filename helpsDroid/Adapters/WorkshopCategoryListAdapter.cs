@@ -8,6 +8,7 @@ using Android.Widget;
 using helps.Droid.Adapters.DataObjects;
 using Android.Graphics;
 using System.Linq;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid.Adapters
 {
@@ -15,7 +16,7 @@ namespace helps.Droid.Adapters
     {
         private LayoutInflater inflater;
         private int ItemLayout = Resource.Layout.ListItem_WorkshopCategory;
-        private List<WorkshopCategory> TheList;
+        private List<WorkshopSet> TheList;
 
         private ImageView ImgColor;
         private TextView TxtName;
@@ -23,39 +24,21 @@ namespace helps.Droid.Adapters
         public WorkshopCategoryListAdapter(LayoutInflater inflater) 
         {
             this.inflater = inflater;
-            TheList = new List<WorkshopCategory>();
-            PopulateList();
+            TheList = new List<WorkshopSet>();
         }
 
-        public void PopulateList()
+        public override void Clear()
         {
-            int count = 0;
-            TheList.Add(new WorkshopCategory
-            {
-                Id = -1,
-                Name = "View All"
-            });
-            for (int i = 0; i <= 3; i++)
-            {
-                TheList.Add(new WorkshopCategory
-                {
-                    Id = count++,
-                    Name = "Writing an Essay"
-                });
-                TheList.Add(new WorkshopCategory
-                {
-                    Id = count++,
-                    Name = "Presenting Skills 101"
-                });
-                TheList.Add(new WorkshopCategory
-                {
-                    Id = count++,
-                    Name = "Writing a literature review"
-                });
-            }
-            //Shuffle<Session>(SessionList);
-            base.PopulateList(TheList.Select(x => new MyList() { Id = x.Id }).ToList());
+            TheList.Clear();
+            base.Clear();
         }
+
+        public void AddAll(List<WorkshopSet> workshops)
+        {
+            TheList = workshops;
+            base.AddAll(TheList.Select(x => new MyList() { Id = x.Id }).ToList());
+        }
+
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {

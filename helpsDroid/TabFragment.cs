@@ -33,7 +33,7 @@ namespace helps.Droid
         {
             var root = inflater.Inflate(GetLayout(), container, false);
 
-            var bookingsAdapter = new BookingsListAdapter(inflater);
+            var bookingsAdapter = new BookingsListAdapter(inflater, Resources, true);
             var bookingsListView = root.FindViewById<ListView>(GetListView());
             bookingsListView.Adapter = bookingsAdapter;
 

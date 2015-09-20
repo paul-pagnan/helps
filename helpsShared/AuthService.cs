@@ -6,14 +6,20 @@ using helps.Shared.DataObjects;
 using System.Net.Http;
 using System.Linq;
 using System.Web.Script.Serialization;
+using Microsoft.WindowsAzure.MobileServices;
+using helps.Shared.Helpers;
 
 namespace helps.Shared
 {
     public class AuthService : Main
     {
-        public AuthService()
+        public const string servicesApplicationURL = @"http://54.153.240.143/";
+        public const string servicesApplicationKey = @"EcJyqLPpfEiVHyiAwKGmrIKvCQXjtL23";
+        public MobileServiceClient authClient;
+
+        public AuthService() : base()
         {
-            Init();
+            authClient = new MobileServiceClient(servicesApplicationURL, servicesApplicationKey);
         }
 
         public async Task<GenericResponse> Login(LoginRequest request)
@@ -21,31 +27,31 @@ namespace helps.Shared
             try
             {   
                 var response = await authClient.InvokeApiAsync<LoginRequest, User>("SignIn", request);
-                database.SetUser(response);
-                return Success();
+                userTable.SetUser(response);
+                return ResponseHelper.Success();
             }
             catch (Exception ex)
             {
-                return CreateErrorResponse("Login Failure", ex);
+                return ResponseHelper.CreateErrorResponse("Login Failure", ex);
             }
         }
 
         public User CurrentUser()
         {
-            return database.CurrentUser();
+            return userTable.CurrentUser();
         }
 
         public async Task<GenericResponse> Register(RegisterRequest request)
         {
             try
             {
-                database.SetUser(new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, StudentId = request.StudentId });
+                userTable.SetUser(new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, StudentId = request.StudentId });
                 var response = await authClient.InvokeApiAsync<RegisterRequest, GenericResponse>("Registration", request);
-                return Success();
+                return ResponseHelper.Success();
             }
             catch (Exception ex)
             {
-                return CreateErrorResponse("Registration Failure", ex);
+                return ResponseHelper.CreateErrorResponse("Registration Failure", ex);
             }
         }
 
@@ -56,11 +62,11 @@ namespace helps.Shared
                 Dictionary<string, string> paramaters = new Dictionary<string, string>();
                 paramaters.Add("studentId", StudentId);
                 JToken response = await authClient.InvokeApiAsync("ForgotPassword", HttpMethod.Get, paramaters);
-                return Success();
+                return ResponseHelper.Success();
             }
             catch (Exception ex)
             {
-                return CreateErrorResponse("Failure", ex);
+                return ResponseHelper.CreateErrorResponse("Failure", ex);
             }
         }
 
@@ -72,11 +78,11 @@ namespace helps.Shared
                 paramaters.Add("StudentId", StudentId);
                 paramaters.Add("Resend", "true");
                 JToken response = await authClient.InvokeApiAsync("ConfirmEmail", HttpMethod.Get, paramaters);
-                return Success();
+                return ResponseHelper.Success();
             }
             catch (Exception ex)
             {
-                return CreateErrorResponse("Failure", ex);
+                return ResponseHelper.CreateErrorResponse("Failure", ex);
             }    
         }
 
@@ -87,22 +93,22 @@ namespace helps.Shared
                 Dictionary<string, string> paramaters = new Dictionary<string, string>();
                 paramaters.Add("StudentId", StudentId);
                 var response = await authClient.InvokeApiAsync("CompleteSetup", HttpMethod.Get, paramaters);
-                return Success();
+                return ResponseHelper.Success();
             }
             catch (Exception ex)
             {
-                return CreateErrorResponse("Failure", ex);
+                return ResponseHelper.CreateErrorResponse("Failure", ex);
             }
         }
 
         public async Task<GenericResponse> RegisterHelps(DetailsInputRequest request)
         {
-            return Success();
+            return ResponseHelper.Success();
         }
 
         public void Logout()
         {
-            database.ClearCurrentUser();
+            userTable.ClearCurrentUser();
         }
         
     }

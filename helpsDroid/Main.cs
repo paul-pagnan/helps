@@ -18,24 +18,26 @@ namespace helps.Droid
     public abstract class Main : Activity
     {
         public AuthService AuthSvc;
-        public HelpsService HelpsSvc;
+        public StudentService StudentSvc;
+        public WorkshopService WorkshopSvc;
         public User CurrentUser;
 
         public Toolbar Toolbar { get; set; }
 
         protected abstract int LayoutResource { get; }
 
-        public void Init()
+        public Main()
         {
             AuthSvc = new AuthService();
-            HelpsSvc = new HelpsService();
+            StudentSvc = new StudentService();
+            WorkshopSvc = new WorkshopService();
+
             CurrentUser = AuthSvc.CurrentUser();
         }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Init();
             SetContentView(LayoutResource);
             Toolbar = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
             if (Toolbar == null)

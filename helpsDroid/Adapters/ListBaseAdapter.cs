@@ -21,11 +21,21 @@ namespace helps.Droid.Adapters
         public List<Color> colors;
         public List<MyList> TheList;
 
-        public void PopulateList(List<MyList> list)
+        public ListBaseAdapter()
+        {
+            TheList = new List<MyList>();
+        }
+
+        public virtual void AddAll(List<MyList> list)
         {
             TheList = list;
         }
-     
+        
+        public virtual void Clear()
+        {
+            TheList.Clear();
+        }
+
         public override int Count
         {
             get { return TheList.Count; }

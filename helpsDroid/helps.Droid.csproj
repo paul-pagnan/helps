@@ -65,6 +65,9 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PullToRefresharp">
+      <HintPath>..\..\..\Desktop\PullToRefresharp.dll</HintPath>
+    </Reference>
     <Reference Include="Refractored.PagerSlidingTabStrip, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Source\Repos\PagerSlidingTabStrip-for-Xamarin.Android\PagerSlidingTabStrip\bin\Debug\Refractored.PagerSlidingTabStrip.dll</HintPath>
@@ -125,7 +128,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\DataObjects\WorkshopCategory.cs" />
     <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\DataObjects\Session.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
@@ -182,7 +184,7 @@
     <AndroidResource Include="Resources\layout\Fragment_PastBookings.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ListItem_MyBookings.axml">
+    <AndroidResource Include="Resources\layout\ListItem_Booking.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_MakeBooking.axml">

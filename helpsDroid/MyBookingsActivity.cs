@@ -28,7 +28,6 @@ namespace helps.Droid
         private ViewPager pager;
         private PagerSlidingTabStrip tabs;
 
-
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_MyBookings; }

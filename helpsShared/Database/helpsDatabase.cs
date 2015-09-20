@@ -11,33 +11,17 @@ namespace helps.Shared.Database
 {
     public class helpsDatabase
     {
-        SQLiteConnection database;
+        public SQLiteConnection database;
         public helpsDatabase()
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
             database.CreateTable<User>();
-        }
-        
-        public User GetUser(string StudentId)
-        {
-            return database.Table<User>().FirstOrDefault(x => x.StudentId == StudentId);
+            database.CreateTable<WorkshopSet>();
         }
 
-        public int SetUser(User user)
+        public bool NeedsUpdating(DateTime lastUpdated, int UpdateBuffer)
         {
-            return database.InsertOrReplace(user);
-        }
-
-        public User CurrentUser()
-        {
-            return database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
-        }
-
-        public void ClearCurrentUser()
-        {
-            var user = CurrentUser();
-            user.AuthToken = null;
-            database.Update(user);
+            return DateTime.Now > lastUpdated.AddMinutes(UpdateBuffer);
         }
     }
 }

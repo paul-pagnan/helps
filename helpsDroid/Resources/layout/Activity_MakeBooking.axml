@@ -17,29 +17,42 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:gravity="center_vertical"
             android:id="@+id/SessionCategoryLayout">
-            <ListView
-                android:id="@+id/workshopSetList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+            <ProgressBar
+                android:id="@+id/workshopSetLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/workshopSetList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/WorkshopListLayout"
-            android:padding="@dimen/layout_padding"
-            android:gravity="center_vertical">
-            <Button
-                android:text="Button222"
+            android:id="@+id/WorkshopListLayout">
+            <ProgressBar
+                android:id="@+id/workshopLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:onClick="FlipView" />
-            <ListView
-                android:id="@+id/workshopList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:indeterminate="true" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/workshopList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
     </ViewFlipper>
 </RelativeLayout>

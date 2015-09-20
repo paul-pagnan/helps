@@ -8,5 +8,7 @@ namespace helps.Droid.Adapters.DataObjects
         public string Time { get; set; }
         public string DateHumanFriendly { get; set; }
         public string Location { get; set; }
+        public int FilledPlaces { get; set; }
+        public int TotalPlaces { get; set; }
     }
 }

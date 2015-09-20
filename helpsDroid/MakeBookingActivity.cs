@@ -13,6 +13,10 @@ using helps.Shared;
 using helps.Shared.DataObjects;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
+using Android.Support.V4.Widget;
+using System.Threading.Tasks;
+using System.Threading;
+using Java.Lang;
 
 namespace helps.Droid
 { 
@@ -20,27 +24,66 @@ namespace helps.Droid
     public class MakeBookingActivity : Main
     {
         private ViewFlipper viewFlipper;
+        private SwipeRefreshLayout categoryRefresher;
+        private SwipeRefreshLayout workshopRefresher;
+
+        private ListView workshopSetListView;
+        private WorkshopCategoryListAdapter workshopSetListAdapter;
+
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_MakeBooking; }
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            InitMenu();
-
             viewFlipper = FindViewById<ViewFlipper>(Resource.Id.bookingflipper);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
+
+            InitRefreshers();
+            InitLists();
+            await Task.Factory.StartNew(() => LoadData(false));
+            FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
+            UpdateLists();
         }
 
-        private void InitMenu()
+        private void InitRefreshers()
         {
-            var workshopCategoryAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater);
-            var workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
-            workshopSetListView.Adapter = workshopCategoryAdapter;
+            categoryRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe1);
+            categoryRefresher.Refresh += async (sender, e) =>
+            {
+                await Task.Factory.StartNew(() => LoadData(true));
+                UpdateLists();
+                categoryRefresher.Refreshing = false;
+            };
+
+            workshopRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe2);
+            workshopRefresher.Refreshing = true;
+            workshopRefresher.Refresh +=  (sender, e) =>
+            {
+                
+                workshopRefresher.Refreshing = false;
+            };
+        }
+
+        private void InitLists()
+        {
+            workshopSetListAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater);
+            workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
+            workshopSetListView.Adapter = workshopSetListAdapter;
+        }
+        private async void LoadData(bool force = false)
+        {
+            workshopSetListAdapter.AddAll(await WorkshopSvc.GetWorkshopSets(force));
+        }
+
+        private void UpdateLists()
+        {
+            workshopSetListAdapter.NotifyDataSetChanged();
+            workshopRefresher.Refreshing = false;
+
             workshopSetListView.ItemClick += (sender, e) =>
             {
                 InitWorkshopList(e.Id);
@@ -50,7 +93,9 @@ namespace helps.Droid
         private void InitWorkshopList(long id)
         {
             FlipView();
-            DialogHelper.ShowDialog(this, "You clicked " + id, "Click Event");
+            var bookingsAdapter = new BookingsListAdapter(this.LayoutInflater, Resources, false);
+            var bookingsListView = FindViewById<ListView>(Resource.Id.workshopList);
+            bookingsListView.Adapter = bookingsAdapter;
         }
 
         public override void OnBackPressed()
