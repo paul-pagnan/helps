@@ -26,7 +26,7 @@ namespace helps.Droid
 
         protected abstract int LayoutResource { get; }
 
-        public Main()
+        public void Init()
         {
             AuthSvc = new AuthService();
             StudentSvc = new StudentService();
@@ -37,6 +37,7 @@ namespace helps.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+            Init();
             base.OnCreate(bundle);
             SetContentView(LayoutResource);
             Toolbar = FindViewById<Toolbar>(Resource.Id.Ttoolbar);

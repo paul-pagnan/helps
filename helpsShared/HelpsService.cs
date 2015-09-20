@@ -31,7 +31,7 @@ namespace helps.Shared
             helpsClient.BaseAddress = new Uri(helpsApplicationURL);
             helpsClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             helpsClient.DefaultRequestHeaders.Add("AppKey", helpsApplicationKey);
-            Purge();
+            //Purge();
         }
 
         private async void Purge()
