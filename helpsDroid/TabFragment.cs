@@ -14,7 +14,6 @@ namespace helps.Droid
         private Activity activity;
         public static TabFragment NewInstance(int position)
         {
-
             var f = new TabFragment();
             var b = new Bundle();
             b.PutInt("position", position);
@@ -36,6 +35,8 @@ namespace helps.Droid
             var bookingsAdapter = new BookingsListAdapter(inflater, Resources, true);
             var bookingsListView = root.FindViewById<ListView>(GetListView());
             bookingsListView.Adapter = bookingsAdapter;
+            //Add data to the list
+
 
             ViewCompat.SetElevation(root, 50);
             return root;

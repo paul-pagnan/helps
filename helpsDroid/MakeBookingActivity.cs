@@ -74,6 +74,7 @@ namespace helps.Droid
             workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
             workshopSetListView.Adapter = workshopSetListAdapter;
         }
+
         private async void LoadData(bool force = false)
         {
             workshopSetListAdapter.AddAll(await WorkshopSvc.GetWorkshopSets(force));

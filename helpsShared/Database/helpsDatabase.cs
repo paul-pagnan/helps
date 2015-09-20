@@ -23,5 +23,6 @@ namespace helps.Shared.Database
         {
             return DateTime.Now > lastUpdated.AddMinutes(UpdateBuffer);
         }
+     
     }
 }

@@ -36,7 +36,6 @@ namespace helps.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);          
-
             adapter = new MyPagerAdapter(SupportFragmentManager, this.LayoutInflater);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);

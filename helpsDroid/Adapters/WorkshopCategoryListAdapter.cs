@@ -54,6 +54,7 @@ namespace helps.Droid.Adapters
         {
             ImgColor.SetBackgroundColor(GetColor(TheList[position].Id));
             TxtName.Text = TheList[position].Name;
+
             if (TheList[position].Id < 0)
                 TxtName.SetTypeface(Typeface.Create("sans-serif-light", TypefaceStyle.Bold), TypefaceStyle.Bold);
             else

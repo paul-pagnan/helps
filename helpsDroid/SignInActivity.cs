@@ -26,7 +26,6 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_Sign_In; }
         }
 
-
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
