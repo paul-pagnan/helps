@@ -25,9 +25,16 @@ namespace helps.Droid
 
         public Main()
         {
-            CurrentUser = Services.Auth.CurrentUser();
+            //Init();
         }
-
+        public void Init()
+        {
+            try
+            {
+                CurrentUser = Services.Auth.CurrentUser();
+            }
+            catch (Exception ex) { }
+        }
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -45,7 +52,8 @@ namespace helps.Droid
                 };
             }
         }
-        
+
+
         public void setPadding(Toolbar toolbar)
         {
             toolbar.SetPadding(0, getStatusBarHeight(), 0, 0);
