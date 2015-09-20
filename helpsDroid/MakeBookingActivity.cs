@@ -46,6 +46,7 @@ namespace helps.Droid
             InitLists();
             await Task.Factory.StartNew(() => LoadData(false));
             FindViewById<ProgressBar>(Resource.Id.workshopSetLoading).Visibility = ViewStates.Gone;
+            FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
             UpdateLists();
         }
 

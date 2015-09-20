@@ -27,13 +27,11 @@ namespace helps.Droid
         {
             Init();
         }
+
         public void Init()
         {
-            try
-            {
+            if(Forms.IsInitialized)
                 CurrentUser = Services.Auth.CurrentUser();
-            }
-            catch (Exception ex) { }
         }
 
         protected override void OnCreate(Bundle bundle)
