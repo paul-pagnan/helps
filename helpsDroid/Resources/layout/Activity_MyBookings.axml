@@ -25,4 +25,11 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:context=".MyBookingsActivity" />
+    <include
+        android:id="@+id/NoConnection"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/NoConnection"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
 </LinearLayout>

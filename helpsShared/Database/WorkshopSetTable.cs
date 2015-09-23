@@ -9,7 +9,8 @@ namespace helps.Shared.Database
 {
     public class WorkshopSetTable : helpsDatabase
     {
-        public int UpdateBuffer = 60;
+        // Update once a day - WorkshopSets change very rarely
+        public int UpdateBuffer = 1440;
         public WorkshopSetTable() : base() { }
        
         public List<WorkshopSet> Get()

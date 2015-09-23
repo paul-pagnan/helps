@@ -44,10 +44,13 @@ namespace helps.Droid
 
             InitRefreshers();
             InitLists();
-            await Task.Factory.StartNew(() => LoadData(false));
+            //Get Local Data First, then update later
+            await Task.Factory.StartNew(() => LoadData(true));
             FindViewById<ProgressBar>(Resource.Id.workshopSetLoading).Visibility = ViewStates.Gone;
             FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
-            UpdateLists();
+            NotifyListUpdate();
+            await Task.Factory.StartNew(() => BackgroundRefresh());
+            NotifyListUpdate();
         }
 
         private void InitRefreshers()
@@ -55,8 +58,8 @@ namespace helps.Droid
             categoryRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe1);
             categoryRefresher.Refresh += async (sender, e) =>
             {
-                await Task.Factory.StartNew(() => LoadData(true));
-                UpdateLists();
+                await Task.Factory.StartNew(() => LoadData(false, true));
+                NotifyListUpdate();
                 categoryRefresher.Refreshing = false;
             };
 
@@ -64,7 +67,6 @@ namespace helps.Droid
             workshopRefresher.Refreshing = true;
             workshopRefresher.Refresh +=  (sender, e) =>
             {
-                
                 workshopRefresher.Refreshing = false;
             };
         }
@@ -76,12 +78,12 @@ namespace helps.Droid
             workshopSetListView.Adapter = workshopSetListAdapter;
         }
 
-        private async void LoadData(bool force = false)
+        private async void LoadData(bool localOnly, bool force = false)
         {
-            workshopSetListAdapter.AddAll(await Services.Workshop.GetWorkshopSets(force));
+            workshopSetListAdapter.AddAll(await Services.Workshop.GetWorkshopSets(localOnly, force));
         }
 
-        private void UpdateLists()
+        private void NotifyListUpdate()
         {
             workshopSetListAdapter.NotifyDataSetChanged();
             workshopRefresher.Refreshing = false;
@@ -90,6 +92,13 @@ namespace helps.Droid
             {
                 InitWorkshopList(e.Id);
             };
+        }
+
+        private async void BackgroundRefresh()
+        {
+            var list = await Services.Workshop.GetWorkshopSets(false, false);
+            workshopSetListAdapter.Clear();
+            workshopSetListAdapter.AddAll(list);
         }
 
         private void InitWorkshopList(long id)

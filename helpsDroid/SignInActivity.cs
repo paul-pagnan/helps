@@ -31,13 +31,19 @@ namespace helps.Droid
             Xamarin.Forms.Forms.Init(this, bundle);
             base.Init();
             base.OnCreate(bundle);
-            
-            //Check if the user has an active session
-            if(CurrentUser != null )
-                SwitchActivity();
 
-            if(bundle == null)
+            //Check if the user has an active session
+            if (CurrentUser != null)
+            {
+                SwitchActivity();
+                return;
+            }
+
+            if (bundle == null)
+            {
                 SkipLogin();
+                return;
+            }
         }
 
         public async void SkipLogin()
@@ -100,6 +106,7 @@ namespace helps.Droid
             var intent = new Intent(this, typeof(DashboardActivity));
             if (!Services.Auth.CurrentUser().HasLoggedIn)
                 intent = new Intent(this, typeof(DetailsInputActivity));
+            
             StartActivity(intent);
             Finish();
         }

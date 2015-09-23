@@ -56,4 +56,11 @@
             </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
     </ViewFlipper>
+    <include
+        android:id="@+id/NoConnection"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/NoConnection"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
 </RelativeLayout>

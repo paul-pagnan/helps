@@ -18,15 +18,15 @@ namespace helps.Shared
         {
         }
 
-        public async Task<List<WorkshopSet>> GetWorkshopSets(bool ForceUpdate)
+        public async Task<List<WorkshopSet>> GetWorkshopSets(bool LocalOnly, bool ForceUpdate = false)
         {
-            if (workshopSetTable.NeedsUpdating() || ForceUpdate)
+            if (((workshopSetTable.NeedsUpdating() || ForceUpdate) && !LocalOnly) || workshopSetTable.First() == null)
             {
-                var response = helpsClient.GetAsync("api/workshop/workshopSets/true").Result;
+                var response = helpsClient.GetAsync("api/workshop/workshopSets/true");
 
-                if (response.IsSuccessStatusCode)
+                if (response.Result.IsSuccessStatusCode)
                 {
-                    List<WorkshopSet> decodedResponse = response.Content.ReadAsAsync<GetResponse<WorkshopSet>>().Result.Results;
+                    List<WorkshopSet> decodedResponse = response.Result.Content.ReadAsAsync<GetResponse<WorkshopSet>>().Result.Results;
                     workshopSetTable.SetAll(decodedResponse);
                     return decodedResponse;
                 }
