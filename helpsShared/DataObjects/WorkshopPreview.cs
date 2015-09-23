@@ -1,7 +1,8 @@
-namespace helps.Droid.Adapters.DataObjects
-{
-    public class Session : MyList
+namespace helps.Shared.DataObjects
+{ 
+    public class WorkshopPreview 
     { 
+        public int Id { get; set; }
         public string Name { get; set; }
         public int WorkshopSet { get; set; }
         public string WorkshopSetName { get; set; }

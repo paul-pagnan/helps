@@ -99,40 +99,39 @@ namespace helps.Droid
         //Exception Handlers
         void HandleExceptions(object sender, UnhandledExceptionEventArgs e)
         {
+            var Ex = e.ExceptionObject;
             try {
                 AggregateException ParentEx = (AggregateException)e.ExceptionObject;
                 var exceptions = ParentEx.InnerExceptions;
-                foreach (System.Exception ex in exceptions)
+                Ex = exceptions.FirstOrDefault();
+            } catch(System.Exception ex) {  }
+               
+            if (Ex.GetType() == typeof(System.Net.WebException))
+            {
+                var context = CurrentActivity();
+                HelpsService.CurrentlyUpdating = false;
+                context.RunOnUiThread(delegate
                 {
-                    if (ex.GetType() == typeof(System.Net.WebException))
+                    var NoConnection = context.FindViewById(Resource.Id.NoConnection);
+                    if (NoConnection != null)
                     {
-                        var context = CurrentActivity();
-                        context.RunOnUiThread(delegate
+                        NoConnection.Visibility = ViewStates.Visible;
+
+                        new Handler().PostDelayed(delegate
                         {
-                            var NoConnection = context.FindViewById(Resource.Id.NoConnection);
-                            if (NoConnection != null)
-                            {
-                                NoConnection.Visibility = ViewStates.Visible;
+                            Android.Views.Animations.Animation fadeOut = new AlphaAnimation(1, 0);
+                            fadeOut.Interpolator = new DecelerateInterpolator(); 
+                            fadeOut.Duration = 1000;
 
-                                new Handler().PostDelayed(delegate
-                                {
-                                    //NoConnection.Visibility = ViewStates.Gone;
-
-                                    Android.Views.Animations.Animation fadeOut = new AlphaAnimation(1, 0);
-                                    fadeOut.Interpolator = new DecelerateInterpolator(); 
-                                    fadeOut.Duration = 1000;
-
-                                    AnimationSet animation = new AnimationSet(false);
-                                    animation.AddAnimation(fadeOut);
-                                    NoConnection.Animation = animation;
-                                    NoConnection.StartAnimation(animation);
-                                    new Handler().PostDelayed(delegate { NoConnection.Visibility = ViewStates.Gone; }, 1000);
-                                }, 2000);
-                            }
-                        });
+                            AnimationSet animation = new AnimationSet(false);
+                            animation.AddAnimation(fadeOut);
+                            NoConnection.Animation = animation;
+                            NoConnection.StartAnimation(animation);
+                            new Handler().PostDelayed(delegate { NoConnection.Visibility = ViewStates.Gone; }, 1000);
+                        }, 2000);
                     }
-                }
-            } catch (System.Exception ex) { }
+                });
+            }
         }
         
         void HandleAndroidException(object sender, RaiseThrowableEventArgs e)

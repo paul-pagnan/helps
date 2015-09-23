@@ -17,6 +17,7 @@ namespace helps.Shared.Database
             database = DependencyService.Get<ISQLite>().GetConnection();
             database.CreateTable<User>();
             database.CreateTable<WorkshopSet>();
+            database.CreateTable<WorkshopBooking>();
         }
 
         public bool NeedsUpdating(DateTime lastUpdated, int UpdateBuffer)

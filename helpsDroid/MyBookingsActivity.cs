@@ -66,7 +66,6 @@ namespace helps.Droid
             return new Java.Lang.String(Titles[position]);
         }
         
-
         public override int Count
         {
             get { return Titles.Length; }

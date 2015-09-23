@@ -39,17 +39,18 @@ namespace helps.Droid
         {
             base.OnCreate(bundle);
             viewFlipper = FindViewById<ViewFlipper>(Resource.Id.bookingflipper);
+
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
 
             InitRefreshers();
             InitLists();
+
+            FindViewById<RelativeLayout>(Resource.Id.mainLayout).Invalidate();
             //Get Local Data First, then update later
             await Task.Factory.StartNew(() => LoadData(true));
-            FindViewById<ProgressBar>(Resource.Id.workshopSetLoading).Visibility = ViewStates.Gone;
-            FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
-            NotifyListUpdate();
-            await Task.Factory.StartNew(() => BackgroundRefresh());
+            //Do a background Sync now
+            await Task.Factory.StartNew(() => LoadData(false, false));
             NotifyListUpdate();
         }
 
@@ -80,7 +81,18 @@ namespace helps.Droid
 
         private async void LoadData(bool localOnly, bool force = false)
         {
-            workshopSetListAdapter.AddAll(await Services.Workshop.GetWorkshopSets(localOnly, force));
+
+            var list = await Services.Workshop.GetWorkshopSets(localOnly, force);
+            workshopSetListAdapter.Clear();
+            workshopSetListAdapter.AddAll(list);
+            if (workshopSetListAdapter.Count > 0)
+            {
+                RunOnUiThread(delegate
+                {
+                    FindViewById<ProgressBar>(Resource.Id.workshopSetLoading).Visibility = ViewStates.Gone;
+                    NotifyListUpdate();
+                });
+            }
         }
 
         private void NotifyListUpdate()
@@ -92,13 +104,6 @@ namespace helps.Droid
             {
                 InitWorkshopList(e.Id);
             };
-        }
-
-        private async void BackgroundRefresh()
-        {
-            var list = await Services.Workshop.GetWorkshopSets(false, false);
-            workshopSetListAdapter.Clear();
-            workshopSetListAdapter.AddAll(list);
         }
 
         private void InitWorkshopList(long id)

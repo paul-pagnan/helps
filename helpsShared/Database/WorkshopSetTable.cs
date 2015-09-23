@@ -13,7 +13,7 @@ namespace helps.Shared.Database
         public int UpdateBuffer = 1440;
         public WorkshopSetTable() : base() { }
        
-        public List<WorkshopSet> Get()
+        public List<WorkshopSet> GetAll()
         {
             return database.Table<WorkshopSet>().ToList<WorkshopSet>();
         }

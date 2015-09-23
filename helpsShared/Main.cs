@@ -11,10 +11,13 @@ namespace helps.Shared
     {
         public UserTable userTable;
         public WorkshopSetTable workshopSetTable;
+        public WorkshopBookingTable workshopBookingTable;
+
         public Main()
         {
             userTable = new UserTable();
             workshopSetTable = new WorkshopSetTable();
+            workshopBookingTable = new WorkshopBookingTable();
         }
     }
 }

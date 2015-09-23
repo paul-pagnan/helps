@@ -14,19 +14,18 @@ namespace helps.Droid
         public Toolbar Toolbar { get; set; }
 
         protected abstract int LayoutResource { get; }
+        public User CurrentUser;
 
-        protected int ActionBarIcon
+        public MyBookingsFragment()
         {
-            set { Toolbar.SetNavigationIcon(value); }
+            Init();
         }
 
-        public AuthService AuthSvc;
-        public StudentService HelpsSvc;
         public void Init()
         {
-            AuthSvc = new AuthService();
-            HelpsSvc = new StudentService();
+             CurrentUser = Services.Auth.CurrentUser();
         }
+
 
         public void setPadding(Toolbar toolbar)
         {

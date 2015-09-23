@@ -128,12 +128,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
-    <Compile Include="Adapters\DataObjects\Session.cs" />
-    <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\DataObjects\MyList.cs" />
+    <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
+    <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
+    <Compile Include="NetworkConnection.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="MakeBookingActivity.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
