@@ -52,14 +52,13 @@ namespace helps.Droid.Adapters
 
         private void SetComponents(int position)
         {
-            ImgColor.SetBackgroundColor(GetColor(TheList[position].Id));
+            ImgColor.SetBackgroundColor(GetColor(position));
             TxtName.Text = TheList[position].Name;
 
             if (TheList[position].Id < 0)
                 TxtName.SetTypeface(Typeface.Create("sans-serif-light", TypefaceStyle.Bold), TypefaceStyle.Bold);
             else
                 TxtName.SetTypeface(Typeface.Create("sans-serif-light", TypefaceStyle.Normal), TypefaceStyle.Normal);
-
         }
 
         private void InitComponents(View view)

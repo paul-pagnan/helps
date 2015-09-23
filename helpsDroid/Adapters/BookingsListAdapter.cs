@@ -105,7 +105,7 @@ namespace helps.Droid.Adapters
 
         private void SetComponents(int position)
         {
-            ImgColor.SetBackgroundColor(GetColor(SessionList[position].WorkshopSet));
+            ImgColor.SetBackgroundColor(GetColor(position));
             TxtName.Text = SessionList[position].Name;
             TxtWorkshopSetName.Text = SessionList[position].WorkshopSetName;
             TxtDate.Text = SessionList[position].DateHumanFriendly;
