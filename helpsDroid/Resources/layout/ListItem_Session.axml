@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/list_item_height">
+    <ImageView
+        android:id="@+id/BookingColor"
+        android:layout_width="7dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/accent" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -25,19 +31,54 @@
             android:fontFamily="sans-serif-light"
             android:textStyle="normal"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/BookingWorkshopSetName"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="7dp"
+            android:ellipsize="marquee"
+            android:text="Description"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="normal"
+            android:textSize="14sp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/BookingName"
             android:id="@+id/linearLayout1"
-            android:weightSum="2">
+            android:weightSum="3">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_weight="1.15">
+                <helps.Droid.Extensions.FontAwesome
+                    android:id="@+id/icoCalendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fa_calendar_o"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="7dp"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/BookingDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="26dip"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-light"
+                    android:textStyle="normal"
+                    android:text=""
+                    android:textSize="15sp" />
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout3"
-                android:layout_weight="1">
+                android:layout_weight="0.85">
                 <helps.Droid.Extensions.FontAwesome
                     android:id="@+id/icoClock"
                     android:layout_width="wrap_content"

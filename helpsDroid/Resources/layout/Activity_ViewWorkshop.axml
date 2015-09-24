@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    p1:orientation="vertical"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="fill_parent"
+    p1:layout_height="fill_parent"
+    p1:id="@+id/relativeLayout66"
+    tools:menu="logout">
+    <include
+        p1:id="@+id/Ttoolbar"
+        p1:layout_height="wrap_content"
+        p1:layout_width="match_parent"
+        layout="@layout/toolbar" />
+    <ScrollView
+        p1:layout_width="fill_parent"
+        p1:layout_height="fill_parent"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_below="@id/Ttoolbar">
+        <LinearLayout
+            p1:orientation="vertical"
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="fill_parent"
+            p1:layout_height="wrap_content"
+            p1:layout_below="@id/Ttoolbar"
+            p1:padding="@dimen/layout_padding"
+            p1:id="@+id/linearLayout1">
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout2">
+                <TextView
+                    p1:text="Title"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewTitle"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginRight="10dp" />
+                <TextView
+                    p1:text="Exam preparation repeat"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:id="@+id/textViewTitleValue"
+                    p1:layout_alignParentRight="true"
+                    p1:gravity="right" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout3">
+                <TextView
+                    p1:text="Room"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewRoom"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginRight="10dp" />
+                <TextView
+                    p1:text="RoomValue"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:id="@+id/textViewRoomValue"
+                    p1:layout_alignParentRight="true"
+                    p1:gravity="right" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout4">
+                <TextView
+                    p1:text="Date"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewDate"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginRight="10dp" />
+                <TextView
+                    p1:text="DateValue"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:id="@+id/textViewDateValue"
+                    p1:layout_alignParentRight="true"
+                    p1:gravity="right" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout5">
+                <TextView
+                    p1:text="Target Group"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewTargetGroup"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginRight="10dp" />
+                <TextView
+                    p1:text="Target Group Value"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:id="@+id/textViewTargetGroupValue"
+                    p1:layout_alignParentRight="true"
+                    p1:gravity="right" />
+            </RelativeLayout>
+            <TextView
+                p1:text="What it covers"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:id="@+id/textViewWhatItCovers"
+                p1:layout_width="wrap_content"
+                p1:layout_height="wrap_content"
+                p1:layout_marginRight="10dp" />
+            <TextView
+                p1:text="What it covers value"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="wrap_content"
+                p1:layout_height="35.5dp"
+                p1:id="@+id/textViewWhatItCoversValue"
+                p1:layout_alignParentRight="true"
+                p1:gravity="right"
+                p1:paddingLeft="10dp" />
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout6">
+                <TextView
+                    p1:text="Place Available"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewPlaceAvailable"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginRight="10dp" />
+                <TextView
+                    p1:text="10/20"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="35.5dp"
+                    p1:id="@+id/textViewPlaceAvailableValue"
+                    p1:layout_alignParentRight="true"
+                    p1:gravity="right" />
+            </RelativeLayout>
+            <TextView
+                p1:text="Sessions"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:id="@+id/textViewWSessions"
+                p1:layout_width="wrap_content"
+                p1:layout_height="wrap_content"
+                p1:layout_marginRight="10dp" />
+            <ListView
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_width="match_parent"
+                p1:layout_height="match_parent"
+                p1:id="@+id/listViewSession" />
+            <Button
+                p1:text="Book"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/FinishBook"
+                p1:textColor="#FFFFFF"
+                p1:background="@drawable/flat_selector"
+                style="?android:attr/borderlessButtonStyle"
+                p1:onClick="Submit" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
