@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <include
+        android:id="@+id/Ttoolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/toolbar" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/Ttoolbar">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/Ttoolbar"
+            android:id="@+id/relativeLayout1">
+            <Button
+                android:text="Make A Booking"
+                android:gravity="bottom"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:textSize="@dimen/dashboard_text_size"
+                android:id="@+id/btnMakeBooking"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/make_booking_item"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif-light"
+                android:textAllCaps="false"
+                android:onClick="MakeBooking" />
+            <Button
+                android:text="My Bookings"
+                android:gravity="bottom"
+                android:layout_below="@id/btnMakeBooking"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:id="@+id/btnMyBooking"
+                android:textSize="@dimen/dashboard_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/my_booking_item"
+                android:fontFamily="sans-serif-light"
+                android:textAllCaps="false"
+                android:onClick="MyBookings" />
+            <Button
+                android:text="Settings"
+                android:gravity="bottom"
+                android:id="@+id/btnSettings"
+                android:layout_below="@id/btnMyBooking"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:textSize="@dimen/dashboard_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/settings_item"
+                android:fontFamily="sans-serif-light"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

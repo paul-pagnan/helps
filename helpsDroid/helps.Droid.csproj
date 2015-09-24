@@ -65,12 +65,8 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PullToRefresharp">
-      <HintPath>..\..\..\Desktop\PullToRefresharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Refractored.PagerSlidingTabStrip, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Source\Repos\PagerSlidingTabStrip-for-Xamarin.Android\PagerSlidingTabStrip\bin\Debug\Refractored.PagerSlidingTabStrip.dll</HintPath>
+    <Reference Include="Refractored.PagerSlidingTabStrip">
+      <HintPath>..\..\..\Desktop\Refractored.PagerSlidingTabStrip.dll</HintPath>
     </Reference>
     <Reference Include="SQLite-net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
@@ -132,6 +128,7 @@
     <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
+    <Compile Include="ViewSessionActivity.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
     <Compile Include="NetworkConnection.cs" />
     <Compile Include="Services.cs" />
@@ -177,7 +174,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_MyBookings.axml">
-      <SubType>AndroidResource</SubType>
+      <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Fragment_CurrentBookings.axml">
       <SubType>AndroidResource</SubType>
@@ -195,6 +192,15 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\NoConnection.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_ViewWorkshop.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListItem_Session.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_ViewSession.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
