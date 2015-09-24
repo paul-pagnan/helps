@@ -37,7 +37,6 @@ namespace helps.Droid
             position = Arguments.GetInt("position");
         }
 
-
         public override Android.Views.View OnCreateView(Android.Views.LayoutInflater inflater, Android.Views.ViewGroup container, Bundle savedInstanceState)
         {
             var root = inflater.Inflate(GetLayout(), container, false);

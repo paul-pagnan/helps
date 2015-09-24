@@ -40,6 +40,27 @@ namespace helps.Shared
             return workshopSetTable.GetAll();
         }
 
+        public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
+        {
+            if (!LocalOnly && ((workshopTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            {
+                TestConnection();
+                CurrentlyUpdating = true;
+
+                var response = await helpsClient.GetAsync("api/workshop/search?workshopSetId=" + workshopSet + "&active=true&startingDtBegin=" + DateTime.Today);
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<GetResponse<Workshop>>();
+                    List<Workshop> decodedResponse = result.Results;
+                    workshopTable.SetAll(decodedResponse);
+                    CurrentlyUpdating = false;
+                    return TranslatePreview(decodedResponse);
+                }
+            }
+            return TranslatePreview(workshopTable.GetAll(workshopSet));
+        }
+
+
         public async Task<List<WorkshopPreview>> GetBookings(bool Current, bool LocalOnly, bool ForceUpdate = false)
         {
             //TODO Introduce Pagination
@@ -72,7 +93,6 @@ namespace helps.Shared
         private async Task<List<WorkshopPreview>> TranslatePreview(List<WorkshopBooking> list)
         {
             List<WorkshopPreview> translated = new List<WorkshopPreview>();
-
             foreach (WorkshopBooking booking in list)
             {
                 translated.Add(new WorkshopPreview
@@ -85,6 +105,26 @@ namespace helps.Shared
                     Location = await MiscServices.GetCampus(booking.campusID),
                     FilledPlaces = -1,
                     TotalPlaces = booking.maximum
+                });
+            }
+            return translated;
+        }
+
+        private List<WorkshopPreview> TranslatePreview(List<Workshop> list)
+        {
+            List<WorkshopPreview> translated = new List<WorkshopPreview>();
+            foreach (Workshop workshop in list)
+            {
+                translated.Add(new WorkshopPreview
+                {
+                    Id = workshop.WorkshopId,
+                    Name = workshop.topic,
+                    WorkshopSet = workshop.WorkShopSetId,
+                    Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
+                    DateHumanFriendly = HumanizeDate(workshop.StartDate),
+                    Location = workshop.campus,
+                    FilledPlaces = workshop.BookingCount,
+                    TotalPlaces = workshop.maximum
                 });
             }
             return translated;
@@ -112,6 +152,7 @@ namespace helps.Shared
             return (Hour > 12) ? (Hour - 12) : Hour;
         }
 
+       
         private string Meridiem(int Hour)
         {
             return (Hour >= 12) ? "PM" : "AM";

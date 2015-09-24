@@ -66,7 +66,7 @@
                 <TextView
                     android:id="@+id/BookingDate"
                     android:layout_width="fill_parent"
-                    android:layout_height="26dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:fontFamily="sans-serif-light"
                     android:textStyle="normal"
@@ -90,7 +90,7 @@
                 <TextView
                     android:id="@+id/BookingTime"
                     android:layout_width="fill_parent"
-                    android:layout_height="26dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:fontFamily="sans-serif-light"
                     android:textStyle="normal"
@@ -114,7 +114,7 @@
                 <TextView
                     android:id="@+id/BookingLocation"
                     android:layout_width="fill_parent"
-                    android:layout_height="26dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:fontFamily="sans-serif-light"
                     android:textStyle="normal"

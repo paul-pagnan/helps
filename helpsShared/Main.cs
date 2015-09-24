@@ -13,6 +13,7 @@ namespace helps.Shared
         
         public static WorkshopSetTable workshopSetTable;
         public static WorkshopBookingTable workshopBookingTable;
+        public static WorkshopTable workshopTable;
         public static CampusTable campusTable;
 
 
@@ -21,6 +22,7 @@ namespace helps.Shared
             userTable = new UserTable();
             workshopSetTable = new WorkshopSetTable();
             workshopBookingTable = new WorkshopBookingTable();
+            workshopTable = new WorkshopTable();
             campusTable = new CampusTable();
         }
     }

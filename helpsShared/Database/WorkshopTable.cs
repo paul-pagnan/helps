@@ -17,6 +17,11 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<Workshop>().Where(x => x.WorkshopId == id).FirstOrDefault();
         }
 
+        public List<Workshop> GetAll(int WorkshopSetId)
+        {
+            return helpsDatabase.Database.Table<Workshop>().Where(x => x.WorkShopSetId == WorkshopSetId).ToList();
+        }
+
         public Workshop First()
         {
             return helpsDatabase.Database.Table<Workshop>().FirstOrDefault();

@@ -30,6 +30,12 @@ namespace helps.Droid
         private ListView workshopSetListView;
         private WorkshopCategoryListAdapter workshopSetListAdapter;
 
+        private ListView workshopListView;
+        private BookingsListAdapter workshopListAdapter;
+
+        private int CurrentWorkshopSet;
+
+
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_MakeBooking; }
@@ -46,28 +52,36 @@ namespace helps.Droid
             InitRefreshers();
             InitLists();
 
+            workshopSetListView.ItemClick += (sender, e) =>
+            {
+                InitWorkshopList((int)e.Id);
+            };
+
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).Invalidate();
             //Get Local Data First, then update later
-            await Task.Factory.StartNew(() => LoadData(true));
+            await Task.Factory.StartNew(() => LoadSets(true));
             //Do a background Sync now
-            await Task.Factory.StartNew(() => LoadData(false, false));
+            await Task.Factory.StartNew(() => LoadSets(false, false));
             NotifyListUpdate();
         }
 
+       
         private void InitRefreshers()
         {
             categoryRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe1);
             categoryRefresher.Refresh += async (sender, e) =>
             {
-                await Task.Factory.StartNew(() => LoadData(false, true));
+                await Task.Factory.StartNew(() => LoadSets(false, true));
                 NotifyListUpdate();
                 categoryRefresher.Refreshing = false;
             };
 
             workshopRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe2);
             workshopRefresher.Refreshing = true;
-            workshopRefresher.Refresh +=  (sender, e) =>
+            workshopRefresher.Refresh +=  async (sender, e) =>
             {
+                await Task.Factory.StartNew(() => LoadWorkshops(CurrentWorkshopSet, false, true));
+                NotifyListUpdate();
                 workshopRefresher.Refreshing = false;
             };
         }
@@ -77,11 +91,14 @@ namespace helps.Droid
             workshopSetListAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater);
             workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
             workshopSetListView.Adapter = workshopSetListAdapter;
+
+            workshopListAdapter = new BookingsListAdapter(this.LayoutInflater, Resources, false);
+            workshopListView = FindViewById<ListView>(Resource.Id.workshopList);
+            workshopListView.Adapter = workshopListAdapter;
         }
 
-        private async void LoadData(bool localOnly, bool force = false)
+        private async void LoadSets(bool localOnly, bool force = false)
         {
-
             var list = await Services.Workshop.GetWorkshopSets(localOnly, force);
             workshopSetListAdapter.Clear();
             workshopSetListAdapter.AddAll(list);
@@ -95,23 +112,45 @@ namespace helps.Droid
             }
         }
 
+        private async void LoadWorkshops(int workshopSet, bool localOnly, bool force = false)
+        {
+            if (CurrentWorkshopSet > 0)
+            {
+                var list = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
+                workshopListAdapter.Clear();
+                workshopListAdapter.AddAll(list);
+                if (workshopListAdapter.Count > 0)
+                {
+                    RunOnUiThread(delegate
+                    {
+                        FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
+                        NotifyWorkshopListUpdate();
+                    });
+                }
+            }
+        }
+
         private void NotifyListUpdate()
         {
             workshopSetListAdapter.NotifyDataSetChanged();
-            workshopRefresher.Refreshing = false;
-
-            workshopSetListView.ItemClick += (sender, e) =>
-            {
-                InitWorkshopList(e.Id);
-            };
+            categoryRefresher.Refreshing = false;
         }
 
-        private void InitWorkshopList(long id)
+        private void NotifyWorkshopListUpdate()
         {
+            workshopListAdapter.NotifyDataSetChanged();
+            workshopRefresher.Refreshing = false;
+        }
+
+        private async void InitWorkshopList(int id)
+        {
+            CurrentWorkshopSet = id;
             FlipView();
-            var bookingsAdapter = new BookingsListAdapter(this.LayoutInflater, Resources, false);
-            var bookingsListView = FindViewById<ListView>(Resource.Id.workshopList);
-            bookingsListView.Adapter = bookingsAdapter;
+
+            //Load from local first
+            await Task.Factory.StartNew(() => LoadWorkshops(id, true));
+            //Do a background Sync now
+            await Task.Factory.StartNew(() => LoadWorkshops(id, false, false));
         }
 
         public override void OnBackPressed()
@@ -120,10 +159,13 @@ namespace helps.Droid
                 return;
             base.OnBackPressed();
         }
-
       
         public bool Back()
         {
+            FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Visible;
+            workshopListAdapter.Clear();
+            NotifyListUpdate();
+            CurrentWorkshopSet = 0;
             if (viewFlipper.DisplayedChild > 0)
                 return FlipView();
 
