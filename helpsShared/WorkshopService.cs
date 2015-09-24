@@ -42,12 +42,13 @@ namespace helps.Shared
 
         public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
         {
+            //TODO Introduce Pagination
             if (!LocalOnly && ((workshopTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
             {
                 TestConnection();
                 CurrentlyUpdating = true;
 
-                var response = await helpsClient.GetAsync("api/workshop/search?workshopSetId=" + workshopSet + "&active=true&startingDtBegin=" + DateTime.Today);
+                var response = await helpsClient.GetAsync("api/workshop/search?workshopSetId=" + workshopSet + "&active=true");
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<Workshop>>();

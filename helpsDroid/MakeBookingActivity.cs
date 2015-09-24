@@ -54,6 +54,7 @@ namespace helps.Droid
 
             workshopSetListView.ItemClick += (sender, e) =>
             {
+                FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Visible;
                 InitWorkshopList((int)e.Id);
             };
 
@@ -119,14 +120,15 @@ namespace helps.Droid
                 var list = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
                 workshopListAdapter.Clear();
                 workshopListAdapter.AddAll(list);
-                if (workshopListAdapter.Count > 0)
+                
+                RunOnUiThread(delegate
                 {
-                    RunOnUiThread(delegate
+                    if (workshopListAdapter.Count > 0)
                     {
                         FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
                         NotifyWorkshopListUpdate();
-                    });
-                }
+                    }
+                });               
             }
         }
 
@@ -162,7 +164,6 @@ namespace helps.Droid
       
         public bool Back()
         {
-            FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Visible;
             workshopListAdapter.Clear();
             NotifyListUpdate();
             CurrentWorkshopSet = 0;
