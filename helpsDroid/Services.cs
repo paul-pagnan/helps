@@ -1,4 +1,5 @@
 using helps.Shared;
+using helps.Shared.Database;
 using System.Threading.Tasks;
 
 namespace helps.Droid
@@ -11,6 +12,7 @@ namespace helps.Droid
 
         static Services()
         {
+            helpsDatabase.InitDatabase();
             Auth = new AuthService();
             Student = new StudentService();
             Workshop = new WorkshopService();

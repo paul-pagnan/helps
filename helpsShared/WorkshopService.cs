@@ -50,7 +50,7 @@ namespace helps.Shared
                 CurrentlyUpdating = true;
                 await UpdateBookings();
             }
-            return TranslatePreview(workshopBookingTable.GetAll(Current));
+            return await TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
         private async Task<bool> UpdateBookings()
@@ -60,7 +60,7 @@ namespace helps.Shared
             var response = await helpsClient.GetAsync("api/workshop/booking/search?" + queryString);
             if (response.IsSuccessStatusCode)
             {
-                var result = await response.Content.ReadAsAsync<GetResponse<WorkshopBooking>>();
+                var result = await response.Content.ReadAsAsync<GetResponse<WorkshopBooking>>(Formatters());
                 List<WorkshopBooking> decodedResponse = result.Results;
                 workshopBookingTable.SetAll(decodedResponse);
                 CurrentlyUpdating = false;
@@ -69,7 +69,7 @@ namespace helps.Shared
             return false;
         }
 
-        private List<WorkshopPreview> TranslatePreview(List<WorkshopBooking> list)
+        private async Task<List<WorkshopPreview>> TranslatePreview(List<WorkshopBooking> list)
         {
             List<WorkshopPreview> translated = new List<WorkshopPreview>();
 
@@ -79,15 +79,42 @@ namespace helps.Shared
                 {
                     Id = booking.workshopId,
                     Name = booking.topic,
-                    WorkshopSet = booking.workshopId,
-                    Time = "asf",
-                    DateHumanFriendly = "123",
-                    Location = booking.campusID,
+                    WorkshopSet = booking.WorkShopSetID,
+                    Time = HumanizeTimeSpan(booking.starting, booking.ending),
+                    DateHumanFriendly = HumanizeDate(booking.starting),
+                    Location = await MiscServices.GetCampus(booking.campusID),
                     FilledPlaces = -1,
                     TotalPlaces = booking.maximum
                 });
             }
             return translated;
+        }
+
+        private string HumanizeDate(DateTime starting)
+        {
+            var humanized = starting.ToString("dd/MM/yyyy");
+            bool Past = starting < DateTime.Now;
+
+            if (starting < DateTime.Now.AddDays(1) && !Past)
+                humanized = "Today";
+            else if (starting < DateTime.Now.AddDays(2) && !Past)
+                humanized = "Tomorrow";
+            return humanized;
+        }
+
+        private string HumanizeTimeSpan(DateTime start, DateTime end)
+        {
+            return To12Hour(start.Hour).ToString() + " - " + To12Hour(end.Hour).ToString() + " " + Meridiem(end.Hour);
+        }
+
+        private int To12Hour(int Hour)
+        {
+            return (Hour > 12) ? (Hour - 12) : Hour;
+        }
+
+        private string Meridiem(int Hour)
+        {
+            return (Hour >= 12) ? "PM" : "AM";
         }
     }
 }

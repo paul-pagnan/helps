@@ -12,13 +12,14 @@ namespace helps.Shared.DataObjects
         public string topic { get; set; }
         public string description { get; set; }
         public string targetingGroup { get; set; }
-        public string campusID { get; set; }
-        public string starting { get; set; }
-        public string ending { get; set; }
+        public int campusID { get; set; }
+        public DateTime starting { get; set; }
+        public DateTime ending { get; set; }
         public int maximum { get; set; }
-        public int cutoff { get; set; }
-        public string attended { get; set; }
+        public int? cutoff { get; set; }
+        public DateTime attended { get; set; }
         public string type { get; set; }
+        public int WorkShopSetID { get; set; }
         public DateTime LastUpdated { get; set; }
     }
 }

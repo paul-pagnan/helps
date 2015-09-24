@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:paddingLeft="25dp"
         android:paddingRight="10dp"
-        android:paddingTop="20dp"
+        android:paddingTop="15dp"
         android:paddingBottom="10dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -30,7 +30,7 @@
             android:textColor="@color/text_dark"
             android:fontFamily="sans-serif-light"
             android:textStyle="normal"
-            android:textSize="21sp" />
+            android:textSize="18sp" />
         <TextView
             android:id="@+id/BookingWorkshopSetName"
             android:layout_width="fill_parent"
@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout2"
-                android:layout_weight="1.2">
+                android:layout_weight="1.15">
                 <helps.Droid.Extensions.FontAwesome
                     android:id="@+id/icoCalendar"
                     android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout3"
-                android:layout_weight="0.9">
+                android:layout_weight="0.85">
                 <helps.Droid.Extensions.FontAwesome
                     android:id="@+id/icoClock"
                     android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout4"
-                android:layout_weight="0.9">
+                android:layout_weight="1">
                 <helps.Droid.Extensions.FontAwesome
                     android:id="@+id/icoLocation"
                     android:layout_width="wrap_content"

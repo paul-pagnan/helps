@@ -7,48 +7,47 @@ using helps.Shared.DataObjects;
 
 namespace helps.Shared.Database
 {
-    public class WorkshopBookingTable : helpsDatabase
+    public class WorkshopBookingTable 
     {
         // Update Hourly
-        public int UpdateBuffer = 0;
-        public WorkshopBookingTable() : base() { }
+        public int UpdateBuffer = 60;
 
         public List<WorkshopBooking> GetAll()
         {
-            return database.Table<WorkshopBooking>().ToList<WorkshopBooking>();
+            return helpsDatabase.Database.Table<WorkshopBooking>().ToList<WorkshopBooking>();
         }
 
         public WorkshopBooking Get(int id)
         {
-            return database.Table<WorkshopBooking>().Where(x => x.BookingId == id).FirstOrDefault();
+            return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.BookingId == id).FirstOrDefault();
         }
 
         public List<WorkshopBooking> GetAll(bool Current)
         {
             if(Current)
-                return database.Table<WorkshopBooking>().Where(x => x.attended == null).ToList();
+                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended == DateTime.MinValue).ToList();
             else
-                return database.Table<WorkshopBooking>().Where(x => x.attended != null).ToList();
+                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended != DateTime.MinValue).ToList();
         }
 
         public WorkshopBooking First()
         {
-            return database.Table<WorkshopBooking>().FirstOrDefault();
+            return helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault();
         }
 
         public void SetAll(List<WorkshopBooking> list)
         {
             var updatedList = list.Select(x => { x.LastUpdated = DateTime.Now; return x; }).ToList();
             if (First() == null)
-                database.InsertAll(updatedList);
+                helpsDatabase.Database.InsertAll(updatedList);
             else
-                database.UpdateAll(updatedList);
+                helpsDatabase.Database.UpdateAll(updatedList);
         }
 
         public bool NeedsUpdating()
         {
             var record = First();
-            return (record == null) ? true : base.NeedsUpdating(record.LastUpdated, UpdateBuffer);
+            return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
 
     }

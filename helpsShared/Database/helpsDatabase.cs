@@ -9,21 +9,28 @@ using helps.Shared.DataObjects;
 
 namespace helps.Shared.Database
 {
-    public class helpsDatabase
+    public static class helpsDatabase
     {
-        public SQLiteConnection database;
-        public helpsDatabase()
+        public static SQLiteConnection Database;
+        public static void InitDatabase()
         {
-            database = DependencyService.Get<ISQLite>().GetConnection();
-            database.CreateTable<User>();
-            database.CreateTable<WorkshopSet>();
-            database.CreateTable<WorkshopBooking>();
+            Database = DependencyService.Get<ISQLite>().GetConnection();
+
+            //Auth
+            Database.CreateTable<User>();
+
+            //Workshops
+            Database.CreateTable<Workshop>();
+            Database.CreateTable<WorkshopSet>();
+            Database.CreateTable<WorkshopBooking>();
+
+            //Misc
+            Database.CreateTable<Campus>();
         }
 
-        public bool NeedsUpdating(DateTime lastUpdated, int UpdateBuffer)
+        public static bool NeedsUpdating(DateTime lastUpdated, int UpdateBuffer)
         {
             return DateTime.Now > lastUpdated.AddMinutes(UpdateBuffer);
         }
-     
     }
 }

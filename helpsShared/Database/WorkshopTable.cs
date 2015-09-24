@@ -7,25 +7,25 @@ using helps.Shared.DataObjects;
 
 namespace helps.Shared.Database
 {
-    public class WorkshopSetTable
+    public class WorkshopTable
     {
-        // Update once a day - WorkshopSets change very rarely
-        public int UpdateBuffer = 1440;
-       
-        public List<WorkshopSet> GetAll()
+        // Update Hourly
+        public int UpdateBuffer = 60;
+
+        public Workshop Get(int id)
         {
-            return helpsDatabase.Database.Table<WorkshopSet>().ToList<WorkshopSet>();
+            return helpsDatabase.Database.Table<Workshop>().Where(x => x.WorkshopId == id).FirstOrDefault();
         }
 
-        public WorkshopSet First()
+        public Workshop First()
         {
-            return helpsDatabase.Database.Table<WorkshopSet>().FirstOrDefault();
+            return helpsDatabase.Database.Table<Workshop>().FirstOrDefault();
         }
 
-        public void SetAll(List<WorkshopSet> list)
+        public void SetAll(List<Workshop> list)
         {
             var updatedList = list.Select(x => { x.LastUpdated = DateTime.Now; return x; }).ToList();
-            if(First() == null)
+            if (First() == null)
                 helpsDatabase.Database.InsertAll(updatedList);
             else
                 helpsDatabase.Database.UpdateAll(updatedList);
@@ -36,5 +36,6 @@ namespace helps.Shared.Database
             var record = First();
             return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
+
     }
 }

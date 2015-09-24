@@ -42,8 +42,8 @@ namespace helps.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
-            Init();
             base.OnCreate(bundle);
+            Init();
 
             //Create Exception Handlers
             AppDomain.CurrentDomain.UnhandledException += HandleExceptions;

@@ -29,20 +29,16 @@ namespace helps.Droid
         protected override async void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
-            base.Init();
             base.OnCreate(bundle);
+            
 
             //Check if the user has an active session
             if (CurrentUser != null)
             {
                 SwitchActivity();
-                return;
-            }
-
-            if (bundle == null)
+            } else if (bundle == null)
             {
                 SkipLogin();
-                return;
             }
         }
 

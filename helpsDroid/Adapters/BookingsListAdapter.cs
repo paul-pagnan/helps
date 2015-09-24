@@ -33,6 +33,7 @@ namespace helps.Droid.Adapters
             this.inflater = inflater;
             WorkshopList = new List<WorkshopPreview>();
             this.resources = resources;
+            this.ShowLocation = ShowLocation;
         }
 
         public override void Clear()

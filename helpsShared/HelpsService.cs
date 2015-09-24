@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using helps.Shared.DataObjects;
-
-using Microsoft.WindowsAzure.MobileServices;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-using helps.Shared.Database;
 
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Diagnostics;
-using Connectivity.Plugin;
 using Xamarin.Forms;
+using System.Collections.Generic;
+using System.Net.Http.Formatting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace helps.Shared
 {
@@ -23,12 +15,15 @@ namespace helps.Shared
         public static bool CurrentlyUpdating = false;
 
         public static HttpClient helpsClient;
-        
+
         public const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
         public const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
 
-        static HelpsService() {
-            
+
+
+        static HelpsService()
+        {
+
             helpsClient = new HttpClient();
             helpsClient.BaseAddress = new Uri(helpsApplicationURL);
             helpsClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -40,19 +35,37 @@ namespace helps.Shared
             await helpsClient.GetAsync("api/workshop/workshopSets/as");
         }
 
-        public void TestConnection()
+        public static void TestConnection()
         {
             var networkConnection = DependencyService.Get<INetworkConnection>();
-            try
-            {
-                networkConnection.CheckNetworkConnection();
-            } catch(Exception ex)
-            {
-                var a = "as";
-            }
+            networkConnection.CheckNetworkConnection();
             if (!networkConnection.IsConnected)
                 throw new System.Net.WebException();
         }
 
+
+        public IEnumerable<JsonMediaTypeFormatter> Formatters()
+        {
+            return new[] {new JsonMediaTypeFormatter {
+                  SerializerSettings = new JsonSerializerSettings {
+                      Converters = new List<JsonConverter> {
+                        new MyDateTimeConvertor()
+                       }
+                     }
+                  }
+            };
+        }
+    }
+
+    public class MyDateTimeConvertor : DateTimeConverterBase
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return reader.Value;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+        }
     }
 }

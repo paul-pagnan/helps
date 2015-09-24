@@ -7,28 +7,27 @@ using helps.Shared.DataObjects;
 
 namespace helps.Shared.Database
 {
-    public class UserTable : helpsDatabase
+    public class UserTable
     {
-        public UserTable() : base() { }
         public User GetUser(string StudentId)
         {
-            return database.Table<User>().FirstOrDefault(x => x.StudentId == StudentId);
+            return helpsDatabase.Database.Table<User>().FirstOrDefault(x => x.StudentId == StudentId);
         }
 
         public int SetUser(User user)
         {
-            return database.InsertOrReplace(user);
+            return helpsDatabase.Database.InsertOrReplace(user);
         }
 
         public User CurrentUser()
         {
-            return database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
+            return helpsDatabase.Database.Table<User>().FirstOrDefault(x => x.AuthToken != null);
         }
         public void ClearCurrentUser()
         {
             var user = CurrentUser();
             user.AuthToken = null;
-            database.Update(user);
+            helpsDatabase.Database.Update(user);
         }
     }
 }

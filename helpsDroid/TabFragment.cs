@@ -67,7 +67,7 @@ namespace helps.Droid
         {
             if (position == 0)
                 listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
-            else
+            else if (!force)
             {
                 Looper.Prepare();
                 new Handler().PostDelayed(async () =>
@@ -75,6 +75,9 @@ namespace helps.Droid
                     listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
                     NotifyListUpdate();
                 }, 1000);
+            } else
+            {
+                listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
             }
         }
 
