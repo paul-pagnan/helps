@@ -19,7 +19,7 @@ namespace helps.Shared
         public const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
         public const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
 
-
+        public const string DateFormat = "yyy-MM-ddThh:mm";
 
         static HelpsService()
         {

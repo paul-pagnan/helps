@@ -48,7 +48,8 @@ namespace helps.Shared
                 TestConnection();
                 CurrentlyUpdating = true;
 
-                var response = await helpsClient.GetAsync("api/workshop/search?workshopSetId=" + workshopSet + "&active=true");
+                var queryString = "workshopSetId=" + workshopSet + "&active=true" + "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" + DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
+                var response = await helpsClient.GetAsync("api/workshop/search?" + queryString);
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<Workshop>>();
