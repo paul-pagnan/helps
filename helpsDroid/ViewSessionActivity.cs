@@ -61,11 +61,6 @@ namespace helps.Droid
             date = FindViewById<TextView>(Resource.Id.textViewDateValue);
 
             room = FindViewById<TextView>(Resource.Id.textViewRoomValue);
-
-            //name = FindViewById<TextView>(Resource.Id.textViewNameValue);
-            //name.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
-
-
         }
 
         protected override void OnCreate(Bundle bundle)

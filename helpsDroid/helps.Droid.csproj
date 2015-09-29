@@ -141,6 +141,7 @@
     <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
+    <Compile Include="ViewWorkshopActivity.cs" />
     <Compile Include="ViewSessionActivity.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
     <Compile Include="NetworkConnection.cs" />
