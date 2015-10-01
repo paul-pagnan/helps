@@ -75,7 +75,7 @@ namespace helps.Droid
 
         private void ViewWorkshop(int id)
         {
-            Intent intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
+            var intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
             intent.PutExtra("WorkshopId", id);
             StartActivity(intent);
         }

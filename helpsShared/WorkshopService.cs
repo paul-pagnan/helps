@@ -42,7 +42,10 @@ namespace helps.Shared
 
         public WorkshopDetail GetWorkshop(int workshopId)
         {
-            return TranslateDetail(workshopTable.Get(workshopId));
+            var workshop = workshopTable.Get(workshopId);
+            if (workshop.type == "multiple")
+                return TranslateDetail(workshopTable.GetProgramWorkshops(workshop.ProgramId.GetValueOrDefault()));
+            return TranslateDetail(new List<Workshop>() { workshopTable.Get(workshopId) });
         }
 
   
@@ -120,9 +123,37 @@ namespace helps.Shared
             return translated;
         }
 
-        private WorkshopDetail TranslateDetail(Workshop workshop)
+        private WorkshopDetail TranslateDetail(List<Workshop> workshops)
         {
-            throw new NotImplementedException();
+            List<SessionPreview> sessions = new List<SessionPreview>();
+            if (workshops.Count > 1)
+            {
+                foreach (Workshop session in workshops)
+                {
+                    sessions.Add(new SessionPreview()
+                    {
+                        Id = session.WorkshopId,
+                        Title = HumanizeDate(session.StartDate, true),
+                        Time = HumanizeTimeSpan(session.StartDate, session.EndDate),
+                        Location = session.campus
+                    });
+                }
+            }
+
+            var workshop = workshops.FirstOrDefault();
+            return new WorkshopDetail()
+            {
+                Id = workshop.WorkshopId,
+                Title = workshop.topic,
+                Room = workshop.campus,
+                Time = (workshop.type != "multiple") ? HumanizeTimeSpan(workshop.StartDate, workshop.EndDate) : null,
+                DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
+                TargetGroup = workshop.targetingGroup,
+                Description = workshop.description,
+                FilledPlaces = workshop.BookingCount,
+                TotalPlaces = workshop.maximum,
+                Sessions = sessions
+            };
         }
 
 
@@ -152,7 +183,7 @@ namespace helps.Shared
             return translated;
         }
 
-        private string HumanizeDate(DateTime starting)
+        private string HumanizeDate(DateTime starting, bool IncludeDay = false)
         {
             var humanized = starting.ToString("dd/MM/yyyy");
             bool Past = starting < DateTime.Now;
@@ -161,6 +192,8 @@ namespace helps.Shared
                 humanized = "Today";
             else if (starting < DateTime.Now.AddDays(2) && !Past)
                 humanized = "Tomorrow";
+            else if (IncludeDay)
+                humanized = starting.DayOfWeek + " " + humanized;
             return humanized;
         }
 

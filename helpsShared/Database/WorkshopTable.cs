@@ -51,5 +51,12 @@ namespace helps.Shared.Database
             return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
 
+        public List<Workshop> GetProgramWorkshops(int programId)
+        {
+            return
+                helpsDatabase.Database.Table<Workshop>()
+                    .Where(x => x.ProgramId == programId)
+                    .ToList();
+        }
     }
 }
