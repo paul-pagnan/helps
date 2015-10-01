@@ -126,7 +126,7 @@ namespace helps.Shared
         private WorkshopDetail TranslateDetail(List<Workshop> workshops)
         {
             List<SessionPreview> sessions = new List<SessionPreview>();
-            if (workshops.Count > 1)
+            if (workshops.First().type == "multiple")
             {
                 foreach (Workshop session in workshops)
                 {

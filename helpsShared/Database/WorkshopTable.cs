@@ -22,6 +22,11 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<Workshop>().Where(x => x.WorkShopSetId == WorkshopSetId).ToList();
         }
 
+        public List<Workshop> GetAll()
+        {
+            return helpsDatabase.Database.Table<Workshop>().ToList();
+        }
+
         public Workshop First()
         {
             return helpsDatabase.Database.Table<Workshop>().FirstOrDefault();
@@ -33,7 +38,7 @@ namespace helps.Shared.Database
                 .Select(x => { x.LastUpdated = DateTime.Now; return x; })
                 .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetId).Name; return x; })
                 .ToList();
-            if (First() == null)
+            if (GetAll(list.First().WorkShopSetId).FirstOrDefault() == null)
                 helpsDatabase.Database.InsertAll(updatedList);
             else
                 helpsDatabase.Database.UpdateAll(updatedList);
