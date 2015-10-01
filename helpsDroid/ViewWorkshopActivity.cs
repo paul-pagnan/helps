@@ -12,6 +12,7 @@ using System.Globalization;
 using helps.Shared.DataObjects;
 using helps.Shared.Consts;
 using helps.Droid.Helpers;
+using helps.Droid.Adapters;
 
 namespace helps.Droid
 {
@@ -25,6 +26,9 @@ namespace helps.Droid
         private TextView targetGroup;
         private TextView whatItCovers;
         private TextView placeAvailable;
+        private LinearLayout sessionsList;
+
+        private SessionListAdapter sessionsListAdapter;
 
         protected override int LayoutResource
         {
@@ -39,13 +43,19 @@ namespace helps.Droid
             ActionBar.SetDisplayShowHomeEnabled(true);
 
             InitComponents();
-
-            Bundle extras = Intent.Extras;
-            if(extras != null)
+            try
             {
-                int workshopId = extras.GetInt("WorkshopId");
-                workshop = Services.Workshop.GetWorkshop(workshopId);
-                UpdateFields();
+                Bundle extras = Intent.Extras;
+                if (extras != null)
+                {
+                    int workshopId = extras.GetInt("WorkshopId");
+                    workshop = Services.Workshop.GetWorkshop(workshopId);
+                    UpdateFields();
+                }
+            }
+            catch (Exception ex)
+            {
+                var a = ex;
             }
         }
 
@@ -57,6 +67,14 @@ namespace helps.Droid
             targetGroup.Text = workshop.TargetGroup;
             whatItCovers.Text = workshop.Description;
             placeAvailable.Text = workshop.FilledPlaces + "/" + workshop.TotalPlaces;
+
+            sessionsListAdapter.AddAll(workshop.Sessions);
+
+            for (int i = 0; i < sessionsListAdapter.Count; i++)
+            {
+                var view = sessionsListAdapter.GetView(i, null, sessionsList);
+                sessionsList.AddView(view);
+            }
         }
 
         private void InitComponents()
@@ -67,6 +85,10 @@ namespace helps.Droid
             targetGroup = FindViewById<TextView>(Resource.Id.textViewTargetGroupValue);
             whatItCovers = FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue);
             placeAvailable = FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue);
+
+            sessionsList = FindViewById<LinearLayout>(Resource.Id.listViewSessions);
+            sessionsList.Orientation =  Orientation.Vertical;
+            sessionsListAdapter = new SessionListAdapter(this.LayoutInflater);
         }
     }
 }

@@ -166,12 +166,13 @@
                 p1:layout_width="wrap_content"
                 p1:layout_height="wrap_content"
                 p1:layout_marginRight="10dp" />
-            <ListView
+            <LinearLayout
                 p1:minWidth="25px"
                 p1:minHeight="25px"
-                p1:layout_width="match_parent"
-                p1:layout_height="match_parent"
-                p1:id="@+id/listViewSession" />
+                p1:layout_width="fill_parent"
+                p1:layout_height="0dp"
+                p1:layout_weight="1"
+                p1:id="@+id/listViewSessions" />
             <Button
                 p1:text="Book"
                 p1:layout_width="match_parent"
