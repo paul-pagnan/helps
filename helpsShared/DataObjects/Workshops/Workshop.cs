@@ -20,7 +20,10 @@ namespace helps.Shared.DataObjects
         public string type { get; set; }
         public string DaysOfWeek { get; set; }
         public int BookingCount { get; set; }
-
+        public int? NumOfWeeks { get; set; }
+        public int? ProgramId { get; set; }
+        public DateTime? ProgramStartDate { get; set; }
+        public DateTime? ProgramEndDate { get; set; }
         public DateTime LastUpdated { get; set; }
     }
 }

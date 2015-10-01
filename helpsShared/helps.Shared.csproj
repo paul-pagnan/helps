@@ -51,6 +51,8 @@
     <Compile Include="DataObjects\Auth\RegisterRequest.cs" />
     <Compile Include="DataObjects\Misc\Campus.cs" />
     <Compile Include="DataObjects\Workshops\Workshop.cs" />
+    <Compile Include="DataObjects\Workshops\WorkshopDetail.cs" />
+    <Compile Include="DataObjects\Workshops\SessionPreview.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopPreview.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopBooking.cs" />
     <Compile Include="DataObjects\Auth\User.cs" />

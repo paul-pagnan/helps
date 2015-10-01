@@ -54,13 +54,14 @@ namespace helps.Shared
                 TestConnection();
                 CurrentlyUpdating = true;
 
-                var queryString = "workshopSetId=" + workshopSet + "&active=true" + "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" + DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
+                var queryString = "workshopSetId=" + workshopSet + "&active=true" + "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" + DateTime.MaxValue.AddMonths(-1).ToString(DateFormat) + "&pageSize=9999";
                 var response = await helpsClient.GetAsync("api/workshop/search?" + queryString);
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<Workshop>>();
                     List<Workshop> decodedResponse = result.Results;
-                    workshopTable.SetAll(decodedResponse);
+                    if (decodedResponse != null)
+                        workshopTable.SetAll(decodedResponse);
                     CurrentlyUpdating = false;
                     return TranslatePreview(decodedResponse);
                 }
@@ -85,7 +86,7 @@ namespace helps.Shared
         private async Task<bool> UpdateBookings()
         {
             var currentUser = userTable.CurrentUser().StudentId;
-            var queryString = "studentId=" + currentUser;
+            var queryString = "studentId=" + currentUser + "&pageSize=9999";
             var response = await helpsClient.GetAsync("api/workshop/booking/search?" + queryString);
             if (response.IsSuccessStatusCode)
             {
@@ -108,7 +109,7 @@ namespace helps.Shared
                     Id = booking.workshopId,
                     Name = booking.topic,
                     WorkshopSet = booking.WorkShopSetID,
-                    WorkshopSetName = booking.WorkShopSetName,
+                    NumSessions = booking.WorkShopSetName,
                     Time = HumanizeTimeSpan(booking.starting, booking.ending),
                     DateHumanFriendly = HumanizeDate(booking.starting),
                     Location = await MiscServices.GetCampus(booking.campusID),
@@ -128,20 +129,25 @@ namespace helps.Shared
         private List<WorkshopPreview> TranslatePreview(List<Workshop> list)
         {
             List<WorkshopPreview> translated = new List<WorkshopPreview>();
+            List<int> programs = new List<int>();
             foreach (Workshop workshop in list)
             {
-                translated.Add(new WorkshopPreview
+                if (!programs.Contains(workshop.ProgramId.GetValueOrDefault()))
                 {
-                    Id = workshop.WorkshopId,
-                    Name = workshop.topic,
-                    WorkshopSet = workshop.WorkShopSetId,
-                    WorkshopSetName = workshop.WorkShopSetName,
-                    Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
-                    DateHumanFriendly = HumanizeDate(workshop.StartDate),
-                    Location = workshop.campus,
-                    FilledPlaces = workshop.BookingCount,
-                    TotalPlaces = workshop.maximum
-                });
+                    programs.Add(workshop.ProgramId.GetValueOrDefault());
+                    translated.Add(new WorkshopPreview
+                    {
+                        Id = workshop.WorkshopId,
+                        Name = workshop.topic,
+                        WorkshopSet = workshop.WorkShopSetId,
+                        NumSessions = (workshop.type == "multiple") ? "Num of Sessions: " + workshop.NumOfWeeks : "",
+                        Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
+                        DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
+                        Location = workshop.campus,
+                        FilledPlaces = workshop.BookingCount,
+                        TotalPlaces = workshop.maximum
+                    });
+                }
             }
             return translated;
         }
@@ -156,6 +162,11 @@ namespace helps.Shared
             else if (starting < DateTime.Now.AddDays(2) && !Past)
                 humanized = "Tomorrow";
             return humanized;
+        }
+
+        private string HumanizeDate(DateTime starting, DateTime ending) 
+        {
+            return starting.ToString("dd/MM/yyyy") + " - " + ending.ToString("dd/MM/yyyy");
         }
 
         private string HumanizeTimeSpan(DateTime start, DateTime end)

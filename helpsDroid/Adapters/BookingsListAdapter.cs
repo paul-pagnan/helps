@@ -62,7 +62,7 @@ namespace helps.Droid.Adapters
         {
             ImgColor.SetBackgroundColor(GetColor(position));
             TxtName.Text = WorkshopList[position].Name;
-            TxtWorkshopSetName.Text = WorkshopList[position].WorkshopSetName;
+            TxtWorkshopSetName.Text = WorkshopList[position].NumSessions;
             TxtDate.Text = WorkshopList[position].DateHumanFriendly;
             TxtTime.Text = WorkshopList[position].Time;
 
