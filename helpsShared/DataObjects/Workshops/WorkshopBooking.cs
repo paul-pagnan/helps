@@ -20,6 +20,7 @@ namespace helps.Shared.DataObjects
         public DateTime attended { get; set; }
         public string type { get; set; }
         public int WorkShopSetID { get; set; }
+        public string WorkShopSetName { get; set; }
         public DateTime LastUpdated { get; set; }
     }
 }

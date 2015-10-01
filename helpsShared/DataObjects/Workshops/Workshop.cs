@@ -15,6 +15,7 @@ namespace helps.Shared.DataObjects
         public DateTime EndDate { get; set; }
         public int maximum { get; set; }
         public int WorkShopSetId { get; set; }
+        public string WorkShopSetName { get; set; }
         public int? cutoff { get; set; }
         public string type { get; set; }
         public string DaysOfWeek { get; set; }

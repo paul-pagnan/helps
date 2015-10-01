@@ -40,10 +40,16 @@ namespace helps.Shared
             return workshopSetTable.GetAll();
         }
 
+        public WorkshopDetail GetWorkshop(int workshopId)
+        {
+            return TranslateDetail(workshopTable.Get(workshopId));
+        }
+
+  
         public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
         {
             //TODO Introduce Pagination
-            if (!LocalOnly && ((workshopTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && ((workshopTable.NeedsUpdating(workshopSet) || ForceUpdate) && !CurrentlyUpdating))
             {
                 TestConnection();
                 CurrentlyUpdating = true;
@@ -102,6 +108,7 @@ namespace helps.Shared
                     Id = booking.workshopId,
                     Name = booking.topic,
                     WorkshopSet = booking.WorkShopSetID,
+                    WorkshopSetName = booking.WorkShopSetName,
                     Time = HumanizeTimeSpan(booking.starting, booking.ending),
                     DateHumanFriendly = HumanizeDate(booking.starting),
                     Location = await MiscServices.GetCampus(booking.campusID),
@@ -111,6 +118,12 @@ namespace helps.Shared
             }
             return translated;
         }
+
+        private WorkshopDetail TranslateDetail(Workshop workshop)
+        {
+            throw new NotImplementedException();
+        }
+
 
         private List<WorkshopPreview> TranslatePreview(List<Workshop> list)
         {
@@ -122,6 +135,7 @@ namespace helps.Shared
                     Id = workshop.WorkshopId,
                     Name = workshop.topic,
                     WorkshopSet = workshop.WorkShopSetId,
+                    WorkshopSetName = workshop.WorkShopSetName,
                     Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
                     DateHumanFriendly = HumanizeDate(workshop.StartDate),
                     Location = workshop.campus,

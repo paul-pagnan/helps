@@ -46,6 +46,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:indeterminate="true" />
+            <TextView
+                android:text="No Workshops Found"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/workshopSetLoading"
+                android:textColor="@color/text_dark"
+                android:id="@+id/noWorkshops"
+                android:visibility="gone"
+                android:layout_centerInParent="true" />
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipe2"
                 android:layout_width="fill_parent"

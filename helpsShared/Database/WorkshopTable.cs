@@ -29,7 +29,10 @@ namespace helps.Shared.Database
 
         public void SetAll(List<Workshop> list)
         {
-            var updatedList = list.Select(x => { x.LastUpdated = DateTime.Now; return x; }).ToList();
+            var updatedList = list
+                .Select(x => { x.LastUpdated = DateTime.Now; return x; })
+                .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetId).Name; return x; })
+                .ToList();
             if (First() == null)
                 helpsDatabase.Database.InsertAll(updatedList);
             else
@@ -39,6 +42,12 @@ namespace helps.Shared.Database
         public bool NeedsUpdating()
         {
             var record = First();
+            return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
+        }
+
+        public bool NeedsUpdating(int WorkshopSet)
+        {
+            var record = GetAll(WorkshopSet).FirstOrDefault();
             return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
 

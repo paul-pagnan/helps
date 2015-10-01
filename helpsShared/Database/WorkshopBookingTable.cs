@@ -37,7 +37,10 @@ namespace helps.Shared.Database
 
         public void SetAll(List<WorkshopBooking> list)
         {
-            var updatedList = list.Select(x => { x.LastUpdated = DateTime.Now; return x; }).ToList();
+            var updatedList = list
+               .Select(x => { x.LastUpdated = DateTime.Now; return x; })
+               .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetID).Name; return x; })
+               .ToList();
             if (First() == null)
                 helpsDatabase.Database.InsertAll(updatedList);
             else

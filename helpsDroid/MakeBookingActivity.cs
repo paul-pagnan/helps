@@ -54,9 +54,16 @@ namespace helps.Droid
 
             workshopSetListView.ItemClick += (sender, e) =>
             {
+                FindViewById<TextView>(Resource.Id.noWorkshops).Visibility = ViewStates.Gone;
                 FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Visible;
                 InitWorkshopList((int)e.Id);
             };
+
+            workshopListView.ItemClick += (sender, e) =>
+            {
+                ViewWorkshop((int)e.Id);
+            };
+
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).Invalidate();
             //Get Local Data First, then update later
@@ -66,7 +73,13 @@ namespace helps.Droid
             NotifyListUpdate();
         }
 
-       
+        private void ViewWorkshop(int id)
+        {
+            Intent intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
+            intent.PutExtra("WorkshopId", id);
+            StartActivity(intent);
+        }
+
         private void InitRefreshers()
         {
             categoryRefresher = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe1);
@@ -127,6 +140,10 @@ namespace helps.Droid
                     {
                         FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
                         NotifyWorkshopListUpdate();
+                    } else if (!localOnly)
+                    {
+                        FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Gone;
+                        FindViewById<TextView>(Resource.Id.noWorkshops).Visibility = ViewStates.Visible;
                     }
                 });               
             }
