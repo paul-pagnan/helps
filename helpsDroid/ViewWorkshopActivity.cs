@@ -28,12 +28,16 @@ namespace helps.Droid
 
         protected override int LayoutResource
         {
-            get { return Resource.Layout.Activity_ViewSession; }
+            get { return Resource.Layout.Activity_ViewWorkshop; }
         }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            ActionBar.SetDisplayShowHomeEnabled(true);
+
             InitComponents();
 
             Bundle extras = Intent.Extras;

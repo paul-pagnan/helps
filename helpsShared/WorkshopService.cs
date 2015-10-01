@@ -147,9 +147,9 @@ namespace helps.Shared
                 Title = workshop.topic,
                 Room = workshop.campus,
                 Time = (workshop.type != "multiple") ? HumanizeTimeSpan(workshop.StartDate, workshop.EndDate) : null,
-                DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
-                TargetGroup = workshop.targetingGroup,
-                Description = workshop.description,
+                DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : workshop.StartDate.ToString("dd/MM/yyyy"),
+                TargetGroup = workshop.targetingGroup ?? "N/A",
+                Description = workshop.description ?? "N/A",
                 FilledPlaces = workshop.BookingCount,
                 TotalPlaces = workshop.maximum,
                 Sessions = sessions
