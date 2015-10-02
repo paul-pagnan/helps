@@ -56,7 +56,7 @@ namespace helps.Droid
             {
                 FindViewById<TextView>(Resource.Id.noWorkshops).Visibility = ViewStates.Gone;
                 FindViewById<ProgressBar>(Resource.Id.workshopLoading).Visibility = ViewStates.Visible;
-                InitWorkshopList((int)e.Id);
+                InitWorkshopList((int)e.Id, e.Position);
             };
 
             workshopListView.ItemClick += (sender, e) =>
@@ -94,7 +94,7 @@ namespace helps.Droid
             workshopRefresher.Refreshing = true;
             workshopRefresher.Refresh +=  async (sender, e) =>
             {
-                await Task.Factory.StartNew(() => LoadWorkshops(CurrentWorkshopSet, false, true));
+                await Task.Factory.StartNew(() => LoadWorkshops(CurrentWorkshopSet, -1, false, true));
                 NotifyListUpdate();
                 workshopRefresher.Refreshing = false;
             };
@@ -126,13 +126,13 @@ namespace helps.Droid
             }
         }
 
-        private async void LoadWorkshops(int workshopSet, bool localOnly, bool force = false)
+        private async void LoadWorkshops(int workshopSet, int position, bool localOnly, bool force = false)
         {
             if (CurrentWorkshopSet > 0)
             {
                 var list = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
                 workshopListAdapter.Clear();
-                workshopListAdapter.AddAll(list);
+                workshopListAdapter.AddAll(list, position);
                 
                 RunOnUiThread(delegate
                 {
@@ -161,15 +161,15 @@ namespace helps.Droid
             workshopRefresher.Refreshing = false;
         }
 
-        private async void InitWorkshopList(int id)
+        private async void InitWorkshopList(int id, int position)
         {
             CurrentWorkshopSet = id;
             FlipView();
 
             //Load from local first
-            await Task.Factory.StartNew(() => LoadWorkshops(id, true));
+            await Task.Factory.StartNew(() => LoadWorkshops(id, position, true));
             //Do a background Sync now
-            await Task.Factory.StartNew(() => LoadWorkshops(id, false, false));
+            await Task.Factory.StartNew(() => LoadWorkshops(id, position, false, false));
         }
 
         public override void OnBackPressed()

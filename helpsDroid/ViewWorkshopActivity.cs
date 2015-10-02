@@ -43,19 +43,12 @@ namespace helps.Droid
             ActionBar.SetDisplayShowHomeEnabled(true);
 
             InitComponents();
-            try
+            Bundle extras = Intent.Extras;
+            if (extras != null)
             {
-                Bundle extras = Intent.Extras;
-                if (extras != null)
-                {
-                    int workshopId = extras.GetInt("WorkshopId");
-                    workshop = Services.Workshop.GetWorkshop(workshopId);
-                    UpdateFields();
-                }
-            }
-            catch (Exception ex)
-            {
-                var a = ex;
+                int workshopId = extras.GetInt("WorkshopId");
+                workshop = Services.Workshop.GetWorkshop(workshopId);
+                UpdateFields();
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,13 @@ namespace helps.Shared.Database
                 .Select(x => { x.LastUpdated = DateTime.Now; return x; })
                 .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetId).Name; return x; })
                 .ToList();
-            if (GetAll(list.First().WorkShopSetId).FirstOrDefault() == null)
-                helpsDatabase.Database.InsertAll(updatedList);
-            else
-                helpsDatabase.Database.UpdateAll(updatedList);
+            if (list.Count > 0)
+            {
+                if (GetAll(list.FirstOrDefault().WorkShopSetId).FirstOrDefault() == null)
+                    helpsDatabase.Database.InsertAll(updatedList);
+                else
+                    helpsDatabase.Database.UpdateAll(updatedList);
+            }
         }
 
         public bool NeedsUpdating()
