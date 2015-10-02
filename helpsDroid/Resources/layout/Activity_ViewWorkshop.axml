@@ -62,6 +62,33 @@
                 p1:minHeight="25px"
                 p1:paddingLeft="@dimen/layout_padding"
                 p1:paddingRight="@dimen/layout_padding"
+                p1:layout_width="fill_parent"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout4">
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoClock"
+                    p1:layout_width="@dimen/icon_size"
+                    p1:layout_height="wrap_content"
+                    p1:text="@string/fa_clock_o"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
+                <TextView
+                    p1:text="DateValue"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textViewDateValue"
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="2dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoClock" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:paddingRight="@dimen/layout_padding"
                 p1:paddingTop="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
@@ -80,36 +107,9 @@
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textViewRoomValue"
                     p1:textColor="@color/text_dark"
-                    p1:paddingTop="3dp"
+                    p1:paddingTop="2dp"
                     p1:textSize="@dimen/text_size"
                     p1:layout_toRightOf="@id/icoRoom" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:paddingRight="@dimen/layout_padding"
-                p1:layout_width="fill_parent"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout4">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoClock"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_clock_o"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="DateValue"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewDateValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="3dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoClock" />
             </RelativeLayout>
             <RelativeLayout
                 p1:orientation="horizontal"
@@ -134,7 +134,7 @@
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textViewTargetGroupValue"
                     p1:textColor="@color/text_dark"
-                    p1:paddingTop="3dp"
+                    p1:paddingTop="2dp"
                     p1:textSize="@dimen/text_size"
                     p1:layout_toRightOf="@id/icoTarget" />
             </RelativeLayout>
@@ -160,7 +160,7 @@
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textViewWhatItCoversValue"
                     p1:textColor="@color/text_dark"
-                    p1:paddingTop="3dp"
+                    p1:paddingTop="2dp"
                     p1:textSize="@dimen/text_size"
                     p1:layout_toRightOf="@id/icoList" />
             </RelativeLayout>
@@ -187,7 +187,7 @@
                     p1:layout_height="wrap_content"
                     p1:id="@+id/textViewPlaceAvailableValue"
                     p1:textColor="@color/text_dark"
-                    p1:paddingTop="3dp"
+                    p1:paddingTop="2dp"
                     p1:textSize="@dimen/text_size"
                     p1:layout_toRightOf="@id/icoPlaces" />
             </RelativeLayout>
