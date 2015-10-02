@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Globalization;
+using Android.Graphics;
 using helps.Shared.DataObjects;
 using helps.Shared.Consts;
 using helps.Droid.Helpers;
@@ -16,7 +17,7 @@ using helps.Droid.Adapters;
 
 namespace helps.Droid
 {
-    [Activity(Label = "My Information", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class ViewWorkshopActivity : Main
     {
         private WorkshopDetail workshop;
@@ -27,6 +28,8 @@ namespace helps.Droid
         private TextView whatItCovers;
         private TextView placeAvailable;
         private LinearLayout sessionsList;
+        private RelativeLayout toolbarLayout;
+        private RelativeLayout sessionContainer;
 
         private SessionListAdapter sessionsListAdapter;
 
@@ -42,12 +45,20 @@ namespace helps.Droid
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
 
-            InitComponents();
+            
             Bundle extras = Intent.Extras;
             if (extras != null)
             {
                 int workshopId = extras.GetInt("WorkshopId");
+                string[] colorArr = extras.GetString("Color").Split(',');
+                var color = Color.Argb(Int32.Parse(colorArr[0]), Int32.Parse(colorArr[1]), Int32.Parse(colorArr[2]),
+                    Int32.Parse(colorArr[3]));
+                Toolbar.SetBackgroundColor(color);
+                toolbarLayout = FindViewById<RelativeLayout>(Resource.Id.layouttoolbarLarge);
+                toolbarLayout.SetBackgroundColor(color);
+                Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
                 workshop = Services.Workshop.GetWorkshop(workshopId);
+                InitComponents();
                 UpdateFields();
             }
         }
@@ -56,7 +67,10 @@ namespace helps.Droid
         {
             title.Text = workshop.Title;
             room.Text = workshop.Room;
-            date.Text = workshop.DateHumanFriendly;
+
+            var TimeString = (workshop.Time != null) ? System.Environment.NewLine + workshop.Time : "";
+            date.Text = workshop.DateHumanFriendly + TimeString;
+
             targetGroup.Text = workshop.TargetGroup;
             whatItCovers.Text = workshop.Description;
             placeAvailable.Text = workshop.FilledPlaces + "/" + workshop.TotalPlaces;
@@ -72,7 +86,7 @@ namespace helps.Droid
 
         private void InitComponents()
         {
-            title = FindViewById<TextView>(Resource.Id.textViewTitleValue);
+            title = FindViewById<TextView>(Resource.Id.title);
             room = FindViewById<TextView>(Resource.Id.textViewRoomValue);
             date = FindViewById<TextView>(Resource.Id.textViewDateValue);
             targetGroup = FindViewById<TextView>(Resource.Id.textViewTargetGroupValue);
@@ -82,6 +96,26 @@ namespace helps.Droid
             sessionsList = FindViewById<LinearLayout>(Resource.Id.listViewSessions);
             sessionsList.Orientation =  Orientation.Vertical;
             sessionsListAdapter = new SessionListAdapter(this.LayoutInflater);
+
+            sessionContainer = FindViewById<RelativeLayout>(Resource.Id.sessionContainer);
+            if (workshop.Sessions.Count == 0)
+                sessionContainer.Visibility = ViewStates.Gone;
+            }
+
+
+        [Java.Interop.Export()]
+        public async void Book(View view)
+        {
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            dialog.Show();
+            var response = await Services.Workshop.Book(workshop.Id);
+            dialog.Hide();
+            if (response.Success)
+            {
+                //TODO Update book button and refresh the page
+            }
+            else
+                DialogHelper.ShowDialog(this, response.Message, response.Title);
         }
     }
 }

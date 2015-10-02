@@ -13,12 +13,41 @@
         p1:layout_height="wrap_content"
         p1:layout_width="match_parent"
         layout="@layout/toolbar" />
+    <RelativeLayout
+        p1:layout_width="fill_parent"
+        p1:id="@+id/layouttoolbarLarge"
+        p1:layout_height="@dimen/large_toolbar"
+        p1:gravity="bottom"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_below="@id/Ttoolbar">
+        <RelativeLayout
+            p1:paddingLeft="50dp"
+            p1:paddingBottom="20dp"
+            p1:layout_width="fill_parent"
+            p1:layout_height="wrap_content"
+            p1:layout_alignParentBottom="true">
+            <ScrollView
+                p1:layout_width="fill_parent"
+                p1:layout_height="fill_parent">
+                <TextView
+                    p1:text=""
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="fill_parent"
+                    p1:textColor="@color/text_white"
+                    p1:layout_height="wrap_content"
+                    p1:minHeight="80dp"
+                    p1:gravity="bottom"
+                    p1:id="@+id/title" />
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
     <ScrollView
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent"
         p1:minWidth="25px"
         p1:minHeight="25px"
-        p1:layout_below="@id/Ttoolbar">
+        p1:layout_below="@id/layouttoolbarLarge">
         <LinearLayout
             p1:orientation="vertical"
             p1:minWidth="25px"
@@ -26,162 +55,189 @@
             p1:layout_width="fill_parent"
             p1:layout_height="wrap_content"
             p1:layout_below="@id/Ttoolbar"
-            p1:padding="@dimen/layout_padding"
             p1:id="@+id/linearLayout1">
             <RelativeLayout
                 p1:orientation="horizontal"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:paddingRight="@dimen/layout_padding"
+                p1:paddingTop="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
+                p1:layout_marginBottom="@dimen/form_margin_body"
                 p1:id="@+id/linearLayout2">
-                <TextView
-                    p1:text="Title"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewTitle"
-                    p1:layout_width="wrap_content"
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoRoom"
+                    p1:layout_width="@dimen/icon_size"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Exam preparation repeat"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewTitleValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout3">
-                <TextView
-                    p1:text="Room"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewRoom"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
+                    p1:text="@string/fa_map_marker"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
                 <TextView
                     p1:text="RoomValue"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewRoomValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout4">
-                <TextView
-                    p1:text="Date"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewDate"
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="DateValue"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewDateValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
+                    p1:id="@+id/textViewRoomValue"
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="3dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoRoom" />
             </RelativeLayout>
             <RelativeLayout
                 p1:orientation="horizontal"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:paddingRight="@dimen/layout_padding"
+                p1:layout_width="fill_parent"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout4">
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoClock"
+                    p1:layout_width="@dimen/icon_size"
+                    p1:layout_height="wrap_content"
+                    p1:text="@string/fa_clock_o"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
+                <TextView
+                    p1:text="DateValue"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textViewDateValue"
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="3dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoClock" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:paddingRight="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout5">
-                <TextView
-                    p1:text="Target Group"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewTargetGroup"
-                    p1:layout_width="wrap_content"
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoTarget"
+                    p1:layout_width="@dimen/icon_size"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
+                    p1:text="@string/fa_bullseye"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
                 <TextView
                     p1:text="Target Group Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
                     p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
+                    p1:layout_height="wrap_content"
                     p1:id="@+id/textViewTargetGroupValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="3dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoTarget" />
             </RelativeLayout>
-            <TextView
-                p1:text="What it covers"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:id="@+id/textViewWhatItCovers"
-                p1:layout_width="wrap_content"
-                p1:layout_height="wrap_content"
-                p1:layout_marginRight="10dp" />
-            <TextView
-                p1:text="What it covers value"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:layout_width="wrap_content"
-                p1:layout_height="35.5dp"
-                p1:id="@+id/textViewWhatItCoversValue"
-                p1:layout_alignParentRight="true"
-                p1:gravity="right"
-                p1:paddingLeft="10dp" />
             <RelativeLayout
                 p1:orientation="horizontal"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/linearLayout5">
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoList"
+                    p1:layout_width="@dimen/icon_size"
+                    p1:layout_height="wrap_content"
+                    p1:text="@string/fa_list_ul"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
+                <TextView
+                    p1:text="Description"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/textViewWhatItCoversValue"
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="3dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoList" />
+            </RelativeLayout>
+            <RelativeLayout
+                p1:orientation="horizontal"
+                p1:minWidth="25px"
+                p1:minHeight="25px"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:paddingRight="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/linearLayout6">
+                <helps.Droid.Extensions.FontAwesome
+                    p1:id="@+id/icoPlaces"
+                    p1:layout_width="@dimen/icon_size"
+                    p1:layout_height="wrap_content"
+                    p1:text="@string/fa_users"
+                    p1:textSize="@dimen/icon_size"
+                    p1:layout_marginRight="@dimen/icon_margin" />
                 <TextView
-                    p1:text="Place Available"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewPlaceAvailable"
+                    p1:text="Places Available"
                     p1:layout_width="wrap_content"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="10/20"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
                     p1:id="@+id/textViewPlaceAvailableValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
+                    p1:textColor="@color/text_dark"
+                    p1:paddingTop="3dp"
+                    p1:textSize="@dimen/text_size"
+                    p1:layout_toRightOf="@id/icoPlaces" />
             </RelativeLayout>
-            <TextView
-                p1:text="Sessions"
-                p1:textAppearance="?android:attr/textAppearanceMedium"
-                p1:id="@+id/textViewWSessions"
-                p1:layout_width="wrap_content"
-                p1:layout_height="wrap_content"
-                p1:layout_marginRight="10dp" />
-            <LinearLayout
+            <RelativeLayout
+                p1:id="@+id/sessionContainer"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
                 p1:layout_width="fill_parent"
-                p1:layout_height="0dp"
-                p1:layout_weight="1"
-                p1:id="@+id/listViewSessions" />
+                p1:layout_height="wrap_content">
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="1dip"
+                    p1:background="#D6D6D6"
+                    p1:id="@+id/linearLayout7"
+                    p1:layout_marginBottom="@dimen/form_margin" />
+                <TextView
+                    p1:text="Sessions"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:id="@+id/textViewWSessions"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_width="wrap_content"
+                    p1:layout_height="50dp"
+                    p1:gravity="bottom"
+                    p1:layout_marginRight="10dp"
+                    p1:layout_marginBottom="@dimen/form_margin" />
+                <LinearLayout
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:paddingTop="@dimen/form_margin"
+                    p1:id="@+id/listViewSessions"
+                    p1:gravity="left"
+                    p1:layout_marginBottom="@dimen/form_margin"
+                    p1:layout_marginTop="@dimen/form_margin" />
+            </RelativeLayout>
             <Button
                 p1:text="Book"
-                p1:layout_width="match_parent"
+                p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/FinishBook"
                 p1:textColor="#FFFFFF"
                 p1:background="@drawable/flat_selector"
                 style="?android:attr/borderlessButtonStyle"
-                p1:onClick="Submit" />
+                p1:onClick="Book"
+                p1:layout_alignParentBottom="true" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

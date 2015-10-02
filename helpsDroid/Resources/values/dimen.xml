@@ -4,8 +4,16 @@
   <dimen name="layer_padding">0dp</dimen>
   <dimen name="layout_padding">25dp</dimen>
   <dimen name="form_margin">30dp</dimen>
+  <dimen name="icon_margin">30dp</dimen>
+
   <dimen name="dashboard_text_size">23.5dp</dimen>
   <dimen name="dashboard_item_height">200dp</dimen>
   <dimen name="list_item_height">145dp</dimen>
   <dimen name="list_session_height">15dp</dimen>
+  <dimen name="large_toolbar">100dp</dimen>
+
+  <dimen name="text_size">16dp</dimen>
+
+  <dimen name="icon_size">24dp</dimen>
+  <dimen name="form_margin_body">24dp</dimen>
 </resources>

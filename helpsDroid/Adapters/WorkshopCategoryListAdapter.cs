@@ -8,6 +8,7 @@ using Android.Widget;
 using helps.Droid.Adapters.DataObjects;
 using Android.Graphics;
 using System.Linq;
+using Android.Content.Res;
 using helps.Shared.DataObjects;
 
 namespace helps.Droid.Adapters
@@ -20,10 +21,12 @@ namespace helps.Droid.Adapters
 
         private ImageView ImgColor;
         private TextView TxtName;
+        private Resources resources;
 
-        public WorkshopCategoryListAdapter(LayoutInflater inflater) 
+        public WorkshopCategoryListAdapter(LayoutInflater inflater, Resources resources) 
         {
             this.inflater = inflater;
+            this.resources = resources;
             TheList = new List<WorkshopSet>();
         }
 
@@ -44,7 +47,7 @@ namespace helps.Droid.Adapters
         {
             var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
 
-            base.InitColors(view);
+            base.InitColors(resources);
             InitComponents(view);
             SetComponents(position);
             return view;

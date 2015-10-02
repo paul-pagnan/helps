@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -77,26 +78,31 @@ namespace helps.Droid.Adapters
             return colors[rng.Next(colors.Count)];
         }
 
+        public Color ItemColor(int id)
+        {
+            return TheList.Where(x => x.Id == id).FirstOrDefault().color;
+        }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             return null;
         }
 
-        public void InitColors(View view)
+        public void InitColors(Resources res)
         {
             colors = new List<Color>();
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_1));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_2));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_3));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_4));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_5));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_6));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_7));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_8));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_9));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_10));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_11));
-            colors.Add(view.Resources.GetColor(Resource.Color.cat_12));
+            colors.Add(res.GetColor(Resource.Color.cat_1));
+            colors.Add(res.GetColor(Resource.Color.cat_2));
+            colors.Add(res.GetColor(Resource.Color.cat_3));
+            colors.Add(res.GetColor(Resource.Color.cat_4));
+            colors.Add(res.GetColor(Resource.Color.cat_5));
+            colors.Add(res.GetColor(Resource.Color.cat_6));
+            colors.Add(res.GetColor(Resource.Color.cat_7));
+            colors.Add(res.GetColor(Resource.Color.cat_8));
+            colors.Add(res.GetColor(Resource.Color.cat_9));
+            colors.Add(res.GetColor(Resource.Color.cat_10));
+            colors.Add(res.GetColor(Resource.Color.cat_11));
+            colors.Add(res.GetColor(Resource.Color.cat_12));
         }
 
     }

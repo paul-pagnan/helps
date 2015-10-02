@@ -16,6 +16,7 @@ using helps.Droid.Adapters;
 using Android.Support.V4.Widget;
 using System.Threading.Tasks;
 using System.Threading;
+using Android.Graphics;
 using Java.Lang;
 
 namespace helps.Droid
@@ -61,7 +62,7 @@ namespace helps.Droid
 
             workshopListView.ItemClick += (sender, e) =>
             {
-                ViewWorkshop((int)e.Id);
+                ViewWorkshop((int)e.Id, workshopListAdapter.ItemColor((int)e.Id));
             };
 
 
@@ -73,10 +74,11 @@ namespace helps.Droid
             NotifyListUpdate();
         }
 
-        private void ViewWorkshop(int id)
+        private void ViewWorkshop(int id, Color color)
         {
             var intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
             intent.PutExtra("WorkshopId", id);
+            intent.PutExtra("Color", color.A + "," + color.R + "," + color.G + "," + color.B);
             StartActivity(intent);
         }
 
@@ -102,7 +104,7 @@ namespace helps.Droid
 
         private void InitLists()
         {
-            workshopSetListAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater);
+            workshopSetListAdapter = new WorkshopCategoryListAdapter(this.LayoutInflater, Resources);
             workshopSetListView = FindViewById<ListView>(Resource.Id.workshopSetList);
             workshopSetListView.Adapter = workshopSetListAdapter;
 

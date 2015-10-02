@@ -47,20 +47,23 @@ namespace helps.Droid.Adapters
         public void AddAll(List<WorkshopPreview> workshops, int position = -1)
         {
             WorkshopList = workshops;
+            InitColors(resources);
             if(position > -1)
                 ColorOverride = position;
-            base.AddAll(WorkshopList.Select(x => new MyList() { Id = x.Id }).ToList());
+            var color = (ColorOverride > -1) ? GetColor(ColorOverride) : GetColor(position);
+            base.AddAll(WorkshopList.Select(x => new MyList() { Id = x.Id, color = color}).ToList());
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
 
-            base.InitColors(view);
+            base.InitColors(resources);
             InitComponents(view);
             SetComponents(position);
             return view;
         }
+
 
         private void SetComponents(int position)
         {

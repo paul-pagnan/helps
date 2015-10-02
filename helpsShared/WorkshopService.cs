@@ -86,6 +86,11 @@ namespace helps.Shared
             return await TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
+        public async Task<GenericResponse> Book(int id)
+        {
+            return new GenericResponse() {Success = false, Title = "Error", Message = "Not Implmeneted yet"};
+        }
+
         private async Task<bool> UpdateBookings()
         {
             var currentUser = userTable.CurrentUser().StudentId;
