@@ -324,4 +324,11 @@
                 p1:id="@+id/listViewSession" />
         </LinearLayout>
     </ScrollView>
+    <include
+        p1:id="@+id/NoConnection"
+        p1:layout_height="wrap_content"
+        p1:layout_width="match_parent"
+        layout="@layout/NoConnection"
+        p1:layout_alignParentBottom="true"
+        p1:visibility="gone" />
 </RelativeLayout>

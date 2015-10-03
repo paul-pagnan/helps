@@ -14,16 +14,10 @@ namespace helps.Droid
         public Toolbar Toolbar { get; set; }
 
         protected abstract int LayoutResource { get; }
-        public User CurrentUser;
 
         public MyBookingsFragment()
         {
-            Init();
-        }
 
-        public void Init()
-        {
-             CurrentUser = Services.Auth.CurrentUser();
         }
 
 
@@ -48,7 +42,6 @@ namespace helps.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Init();
             SetContentView(LayoutResource);
             Toolbar = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
             if (Toolbar != null)

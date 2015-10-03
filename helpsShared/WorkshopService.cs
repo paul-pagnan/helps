@@ -48,7 +48,6 @@ namespace helps.Shared
             return TranslateDetail(new List<Workshop>() { workshopTable.Get(workshopId) });
         }
 
-  
         public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
         {
             //TODO Introduce Pagination
@@ -81,9 +80,20 @@ namespace helps.Shared
                 TestConnection();
 
                 CurrentlyUpdating = true;
-                await UpdateBookings();
+                await UpdateBookings(Current);
             }
             return await TranslatePreview(workshopBookingTable.GetAll(Current));
+        }
+
+        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false)
+        {
+            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            {
+                TestConnection();
+                CurrentlyUpdating = true;
+                await UpdateBookings(true);
+            }
+            return workshopBookingTable.GetByWorkshopId(workshopId);
         }
 
         public async Task<GenericResponse> Book(int id)
@@ -95,7 +105,10 @@ namespace helps.Shared
         public async Task<GenericResponse> CancelBooking(int id)
         {
             var queryString = "workshopId=" + id;
-            return await BookingBase("api/workshop/booking/cancel?", queryString);
+            var response = await BookingBase("api/workshop/booking/cancel?", queryString);
+            if(response.Success)
+                workshopBookingTable.RemoveBookingByWorkshopId(id);
+            return response;
         }
 
         public async Task<GenericResponse> BookProgram(int programId)
@@ -107,7 +120,12 @@ namespace helps.Shared
         public async Task<GenericResponse> CancelProgram(int programId)
         {
             var queryString = "programId=" + programId;
-            return await BookingBase("api/program/booking/cancel?", queryString);
+           
+            var response = await BookingBase("api/program/booking/cancel?", queryString);
+            if (response.Success)
+                foreach (Workshop workshop in workshopTable.GetProgramWorkshops(programId))
+                    workshopBookingTable.RemoveBookingByWorkshopId(workshop.WorkshopId);
+            return response;
         }
 
         private async Task<GenericResponse> BookingBase(string endpoint, string queryString)
@@ -129,10 +147,17 @@ namespace helps.Shared
 
 
 
-        private async Task<bool> UpdateBookings()
+        private async Task<bool> UpdateBookings(bool Current)
         {
             var currentUser = userTable.CurrentUser().StudentId;
-            var queryString = "studentId=" + currentUser + "&pageSize=9999";
+            var queryString = "studentId=" + currentUser + "&pageSize=9999&active=true";
+            if (Current)
+                queryString += "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" +
+                               DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
+            else
+                queryString += "&startingDtBegin=" + DateTime.MinValue.AddMonths(1).ToString(DateFormat) +
+                               "&startingDtEnd=" + DateTime.Now.ToString(DateFormat);
+
             var response = await helpsClient.GetAsync("api/workshop/booking/search?" + queryString);
             if (response.IsSuccessStatusCode)
             {

@@ -17,17 +17,24 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<WorkshopBooking>().ToList<WorkshopBooking>();
         }
 
-        public WorkshopBooking Get(int id)
+        public WorkshopBooking GetByWorkshopId(int id)
         {
-            return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.BookingId == id).FirstOrDefault();
+            return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.workshopId == id).FirstOrDefault();
         }
+
+        public void RemoveBookingByWorkshopId(int id)
+        {
+            helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.workshopId == id);
+        }
+
+
 
         public List<WorkshopBooking> GetAll(bool Current)
         {
             if(Current)
-                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended == DateTime.MinValue).ToList();
+                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended == DateTime.MinValue).OrderBy(x => x.starting).ToList();
             else
-                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended != DateTime.MinValue).ToList();
+                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended != DateTime.MinValue).OrderBy(x => x.starting).ToList();
         }
 
         public WorkshopBooking First()

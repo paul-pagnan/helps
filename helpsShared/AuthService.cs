@@ -106,7 +106,7 @@ namespace helps.Shared
             }
         }
 
-        public async Task<GenericResponse> RegisterHelps(DetailsInputRequest request)
+        public GenericResponse RegisterHelps(DetailsInputRequest request)
         {
             return ResponseHelper.Success();
         }

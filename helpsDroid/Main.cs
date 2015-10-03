@@ -104,8 +104,10 @@ namespace helps.Droid
                 AggregateException ParentEx = (AggregateException)e.ExceptionObject;
                 var exceptions = ParentEx.InnerExceptions;
                 Ex = exceptions.FirstOrDefault();
-            } catch(System.Exception ex) {  }
-               
+            } finally
+            {
+            }
+
             if (Ex.GetType() == typeof(System.Net.WebException))
             {
                 var context = CurrentActivity();

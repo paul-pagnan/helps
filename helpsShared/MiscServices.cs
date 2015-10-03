@@ -26,7 +26,7 @@ namespace helps.Shared
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<Campus>>();
                     List<Campus> decodedResponse = result.Results;
-                    await campusTable.SetAll(decodedResponse);
+                    campusTable.SetAll(decodedResponse);
                     CurrentlyUpdating = false;
                 }
             }

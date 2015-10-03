@@ -15,7 +15,6 @@ namespace helps.Droid
     public class TabFragment : Android.Support.V4.App.Fragment
     {
         private int position;
-        private Activity activity;
 
         private SwipeRefreshLayout refresher;
 
@@ -96,8 +95,8 @@ namespace helps.Droid
             await Task.Factory.StartNew(() => LoadData(true));
             context.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Gone;
             NotifyListUpdate();
-            //await Task.Factory.StartNew(() => BackgroundRefresh());
-            //NotifyListUpdate();
+            await Task.Factory.StartNew(() => BackgroundRefresh());
+            NotifyListUpdate();
         }
 
         private int GetLayout()

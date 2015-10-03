@@ -26,7 +26,7 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_Sign_In; }
         }
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             Xamarin.Forms.Forms.Init(this, bundle);
             base.OnCreate(bundle);
@@ -84,14 +84,14 @@ namespace helps.Droid
         }
 
         [Java.Interop.Export()]
-        public async void ShowRegister(View view)
+        public void ShowRegister(View view)
         {
             var intent = new Intent(this, typeof(RegisterActivity));
             StartActivity(intent);
         }
 
         [Java.Interop.Export()]
-        public async void ShowForgotPassword(View view)
+        public void ShowForgotPassword(View view)
         {
             var intent = new Intent(this, typeof(ForgotPasswordActivity));
             StartActivity(intent);

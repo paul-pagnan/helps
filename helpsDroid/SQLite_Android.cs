@@ -32,7 +32,7 @@ namespace helps.Droid
                 var connection = new SQLiteConnection(path);
                 return connection;
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
                 return null;
             }

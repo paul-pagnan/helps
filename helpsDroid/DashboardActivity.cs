@@ -26,7 +26,7 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_Dashboard; }
         }
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -45,14 +45,14 @@ namespace helps.Droid
 
 
         [Java.Interop.Export()]
-        public async void MyBookings(View view)
+        public void MyBookings(View view)
         {
             var intent = new Intent(this, typeof(MyBookingsActivity));
             StartActivity(intent);
         }
 
         [Java.Interop.Export()]
-        public async void MakeBooking(View view)
+        public void MakeBooking(View view)
         {
             var intent = new Intent(this, typeof(MakeBookingActivity));
             StartActivity(intent);

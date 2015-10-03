@@ -67,7 +67,7 @@ namespace helps.Droid
 
 
         [Java.Interop.Export()]
-        public async void Flip(View view)
+        public void Flip(View view)
         {
             viewFlipper.SetInAnimation(this, Resource.Animation.slide_in_from_right);
             viewFlipper.SetOutAnimation(this, Resource.Animation.slide_out_to_left);
@@ -104,7 +104,7 @@ namespace helps.Droid
                 else
                     DialogHelper.ShowDialog(this, Response.Message, Response.Title);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 dialog.Hide();
                 DialogHelper.ShowDialog(this, "Error", "Please enter a valid date of birth");

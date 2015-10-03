@@ -18,7 +18,7 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<Campus>().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public async Task<bool> SetAll(List<Campus> list)
+        public bool SetAll(List<Campus> list)
         {
             if (First() == null)
                 helpsDatabase.Database.InsertAll(list);

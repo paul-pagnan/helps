@@ -232,12 +232,48 @@
                 p1:text="Book"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/FinishBook"
+                p1:id="@+id/BookBtn"
                 p1:textColor="#FFFFFF"
-                p1:background="@drawable/flat_selector"
+                p1:background="@drawable/flat_selector_success"
                 style="?android:attr/borderlessButtonStyle"
                 p1:onClick="Book"
                 p1:layout_alignParentBottom="true" />
+            <Button
+                p1:text="Join Waitlist"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/WaitlistBtn"
+                p1:textColor="#FFFFFF"
+                p1:background="@drawable/flat_selector_warning"
+                style="?android:attr/borderlessButtonStyle"
+                p1:onClick="Waitlist"
+                p1:layout_alignParentBottom="true"
+                p1:visibility="gone" />
+            <Button
+                p1:text="Cancel Booking"
+                p1:layout_width="fill_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/CancelBtn"
+                p1:textColor="#FFFFFF"
+                p1:background="@drawable/flat_selector"
+                style="?android:attr/borderlessButtonStyle"
+                p1:onClick="Cancel"
+                p1:layout_alignParentBottom="true"
+                p1:visibility="gone" />
+            <TextView
+                p1:text="You are currently waitlisted"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/txtWaitlist"
+                p1:visibility="gone" />
         </LinearLayout>
     </ScrollView>
+    <include
+        p1:id="@+id/NoConnection"
+        p1:layout_height="wrap_content"
+        p1:layout_width="match_parent"
+        layout="@layout/NoConnection"
+        p1:layout_alignParentBottom="true"
+        p1:visibility="gone" />
 </RelativeLayout>

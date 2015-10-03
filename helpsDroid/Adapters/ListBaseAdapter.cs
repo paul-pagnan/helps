@@ -71,7 +71,7 @@ namespace helps.Droid.Adapters
             try { 
             if (colors[id] != null)
                 return colors[id];
-            } catch(Exception ex)
+            } catch(Exception)
             {
                 return colors[rng.Next(colors.Count)];
             }

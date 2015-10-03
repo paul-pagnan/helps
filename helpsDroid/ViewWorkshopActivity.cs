@@ -14,6 +14,7 @@ using helps.Shared.DataObjects;
 using helps.Shared.Consts;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
+using System.Threading.Tasks;
 
 namespace helps.Droid
 {
@@ -21,6 +22,8 @@ namespace helps.Droid
     public class ViewWorkshopActivity : Main
     {
         private WorkshopDetail workshop;
+        private WorkshopBooking booking; 
+
         private TextView title;
         private TextView room;
         private TextView date;
@@ -33,19 +36,26 @@ namespace helps.Droid
 
         private SessionListAdapter sessionsListAdapter;
 
+
+        private Button bookButton;
+        private Button cancelButton;
+        private Button waitlistButton;
+
+
+
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_ViewWorkshop; }
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
 
-            
+
             Bundle extras = Intent.Extras;
             if (extras != null)
             {
@@ -60,6 +70,12 @@ namespace helps.Droid
                 workshop = Services.Workshop.GetWorkshop(workshopId);
                 InitComponents();
                 UpdateFields();
+
+                //Get Local Data First, then update later
+                await Task.Factory.StartNew(() => LoadBooking(true));
+
+                //Do a background Sync now
+                await Task.Factory.StartNew(() => LoadBooking(false, false));
             }
         }
 
@@ -84,6 +100,31 @@ namespace helps.Droid
             }
         }
 
+        private void UpdateButtons()
+        {
+            bookButton.Visibility = ViewStates.Gone;
+
+            if (workshop.FilledPlaces >= workshop.TotalPlaces)
+            {
+                waitlistButton.Visibility = ViewStates.Visible;
+                return;
+            }
+
+            if (booking == null)
+                bookButton.Visibility = ViewStates.Visible;
+            else
+                cancelButton.Visibility = ViewStates.Visible;
+        }
+
+        private async void LoadBooking(bool localOnly, bool force = false)
+        {
+            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
+            RunOnUiThread(delegate
+            {
+                UpdateButtons();
+            });
+        }
+
         private void InitComponents()
         {
             title = FindViewById<TextView>(Resource.Id.title);
@@ -94,15 +135,18 @@ namespace helps.Droid
             placeAvailable = FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue);
 
             sessionsList = FindViewById<LinearLayout>(Resource.Id.listViewSessions);
-            sessionsList.Orientation =  Orientation.Vertical;
+            sessionsList.Orientation = Orientation.Vertical;
             sessionsListAdapter = new SessionListAdapter(this.LayoutInflater);
 
             sessionContainer = FindViewById<RelativeLayout>(Resource.Id.sessionContainer);
             if (workshop.Sessions.Count == 0)
                 sessionContainer.Visibility = ViewStates.Gone;
-            }
 
-
+            bookButton = FindViewById<Button>(Resource.Id.BookBtn);
+            cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
+            waitlistButton = FindViewById<Button>(Resource.Id.WaitlistBtn);
+        }
+    
         [Java.Interop.Export()]
         public async void Book(View view)
         {
@@ -117,7 +161,31 @@ namespace helps.Droid
 
             if (response.Success)
             {
-                //TODO Update book button and refresh the page
+                bookButton.Visibility = ViewStates.Gone;
+                cancelButton.Visibility = ViewStates.Visible;
+                DialogHelper.ShowDialog(this, "You have been successfully booked into this workshop", "Workshop Booked");
+            }
+            else
+                DialogHelper.ShowDialog(this, response.Message, response.Title);
+        }
+
+        [Java.Interop.Export()]
+        public async void Cancel(View view)
+        {
+            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            dialog.Show();
+            GenericResponse response = null;
+            if (workshop.ProgramId.HasValue)
+                response = await Services.Workshop.CancelProgram(workshop.ProgramId.Value);
+            else
+                response = await Services.Workshop.CancelBooking(workshop.Id);
+            dialog.Hide();
+
+            if (response.Success)
+            {
+                bookButton.Visibility = ViewStates.Visible;
+                cancelButton.Visibility = ViewStates.Gone;
+                DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);

@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/BookingWorkshopSetName"
             android:layout_width="fill_parent"
-            android:layout_height="26dip"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="7dp"
             android:ellipsize="marquee"

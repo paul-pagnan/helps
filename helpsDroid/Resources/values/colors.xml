@@ -7,6 +7,11 @@
   <color name="accent">#116189</color>
 
   <color name="error">#B71C1C</color>
+  <color name="success">#4CAF50</color>
+  <color name="successPressed">#3D8F41</color>
+  <color name="warning">#FFC107</color>
+  <color name="warningPressed">#DEA909</color>
+
   
   <color name="accentPressed">#094D6F</color>
   <color name="primaryMuted">#C22A1B</color>
