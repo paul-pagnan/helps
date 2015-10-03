@@ -28,19 +28,6 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<Workshop>().FirstOrDefault();
         }
 
-        public void SetAll(List<Workshop> list)
-        {
-            var updatedList = list
-                .Select(x => { x.LastUpdated = DateTime.Now; return x; })
-                .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetId).Name; return x; })
-                .ToList();
-            if (list.Count > 0)
-            {
-                helpsDatabase.Database.Table<Workshop>().Delete(x => x.WorkshopId != null);
-                helpsDatabase.Database.InsertAll(updatedList);
-            }
-        }
-
         public void SetAllByWorkshopSet(List<Workshop> list, int workshopSet)
         {
             var updatedList = list
@@ -49,7 +36,7 @@ namespace helps.Shared.Database
                 .ToList();
             if (list.Count > 0)
             {
-                helpsDatabase.Database.Table<Workshop>().Delete(x => x.WorkshopId == workshopSet);
+                helpsDatabase.Database.Table<Workshop>().Delete(x => x.WorkShopSetId == workshopSet);
                 helpsDatabase.Database.InsertAll(updatedList);
             }
         }
