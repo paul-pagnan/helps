@@ -36,10 +36,21 @@ namespace helps.Shared.Database
                 .ToList();
             if (list.Count > 0)
             {
-                if (GetAll(list.FirstOrDefault().WorkShopSetId).FirstOrDefault() == null)
-                    helpsDatabase.Database.InsertAll(updatedList);
-                else
-                    helpsDatabase.Database.UpdateAll(updatedList);
+                helpsDatabase.Database.Table<Workshop>().Delete(x => x.WorkshopId != null);
+                helpsDatabase.Database.InsertAll(updatedList);
+            }
+        }
+
+        public void SetAllByWorkshopSet(List<Workshop> list, int workshopSet)
+        {
+            var updatedList = list
+                .Select(x => { x.LastUpdated = DateTime.Now; return x; })
+                .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetId).Name; return x; })
+                .ToList();
+            if (list.Count > 0)
+            {
+                helpsDatabase.Database.Table<Workshop>().Delete(x => x.WorkshopId == workshopSet);
+                helpsDatabase.Database.InsertAll(updatedList);
             }
         }
 

@@ -64,7 +64,7 @@ namespace helps.Shared
                     var result = await response.Content.ReadAsAsync<GetResponse<Workshop>>();
                     List<Workshop> decodedResponse = result.Results;
                     if (decodedResponse != null)
-                        workshopTable.SetAll(decodedResponse);
+                        workshopTable.SetAllByWorkshopSet(decodedResponse, workshopSet);
                     CurrentlyUpdating = false;
                     return TranslatePreview(decodedResponse);
                 }
@@ -88,8 +88,46 @@ namespace helps.Shared
 
         public async Task<GenericResponse> Book(int id)
         {
-            return new GenericResponse() {Success = false, Title = "Error", Message = "Not Implmeneted yet"};
+            var queryString = "workshopId=" + id;
+            return await BookingBase("api/workshop/booking/create?", queryString);
         }
+
+        public async Task<GenericResponse> CancelBooking(int id)
+        {
+            var queryString = "workshopId=" + id;
+            return await BookingBase("api/workshop/booking/cancel?", queryString);
+        }
+
+        public async Task<GenericResponse> BookProgram(int programId)
+        {
+            var queryString = "programId=" + programId;
+            return await BookingBase("api/program/booking/create?", queryString);
+        }
+
+        public async Task<GenericResponse> CancelProgram(int programId)
+        {
+            var queryString = "programId=" + programId;
+            return await BookingBase("api/program/booking/cancel?", queryString);
+        }
+
+        private async Task<GenericResponse> BookingBase(string endpoint, string queryString)
+        {
+            var response = await helpsClient.PostAsync(endpoint + queryString + "&studentId=" + AuthService.GetCurrentUser().StudentId + "&userId=" + AuthService.GetCurrentUser().StudentId, null);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsAsync<GetResponse<GenericResponse>>();
+                if (result.IsSuccess)
+                {
+                    GetBookings(true, false, true);
+                    return ResponseHelper.Success();
+                }
+                else
+                    return ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);
+            }
+            return ResponseHelper.CreateErrorResponse("Error", "An unknown error occured");
+        }
+
+
 
         private async Task<bool> UpdateBookings()
         {
@@ -157,6 +195,7 @@ namespace helps.Shared
                 Description = workshop.description ?? "N/A",
                 FilledPlaces = workshop.BookingCount,
                 TotalPlaces = workshop.maximum,
+                ProgramId = workshop.ProgramId,
                 Sessions = sessions
             };
         }

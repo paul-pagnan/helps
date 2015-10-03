@@ -30,10 +30,9 @@ namespace helps.Shared.Database
         public void SetAll(List<WorkshopSet> list)
         {
             var updatedList = list.Select(x => { x.LastUpdated = DateTime.Now; return x; }).ToList();
-            if(First() == null)
-                helpsDatabase.Database.InsertAll(updatedList);
-            else
-                helpsDatabase.Database.UpdateAll(updatedList);
+
+            helpsDatabase.Database.Table<WorkshopSet>().Delete(x => x.Id != null);
+            helpsDatabase.Database.InsertAll(updatedList);
         }
 
         public bool NeedsUpdating()

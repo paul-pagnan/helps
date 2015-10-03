@@ -13,6 +13,7 @@ namespace helps.Shared.DataObjects
         public string Description { get; set; }
         public int FilledPlaces { get; set; }
         public int TotalPlaces { get; set; }
+        public int? ProgramId { get; set; }
         public List<SessionPreview> Sessions { get; set; }
     }
 }

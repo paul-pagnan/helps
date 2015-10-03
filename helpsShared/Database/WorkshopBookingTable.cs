@@ -41,10 +41,9 @@ namespace helps.Shared.Database
                .Select(x => { x.LastUpdated = DateTime.Now; return x; })
                .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetID).Name; return x; })
                .ToList();
-            if (First() == null)
-                helpsDatabase.Database.InsertAll(updatedList);
-            else
-                helpsDatabase.Database.UpdateAll(updatedList);
+
+            helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId != null);
+            helpsDatabase.Database.InsertAll(updatedList);
         }
 
         public bool NeedsUpdating()

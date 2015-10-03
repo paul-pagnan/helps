@@ -41,6 +41,11 @@ namespace helps.Shared
             return userTable.CurrentUser();
         }
 
+        public static User GetCurrentUser()
+        {
+            return userTable.CurrentUser();
+        }
+
         public async Task<GenericResponse> Register(RegisterRequest request)
         {
             try

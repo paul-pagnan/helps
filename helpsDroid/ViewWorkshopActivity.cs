@@ -108,8 +108,13 @@ namespace helps.Droid
         {
             ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
-            var response = await Services.Workshop.Book(workshop.Id);
+            GenericResponse response = null;
+            if (workshop.ProgramId.HasValue)
+                response = await Services.Workshop.BookProgram(workshop.ProgramId.Value);
+            else
+                response = await Services.Workshop.Book(workshop.Id);
             dialog.Hide();
+
             if (response.Success)
             {
                 //TODO Update book button and refresh the page
