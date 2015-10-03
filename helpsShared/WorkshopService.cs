@@ -75,10 +75,9 @@ namespace helps.Shared
         public async Task<List<WorkshopPreview>> GetBookings(bool Current, bool LocalOnly, bool ForceUpdate = false)
         {
             //TODO Introduce Pagination
-            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(Current) || ForceUpdate) && !CurrentlyUpdating))
             {
                 TestConnection();
-
                 CurrentlyUpdating = true;
                 await UpdateBookings(Current);
             }
@@ -87,7 +86,7 @@ namespace helps.Shared
 
         public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false)
         {
-            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(workshopId) || ForceUpdate) && !CurrentlyUpdating))
             {
                 TestConnection();
                 CurrentlyUpdating = true;
@@ -147,23 +146,27 @@ namespace helps.Shared
 
 
 
-        private async Task<bool> UpdateBookings(bool Current)
+        public async Task<bool> UpdateBookings(bool? Current = null)
         {
             var currentUser = userTable.CurrentUser().StudentId;
             var queryString = "studentId=" + currentUser + "&pageSize=9999&active=true";
-            if (Current)
-                queryString += "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" +
-                               DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
-            else
-                queryString += "&startingDtBegin=" + DateTime.MinValue.AddMonths(1).ToString(DateFormat) +
-                               "&startingDtEnd=" + DateTime.Now.ToString(DateFormat);
+            if (Current.HasValue)
+            {
+                if (Current.Value)
+                    queryString += "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" +
+                                   DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
+                else
+                    queryString += "&startingDtBegin=" + DateTime.MinValue.AddYears(2000).ToString(DateFormat) +
+                                   "&startingDtEnd=" + DateTime.Now.ToString(DateFormat);
+            }
 
             var response = await helpsClient.GetAsync("api/workshop/booking/search?" + queryString);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsAsync<GetResponse<WorkshopBooking>>(Formatters());
                 List<WorkshopBooking> decodedResponse = result.Results;
-                workshopBookingTable.SetAll(decodedResponse);
+                if(decodedResponse != null)
+                    await workshopBookingTable.SetAll(decodedResponse, Current);
                 CurrentlyUpdating = false;
                 return true;
             }

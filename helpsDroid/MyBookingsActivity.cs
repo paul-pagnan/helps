@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -33,14 +33,20 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_MyBookings; }
         }
         
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);          
+            base.OnCreate(bundle);
+
+            //Do a Sync now of bookings
+            await Services.Workshop.GetBookings(true, false);
+            await Services.Workshop.GetBookings(false, false);
+
             adapter = new MyPagerAdapter(SupportFragmentManager, this.LayoutInflater);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
             tabs.SetViewPager(pager);
+            FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Gone;
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);

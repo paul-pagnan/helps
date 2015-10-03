@@ -19,13 +19,18 @@
         app:pstsIndicatorColor="@android:color/white"
         app:pstsShouldExpand="true"
         android:textColor="#50FFFFFF" />
-
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:context=".MyBookingsActivity" />
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerInParent="true" />
     <include
         android:id="@+id/NoConnection"
         android:layout_height="wrap_content"

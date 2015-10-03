@@ -61,22 +61,13 @@ namespace helps.Droid
                 refresher.Refreshing = false;
             };
         }
+
         private async void LoadData(bool localOnly, bool force = false)
         {
-            if (position == 0)
-                listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
-            else if (!force)
-            {
-                Looper.Prepare();
-                new Handler().PostDelayed(async () =>
-                {
-                    listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
-                    NotifyListUpdate();
-                }, 1000);
-            } else
-            {
-                listAdapter.AddAll(await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force));
-            }
+            var a = PastOrCurrent();
+            var list = await Services.Workshop.GetBookings(a, localOnly, force);
+            listAdapter.Clear();
+            listAdapter.AddAll(list);
         }
 
         private void NotifyListUpdate()
@@ -93,9 +84,6 @@ namespace helps.Droid
         private async void InitList(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
             await Task.Factory.StartNew(() => LoadData(true));
-            context.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Gone;
-            NotifyListUpdate();
-            await Task.Factory.StartNew(() => BackgroundRefresh());
             NotifyListUpdate();
         }
 
@@ -124,11 +112,5 @@ namespace helps.Droid
             return (position == 0) ? true : false;
         }
 
-        private async void BackgroundRefresh()
-        {
-            var tempList = await Services.Workshop.GetBookings(PastOrCurrent(), false, false);
-            listAdapter.Clear();
-            listAdapter.AddAll(tempList);
-        }
     }
 }

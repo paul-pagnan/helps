@@ -31,31 +31,75 @@ namespace helps.Shared.Database
 
         public List<WorkshopBooking> GetAll(bool Current)
         {
-            if(Current)
-                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended == DateTime.MinValue).OrderBy(x => x.starting).ToList();
+            if (Current)
+            {
+                var b = DateTime.Now;
+                var a = First();
+
+                var list = new List<WorkshopBooking>();
+                foreach (var booking in GetAll())
+                {
+                    if(booking.starting > DateTime.UtcNow) 
+                        list.Add(booking);
+                }
+                //var list = helpsDatabase.Database.Table<WorkshopBooking>()
+                //        .Where(x => x.starting > DateTime.UtcNow)
+                //        .OrderBy(x => x.starting)
+                //        .ToList();
+                return
+                    helpsDatabase.Database.Table<WorkshopBooking>()
+                        .Where(x => x.starting > DateTime.UtcNow)
+                        .OrderBy(x => x.starting)
+                        .ToList();
+
+
+            }
             else
-                return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.attended != DateTime.MinValue).OrderBy(x => x.starting).ToList();
+                return
+                    helpsDatabase.Database.Table<WorkshopBooking>()
+                        .Where(x => x.starting < DateTime.UtcNow)
+                        .OrderBy(x => x.starting)
+                        .ToList();
         }
 
-        public WorkshopBooking First()
+        public WorkshopBooking First(bool? Current = null)
         {
+            if (Current.HasValue)
+                return GetAll(Current.Value).FirstOrDefault();
             return helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault();
         }
 
-        public void SetAll(List<WorkshopBooking> list)
+        public async Task<bool> SetAll(List<WorkshopBooking> list, bool? Current)
         {
             var updatedList = list
                .Select(x => { x.LastUpdated = DateTime.Now; return x; })
-               .Select(x => { x.WorkShopSetName = WorkshopSetTable.Get(x.WorkShopSetID).Name; return x; })
+               .Select(x =>
+               {
+                   var set = WorkshopSetTable.Get(x.WorkShopSetID);
+                   if(set != null)
+                        x.WorkShopSetName = set.Name;
+                   return x;
+               })
                .ToList();
 
-            helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId != null);
-            helpsDatabase.Database.InsertAll(updatedList);
+            if (Current.HasValue)
+            {
+                foreach (var booking in GetAll(Current.Value))
+                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId == booking.BookingId);
+            }
+            helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
+            return true;
         }
 
-        public bool NeedsUpdating()
+        public bool NeedsUpdating(bool Current)
         {
-            var record = First();
+            var record = First(Current);
+            return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
+        }
+
+        public bool NeedsUpdating(int workshopId)
+        {
+            var record = GetByWorkshopId(workshopId);
             return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
 
