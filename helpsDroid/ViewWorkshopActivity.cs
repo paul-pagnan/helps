@@ -15,6 +15,7 @@ using helps.Shared.Consts;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
 using System.Threading.Tasks;
+using com.refractored.fab;
 using Newtonsoft.Json.Bson;
 
 namespace helps.Droid
@@ -40,8 +41,12 @@ namespace helps.Droid
 
         private Button bookButton;
         private Button cancelButton;
-        private Button waitlistButton; 
+        private Button waitlistButton;
+        private FloatingActionButton fab;
 
+        private bool IsBooking;
+
+        private Color color;
 
         protected override int LayoutResource
         {
@@ -63,7 +68,7 @@ namespace helps.Droid
                 int workshopId = extras.GetInt("WorkshopId");
 
                 string[] colorArr = extras.GetString("Color").Split(',');
-                var color = Color.Argb(Int32.Parse(colorArr[0]), Int32.Parse(colorArr[1]), Int32.Parse(colorArr[2]),
+                color = Color.Argb(Int32.Parse(colorArr[0]), Int32.Parse(colorArr[1]), Int32.Parse(colorArr[2]),
                     Int32.Parse(colorArr[3]));
 
                 //Style the view to match workshop
@@ -72,8 +77,7 @@ namespace helps.Droid
                 toolbarLayout.SetBackgroundColor(color);
                 Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
 
-
-                if (extras.GetBoolean("IsBooking"))
+                if (IsBooking = extras.GetBoolean("IsBooking"))
                     workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
                 else
                     workshop = Services.Workshop.GetWorkshop(workshopId);
@@ -110,6 +114,11 @@ namespace helps.Droid
                 var view = sessionsListAdapter.GetView(i, null, sessionsList);
                 sessionsList.AddView(view);
             }
+
+            fab.ColorNormal = Color.Argb(color.A - 100, color.R, color.G, color.B);
+            fab.ColorPressed = Color.Argb(color.A - 50, color.R, color.G, color.B);
+            fab.ColorRipple = color;
+            fab.HasShadow = true;
         }
 
         private void UpdateButtons()
@@ -157,6 +166,10 @@ namespace helps.Droid
             bookingsContainer = FindViewById<RelativeLayout>(Resource.Id.bookingsContainer);
             if (workshop.FilledPlaces == -1)
                 bookingsContainer.Visibility = ViewStates.Gone;
+
+            fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
+            if (IsBooking)
+                fab.Visibility = ViewStates.Visible;
             
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);

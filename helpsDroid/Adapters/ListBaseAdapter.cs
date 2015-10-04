@@ -19,7 +19,7 @@ namespace helps.Droid.Adapters
     public class ListBaseAdapter : BaseAdapter
     {
         public static Random rng = new Random();
-        public List<Color> colors;
+        public static List<Color> colors;
         public List<MyList> TheList;
 
         public ListBaseAdapter()

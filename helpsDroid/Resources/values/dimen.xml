@@ -11,6 +11,7 @@
   <dimen name="list_item_height">145dp</dimen>
   <dimen name="list_session_height">15dp</dimen>
   <dimen name="large_toolbar">100dp</dimen>
+  <dimen name="large_toolbar_fab_margin">70dp</dimen>
 
   <dimen name="text_size">16dp</dimen>
 
