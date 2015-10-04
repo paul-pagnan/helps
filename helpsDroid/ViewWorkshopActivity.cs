@@ -15,8 +15,11 @@ using helps.Shared.Consts;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
 using System.Threading.Tasks;
+using Android.Animation;
 using com.refractored.fab;
 using Newtonsoft.Json.Bson;
+using Android.Views.Animations;
+using Java.Lang;
 
 namespace helps.Droid
 {
@@ -24,7 +27,7 @@ namespace helps.Droid
     public class ViewWorkshopActivity : Main
     {
         private WorkshopDetail workshop;
-        private WorkshopBooking booking; 
+        private WorkshopBooking booking;
 
         private TextView title;
         private TextView room;
@@ -37,6 +40,11 @@ namespace helps.Droid
         private RelativeLayout sessionContainer;
         private RelativeLayout bookingsContainer;
 
+        private ScrollView mainLayout;
+        private ScrollView editLayout;
+        private ViewFlipper flipper;
+
+
         private SessionListAdapter sessionsListAdapter;
 
         private Button bookButton;
@@ -47,13 +55,16 @@ namespace helps.Droid
         private bool IsBooking;
 
         private Color color;
+        private int colorDiff = 35;
+
+        private bool IsEditing;
 
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_ViewWorkshop; }
         }
 
-        protected async override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -86,6 +97,12 @@ namespace helps.Droid
                 InitComponents();
                 UpdateFields();
 
+                if (bundle != null)
+                {
+                    int flipperPosition = bundle.GetInt("TAB_NUMBER");
+                    flipper.DisplayedChild = flipperPosition;
+                }
+
                 //Load booking information so the buttons can be updated
                 //Get Local Data First, then update later
                 await Task.Factory.StartNew(() => LoadBooking(true));
@@ -115,8 +132,8 @@ namespace helps.Droid
                 sessionsList.AddView(view);
             }
 
-            fab.ColorNormal = Color.Argb(color.A - 100, color.R, color.G, color.B);
-            fab.ColorPressed = Color.Argb(color.A - 50, color.R, color.G, color.B);
+            fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff, color.G + colorDiff, color.B + colorDiff);
+            fab.ColorPressed = Color.Argb(color.A, color.R + (colorDiff / 3), color.G + (colorDiff / 3), color.B + (colorDiff / 3));
             fab.ColorRipple = color;
             fab.HasShadow = true;
         }
@@ -168,14 +185,18 @@ namespace helps.Droid
                 bookingsContainer.Visibility = ViewStates.Gone;
 
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            if (IsBooking)
+            //if (IsBooking)
                 fab.Visibility = ViewStates.Visible;
-            
+
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
             waitlistButton = FindViewById<Button>(Resource.Id.WaitlistBtn);
+
+            mainLayout = FindViewById<ScrollView>(Resource.Id.mainLayout);
+            editLayout = FindViewById<ScrollView>(Resource.Id.editLayout);
+            flipper = FindViewById<ViewFlipper>(Resource.Id.flipper);
         }
-    
+
         [Java.Interop.Export()]
         public async void Book(View view)
         {
@@ -203,7 +224,8 @@ namespace helps.Droid
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.SetTitle("Are you sure?");
-            builder.SetMessage("NOTE: Cancelling a booking which is part of a program (series of workshops) will cancel all bookings in that program");
+            builder.SetMessage(
+                "NOTE: Cancelling a booking which is part of a program (series of workshops) will cancel all bookings in that program");
             builder.SetCancelable(false);
             builder.SetPositiveButton("Yes", delegate { ActuallyCancel(); });
             builder.SetNegativeButton("No", delegate { });
@@ -228,6 +250,85 @@ namespace helps.Droid
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
+        }
+
+        [Java.Interop.Export()]
+        public async void Edit(View view)
+        {
+            Animation animOut = AnimationUtils.LoadAnimation(this, Resource.Animation.fadeout);
+            fab.StartAnimation(animOut);
+            animOut.AnimationEnd += (sender, e) =>
+            {
+                IsEditing = !IsEditing;
+                AnimateButton();
+                FlipView();
+                //Do something productive here
+            };
+        }
+
+        public override void OnBackPressed()
+        {
+            if (Back())
+                return;
+            base.OnBackPressed();
+        }
+
+        public bool Back()
+        {
+            if (flipper.DisplayedChild > 0)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.SetMessage(
+                    "Are you sure you want to discard changes to this booking?");
+                builder.SetCancelable(false);
+                builder.SetPositiveButton("Keep Editing", delegate {  });
+                builder.SetNegativeButton("Discard", delegate { IsEditing = !IsEditing; AnimateButton(); FlipView(true); });
+                builder.Show();
+                return true;
+            }
+            return false;
+        }
+
+        private void AnimateButton()
+        { 
+            if (IsEditing)
+                fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_check_24px));
+            else
+                fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_mode_edit_24px));
+
+            int opp = (IsEditing) ? (255 / 2) : 0;
+            fab.ColorNormal = Color.Argb(color.A, color.R + opp + colorDiff, color.G + opp + colorDiff, color.B + opp + colorDiff);
+            fab.ColorPressed = Color.Argb(color.A, color.R + opp + (colorDiff / 3), color.G + opp + (colorDiff / 3), color.B + opp + (colorDiff / 3));
+            fab.ColorRipple = Color.Argb(color.A, color.R + opp, color.G + opp, color.B + opp);
+
+            Animation animIn = AnimationUtils.LoadAnimation(this, Resource.Animation.fadein);
+            fab.StartAnimation(animIn);
+        }
+
+        
+
+        public bool FlipView(bool trash = false)
+        {
+            int index = flipper.DisplayedChild;
+            int InAnimation = (index > 0) ? Resource.Animation.slide_in_from_left : Resource.Animation.appear_from_top_right;
+            int OutAnimation = (index > 0) ? Resource.Animation.dissapear_to_top_right : Resource.Animation.slide_out_to_left;
+
+            if (trash)
+                OutAnimation = Resource.Animation.dissapear_to_bottom_right;
+
+            flipper.SetInAnimation(this, InAnimation);
+            flipper.SetOutAnimation(this, OutAnimation);
+            if (index > 0)
+                flipper.ShowPrevious();
+            else
+                flipper.ShowNext();
+            return true;
+        }
+
+        protected override void OnSaveInstanceState(Bundle bundle)
+        {
+            int position = flipper.DisplayedChild;
+            bundle.PutInt("TAB_NUMBER", position);
         }
     }
 }

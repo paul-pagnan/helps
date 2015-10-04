@@ -56,234 +56,258 @@
         fab:fab_colorNormal="@color/primary"
         fab:fab_colorPressed="@color/primaryDark"
         fab:fab_colorRipple="@color/primaryDark"
-        p1:visibility="gone" />
-    <ScrollView
+        p1:visibility="gone"
+        p1:onClick="Edit" />
+    <ViewFlipper
+        p1:id="@+id/flipper"
         p1:layout_width="fill_parent"
         p1:layout_height="fill_parent"
-        p1:minWidth="25px"
-        p1:minHeight="25px"
         p1:layout_below="@id/layouttoolbarLarge">
-        <LinearLayout
-            p1:orientation="vertical"
-            p1:minWidth="25px"
-            p1:minHeight="25px"
+        <ScrollView
+            p1:id="@+id/mainLayout"
             p1:layout_width="fill_parent"
-            p1:layout_height="wrap_content"
-            p1:layout_below="@id/Ttoolbar"
-            p1:id="@+id/linearLayout1">
-            <RelativeLayout
-                p1:orientation="horizontal"
+            p1:layout_height="fill_parent"
+            p1:minWidth="25px"
+            p1:elevation="2dp"
+            p1:minHeight="25px">
+            <LinearLayout
+                p1:orientation="vertical"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:paddingRight="@dimen/layout_padding"
-                p1:layout_width="fill_parent"
-                p1:paddingTop="@dimen/layout_padding"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout4">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoClock"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_clock_o"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="DateValue"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewDateValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="2dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoClock" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:paddingRight="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:id="@+id/linearLayout2">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoRoom"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_map_marker"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="RoomValue"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewRoomValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="2dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoRoom" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:paddingRight="@dimen/layout_padding"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout5">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoTarget"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_bullseye"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="Target Group Value"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewTargetGroupValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="2dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoTarget" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout5">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoList"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_list_ul"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="Description"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewWhatItCoversValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="2dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoList" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:paddingLeft="@dimen/layout_padding"
-                p1:layout_marginBottom="@dimen/form_margin_body"
-                p1:paddingRight="@dimen/layout_padding"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/bookingsContainer">
-                <helps.Droid.Extensions.FontAwesome
-                    p1:id="@+id/icoPlaces"
-                    p1:layout_width="@dimen/icon_size"
-                    p1:layout_height="wrap_content"
-                    p1:text="@string/fa_users"
-                    p1:textSize="@dimen/icon_size"
-                    p1:layout_marginRight="@dimen/icon_margin" />
-                <TextView
-                    p1:text="Places Available"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/textViewPlaceAvailableValue"
-                    p1:textColor="@color/text_dark"
-                    p1:paddingTop="2dp"
-                    p1:textSize="@dimen/text_size"
-                    p1:layout_toRightOf="@id/icoPlaces" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:id="@+id/sessionContainer"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content">
+                p1:layout_below="@id/Ttoolbar"
+                p1:id="@+id/linearLayout1">
                 <RelativeLayout
                     p1:orientation="horizontal"
                     p1:minWidth="25px"
                     p1:minHeight="25px"
-                    p1:layout_width="fill_parent"
-                    p1:layout_height="1dip"
-                    p1:background="#D6D6D6"
-                    p1:id="@+id/linearLayout7"
-                    p1:layout_marginBottom="@dimen/form_margin" />
-                <TextView
-                    p1:text="Sessions"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewWSessions"
                     p1:paddingLeft="@dimen/layout_padding"
                     p1:paddingRight="@dimen/layout_padding"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="50dp"
-                    p1:gravity="bottom"
-                    p1:layout_marginRight="10dp"
-                    p1:layout_marginBottom="@dimen/form_margin" />
-                <LinearLayout
+                    p1:layout_width="fill_parent"
+                    p1:paddingTop="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/linearLayout4">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoClock"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_clock_o"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="DateValue"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewDateValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoClock" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
                     p1:layout_width="fill_parent"
                     p1:layout_height="wrap_content"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:id="@+id/linearLayout2">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoRoom"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_map_marker"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="RoomValue"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewRoomValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoRoom" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
                     p1:paddingLeft="@dimen/layout_padding"
                     p1:paddingRight="@dimen/layout_padding"
-                    p1:paddingTop="@dimen/form_margin"
-                    p1:id="@+id/listViewSessions"
-                    p1:gravity="left"
-                    p1:layout_marginBottom="@dimen/form_margin"
-                    p1:layout_marginTop="@dimen/form_margin" />
-            </RelativeLayout>
-            <Button
-                p1:text="Book"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/BookBtn"
-                p1:textColor="#FFFFFF"
-                p1:background="@drawable/flat_selector_success"
-                style="?android:attr/borderlessButtonStyle"
-                p1:onClick="Book"
-                p1:layout_alignParentBottom="true" />
-            <Button
-                p1:text="Join Waitlist"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/WaitlistBtn"
-                p1:textColor="#FFFFFF"
-                p1:background="@drawable/flat_selector_warning"
-                style="?android:attr/borderlessButtonStyle"
-                p1:onClick="Waitlist"
-                p1:layout_alignParentBottom="true"
-                p1:visibility="gone" />
-            <Button
-                p1:text="Cancel Booking"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/CancelBtn"
-                p1:textColor="#FFFFFF"
-                p1:background="@drawable/flat_selector"
-                style="?android:attr/borderlessButtonStyle"
-                p1:onClick="Cancel"
-                p1:layout_alignParentBottom="true"
-                p1:visibility="gone" />
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/linearLayout5">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoTarget"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_bullseye"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Target Group Value"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewTargetGroupValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoTarget" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/linearLayout5">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoList"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_list_ul"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Description"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewWhatItCoversValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoList" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/bookingsContainer">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoPlaces"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_users"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Places Available"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewPlaceAvailableValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoPlaces" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:id="@+id/sessionContainer"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content">
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:layout_width="fill_parent"
+                        p1:layout_height="1dip"
+                        p1:background="#D6D6D6"
+                        p1:id="@+id/linearLayout7"
+                        p1:layout_marginBottom="@dimen/form_margin" />
+                    <TextView
+                        p1:text="Sessions"
+                        p1:textAppearance="?android:attr/textAppearanceMedium"
+                        p1:id="@+id/textViewWSessions"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="50dp"
+                        p1:gravity="bottom"
+                        p1:layout_marginRight="10dp"
+                        p1:layout_marginBottom="@dimen/form_margin" />
+                    <LinearLayout
+                        p1:layout_width="fill_parent"
+                        p1:layout_height="wrap_content"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:paddingTop="@dimen/form_margin"
+                        p1:id="@+id/listViewSessions"
+                        p1:gravity="left"
+                        p1:layout_marginBottom="@dimen/form_margin"
+                        p1:layout_marginTop="@dimen/form_margin" />
+                </RelativeLayout>
+                <Button
+                    p1:text="Book"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/BookBtn"
+                    p1:textColor="#FFFFFF"
+                    p1:background="@drawable/flat_selector_success"
+                    style="?android:attr/borderlessButtonStyle"
+                    p1:onClick="Book"
+                    p1:layout_alignParentBottom="true" />
+                <Button
+                    p1:text="Join Waitlist"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/WaitlistBtn"
+                    p1:textColor="#FFFFFF"
+                    p1:background="@drawable/flat_selector_warning"
+                    style="?android:attr/borderlessButtonStyle"
+                    p1:onClick="Waitlist"
+                    p1:layout_alignParentBottom="true"
+                    p1:visibility="gone" />
+                <Button
+                    p1:text="Cancel Booking"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/CancelBtn"
+                    p1:textColor="#FFFFFF"
+                    p1:background="@drawable/flat_selector"
+                    style="?android:attr/borderlessButtonStyle"
+                    p1:onClick="Cancel"
+                    p1:layout_alignParentBottom="true"
+                    p1:visibility="gone" />
+                <TextView
+                    p1:text="You are currently waitlisted"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/txtWaitlist"
+                    p1:visibility="gone" />
+            </LinearLayout>
+        </ScrollView>
+        <ScrollView
+            p1:id="@+id/editLayout"
+            p1:layout_width="fill_parent"
+            p1:layout_height="fill_parent"
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:elevation="2dp"
+            p1:background="@color/primary"
+            p1:layout_below="@id/layouttoolbarLarge">
             <TextView
-                p1:text="You are currently waitlisted"
+                p1:text="test"
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/txtWaitlist"
-                p1:visibility="gone" />
-        </LinearLayout>
-    </ScrollView>
+                p1:id="@+id/txtWaitlist" />
+        </ScrollView>
+    </ViewFlipper>
     <include
         p1:id="@+id/NoConnection"
         p1:layout_height="wrap_content"
