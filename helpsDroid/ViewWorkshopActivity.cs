@@ -15,6 +15,7 @@ using helps.Shared.Consts;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Bson;
 
 namespace helps.Droid
 {
@@ -33,14 +34,13 @@ namespace helps.Droid
         private LinearLayout sessionsList;
         private RelativeLayout toolbarLayout;
         private RelativeLayout sessionContainer;
+        private RelativeLayout bookingsContainer;
 
         private SessionListAdapter sessionsListAdapter;
 
-
         private Button bookButton;
         private Button cancelButton;
-        private Button waitlistButton;
-
+        private Button waitlistButton; 
 
 
         protected override int LayoutResource
@@ -59,18 +59,30 @@ namespace helps.Droid
             Bundle extras = Intent.Extras;
             if (extras != null)
             {
+                //Get vars from bundle
                 int workshopId = extras.GetInt("WorkshopId");
+
                 string[] colorArr = extras.GetString("Color").Split(',');
                 var color = Color.Argb(Int32.Parse(colorArr[0]), Int32.Parse(colorArr[1]), Int32.Parse(colorArr[2]),
                     Int32.Parse(colorArr[3]));
+
+                //Style the view to match workshop
                 Toolbar.SetBackgroundColor(color);
                 toolbarLayout = FindViewById<RelativeLayout>(Resource.Id.layouttoolbarLarge);
                 toolbarLayout.SetBackgroundColor(color);
                 Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
-                workshop = Services.Workshop.GetWorkshop(workshopId);
+
+
+                if (extras.GetBoolean("IsBooking"))
+                    workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
+                else
+                    workshop = Services.Workshop.GetWorkshop(workshopId);
+
+                //Update the view
                 InitComponents();
                 UpdateFields();
 
+                //Load booking information so the buttons can be updated
                 //Get Local Data First, then update later
                 await Task.Factory.StartNew(() => LoadBooking(true));
 
@@ -118,7 +130,7 @@ namespace helps.Droid
 
         private async void LoadBooking(bool localOnly, bool force = false)
         {
-            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
+            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force, true);
             RunOnUiThread(delegate
             {
                 UpdateButtons();
@@ -142,6 +154,10 @@ namespace helps.Droid
             if (workshop.Sessions.Count == 0)
                 sessionContainer.Visibility = ViewStates.Gone;
 
+            bookingsContainer = FindViewById<RelativeLayout>(Resource.Id.bookingsContainer);
+            if (workshop.FilledPlaces == -1)
+                bookingsContainer.Visibility = ViewStates.Gone;
+            
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
             waitlistButton = FindViewById<Button>(Resource.Id.WaitlistBtn);
@@ -170,15 +186,25 @@ namespace helps.Droid
         }
 
         [Java.Interop.Export()]
-        public async void Cancel(View view)
+        public void Cancel(View view)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Are you sure?");
+            builder.SetMessage("NOTE: Cancelling a booking which is part of a program (series of workshops) will cancel all bookings in that program");
+            builder.SetCancelable(false);
+            builder.SetPositiveButton("Yes", delegate { ActuallyCancel(); });
+            builder.SetNegativeButton("No", delegate { });
+            builder.Show();
+        }
+
+        private async void ActuallyCancel()
         {
             ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
             GenericResponse response = null;
-            if (workshop.ProgramId.HasValue)
-                response = await Services.Workshop.CancelProgram(workshop.ProgramId.Value);
-            else
-                response = await Services.Workshop.CancelBooking(workshop.Id);
+
+            response = await Services.Workshop.CancelBooking(workshop.Id);
+
             dialog.Hide();
 
             if (response.Success)

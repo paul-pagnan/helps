@@ -79,6 +79,7 @@ namespace helps.Droid
             var intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
             intent.PutExtra("WorkshopId", id);
             intent.PutExtra("Color", color.A + "," + color.R + "," + color.G + "," + color.B);
+            intent.PutExtra("ExpandProgram", true);
             StartActivity(intent);
         }
 

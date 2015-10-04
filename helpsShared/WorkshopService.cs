@@ -44,8 +44,14 @@ namespace helps.Shared
         {
             var workshop = workshopTable.Get(workshopId);
             if (workshop.type == "multiple")
-                return TranslateDetail(workshopTable.GetProgramWorkshops(workshop.ProgramId.GetValueOrDefault()));
-            return TranslateDetail(new List<Workshop>() { workshopTable.Get(workshopId) });
+                return Translater.TranslateDetail(workshopTable.GetProgramWorkshops(workshop.ProgramId.GetValueOrDefault()));
+            return Translater.TranslateDetail(new List<Workshop>() { workshop });
+        }
+
+        public async Task<WorkshopDetail> GetWorkshopFromBooking(int workshopId)
+        {
+            var booking = workshopBookingTable.GetByWorkshopId(workshopId);
+            return await Translater.TranslateDetail(booking);
         }
 
         public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
@@ -65,12 +71,13 @@ namespace helps.Shared
                     if (decodedResponse != null)
                         workshopTable.SetAllByWorkshopSet(decodedResponse, workshopSet);
                     CurrentlyUpdating = false;
-                    return TranslatePreview(decodedResponse);
+                    return Translater.TranslatePreview(decodedResponse);
                 }
             }
-            return TranslatePreview(workshopTable.GetAll(workshopSet));
+            return Translater.TranslatePreview(workshopTable.GetAll(workshopSet));
         }
 
+      
 
         public async Task<List<WorkshopPreview>> GetBookings(bool Current, bool LocalOnly, bool ForceUpdate = false)
         {
@@ -81,10 +88,10 @@ namespace helps.Shared
                 CurrentlyUpdating = true;
                 await UpdateBookings(Current);
             }
-            return await TranslatePreview(workshopBookingTable.GetAll(Current));
+            return await Translater.TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
-        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false)
+        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false, bool Current = false)
         {
             if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(workshopId) || ForceUpdate) && !CurrentlyUpdating))
             {
@@ -92,7 +99,7 @@ namespace helps.Shared
                 CurrentlyUpdating = true;
                 await UpdateBookings(true);
             }
-            return workshopBookingTable.GetByWorkshopId(workshopId);
+            return workshopBookingTable.GetByWorkshopId(workshopId, Current);
         }
 
         public async Task<GenericResponse> Book(int id)
@@ -103,6 +110,10 @@ namespace helps.Shared
 
         public async Task<GenericResponse> CancelBooking(int id)
         {
+            var workshop = workshopTable.Get(id);
+            if (workshop != null && workshop.ProgramId.HasValue) 
+                return await CancelProgram(workshop.ProgramId.Value);
+
             var queryString = "workshopId=" + id;
             var response = await BookingBase("api/workshop/booking/cancel?", queryString);
             if(response.Success)
@@ -171,123 +182,6 @@ namespace helps.Shared
                 return true;
             }
             return false;
-        }
-
-        private async Task<List<WorkshopPreview>> TranslatePreview(List<WorkshopBooking> list)
-        {
-            List<WorkshopPreview> translated = new List<WorkshopPreview>();
-            foreach (WorkshopBooking booking in list)
-            {
-                translated.Add(new WorkshopPreview
-                {
-                    Id = booking.workshopId,
-                    Name = booking.topic,
-                    WorkshopSet = booking.WorkShopSetID,
-                    NumSessions = booking.WorkShopSetName,
-                    Time = HumanizeTimeSpan(booking.starting, booking.ending),
-                    DateHumanFriendly = HumanizeDate(booking.starting),
-                    Location = await MiscServices.GetCampus(booking.campusID),
-                    FilledPlaces = -1,
-                    TotalPlaces = booking.maximum
-                });
-            }
-            return translated;
-        }
-
-        private WorkshopDetail TranslateDetail(List<Workshop> workshops)
-        {
-            List<SessionPreview> sessions = new List<SessionPreview>();
-            if (workshops.First().type == "multiple")
-            {
-                foreach (Workshop session in workshops)
-                {
-                    sessions.Add(new SessionPreview()
-                    {
-                        Id = session.WorkshopId,
-                        Title = HumanizeDate(session.StartDate, true),
-                        Time = HumanizeTimeSpan(session.StartDate, session.EndDate),
-                        Location = session.campus
-                    });
-                }
-            }
-
-            var workshop = workshops.FirstOrDefault();
-            return new WorkshopDetail()
-            {
-                Id = workshop.WorkshopId,
-                Title = workshop.topic,
-                Room = workshop.campus,
-                Time = (workshop.type != "multiple") ? HumanizeTimeSpan(workshop.StartDate, workshop.EndDate) : null,
-                DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : workshop.StartDate.ToString("dd/MM/yyyy"),
-                TargetGroup = workshop.targetingGroup ?? "N/A",
-                Description = workshop.description ?? "N/A",
-                FilledPlaces = workshop.BookingCount,
-                TotalPlaces = workshop.maximum,
-                ProgramId = workshop.ProgramId,
-                Sessions = sessions
-            };
-        }
-
-
-        private List<WorkshopPreview> TranslatePreview(List<Workshop> list)
-        {
-            List<WorkshopPreview> translated = new List<WorkshopPreview>();
-            List<int> programs = new List<int>();
-            foreach (Workshop workshop in list)
-            {
-                if (!programs.Contains(workshop.ProgramId.GetValueOrDefault()))
-                {
-                    programs.Add(workshop.ProgramId.GetValueOrDefault());
-                    translated.Add(new WorkshopPreview
-                    {
-                        Id = workshop.WorkshopId,
-                        Name = workshop.topic,
-                        WorkshopSet = workshop.WorkShopSetId,
-                        NumSessions = (workshop.type == "multiple") ? "Num of Sessions: " + workshop.NumOfWeeks : "",
-                        Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
-                        DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
-                        Location = workshop.campus,
-                        FilledPlaces = workshop.BookingCount,
-                        TotalPlaces = workshop.maximum
-                    });
-                }
-            }
-            return translated;
-        }
-
-        private string HumanizeDate(DateTime starting, bool IncludeDay = false)
-        {
-            var humanized = starting.ToString("dd/MM/yyyy");
-            bool Past = starting < DateTime.Now;
-
-            if (starting < DateTime.Now.AddDays(1) && !Past)
-                humanized = "Today";
-            else if (starting < DateTime.Now.AddDays(2) && !Past)
-                humanized = "Tomorrow";
-            else if (IncludeDay)
-                humanized = starting.DayOfWeek + " " + humanized;
-            return humanized;
-        }
-
-        private string HumanizeDate(DateTime starting, DateTime ending) 
-        {
-            return starting.ToString("dd/MM/yyyy") + " - " + ending.ToString("dd/MM/yyyy");
-        }
-
-        private string HumanizeTimeSpan(DateTime start, DateTime end)
-        {
-            return To12Hour(start.Hour).ToString() + " - " + To12Hour(end.Hour).ToString() + " " + Meridiem(end.Hour);
-        }
-
-        private int To12Hour(int Hour)
-        {
-            return (Hour > 12) ? (Hour - 12) : Hour;
-        }
-
-       
-        private string Meridiem(int Hour)
-        {
-            return (Hour >= 12) ? "PM" : "AM";
         }
     }
 }

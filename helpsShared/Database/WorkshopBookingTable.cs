@@ -17,9 +17,11 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<WorkshopBooking>().ToList<WorkshopBooking>();
         }
 
-        public WorkshopBooking GetByWorkshopId(int id)
+        public WorkshopBooking GetByWorkshopId(int id, bool Current = false)
         {
-            return helpsDatabase.Database.Table<WorkshopBooking>().Where(x => x.workshopId == id).FirstOrDefault();
+            var a = GetAll(Current);
+            var b = helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault(x => x.workshopId == id && x.starting > DateTime.UtcNow);
+            return b;
         }
 
         public void RemoveBookingByWorkshopId(int id)
@@ -27,40 +29,20 @@ namespace helps.Shared.Database
             helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.workshopId == id);
         }
 
-
-
         public List<WorkshopBooking> GetAll(bool Current)
         {
             if (Current)
-            {
-                var b = DateTime.Now;
-                var a = First();
-
-                var list = new List<WorkshopBooking>();
-                foreach (var booking in GetAll())
-                {
-                    if(booking.starting > DateTime.UtcNow) 
-                        list.Add(booking);
-                }
-                //var list = helpsDatabase.Database.Table<WorkshopBooking>()
-                //        .Where(x => x.starting > DateTime.UtcNow)
-                //        .OrderBy(x => x.starting)
-                //        .ToList();
                 return
                     helpsDatabase.Database.Table<WorkshopBooking>()
                         .Where(x => x.starting > DateTime.UtcNow)
                         .OrderBy(x => x.starting)
                         .ToList();
-
-
-            }
-            else
-                return
-                    helpsDatabase.Database.Table<WorkshopBooking>()
-                        .Where(x => x.starting < DateTime.UtcNow)
-                        .OrderBy(x => x.starting)
-                        .ToList();
-        }
+            return
+                helpsDatabase.Database.Table<WorkshopBooking>()
+                    .Where(x => x.starting < DateTime.UtcNow)
+                    .OrderByDescending(x => x.starting)
+                    .ToList();
+    }
 
         public WorkshopBooking First(bool? Current = null)
         {

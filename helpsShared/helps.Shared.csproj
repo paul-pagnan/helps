@@ -58,6 +58,7 @@
     <Compile Include="DataObjects\Auth\User.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopSet.cs" />
     <Compile Include="Helpers\ResponseHelper.cs" />
+    <Compile Include="Helpers\Translater.cs" />
     <Compile Include="INetworkConnection.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MiscServices.cs" />

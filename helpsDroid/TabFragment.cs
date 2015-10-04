@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System;
 using Android.Support.V4.Widget;
 using Android.Views;
+using Android.Content;
 
 namespace helps.Droid
 {
@@ -44,6 +45,17 @@ namespace helps.Droid
             InitList(root, inflater);
 
             ViewCompat.SetElevation(root, 50);
+
+            list.ItemClick += (sender, e) =>
+            {
+                var intent = new Intent(container.Context, typeof(ViewWorkshopActivity));
+                intent.PutExtra("WorkshopId", (int)e.Id);
+                intent.PutExtra("IsBooking", true);
+                var color = listAdapter.ItemColor((int) e.Id);
+                intent.PutExtra("Color", color.A + "," + color.R + "," + color.G + "," + color.B);
+                StartActivity(intent);
+            };
+
             return root;
         }
 
@@ -74,11 +86,6 @@ namespace helps.Droid
         {
             listAdapter.NotifyDataSetChanged();
             refresher.Refreshing = false;
-
-            list.ItemClick += (sender, e) =>
-            {
-                //Show Booking
-            };
         }
 
         private async void InitList(Android.Views.View context, Android.Views.LayoutInflater inflater)

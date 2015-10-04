@@ -173,7 +173,7 @@
                 p1:paddingRight="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout6">
+                p1:id="@+id/bookingsContainer">
                 <helps.Droid.Extensions.FontAwesome
                     p1:id="@+id/icoPlaces"
                     p1:layout_width="@dimen/icon_size"
