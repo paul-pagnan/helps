@@ -62,7 +62,8 @@ namespace helps.Shared.Helpers
                 TotalPlaces = workshop.maximum,
                 ProgramId = workshop.ProgramId,
                 Sessions = sessions,
-                Type = workshop.type
+                Type = workshop.type,
+                WorkshopSetId = workshop.WorkShopSetId
             };
         }
 
@@ -80,7 +81,8 @@ namespace helps.Shared.Helpers
                 TotalPlaces = booking.maximum,
                 FilledPlaces = -1,
                 Sessions = new List<SessionPreview>(),
-                Type = booking.type
+                Type = booking.type,
+                WorkshopSetId = booking.WorkShopSetID
             };
         }
 

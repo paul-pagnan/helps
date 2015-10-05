@@ -78,9 +78,14 @@ namespace helps.Droid
                 //Get vars from bundle
                 int workshopId = extras.GetInt("WorkshopId");
 
-                string[] colorArr = extras.GetString("Color").Split(',');
-                color = Color.Argb(Int32.Parse(colorArr[0]), Int32.Parse(colorArr[1]), Int32.Parse(colorArr[2]),
-                    Int32.Parse(colorArr[3]));
+                //Get the Booking Details
+                if (IsBooking = extras.GetBoolean("IsBooking"))
+                    workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
+                else
+                    workshop = Services.Workshop.GetWorkshop(workshopId);
+
+                ListBaseAdapter.InitColors(Resources);
+                color = ListBaseAdapter.GetColor(workshop.WorkshopSetId);
 
                 //Style the view to match workshop
                 Toolbar.SetBackgroundColor(color);
@@ -88,18 +93,20 @@ namespace helps.Droid
                 toolbarLayout.SetBackgroundColor(color);
                 Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
 
-                if (IsBooking = extras.GetBoolean("IsBooking"))
-                    workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
-                else
-                    workshop = Services.Workshop.GetWorkshop(workshopId);
 
                 //Update the view
                 InitComponents();
                 UpdateFields();
 
+                // Maintain view once the view has been rotated
                 if (bundle != null)
                 {
                     int flipperPosition = bundle.GetInt("TAB_NUMBER");
+                    if (flipperPosition > 0)
+                    {
+                        IsEditing = true;
+                        AnimateButton();
+                    }
                     flipper.DisplayedChild = flipperPosition;
                 }
 
@@ -132,11 +139,10 @@ namespace helps.Droid
                 sessionsList.AddView(view);
             }
 
-            fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff, color.G + colorDiff, color.B + colorDiff);
-            fab.ColorPressed = Color.Argb(color.A, color.R + (colorDiff / 3), color.G + (colorDiff / 3), color.B + (colorDiff / 3));
-            fab.ColorRipple = color;
-            fab.HasShadow = true;
+            SetButtonColor();
         }
+
+
 
         private void UpdateButtons()
         {
@@ -296,16 +302,19 @@ namespace helps.Droid
             else
                 fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_mode_edit_24px));
 
-            int opp = (IsEditing) ? (255 / 2) : 0;
-            fab.ColorNormal = Color.Argb(color.A, color.R + opp + colorDiff, color.G + opp + colorDiff, color.B + opp + colorDiff);
-            fab.ColorPressed = Color.Argb(color.A, color.R + opp + (colorDiff / 3), color.G + opp + (colorDiff / 3), color.B + opp + (colorDiff / 3));
-            fab.ColorRipple = Color.Argb(color.A, color.R + opp, color.G + opp, color.B + opp);
-
+            SetButtonColor();
             Animation animIn = AnimationUtils.LoadAnimation(this, Resource.Animation.fadein);
             fab.StartAnimation(animIn);
         }
 
-        
+        private void SetButtonColor()
+        {
+            int opp = (IsEditing) ? (255 / 2) : 0;
+            fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff + opp, color.G + opp + colorDiff, color.B + opp + colorDiff);
+            fab.ColorPressed = Color.Argb(color.A, color.R + opp + (colorDiff / 3), color.G + opp + (colorDiff / 3), color.B + opp + (colorDiff / 3));
+            fab.ColorRipple = Color.Argb(color.A, color.R + opp, color.G + opp, color.B + opp);
+        }
+
 
         public bool FlipView(bool trash = false)
         {

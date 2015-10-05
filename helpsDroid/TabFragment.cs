@@ -51,8 +51,6 @@ namespace helps.Droid
                 var intent = new Intent(container.Context, typeof(ViewWorkshopActivity));
                 intent.PutExtra("WorkshopId", (int)e.Id);
                 intent.PutExtra("IsBooking", true);
-                var color = listAdapter.ItemColor((int) e.Id);
-                intent.PutExtra("Color", color.A + "," + color.R + "," + color.G + "," + color.B);
                 StartActivity(intent);
             };
 

@@ -28,8 +28,6 @@ namespace helps.Droid.Adapters
         private TextView TxtLocation;
         private TextView TxtLocationIcon;
 
-        private int ColorOverride = -1;
-
         public BookingsListAdapter(LayoutInflater inflater, Android.Content.Res.Resources resources, bool ShowLocation) 
         {
             this.inflater = inflater;
@@ -47,27 +45,22 @@ namespace helps.Droid.Adapters
         public void AddAll(List<WorkshopPreview> workshops, int position = -1)
         {
             WorkshopList = workshops;
-            InitColors(resources);
-            if(position > -1)
-                ColorOverride = position;
-            var color = (ColorOverride > -1) ? GetColor(ColorOverride) : GetColor(position);
-            base.AddAll(WorkshopList.Select(x => new MyList() { Id = x.Id, color = color}).ToList());
+            base.AddAll(WorkshopList.Select(x => new MyList() { Id = x.Id}).ToList());
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
 
-            base.InitColors(resources);
+            InitColors(resources);
             InitComponents(view);
             SetComponents(position);
             return view;
         }
-
-
+        
         private void SetComponents(int position)
         {
-            ImgColor.SetBackgroundColor(GetColor((ColorOverride > -1) ? ColorOverride : position));
+            ImgColor.SetBackgroundColor(GetColor(WorkshopList[position].WorkshopSet));
             TxtName.Text = WorkshopList[position].Name;
             TxtWorkshopSetName.Text = WorkshopList[position].NumSessions;
             TxtDate.Text = WorkshopList[position].DateHumanFriendly;

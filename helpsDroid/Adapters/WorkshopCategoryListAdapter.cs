@@ -47,7 +47,7 @@ namespace helps.Droid.Adapters
         {
             var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
 
-            base.InitColors(resources);
+            InitColors(resources);
             InitComponents(view);
             SetComponents(position);
             return view;
@@ -55,7 +55,7 @@ namespace helps.Droid.Adapters
 
         private void SetComponents(int position)
         {
-            ImgColor.SetBackgroundColor(GetColor(position));
+            ImgColor.SetBackgroundColor(GetColor(TheList[position].Id));
             TxtName.Text = TheList[position].Name;
 
             if (TheList[position].Id < 0)

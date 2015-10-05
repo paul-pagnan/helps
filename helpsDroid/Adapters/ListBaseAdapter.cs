@@ -18,9 +18,8 @@ namespace helps.Droid.Adapters
     
     public class ListBaseAdapter : BaseAdapter
     {
-        public static Random rng = new Random();
-        public static List<Color> colors;
         public List<MyList> TheList;
+        private static List<Color> colors;
 
         public ListBaseAdapter()
         {
@@ -51,36 +50,12 @@ namespace helps.Droid.Adapters
         {
             return TheList[position].Id;
         }
-        public static void Shuffle<T>(List<T> list)
+      
+        public static Color GetColor(int id)
         {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
+            Random random = new Random(id);
 
-        public Color GetColor(int id)
-        {
-            if (id < 0)
-                return Color.Transparent;
-            try { 
-            if (colors[id] != null)
-                return colors[id];
-            } catch(Exception)
-            {
-                return colors[rng.Next(colors.Count)];
-            }
-            return colors[rng.Next(colors.Count)];
-        }
-
-        public Color ItemColor(int id)
-        {
-            return TheList.Where(x => x.Id == id).FirstOrDefault().color;
+            return colors[random.Next(colors.Count - 1)];
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -88,7 +63,7 @@ namespace helps.Droid.Adapters
             return null;
         }
 
-        public void InitColors(Resources res)
+        public static void InitColors(Resources res)
         {
             colors = new List<Color>();
             colors.Add(res.GetColor(Resource.Color.cat_1));
@@ -103,7 +78,11 @@ namespace helps.Droid.Adapters
             colors.Add(res.GetColor(Resource.Color.cat_10));
             colors.Add(res.GetColor(Resource.Color.cat_11));
             colors.Add(res.GetColor(Resource.Color.cat_12));
+            colors.Add(res.GetColor(Resource.Color.cat_13));
+            colors.Add(res.GetColor(Resource.Color.cat_14));
+            colors.Add(res.GetColor(Resource.Color.cat_15));
+            colors.Add(res.GetColor(Resource.Color.cat_16));
+            colors.Add(res.GetColor(Resource.Color.cat_17));
         }
-
     }
 }
