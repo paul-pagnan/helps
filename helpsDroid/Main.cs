@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -44,6 +45,12 @@ namespace helps.Droid
         {
             base.OnCreate(bundle);
             Init();
+
+            this.SetTaskDescription(new ActivityManager.TaskDescription(
+                Resources.GetString(Resource.String.app_name), 
+                BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher),
+                Resources.GetColor(Resource.Color.primary)));
+            
 
             //Create Exception Handlers
             AppDomain.CurrentDomain.UnhandledException += HandleExceptions;

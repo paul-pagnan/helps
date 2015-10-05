@@ -93,6 +93,10 @@ namespace helps.Droid
                 toolbarLayout.SetBackgroundColor(color);
                 Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
 
+                this.SetTaskDescription(new ActivityManager.TaskDescription(
+                    Resources.GetString(Resource.String.app_name),
+                    BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher),
+                    color));
 
                 //Update the view
                 InitComponents();
