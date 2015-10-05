@@ -22,5 +22,6 @@ namespace helps.Shared.DataObjects
         public int WorkShopSetID { get; set; }
         public string WorkShopSetName { get; set; }
         public DateTime LastUpdated { get; set; }
+        public string notes { get; set; }
     }
 }

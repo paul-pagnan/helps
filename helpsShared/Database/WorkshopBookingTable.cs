@@ -85,5 +85,14 @@ namespace helps.Shared.Database
             return (record == null) ? true : helpsDatabase.NeedsUpdating(record.LastUpdated, UpdateBuffer);
         }
 
+        public void UpdateNotes(string notes, int workshopId)
+        {
+            var record = helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault(x => x.workshopId == workshopId);
+            if (record != null)
+            {
+                record.notes = notes;
+                helpsDatabase.Database.Update(record);
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@ using Android.Animation;
 using com.refractored.fab;
 using Newtonsoft.Json.Bson;
 using Android.Views.Animations;
+using helps.Shared;
 using Java.Lang;
 
 namespace helps.Droid
@@ -35,6 +36,8 @@ namespace helps.Droid
         private TextView targetGroup;
         private TextView whatItCovers;
         private TextView placeAvailable;
+        private EditText editTxtNotes;
+
         private LinearLayout sessionsList;
         private RelativeLayout toolbarLayout;
         private RelativeLayout sessionContainer;
@@ -70,7 +73,6 @@ namespace helps.Droid
 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
-
 
             Bundle extras = Intent.Extras;
             if (extras != null)
@@ -111,6 +113,7 @@ namespace helps.Droid
                         IsEditing = true;
                         AnimateButton();
                     }
+                    editTxtNotes.Text = bundle.GetString("NOTES");
                     flipper.DisplayedChild = flipperPosition;
                 }
 
@@ -143,11 +146,11 @@ namespace helps.Droid
                 sessionsList.AddView(view);
             }
 
+            editTxtNotes.Text = workshop.Notes;
+
             SetButtonColor();
         }
-
-
-
+        
         private void UpdateButtons()
         {
             bookButton.Visibility = ViewStates.Gone;
@@ -195,7 +198,7 @@ namespace helps.Droid
                 bookingsContainer.Visibility = ViewStates.Gone;
 
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            //if (IsBooking)
+            if (IsBooking)
                 fab.Visibility = ViewStates.Visible;
 
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
@@ -205,6 +208,8 @@ namespace helps.Droid
             mainLayout = FindViewById<ScrollView>(Resource.Id.mainLayout);
             editLayout = FindViewById<ScrollView>(Resource.Id.editLayout);
             flipper = FindViewById<ViewFlipper>(Resource.Id.flipper);
+
+            editTxtNotes = FindViewById<EditText>(Resource.Id.editTxtNotes);
         }
 
         [Java.Interop.Export()]
@@ -263,16 +268,33 @@ namespace helps.Droid
         }
 
         [Java.Interop.Export()]
-        public async void Edit(View view)
+        public void Edit(View view)
         {
             Animation animOut = AnimationUtils.LoadAnimation(this, Resource.Animation.fadeout);
             fab.StartAnimation(animOut);
-            animOut.AnimationEnd += (sender, e) =>
+            animOut.AnimationEnd += async (sender, e) =>
             {
-                IsEditing = !IsEditing;
-                AnimateButton();
-                FlipView();
-                //Do something productive here
+                if (IsEditing)
+                {
+                    var dialog = DialogHelper.CreateProgressDialog("Saving...", this);
+                    dialog.Show();
+                    var response = await Services.Workshop.AddNotes(editTxtNotes.Text, workshop.Id);
+                    dialog.Hide();
+                    if (response.Success)
+                    {
+                        IsEditing = !IsEditing;
+                        AnimateButton();
+                        FlipView();
+                    }
+                    else
+                        DialogHelper.ShowDialog(this, response.Message, response.Title);
+                }
+                else
+                {
+                    IsEditing = !IsEditing;
+                    AnimateButton();
+                    FlipView();
+                }
             };
         }
 
@@ -292,7 +314,10 @@ namespace helps.Droid
                     "Are you sure you want to discard changes to this booking?");
                 builder.SetCancelable(false);
                 builder.SetPositiveButton("Keep Editing", delegate {  });
-                builder.SetNegativeButton("Discard", delegate { IsEditing = !IsEditing; AnimateButton(); FlipView(true); });
+                builder.SetNegativeButton("Discard", delegate {
+                    IsEditing = !IsEditing;
+                    AnimateButton(); FlipView(true);
+                });
                 builder.Show();
                 return true;
             }
@@ -319,7 +344,6 @@ namespace helps.Droid
             fab.ColorRipple = Color.Argb(color.A, color.R + opp, color.G + opp, color.B + opp);
         }
 
-
         public bool FlipView(bool trash = false)
         {
             int index = flipper.DisplayedChild;
@@ -342,6 +366,7 @@ namespace helps.Droid
         {
             int position = flipper.DisplayedChild;
             bundle.PutInt("TAB_NUMBER", position);
+            bundle.PutString("NOTES", editTxtNotes.Text);
         }
     }
 }

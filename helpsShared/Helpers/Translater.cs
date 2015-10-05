@@ -82,7 +82,8 @@ namespace helps.Shared.Helpers
                 FilledPlaces = -1,
                 Sessions = new List<SessionPreview>(),
                 Type = booking.type,
-                WorkshopSetId = booking.WorkShopSetID
+                WorkshopSetId = booking.WorkShopSetID,
+                Notes = booking.notes
             };
         }
 

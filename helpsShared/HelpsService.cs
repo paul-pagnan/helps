@@ -43,6 +43,12 @@ namespace helps.Shared
                 throw new System.Net.WebException();
         }
 
+        public static bool IsConnected()
+        {
+            var networkConnection = DependencyService.Get<INetworkConnection>();
+            networkConnection.CheckNetworkConnection();
+            return networkConnection.IsConnected;
+        }
 
         public IEnumerable<JsonMediaTypeFormatter> Formatters()
         {

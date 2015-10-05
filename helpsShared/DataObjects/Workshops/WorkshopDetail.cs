@@ -17,5 +17,6 @@ namespace helps.Shared.DataObjects
         public List<SessionPreview> Sessions { get; set; }
         public string Type { get; set; }
         public int WorkshopSetId { get; set; }
+        public string Notes { get; set; }
     }
 }
