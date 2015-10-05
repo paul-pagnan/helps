@@ -61,7 +61,8 @@
                 android:scaleType="centerCrop"
                 android:background="@drawable/settings_item"
                 android:fontFamily="sans-serif-light"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:onClick="Settings" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

@@ -15,6 +15,7 @@ using System.IO;
 using helps.Shared;
 using helps.Shared.DataObjects;
 using Android.Graphics;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 {
@@ -56,6 +57,12 @@ namespace helps.Droid
         {
             var intent = new Intent(this, typeof(MakeBookingActivity));
             StartActivity(intent);
+        }
+
+        [Java.Interop.Export()]
+        public void Settings(View view)
+        {
+            DialogHelper.ShowDialog(this, "The settings menu has not yet been implemented", "Coming Soon");
         }
     }
 }
