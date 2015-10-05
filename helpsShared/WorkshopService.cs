@@ -31,12 +31,13 @@ namespace helps.Shared
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<WorkshopSet>>();
-                    List<WorkshopSet> decodedResponse = result.Results;
+                    List<WorkshopSet> decodedResponse = result.Results; 
                     workshopSetTable.SetAll(decodedResponse);
                     CurrentlyUpdating = false;
                     return decodedResponse;
                 }
             }
+            CurrentlyUpdating = false;
             return workshopSetTable.GetAll();
         }
 
@@ -74,6 +75,7 @@ namespace helps.Shared
                     return Translater.TranslatePreview(decodedResponse);
                 }
             }
+            CurrentlyUpdating = false;
             return Translater.TranslatePreview(workshopTable.GetAll(workshopSet));
         }
 
@@ -88,6 +90,7 @@ namespace helps.Shared
                 CurrentlyUpdating = true;
                 await UpdateBookings(Current);
             }
+            CurrentlyUpdating = false;
             return await Translater.TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
@@ -149,8 +152,7 @@ namespace helps.Shared
                     GetBookings(true, false, true);
                     return ResponseHelper.Success();
                 }
-                else
-                    return ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);
+                return ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);
             }
             return ResponseHelper.CreateErrorResponse("Error", "An unknown error occured");
         }
@@ -181,6 +183,7 @@ namespace helps.Shared
                 CurrentlyUpdating = false;
                 return true;
             }
+            CurrentlyUpdating = false;
             return false;
         }
     }
