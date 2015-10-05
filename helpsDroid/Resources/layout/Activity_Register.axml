@@ -40,14 +40,14 @@
                 p1:layout_marginBottom="35dp"
                 p1:weightSum="1">
                 <EditText
-                    p1:inputType="text"
+                    p1:inputType="textCapSentences|text"
                     p1:id="@+id/registerFirstName"
                     p1:hint="First Name"
                     p1:layout_width="0dip"
                     p1:layout_weight="0.5"
                     p1:layout_height="match_parent" />
                 <EditText
-                    p1:inputType="text"
+                    p1:inputType="textCapSentences|text"
                     p1:id="@+id/registerLastName"
                     p1:hint="Last Name"
                     p1:layout_width="0dip"
