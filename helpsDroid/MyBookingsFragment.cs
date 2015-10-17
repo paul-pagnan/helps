@@ -1,11 +1,16 @@
+using System;
 using Android;
 using Android.App;
+using Android.Graphics;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
+using helps.Droid.Helpers;
 using helps.Shared;
 using helps.Shared.DataObjects;
+using Java.Lang;
 
 namespace helps.Droid
 {
@@ -19,7 +24,6 @@ namespace helps.Droid
         {
 
         }
-
 
         public void setPadding(Toolbar toolbar)
         {
@@ -42,6 +46,15 @@ namespace helps.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            this.SetTaskDescription(new ActivityManager.TaskDescription(
+                Resources.GetString(Resource.String.app_name),
+                BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher),
+                Resources.GetColor(Resource.Color.primary)));
+
+            //Create Exception Handlers
+            AppDomain.CurrentDomain.UnhandledException += ExceptionHelper.HandleExceptions;
+            AndroidEnvironment.UnhandledExceptionRaiser += HandleAndroidException;
+
             SetContentView(LayoutResource);
             Toolbar = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
             if (Toolbar != null)
@@ -58,6 +71,15 @@ namespace helps.Droid
         public bool OnOptionsItemSelected(IMenuItem item)
         {
             return base.OnOptionsItemSelected(item);
+        }
+
+        void HandleAndroidException(object sender, RaiseThrowableEventArgs e)
+        {
+            if (e.Exception.GetType() == typeof (System.Net.WebException))
+            {
+                ExceptionHelper.NoConnection();
+                e.Handled = true;
+            }
         }
     }
 }

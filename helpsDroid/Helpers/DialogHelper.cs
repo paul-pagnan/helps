@@ -16,7 +16,7 @@ namespace helps.Droid.Helpers
     {
         public static void ShowDialog(Context context, string message, string title)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context, Resource.Style.LightDialog);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.SetMessage(message);
             builder.SetTitle(title);
             builder.Create().Show();

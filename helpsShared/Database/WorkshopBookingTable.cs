@@ -17,11 +17,9 @@ namespace helps.Shared.Database
             return helpsDatabase.Database.Table<WorkshopBooking>().ToList<WorkshopBooking>();
         }
 
-        public WorkshopBooking GetByWorkshopId(int id, bool Current = false)
+        public WorkshopBooking GetByWorkshopId(int id)
         {
-            var a = GetAll(Current);
-            var b = helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault(x => x.workshopId == id && x.starting > DateTime.UtcNow);
-            return b;
+            return helpsDatabase.Database.Table<WorkshopBooking>().FirstOrDefault(x => x.workshopId == id);
         }
 
         public void RemoveBookingByWorkshopId(int id)

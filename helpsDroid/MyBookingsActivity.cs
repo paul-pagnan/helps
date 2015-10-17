@@ -12,8 +12,6 @@ using Android.Widget;
 using Android.Support.V4.View;
 using com.refractored;
 using Java.Interop;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentManager = Android.Support.V4.App.FragmentManager;
 using Java.Lang;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
@@ -41,7 +39,7 @@ namespace helps.Droid
             await Services.Workshop.GetBookings(true, false);
             await Services.Workshop.GetBookings(false, false);
 
-            adapter = new MyPagerAdapter(SupportFragmentManager, this.LayoutInflater);
+            adapter = new MyPagerAdapter(FragmentManager, this.LayoutInflater);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
@@ -53,7 +51,7 @@ namespace helps.Droid
         }
     }
 
-    class MyPagerAdapter : Android.Support.V4.App.FragmentPagerAdapter
+    class MyPagerAdapter : Android.Support.V13.App.FragmentPagerAdapter
     {
         private readonly string[] Titles =
         {
@@ -77,7 +75,7 @@ namespace helps.Droid
             get { return Titles.Length; }
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position)
+        public override Fragment GetItem(int position)
         {
             return TabFragment.NewInstance(position);
         }

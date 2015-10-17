@@ -13,7 +13,7 @@ using Android.Content;
 
 namespace helps.Droid
 {
-    public class TabFragment : Android.Support.V4.App.Fragment
+    public class TabFragment : Fragment
     {
         private int position;
 
@@ -21,6 +21,9 @@ namespace helps.Droid
 
         private ListView list;
         private BookingsListAdapter listAdapter;
+
+        private View root;
+        private LayoutInflater inflater;
 
         public static TabFragment NewInstance(int position)
         {
@@ -37,12 +40,24 @@ namespace helps.Droid
             position = Arguments.GetInt("position");
         }
 
+        public override bool UserVisibleHint
+        {
+            set
+            {
+                if (position > 0 && listAdapter.IsEmpty)
+                    InitList(root, inflater);
+            }
+        }
+
         public override Android.Views.View OnCreateView(Android.Views.LayoutInflater inflater, Android.Views.ViewGroup container, Bundle savedInstanceState)
         {
             var root = inflater.Inflate(GetLayout(), container, false);
+            this.root = root;
+            this.inflater = inflater;
 
             InitElements(root, inflater);
-            InitList(root, inflater);
+            if(position < 1 && listAdapter.IsEmpty)
+                InitList(root, inflater);
 
             ViewCompat.SetElevation(root, 50);
 
@@ -74,8 +89,7 @@ namespace helps.Droid
 
         private async void LoadData(bool localOnly, bool force = false)
         {
-            var a = PastOrCurrent();
-            var list = await Services.Workshop.GetBookings(a, localOnly, force);
+            var list = await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
             listAdapter.Clear();
             listAdapter.AddAll(list);
         }

@@ -93,7 +93,7 @@ namespace helps.Shared
             return await Translater.TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
-        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false, bool Current = false)
+        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false)
         {
             if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(workshopId) || ForceUpdate) && !CurrentlyUpdating))
             {
@@ -101,7 +101,7 @@ namespace helps.Shared
                 CurrentlyUpdating = true;
                 await UpdateBookings(true);
             }
-            return workshopBookingTable.GetByWorkshopId(workshopId, Current);
+            return workshopBookingTable.GetByWorkshopId(workshopId);
         }
 
         public async Task<GenericResponse> Book(int id)

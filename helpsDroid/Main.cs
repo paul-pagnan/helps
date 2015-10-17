@@ -50,12 +50,9 @@ namespace helps.Droid
                 Resources.GetString(Resource.String.app_name), 
                 BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher),
                 Resources.GetColor(Resource.Color.primary)));
-            
 
             //Create Exception Handlers
-            AppDomain.CurrentDomain.UnhandledException += HandleExceptions;
-            //AndroidEnvironment.UnhandledExceptionRaiser += HandleAndroidException;
-            Thread.DefaultUncaughtExceptionHandler = new ThreadExceptionHandler();
+            AppDomain.CurrentDomain.UnhandledException += ExceptionHelper.HandleExceptions;
 
             SetContentView(LayoutResource);
             Toolbar = FindViewById<Toolbar>(Resource.Id.Ttoolbar);
@@ -100,87 +97,6 @@ namespace helps.Droid
             if (item.ItemId == Resource.Id.menu_logout)
                 Logout();
             return base.OnOptionsItemSelected(item);
-        }
-
-
-        //Exception Handlers
-        void HandleExceptions(object sender, UnhandledExceptionEventArgs e)
-        {
-            var Ex = e.ExceptionObject;
-            try {
-                AggregateException ParentEx = (AggregateException)e.ExceptionObject;
-                var exceptions = ParentEx.InnerExceptions;
-                Ex = exceptions.FirstOrDefault();
-            } finally
-            {
-            }
-
-            if (Ex.GetType() == typeof(System.Net.WebException))
-            {
-                var context = CurrentActivity();
-                HelpsService.CurrentlyUpdating = false;
-                context.RunOnUiThread(delegate
-                {
-                    var NoConnection = context.FindViewById(Resource.Id.NoConnection);
-                    if (NoConnection != null)
-                    {
-                        NoConnection.Visibility = ViewStates.Visible;
-
-                        new Handler().PostDelayed(delegate
-                        {
-                            Android.Views.Animations.Animation fadeOut = new AlphaAnimation(1, 0);
-                            fadeOut.Interpolator = new DecelerateInterpolator(); 
-                            fadeOut.Duration = 1000;
-
-                            AnimationSet animation = new AnimationSet(false);
-                            animation.AddAnimation(fadeOut);
-                            NoConnection.Animation = animation;
-                            NoConnection.StartAnimation(animation);
-                            new Handler().PostDelayed(delegate { NoConnection.Visibility = ViewStates.Gone; }, 1000);
-                        }, 2000);
-                    }
-                });
-            }
-        }
-        
-        void HandleAndroidException(object sender, RaiseThrowableEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-
-        public static Activity CurrentActivity()
-        {
-            Class activityThreadClass = Class.ForName("android.app.ActivityThread");
-
-            Java.Lang.Object activityThread = activityThreadClass.GetMethod("currentActivityThread").Invoke(null);
-            Field activitiesField = activityThreadClass.GetDeclaredField("mActivities");
-            activitiesField.Accessible = true;
-            Android.Util.ArrayMap activities = (Android.Util.ArrayMap) activitiesField.Get(activityThread);
-            foreach (Java.Lang.Object activityRecord in activities.Values())
-            {
-                Class activityRecordClass = activityRecord.Class;
-                Field pausedField = activityRecordClass.GetDeclaredField("paused");
-                pausedField.Accessible = true;
-                if (!pausedField.GetBoolean(activityRecord))
-                {
-                    Field activityField = activityRecordClass.GetDeclaredField("activity");
-                    activityField.Accessible = true;
-                    Activity activity = (Activity)activityField.Get(activityRecord);
-                    return activity;
-                }
-            }
-
-            return null;
-        }
-
-
-        public class ThreadExceptionHandler : Java.Lang.Object, Java.Lang.Thread.IUncaughtExceptionHandler
-        {
-            public void UncaughtException(Thread thread, Throwable ex)
-            {
-                Console.WriteLine("ERROR");
-            }
         }
     }
 }

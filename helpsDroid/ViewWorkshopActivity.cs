@@ -169,7 +169,7 @@ namespace helps.Droid
 
         private async void LoadBooking(bool localOnly, bool force = false)
         {
-            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force, true);
+            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
             RunOnUiThread(delegate
             {
                 UpdateButtons();
