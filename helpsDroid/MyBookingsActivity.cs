@@ -44,8 +44,7 @@ namespace helps.Droid
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
             tabs.SetViewPager(pager);
-            FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Gone;
-
+ 
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
         }

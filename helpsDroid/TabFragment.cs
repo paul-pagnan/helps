@@ -10,6 +10,7 @@ using System;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Content;
+using helps.Droid.Helpers;
 
 namespace helps.Droid
 {
@@ -45,7 +46,14 @@ namespace helps.Droid
             set
             {
                 if (position > 0 && listAdapter.IsEmpty)
+                {
+                    var activity = ViewHelper.CurrentActivity();
+                    activity.RunOnUiThread(() =>
+                    {
+                        activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = ViewStates.Visible;
+                    });
                     InitList(root, inflater);
+                }
             }
         }
 
@@ -104,6 +112,11 @@ namespace helps.Droid
         {
             await Task.Factory.StartNew(() => LoadData(true));
             NotifyListUpdate();
+            var activity = ViewHelper.CurrentActivity();
+            activity.RunOnUiThread(() =>
+            {
+                activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = ViewStates.Gone;
+            });
         }
 
         private int GetLayout()

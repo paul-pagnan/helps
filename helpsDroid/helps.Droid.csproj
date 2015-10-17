@@ -155,6 +155,7 @@
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="ViewWorkshopActivity.cs" />
     <Compile Include="ViewSessionActivity.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
