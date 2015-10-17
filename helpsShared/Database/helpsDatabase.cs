@@ -24,6 +24,9 @@ namespace helps.Shared.Database
             Database.CreateTable<WorkshopSet>();
             Database.CreateTable<WorkshopBooking>();
 
+            //Notification
+            Database.CreateTable<NotificationOption>();
+
             //Misc
             Database.CreateTable<Campus>();
         }

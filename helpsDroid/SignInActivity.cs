@@ -28,9 +28,7 @@ namespace helps.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
-            Xamarin.Forms.Forms.Init(this, bundle);
             base.OnCreate(bundle);
-            
 
             //Check if the user has an active session
             if (CurrentUser != null)

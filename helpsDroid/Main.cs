@@ -43,6 +43,8 @@ namespace helps.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+            if (!Forms.IsInitialized)
+                Xamarin.Forms.Forms.Init(this, bundle);
             base.OnCreate(bundle);
             Init();
 
@@ -68,7 +70,6 @@ namespace helps.Droid
                 };
             }
         }
-
 
         public void setPadding(Toolbar toolbar)
         {

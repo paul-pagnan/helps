@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace helps.Shared.DataObjects
@@ -9,6 +10,7 @@ namespace helps.Shared.DataObjects
         public string Room { get; set; }
         public string Time { get; set; }
         public string DateHumanFriendly { get; set; }
+        public DateTime Date { get; set; }
         public string TargetGroup { get; set; }
         public string Description { get; set; }
         public int FilledPlaces { get; set; }

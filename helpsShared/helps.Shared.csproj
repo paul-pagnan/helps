@@ -41,6 +41,7 @@
     <Compile Include="Database\CampusTable.cs" />
     <Compile Include="Database\WorkshopSetTable.cs" />
     <Compile Include="Database\UserTable.cs" />
+    <Compile Include="Database\NotificationTable.cs" />
     <Compile Include="Database\WorkshopTable.cs" />
     <Compile Include="DataObjects\Auth\DetailsInputRequest.cs" />
     <Compile Include="DataObjects\Generic\GetResponse.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="DataObjects\Generic\GenericResponse.cs" />
     <Compile Include="DataObjects\Auth\RegisterRequest.cs" />
     <Compile Include="DataObjects\Misc\Campus.cs" />
+    <Compile Include="DataObjects\Misc\NotificationOption.cs" />
     <Compile Include="DataObjects\Workshops\Workshop.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopBookingUpdate.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopDetail.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="INetworkConnection.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MiscServices.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="StudentService.cs" />
     <Compile Include="HelpsService.cs" />
     <Compile Include="AuthService.cs" />

@@ -15,6 +15,7 @@ namespace helps.Shared
         public static WorkshopBookingTable workshopBookingTable;
         public static WorkshopTable workshopTable;
         public static CampusTable campusTable;
+        public static NotificationTable notificationTable;
 
 
         public Main()
@@ -24,6 +25,7 @@ namespace helps.Shared
             workshopBookingTable = new WorkshopBookingTable();
             workshopTable = new WorkshopTable();
             campusTable = new CampusTable();
+            notificationTable = new NotificationTable();
         }
     }
 }

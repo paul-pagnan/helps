@@ -27,7 +27,7 @@ namespace helps.Droid
     [Activity(Label = "", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class ViewWorkshopActivity : Main
     {
-        private WorkshopDetail workshop;
+        private static WorkshopDetail workshop;
         private WorkshopBooking booking;
 
         private TextView title;
@@ -36,6 +36,7 @@ namespace helps.Droid
         private TextView targetGroup;
         private TextView whatItCovers;
         private TextView placeAvailable;
+        private static TextView notifications;
         private EditText editTxtNotes;
 
         private LinearLayout sessionsList;
@@ -146,6 +147,9 @@ namespace helps.Droid
                 sessionsList.AddView(view);
             }
 
+            if (IsBooking)
+                UpdateNotifications();
+
             editTxtNotes.Text = workshop.Notes;
 
             SetButtonColor();
@@ -167,6 +171,18 @@ namespace helps.Droid
                 cancelButton.Visibility = ViewStates.Visible;
         }
 
+        public static void UpdateNotifications()
+        {
+            var nots = Services.Notification.GetNotifications(workshop.Id);
+            notifications.Text = (nots.Count > 0) ? "" : "No notifications set";
+            foreach (var notification in nots)
+            {
+                if(notification.selected)
+                    notifications.Text += notification.title + System.Environment.NewLine;
+            }
+            //notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
+        }
+
         private async void LoadBooking(bool localOnly, bool force = false)
         {
             booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
@@ -184,6 +200,7 @@ namespace helps.Droid
             targetGroup = FindViewById<TextView>(Resource.Id.textViewTargetGroupValue);
             whatItCovers = FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue);
             placeAvailable = FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue);
+            notifications = FindViewById<TextView>(Resource.Id.textViewnotification);
 
             sessionsList = FindViewById<LinearLayout>(Resource.Id.listViewSessions);
             sessionsList.Orientation = Orientation.Vertical;
@@ -199,7 +216,10 @@ namespace helps.Droid
 
             fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             if (IsBooking)
+            {
                 fab.Visibility = ViewStates.Visible;
+                FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
+            }
 
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
@@ -229,6 +249,7 @@ namespace helps.Droid
                 bookButton.Visibility = ViewStates.Gone;
                 cancelButton.Visibility = ViewStates.Visible;
                 DialogHelper.ShowDialog(this, "You have been successfully booked into this workshop", "Workshop Booked");
+                NotificationHelper.ScheduleNotification(workshop.Id, NotificationHelper.DefaultNotification);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
@@ -262,6 +283,7 @@ namespace helps.Droid
                 bookButton.Visibility = ViewStates.Visible;
                 cancelButton.Visibility = ViewStates.Gone;
                 DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
+                NotificationHelper.Cancel(workshop.Id);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
@@ -367,6 +389,13 @@ namespace helps.Droid
             int position = flipper.DisplayedChild;
             bundle.PutInt("TAB_NUMBER", position);
             bundle.PutString("NOTES", editTxtNotes.Text);
+        }
+
+
+        [Java.Interop.Export()]
+        public void ShowNotificationDialog(View view)
+        {
+            NotificationHelper.ShowDialog(this, workshop);
         }
     }
 }
