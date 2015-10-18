@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using helps.Shared.Helpers;
 using System.Diagnostics;
+using System.Web.Script.Serialization;
 using Connectivity.Plugin;
 using helps.Shared.DataObjects.Workshops;
 
@@ -54,6 +55,12 @@ namespace helps.Shared
         {
             var booking = workshopBookingTable.GetByWorkshopId(workshopId);
             return await Translater.TranslateDetail(booking);
+        }
+
+        public WorkshopDetail GetWorkshopFromBookingLocal(int workshopId)
+        {
+            var booking = workshopBookingTable.GetByWorkshopId(workshopId);
+            return Translater.TranslateDetailLocal(booking);
         }
 
         public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)

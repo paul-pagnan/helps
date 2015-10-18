@@ -14,18 +14,20 @@ namespace helps.Shared.Database
         public static SQLiteConnection Database;
         public static void InitDatabase()
         {
-            Database = DependencyService.Get<ISQLite>().GetConnection();
+            if(Database == null)
+                Database = DependencyService.Get<ISQLite>().GetConnection();
 
             //Auth
             Database.CreateTable<User>();
+
+            //Notification
+            Database.CreateTable<NotificationOption>();
 
             //Workshops
             Database.CreateTable<Workshop>();
             Database.CreateTable<WorkshopSet>();
             Database.CreateTable<WorkshopBooking>();
 
-            //Notification
-            Database.CreateTable<NotificationOption>();
 
             //Misc
             Database.CreateTable<Campus>();

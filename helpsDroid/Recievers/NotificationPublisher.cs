@@ -2,10 +2,9 @@
 using Android.App;
 using Android.Content;
 
-namespace helps.Droid.Helpers
+namespace helps.Droid.Recievers
 {
     [BroadcastReceiver(Enabled = true)]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted })]
     public class NotificationPublisher : BroadcastReceiver
     {
 
@@ -14,6 +13,7 @@ namespace helps.Droid.Helpers
 
         public override void OnReceive(Context context, Intent intent)
         {
+            Console.Out.WriteLine("HELPS: Spawning Notification");
             NotificationManager notificationManager =
                 (NotificationManager) context.GetSystemService(Context.NotificationService);
 

@@ -68,13 +68,13 @@ namespace helps.Shared.Helpers
             };
         }
 
-        public static async Task<WorkshopDetail> TranslateDetail(WorkshopBooking booking)
-        { 
+        public static WorkshopDetail TranslateDetailLocal(WorkshopBooking booking)
+        {
             return new WorkshopDetail()
             {
                 Id = booking.workshopId,
                 Title = booking.topic,
-                Room = await MiscServices.GetCampus(booking.campusID),
+                Room = MiscServices.GetCampusLocal(booking.campusID),
                 Time = HumanizeTimeSpan(booking.starting, booking.ending),
                 DateHumanFriendly = HumanizeDate(booking.starting),
                 TargetGroup = booking.targetingGroup ?? "N/A",
@@ -87,6 +87,13 @@ namespace helps.Shared.Helpers
                 WorkshopSetId = booking.WorkShopSetID,
                 Notes = booking.notes
             };
+        }
+
+        public static async Task<WorkshopDetail> TranslateDetail(WorkshopBooking booking)
+        {
+            var obj = TranslateDetailLocal(booking);
+            obj.Room = await MiscServices.GetCampus(booking.campusID);
+            return obj;
         }
 
         public static List<WorkshopPreview> TranslatePreview(List<Workshop> list)

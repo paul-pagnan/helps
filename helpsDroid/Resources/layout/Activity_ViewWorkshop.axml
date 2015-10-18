@@ -194,7 +194,7 @@
                     p1:paddingRight="@dimen/layout_padding"
                     p1:layout_width="fill_parent"
                     p1:layout_marginBottom="@dimen/form_margin_body"
-                    p1:paddingBottom="15dp"
+                    p1:paddingBottom="5dp"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/notifications"
                     p1:visibility="gone">
@@ -207,11 +207,14 @@
                         p1:layout_marginRight="@dimen/icon_margin" />
                     <TextView
                         p1:text="10 minutes before"
-                        p1:layout_width="wrap_content"
+                        p1:layout_width="fill_parent"
                         p1:layout_height="wrap_content"
                         p1:id="@+id/textViewnotification"
                         p1:textColor="@color/text_dark"
                         p1:paddingTop="2dp"
+                        p1:clickable="true"
+                        p1:background="?android:attr/selectableItemBackground"
+                        p1:onClick="ShowNotificationDialog"
                         p1:lineSpacingMultiplier="2"
                         p1:textSize="@dimen/text_size"
                         p1:layout_toRightOf="@id/icoBell" />

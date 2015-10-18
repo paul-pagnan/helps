@@ -17,7 +17,7 @@ namespace helps.Shared.Database
 
         public List<NotificationOption> GetAll()
         {
-            return helpsDatabase.Database.Table<NotificationOption>().ToList();
+            return helpsDatabase.Database.Table<NotificationOption>().Where(x => x.selected && x.ScheduledDate > DateTime.Now).ToList();
         }
 
         public void InsertAll(List<NotificationOption> notifications)
@@ -26,7 +26,7 @@ namespace helps.Shared.Database
             helpsDatabase.Database.InsertAll(notifications);
         }
 
-        private void Clear(int bookingId)
+        public void Clear(int bookingId)
         {
             helpsDatabase.Database.Table<NotificationOption>().Delete(x => x.workshopId == bookingId);
         }

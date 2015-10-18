@@ -32,5 +32,10 @@ namespace helps.Shared
             }
             return campusTable.GetCampus(id).campus;
         }
+
+        public static string GetCampusLocal(int campusID)
+        {
+            return  campusTable.GetCampus(campusID).campus;
+        }
     }
 }

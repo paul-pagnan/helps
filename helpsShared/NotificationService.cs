@@ -10,13 +10,19 @@ namespace helps.Shared
 {
     public class NotificationService : HelpsService
     {
-        public void StoreNotifications(int workshopId, List<NotificationOption> notifications)
+        public NotificationService() : base()
+        {
+        }
+
+        public void StoreNotifications(WorkshopDetail workshop, List<NotificationOption> notifications)
         {
             notifications = notifications.Select(x =>
             {
-                x.workshopId = workshopId;
+                x.workshopId = workshop.Id;
+                x.ScheduledDate = workshop.Date.AddMinutes(x.mins * -1);
                 return x;
             }).ToList();
+
             notificationTable.InsertAll(notifications);
         }
 
@@ -28,6 +34,11 @@ namespace helps.Shared
         public List<NotificationOption> GetAll()
         {
             return notificationTable.GetAll();
+        }
+
+        public void Clear(int workshopId)
+        {
+            notificationTable.Clear(workshopId);
         }
     }
 }

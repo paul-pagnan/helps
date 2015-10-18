@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using System;
+using SQLite;
 
 namespace helps.Shared.DataObjects
 {
@@ -9,6 +10,7 @@ namespace helps.Shared.DataObjects
         public int workshopId { get; set; }
         public string title { get; set; }
         public int mins { get; set; }
+        public DateTime ScheduledDate { get; set; }
         public bool selected { get; set; }
     }
 }

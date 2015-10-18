@@ -156,7 +156,8 @@
     <Compile Include="Adapters\ListBaseAdapter.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
-    <Compile Include="Helpers\NotificationPublisher.cs" />
+    <Compile Include="Recievers\BootReciever.cs" />
+    <Compile Include="Recievers\NotificationPublisher.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="ViewWorkshopActivity.cs" />
     <Compile Include="ViewSessionActivity.cs" />

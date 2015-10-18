@@ -129,6 +129,9 @@ namespace helps.Droid
 
         private void UpdateFields()
         {
+            if (IsBooking)
+                UpdateNotifications();
+
             title.Text = workshop.Title;
             room.Text = workshop.Room;
 
@@ -146,9 +149,6 @@ namespace helps.Droid
                 var view = sessionsListAdapter.GetView(i, null, sessionsList);
                 sessionsList.AddView(view);
             }
-
-            if (IsBooking)
-                UpdateNotifications();
 
             editTxtNotes.Text = workshop.Notes;
 
@@ -174,13 +174,12 @@ namespace helps.Droid
         public static void UpdateNotifications()
         {
             var nots = Services.Notification.GetNotifications(workshop.Id);
-            notifications.Text = (nots.Count > 0) ? "" : "No notifications set";
-            foreach (var notification in nots)
+            notifications.Text = (nots.Any(x => x.selected)) ? "" : "No notifications set ";
+            foreach (var notification in nots.Where(x => x.selected))
             {
-                if(notification.selected)
-                    notifications.Text += notification.title + System.Environment.NewLine;
+                notifications.Text += notification.title + System.Environment.NewLine;
             }
-            //notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
+            notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
         }
 
         private async void LoadBooking(bool localOnly, bool force = false)
@@ -249,7 +248,7 @@ namespace helps.Droid
                 bookButton.Visibility = ViewStates.Gone;
                 cancelButton.Visibility = ViewStates.Visible;
                 DialogHelper.ShowDialog(this, "You have been successfully booked into this workshop", "Workshop Booked");
-                NotificationHelper.ScheduleNotification(workshop.Id, NotificationHelper.DefaultNotification);
+                NotificationHelper.ScheduleNotification(this, workshop.Id, NotificationHelper.DefaultNotification);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
@@ -283,7 +282,7 @@ namespace helps.Droid
                 bookButton.Visibility = ViewStates.Visible;
                 cancelButton.Visibility = ViewStates.Gone;
                 DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
-                NotificationHelper.Cancel(workshop.Id);
+                NotificationHelper.Cancel(this, workshop.Id);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
@@ -395,7 +394,8 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public void ShowNotificationDialog(View view)
         {
-            NotificationHelper.ShowDialog(this, workshop);
+            var notifier = new NotificationHelper(workshop);
+            notifier.ShowDialog(this, workshop);
         }
     }
 }
