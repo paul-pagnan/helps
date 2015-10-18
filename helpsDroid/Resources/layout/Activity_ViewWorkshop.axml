@@ -192,9 +192,35 @@
                     p1:minHeight="25px"
                     p1:paddingLeft="@dimen/layout_padding"
                     p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/bookingsContainer">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoPlaces"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_users"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Places Available"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewPlaceAvailableValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoPlaces" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
                     p1:layout_width="fill_parent"
                     p1:layout_marginBottom="@dimen/form_margin_body"
-                    p1:paddingBottom="5dp"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/notifications"
                     p1:visibility="gone">
@@ -234,38 +260,10 @@
                         p1:layout_below="@id/textViewnotification" />
                 </RelativeLayout>
                 <RelativeLayout
-                    p1:orientation="horizontal"
-                    p1:minWidth="25px"
-                    p1:minHeight="25px"
-                    p1:paddingLeft="@dimen/layout_padding"
-                    p1:layout_marginBottom="@dimen/form_margin"
-                    p1:paddingRight="@dimen/layout_padding"
-                    p1:layout_width="fill_parent"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/bookingsContainer">
-                    <helps.Droid.Extensions.FontAwesome
-                        p1:id="@+id/icoPlaces"
-                        p1:layout_width="@dimen/icon_size"
-                        p1:layout_height="wrap_content"
-                        p1:text="@string/fa_users"
-                        p1:textSize="@dimen/icon_size"
-                        p1:layout_marginRight="@dimen/icon_margin" />
-                    <TextView
-                        p1:text="Places Available"
-                        p1:layout_width="wrap_content"
-                        p1:layout_height="wrap_content"
-                        p1:id="@+id/textViewPlaceAvailableValue"
-                        p1:textColor="@color/text_dark"
-                        p1:paddingTop="2dp"
-                        p1:textSize="@dimen/text_size"
-                        p1:layout_toRightOf="@id/icoPlaces" />
-                </RelativeLayout>
-                <RelativeLayout
                     p1:id="@+id/sessionContainer"
                     p1:minWidth="25px"
                     p1:minHeight="25px"
                     p1:layout_width="fill_parent"
-                    p1:layout_marginTop="@dimen/form_margin_body"
                     p1:layout_height="wrap_content">
                     <RelativeLayout
                         p1:orientation="horizontal"

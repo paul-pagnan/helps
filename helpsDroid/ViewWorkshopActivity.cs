@@ -1,26 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System.Globalization;
-using Android.Graphics;
-using helps.Shared.DataObjects;
-using helps.Shared.Consts;
-using helps.Droid.Helpers;
-using helps.Droid.Adapters;
 using System.Threading.Tasks;
-using Android.Animation;
-using com.refractored.fab;
-using Newtonsoft.Json.Bson;
+using Android.App;
+using Android.Graphics;
+using Android.OS;
+using Android.Views;
 using Android.Views.Animations;
-using helps.Shared;
-using Java.Lang;
+using Android.Widget;
+using com.refractored.fab;
+using helps.Droid.Adapters;
+using helps.Droid.Helpers;
+using helps.Shared.DataObjects;
+using Java.Interop;
+using Environment = System.Environment;
 
 namespace helps.Droid
 {
@@ -59,7 +50,7 @@ namespace helps.Droid
         private bool IsBooking;
 
         private Color color;
-        private int colorDiff = 35;
+        private readonly int colorDiff = 35;
 
         private bool IsEditing;
 
@@ -75,11 +66,11 @@ namespace helps.Droid
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
 
-            Bundle extras = Intent.Extras;
+            var extras = Intent.Extras;
             if (extras != null)
             {
                 //Get vars from bundle
-                int workshopId = extras.GetInt("WorkshopId");
+                var workshopId = extras.GetInt("WorkshopId");
 
                 //Get the Booking Details
                 if (IsBooking = extras.GetBoolean("IsBooking"))
@@ -96,7 +87,7 @@ namespace helps.Droid
                 toolbarLayout.SetBackgroundColor(color);
                 Toolbar.NavigationIcon = Resources.GetDrawable(Resource.Drawable.ic_close_white_24dp);
 
-                this.SetTaskDescription(new ActivityManager.TaskDescription(
+                SetTaskDescription(new ActivityManager.TaskDescription(
                     Resources.GetString(Resource.String.app_name),
                     BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher),
                     color));
@@ -108,7 +99,7 @@ namespace helps.Droid
                 // Maintain view once the view has been rotated
                 if (bundle != null)
                 {
-                    int flipperPosition = bundle.GetInt("TAB_NUMBER");
+                    var flipperPosition = bundle.GetInt("TAB_NUMBER");
                     if (flipperPosition > 0)
                     {
                         IsEditing = true;
@@ -129,13 +120,13 @@ namespace helps.Droid
 
         private void UpdateFields()
         {
-            if (IsBooking)
-                UpdateNotifications();
+            if(booking != null)
+                ShowNotifications();
 
             title.Text = workshop.Title;
             room.Text = workshop.Room;
 
-            var TimeString = (workshop.Time != null) ? System.Environment.NewLine + workshop.Time : "";
+            var TimeString = (workshop.Time != null) ? Environment.NewLine + workshop.Time : "";
             date.Text = workshop.DateHumanFriendly + TimeString;
 
             targetGroup.Text = workshop.TargetGroup;
@@ -144,17 +135,22 @@ namespace helps.Droid
 
             sessionsListAdapter.AddAll(workshop.Sessions);
 
-            for (int i = 0; i < sessionsListAdapter.Count; i++)
+            for (var i = 0; i < sessionsListAdapter.Count; i++)
             {
                 var view = sessionsListAdapter.GetView(i, null, sessionsList);
                 sessionsList.AddView(view);
             }
-
+            UpdateButtons();
             editTxtNotes.Text = workshop.Notes;
-
             SetButtonColor();
         }
-        
+
+        private void ShowNotifications()
+        {
+            FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
+            UpdateNotifications();
+        }
+
         private void UpdateButtons()
         {
             bookButton.Visibility = ViewStates.Gone;
@@ -177,7 +173,7 @@ namespace helps.Droid
             notifications.Text = (nots.Any(x => x.selected)) ? "" : "No notifications set ";
             foreach (var notification in nots.Where(x => x.selected))
             {
-                notifications.Text += notification.title + System.Environment.NewLine;
+                notifications.Text += notification.title + Environment.NewLine;
             }
             notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
         }
@@ -185,10 +181,7 @@ namespace helps.Droid
         private async void LoadBooking(bool localOnly, bool force = false)
         {
             booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
-            RunOnUiThread(delegate
-            {
-                UpdateButtons();
-            });
+            RunOnUiThread(delegate { UpdateFields(); });
         }
 
         private void InitComponents()
@@ -203,7 +196,7 @@ namespace helps.Droid
 
             sessionsList = FindViewById<LinearLayout>(Resource.Id.listViewSessions);
             sessionsList.Orientation = Orientation.Vertical;
-            sessionsListAdapter = new SessionListAdapter(this.LayoutInflater);
+            sessionsListAdapter = new SessionListAdapter(LayoutInflater);
 
             sessionContainer = FindViewById<RelativeLayout>(Resource.Id.sessionContainer);
             if (workshop.Sessions.Count == 0)
@@ -217,7 +210,6 @@ namespace helps.Droid
             if (IsBooking)
             {
                 fab.Visibility = ViewStates.Visible;
-                FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
             }
 
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
@@ -231,10 +223,10 @@ namespace helps.Droid
             editTxtNotes = FindViewById<EditText>(Resource.Id.editTxtNotes);
         }
 
-        [Java.Interop.Export()]
+        [Export]
         public async void Book(View view)
         {
-            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
             GenericResponse response = null;
             if (workshop.ProgramId.HasValue)
@@ -245,19 +237,25 @@ namespace helps.Droid
 
             if (response.Success)
             {
-                bookButton.Visibility = ViewStates.Gone;
-                cancelButton.Visibility = ViewStates.Visible;
-                DialogHelper.ShowDialog(this, "You have been successfully booked into this workshop", "Workshop Booked");
-                NotificationHelper.ScheduleNotification(this, workshop.Id, NotificationHelper.DefaultNotification);
+                var builder = new AlertDialog.Builder(this);
+                builder.SetTitle("Booked Successfully");
+                builder.SetMessage("Would you like to set up notifications now?");
+                builder.SetCancelable(false);
+                builder.SetPositiveButton("Create Notifications", delegate { ShowNotificationDialog(null); });
+                builder.SetNegativeButton("Close", delegate { });
+                builder.Show();
+                booking = new WorkshopBooking();
+                UpdateButtons();
+                ShowNotifications();                
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
         }
 
-        [Java.Interop.Export()]
+        [Export]
         public void Cancel(View view)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            var builder = new AlertDialog.Builder(this);
             builder.SetTitle("Are you sure?");
             builder.SetMessage(
                 "NOTE: Cancelling a booking which is part of a program (series of workshops) will cancel all bookings in that program");
@@ -269,29 +267,28 @@ namespace helps.Droid
 
         private async void ActuallyCancel()
         {
-            ProgressDialog dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
             GenericResponse response = null;
-
             response = await Services.Workshop.CancelBooking(workshop.Id);
-
             dialog.Hide();
 
             if (response.Success)
             {
-                bookButton.Visibility = ViewStates.Visible;
-                cancelButton.Visibility = ViewStates.Gone;
                 DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
                 NotificationHelper.Cancel(this, workshop.Id);
+                booking = null;
+                UpdateButtons();
+                FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Gone;
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
         }
 
-        [Java.Interop.Export()]
+        [Export]
         public void Edit(View view)
         {
-            Animation animOut = AnimationUtils.LoadAnimation(this, Resource.Animation.fadeout);
+            var animOut = AnimationUtils.LoadAnimation(this, Resource.Animation.fadeout);
             fab.StartAnimation(animOut);
             animOut.AnimationEnd += async (sender, e) =>
             {
@@ -330,14 +327,16 @@ namespace helps.Droid
         {
             if (flipper.DisplayedChild > 0)
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                var builder = new AlertDialog.Builder(this);
                 builder.SetMessage(
                     "Are you sure you want to discard changes to this booking?");
                 builder.SetCancelable(false);
-                builder.SetPositiveButton("Keep Editing", delegate {  });
-                builder.SetNegativeButton("Discard", delegate {
+                builder.SetPositiveButton("Keep Editing", delegate { });
+                builder.SetNegativeButton("Discard", delegate
+                {
                     IsEditing = !IsEditing;
-                    AnimateButton(); FlipView(true);
+                    AnimateButton();
+                    FlipView(true);
                 });
                 builder.Show();
                 return true;
@@ -346,30 +345,36 @@ namespace helps.Droid
         }
 
         private void AnimateButton()
-        { 
+        {
             if (IsEditing)
                 fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_check_24px));
             else
                 fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_mode_edit_24px));
 
             SetButtonColor();
-            Animation animIn = AnimationUtils.LoadAnimation(this, Resource.Animation.fadein);
+            var animIn = AnimationUtils.LoadAnimation(this, Resource.Animation.fadein);
             fab.StartAnimation(animIn);
         }
 
         private void SetButtonColor()
         {
-            int opp = (IsEditing) ? (255 / 2) : 0;
-            fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff + opp, color.G + opp + colorDiff, color.B + opp + colorDiff);
-            fab.ColorPressed = Color.Argb(color.A, color.R + opp + (colorDiff / 3), color.G + opp + (colorDiff / 3), color.B + opp + (colorDiff / 3));
+            var opp = (IsEditing) ? (255/2) : 0;
+            fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff + opp, color.G + opp + colorDiff,
+                color.B + opp + colorDiff);
+            fab.ColorPressed = Color.Argb(color.A, color.R + opp + (colorDiff/3), color.G + opp + (colorDiff/3),
+                color.B + opp + (colorDiff/3));
             fab.ColorRipple = Color.Argb(color.A, color.R + opp, color.G + opp, color.B + opp);
         }
 
         public bool FlipView(bool trash = false)
         {
-            int index = flipper.DisplayedChild;
-            int InAnimation = (index > 0) ? Resource.Animation.slide_in_from_left : Resource.Animation.appear_from_top_right;
-            int OutAnimation = (index > 0) ? Resource.Animation.dissapear_to_top_right : Resource.Animation.slide_out_to_left;
+            var index = flipper.DisplayedChild;
+            var InAnimation = (index > 0)
+                ? Resource.Animation.slide_in_from_left
+                : Resource.Animation.appear_from_top_right;
+            var OutAnimation = (index > 0)
+                ? Resource.Animation.dissapear_to_top_right
+                : Resource.Animation.slide_out_to_left;
 
             if (trash)
                 OutAnimation = Resource.Animation.dissapear_to_bottom_right;
@@ -385,13 +390,13 @@ namespace helps.Droid
 
         protected override void OnSaveInstanceState(Bundle bundle)
         {
-            int position = flipper.DisplayedChild;
+            var position = flipper.DisplayedChild;
             bundle.PutInt("TAB_NUMBER", position);
             bundle.PutString("NOTES", editTxtNotes.Text);
         }
 
 
-        [Java.Interop.Export()]
+        [Export]
         public void ShowNotificationDialog(View view)
         {
             var notifier = new NotificationHelper(workshop);
