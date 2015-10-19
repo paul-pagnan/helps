@@ -127,9 +127,9 @@ namespace helps.Shared.Helpers
             var humanized = starting.ToString("dd/MM/yyyy");
             bool Past = starting < DateTime.Now;
 
-            if (starting < DateTime.Now.AddDays(1) && !Past)
+            if (starting < DateTime.UtcNow.AddDays(1) && !Past)
                 humanized = "Today";
-            else if (starting < DateTime.Now.AddDays(2) && !Past)
+            else if (starting < DateTime.UtcNow.AddDays(2) && !Past)
                 humanized = "Tomorrow";
             else if (IncludeDay)
                 humanized = starting.DayOfWeek + " " + humanized;
