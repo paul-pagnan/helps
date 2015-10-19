@@ -64,7 +64,7 @@ namespace helps.Shared.Database
 
             if (Current.HasValue)
             {
-                foreach (var booking in GetAll(Current.Value))
+                foreach (var booking in GetAll())
                     helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId == booking.BookingId);
             }
             helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
