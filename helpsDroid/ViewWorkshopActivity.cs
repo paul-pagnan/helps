@@ -133,6 +133,7 @@ namespace helps.Droid
             whatItCovers.Text = workshop.Description;
             placeAvailable.Text = workshop.FilledPlaces + "/" + workshop.TotalPlaces;
 
+            sessionsListAdapter.Clear();
             sessionsListAdapter.AddAll(workshop.Sessions);
 
             for (var i = 0; i < sessionsListAdapter.Count; i++)
@@ -154,6 +155,7 @@ namespace helps.Droid
         private void UpdateButtons()
         {
             bookButton.Visibility = ViewStates.Gone;
+            cancelButton.Visibility = ViewStates.Gone;
 
             if (workshop.FilledPlaces >= workshop.TotalPlaces)
             {

@@ -32,14 +32,14 @@ namespace helps.Shared.Database
             if (Current) { 
                 return 
                     helpsDatabase.Database.Table<WorkshopBooking>()
-                        .Where(x => x.starting > DateTime.Now)
-                        .OrderBy(x => x.starting)
+                        .Where(x => x.ending > DateTime.Now)
+                        .OrderBy(x => x.ending)
                         .ToList();
             }
             return
                 helpsDatabase.Database.Table<WorkshopBooking>()
-                    .Where(x => x.starting < DateTime.Now)
-                    .OrderByDescending(x => x.starting)
+                    .Where(x => x.ending < DateTime.Now)
+                    .OrderByDescending(x => x.ending)
                     .ToList();
     }
 
@@ -65,8 +65,10 @@ namespace helps.Shared.Database
 
             if (Current.HasValue)
             {
-                foreach (var booking in GetAll())
-                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId == booking.BookingId);
+                if(Current.Value)
+                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending > DateTime.Now);
+                else
+                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending < DateTime.Now);
             }
             helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
 
