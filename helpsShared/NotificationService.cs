@@ -18,7 +18,7 @@ namespace helps.Shared
         {
             notifications = notifications.Select(x =>
             {
-                x.workshopId = workshop.Id;
+                x.workshop = workshop.Id;
                 x.ScheduledDate = workshop.Date.AddMinutes(x.mins * -1);
                 return x;
             }).ToList();

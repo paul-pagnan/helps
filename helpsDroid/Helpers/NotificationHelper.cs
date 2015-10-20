@@ -119,7 +119,7 @@ namespace helps.Droid.Helpers
         {
             var notifications = Services.Notification.GetAll();
             Console.Out.WriteLine("HELPS: Notifications Found - " + notifications.Count);
-            Schedule(ctx, notifications.First().workshopId, notifications);
+            Schedule(ctx, notifications.First().workshop, notifications);
         }
 
         private static void Schedule(Context ctx, int workshopId, List<NotificationOption> notifications)
