@@ -156,7 +156,7 @@ namespace helps.Droid.Helpers
                     ScheduleNotifications(ctx, workshop.Id);
                     ViewHelper.CurrentActivity().RunOnUiThread(() =>
                     {
-                        ViewWorkshopActivity.UpdateNotifications();
+                        ViewSessionBase.UpdateNotifications();
                     });
                 }
             }

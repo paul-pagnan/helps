@@ -160,6 +160,7 @@
     <Compile Include="Recievers\BootReciever.cs" />
     <Compile Include="Recievers\NotificationPublisher.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
+    <Compile Include="ViewSessionBase.cs" />
     <Compile Include="ViewWorkshopActivity.cs" />
     <Compile Include="ViewSessionActivity.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />

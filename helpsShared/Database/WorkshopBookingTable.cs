@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using helps.Shared.DataObjects;
+using Xamarin.Forms;
 
 namespace helps.Shared.Database
 {
@@ -65,10 +66,14 @@ namespace helps.Shared.Database
 
             if (Current.HasValue)
             {
-                if(Current.Value)
+                if (Current.Value)
                     helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending > DateTime.Now);
                 else
+                {
+                    foreach (var item in list)
+                        helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.workshopId == item.workshopId);
                     helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending < DateTime.Now);
+                }
             }
             helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
 
