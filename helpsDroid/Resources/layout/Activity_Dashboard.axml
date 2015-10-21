@@ -34,7 +34,7 @@
                 android:textAllCaps="false"
                 android:onClick="MakeBooking" />
             <Button
-                android:text="My Workshop Bookings"
+                android:text="Workshop Bookings"
                 android:gravity="bottom"
                 android:layout_below="@id/btnMakeBooking"
                 android:textColor="@color/text_white"
@@ -49,10 +49,25 @@
                 android:textAllCaps="false"
                 android:onClick="MyWorkshopBookings" />
             <Button
+                android:text="Session Bookings"
+                android:gravity="bottom"
+                android:layout_below="@id/btnMyBooking"
+                android:textColor="@color/text_white"
+                android:padding="25dp"
+                android:id="@+id/btnMySessionBooking"
+                android:textSize="@dimen/dashboard_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dashboard_item_height"
+                android:scaleType="centerCrop"
+                android:background="@drawable/my_session_booking_item"
+                android:fontFamily="sans-serif-light"
+                android:textAllCaps="false"
+                android:onClick="MySessionBookings" />
+            <Button
                 android:text="Settings"
                 android:gravity="bottom"
                 android:id="@+id/btnSettings"
-                android:layout_below="@id/btnMyBooking"
+                android:layout_below="@id/btnMySessionBooking"
                 android:textColor="@color/text_white"
                 android:padding="25dp"
                 android:textSize="@dimen/dashboard_text_size"

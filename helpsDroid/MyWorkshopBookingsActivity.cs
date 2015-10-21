@@ -16,7 +16,6 @@ using Java.Lang;
 using helps.Droid.Helpers;
 using helps.Droid.Adapters;
 
-
 namespace helps.Droid
 {
     [Activity(Label = "My Workshop Bookings", Theme = "@style/AppTheme.MyToolbar")]
@@ -28,7 +27,7 @@ namespace helps.Droid
 
         protected override int LayoutResource
         {
-            get { return Resource.Layout.Activity_MyWorkshopBookings; }
+            get { return Resource.Layout.Activity_Bookings; }
         }
         
         protected async override void OnCreate(Bundle bundle)

@@ -173,7 +173,7 @@
     <Compile Include="MyBookingsFragment.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ForgotPasswordActivity.cs" />
-    <Compile Include="MyBookingsActivity.cs" />
+    <Compile Include="MyWorkshopBookingsActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,7 +207,7 @@
     <AndroidResource Include="Resources\layout\Activity_Dashboard.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Activity_MyWorkshopBookings.axml">
+    <AndroidResource Include="Resources\layout\Activity_Bookings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Fragment_CurrentBookings.axml">
@@ -328,9 +328,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\helps_logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +374,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\myBookings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\myBookings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\FontAwesome.xml" />
@@ -432,6 +426,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\anim\dissapear_to_bottom_right.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\sessionBookings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-ldpi\sessionBookings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\sessionBookings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\sessionBookings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\sessionBookings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\my_session_booking_item.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\notificationIcon.png" />

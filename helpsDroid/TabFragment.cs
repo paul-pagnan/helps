@@ -7,10 +7,12 @@ using helps.Droid.Adapters;
 using Android.Support.V4.View;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Content;
 using helps.Droid.Helpers;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
@@ -19,10 +21,11 @@ namespace helps.Droid
         private int position;
         private bool workshop;
         private SwipeRefreshLayout refresher;
-        private ListView list;
+        private ListView listView;
         private BookingsListAdapter listAdapter;
         private View root;
         private LayoutInflater inflater;
+        private readonly Activity activity = ViewHelper.CurrentActivity();
 
         public static TabFragment NewInstance(int position, bool workshop)
         {
@@ -69,7 +72,7 @@ namespace helps.Droid
 
             ViewCompat.SetElevation(root, 50);
 
-            list.ItemClick += (sender, e) =>
+            listView.ItemClick += (sender, e) =>
             {
                 var intent = new Intent(container.Context, typeof(ViewWorkshopActivity));
                 intent.PutExtra("WorkshopId", (int)e.Id);
@@ -83,8 +86,8 @@ namespace helps.Droid
         private void InitElements(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
             listAdapter = new BookingsListAdapter(inflater, Resources, true);
-            list = context.FindViewById<ListView>(GetListView());
-            list.Adapter = listAdapter;
+            listView = context.FindViewById<ListView>(GetListView());
+            listView.Adapter = listAdapter;
 
             refresher = context.FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefresh);
             refresher.Refresh += async (sender, e) =>
@@ -97,31 +100,51 @@ namespace helps.Droid
 
         private async void LoadData(bool localOnly, bool force = false)
         {
-            var list = await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
-            listAdapter.Clear();
-            listAdapter.AddAll(list);
+            var list = new List<WorkshopPreview>();
+            try
+            {
+                list = await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
+                listAdapter.Clear();
+                listAdapter.AddAll(list);
+                NotifyListUpdate();
+                PostListUpdateView(localOnly, list.Count == 0);
+            }
+            catch (Exception ex)
+            {
+                PostListUpdateView(localOnly, true);
+                throw ex;
+            }
+        }
+
+        private void PostListUpdateView(bool localOnly, bool listEmpty)
+        {
+            activity.RunOnUiThread(() =>
+            {
+                activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = (!listEmpty || !localOnly)
+                    ? ViewStates.Gone
+                    : ViewStates.Visible;
+                var noBookings = (!localOnly && listEmpty);
+                activity.FindViewById<TextView>(Resource.Id.noBookings).Visibility = noBookings
+                    ? ViewStates.Visible
+                    : ViewStates.Gone;
+            });
         }
 
         private void NotifyListUpdate()
         {
-            listAdapter.NotifyDataSetChanged();
-            refresher.Refreshing = false;
+            activity.RunOnUiThread(() =>
+            {
+                listAdapter.NotifyDataSetChanged();
+                refresher.Refreshing = false;
+            });
         }
 
         private async void InitList(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
             //Load from local first
             await Task.Factory.StartNew(() => LoadData(true));
-            NotifyListUpdate();
-            var activity = ViewHelper.CurrentActivity();
-            activity.RunOnUiThread(() =>
-            {
-                activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = ViewStates.Gone;
-            });
-
             //Do background refresh
             await Task.Factory.StartNew(() => LoadData(false));
-            NotifyListUpdate();
         }
 
         private int GetLayout()
@@ -148,6 +171,5 @@ namespace helps.Droid
         {
             return (position == 0) ? true : false;
         }
-
     }
 }

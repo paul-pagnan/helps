@@ -34,9 +34,9 @@ namespace helps.Droid
             Color color = Resources.GetColor(Resource.Color.tint);
             FindViewById<Button>(Resource.Id.btnMakeBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
             FindViewById<Button>(Resource.Id.btnMyBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
+            FindViewById<Button>(Resource.Id.btnMySessionBooking).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
             FindViewById<Button>(Resource.Id.btnSettings).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
         }
-
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -51,6 +51,13 @@ namespace helps.Droid
             var intent = new Intent(this, typeof(MyWorkshopBookingsActivity));
             StartActivity(intent);
         }
+
+        [Java.Interop.Export()]
+        public void MySessionBookings(View view)
+        {
+            DialogHelper.ShowDialog(this, "The sessions menu has not yet been implemented", "Coming Soon");
+        }
+
 
         [Java.Interop.Export()]
         public void MakeBooking(View view)
