@@ -17,20 +17,19 @@ namespace helps.Droid
     public class TabFragment : Fragment
     {
         private int position;
-
+        private bool workshop;
         private SwipeRefreshLayout refresher;
-
         private ListView list;
         private BookingsListAdapter listAdapter;
-
         private View root;
         private LayoutInflater inflater;
 
-        public static TabFragment NewInstance(int position)
+        public static TabFragment NewInstance(int position, bool workshop)
         {
             var f = new TabFragment();
             var b = new Bundle();
             b.PutInt("position", position);
+            b.PutBoolean("workshop", workshop);
             f.Arguments = b;
             return f;
         }
@@ -39,6 +38,7 @@ namespace helps.Droid
         {
             base.OnCreate(savedInstanceState);
             position = Arguments.GetInt("position");
+            workshop = Arguments.GetBoolean("workshop");
         }
 
         public override bool UserVisibleHint
@@ -110,6 +110,7 @@ namespace helps.Droid
 
         private async void InitList(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
+            //Load from local first
             await Task.Factory.StartNew(() => LoadData(true));
             NotifyListUpdate();
             var activity = ViewHelper.CurrentActivity();
@@ -117,6 +118,10 @@ namespace helps.Droid
             {
                 activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = ViewStates.Gone;
             });
+
+            //Do background refresh
+            await Task.Factory.StartNew(() => LoadData(false));
+            NotifyListUpdate();
         }
 
         private int GetLayout()

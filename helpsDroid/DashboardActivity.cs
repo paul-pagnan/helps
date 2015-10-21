@@ -46,9 +46,9 @@ namespace helps.Droid
 
 
         [Java.Interop.Export()]
-        public void MyBookings(View view)
+        public void MyWorkshopBookings(View view)
         {
-            var intent = new Intent(this, typeof(MyBookingsActivity));
+            var intent = new Intent(this, typeof(MyWorkshopBookingsActivity));
             StartActivity(intent);
         }
 

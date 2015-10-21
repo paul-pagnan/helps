@@ -101,5 +101,7 @@ namespace helps.Shared.Database
                 helpsDatabase.Database.Update(record);
             }
         }
+
+      
     }
 }

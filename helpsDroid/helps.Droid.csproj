@@ -207,7 +207,7 @@
     <AndroidResource Include="Resources\layout\Activity_Dashboard.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Activity_MyBookings.axml">
+    <AndroidResource Include="Resources\layout\Activity_MyWorkshopBookings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Fragment_CurrentBookings.axml">

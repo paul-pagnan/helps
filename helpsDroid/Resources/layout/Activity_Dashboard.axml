@@ -34,7 +34,7 @@
                 android:textAllCaps="false"
                 android:onClick="MakeBooking" />
             <Button
-                android:text="My Bookings"
+                android:text="My Workshop Bookings"
                 android:gravity="bottom"
                 android:layout_below="@id/btnMakeBooking"
                 android:textColor="@color/text_white"
@@ -47,7 +47,7 @@
                 android:background="@drawable/my_booking_item"
                 android:fontFamily="sans-serif-light"
                 android:textAllCaps="false"
-                android:onClick="MyBookings" />
+                android:onClick="MyWorkshopBookings" />
             <Button
                 android:text="Settings"
                 android:gravity="bottom"
