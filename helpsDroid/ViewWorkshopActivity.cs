@@ -39,7 +39,7 @@ namespace helps.Droid
             if (extras != null)
             {
                 //Get vars from bundle
-                var workshopId = extras.GetInt("WorkshopId");
+                var workshopId = extras.GetInt("Id");
 
                 //Get the Booking Details
                 if (extras.GetBoolean("IsBooking"))

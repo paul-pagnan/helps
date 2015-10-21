@@ -94,7 +94,7 @@ namespace helps.Shared
             {
                 TestConnection();
                 CurrentlyUpdating = true;
-                await UpdateBookings(Current);
+                await BookingsService.UpdateBookings("workshop", Current);
             }
             CurrentlyUpdating = false;
             return await Translater.TranslatePreview(workshopBookingTable.GetAll(Current));
@@ -106,7 +106,7 @@ namespace helps.Shared
             {
                 TestConnection();
                 CurrentlyUpdating = true;
-                await UpdateBookings(true);
+                await BookingsService.UpdateBookings("workshop", true);
             }
             return workshopBookingTable.GetByWorkshopId(workshopId);
         }
@@ -167,34 +167,6 @@ namespace helps.Shared
         }
 
 
-
-        public async Task<bool> UpdateBookings(bool? Current = null)
-        {
-            var currentUser = userTable.CurrentUser().StudentId;
-            var queryString = "studentId=" + currentUser + "&pageSize=9999&active=true";
-            if (Current.HasValue)
-            {
-                if (Current.Value)
-                    queryString += "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" +
-                                   DateTime.MaxValue.AddMonths(-1).ToString(DateFormat);
-                else
-                    queryString += "&startingDtBegin=" + DateTime.MinValue.AddYears(2000).ToString(DateFormat) +
-                                   "&startingDtEnd=" + DateTime.Now.ToString(DateFormat);
-            }
-
-            var response = await helpsClient.GetAsync("api/workshop/booking/search?" + queryString);
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsAsync<GetResponse<WorkshopBooking>>(Formatters());
-                List<WorkshopBooking> decodedResponse = result.Results;
-                if(decodedResponse != null)
-                    await workshopBookingTable.SetAll(decodedResponse, Current);
-                CurrentlyUpdating = false;
-                return true;
-            }
-            CurrentlyUpdating = false;
-            return false;
-        }
 
         public async Task<GenericResponse> AddNotes(string notes, int workshopId)
         {

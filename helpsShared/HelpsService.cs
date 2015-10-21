@@ -14,12 +14,11 @@ namespace helps.Shared
     {
         public static bool CurrentlyUpdating = false;
 
-        public static HttpClient helpsClient;
+        protected readonly static HttpClient helpsClient;
 
-        public const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
-        public const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
-
-        public const string DateFormat = "yyy-MM-ddThh:mm";
+        private const string helpsApplicationURL = @"http://helps.pagnan.com.au/";
+        private const string helpsApplicationKey = @"94n4NXGofY2Esdd36GlQ3JR66T102bXI";
+        protected const string DateFormat = "yyy-MM-ddThh:mm";
 
         static HelpsService()
         {
@@ -35,7 +34,7 @@ namespace helps.Shared
             await helpsClient.GetAsync("api/workshop/workshopSets/as");
         }
 
-        public static void TestConnection()
+        protected static void TestConnection()
         {
             var networkConnection = DependencyService.Get<INetworkConnection>();
             networkConnection.CheckNetworkConnection();
@@ -43,14 +42,14 @@ namespace helps.Shared
                 throw new System.Net.WebException();
         }
 
-        public static bool IsConnected()
+        protected static bool IsConnected()
         {
             var networkConnection = DependencyService.Get<INetworkConnection>();
             networkConnection.CheckNetworkConnection();
             return networkConnection.IsConnected;
         }
 
-        public IEnumerable<JsonMediaTypeFormatter> Formatters()
+        protected static IEnumerable<JsonMediaTypeFormatter> Formatters()
         {
             return new[] {new JsonMediaTypeFormatter {
                   SerializerSettings = new JsonSerializerSettings {

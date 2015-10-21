@@ -55,7 +55,8 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public void MySessionBookings(View view)
         {
-            DialogHelper.ShowDialog(this, "The sessions menu has not yet been implemented", "Coming Soon");
+            var intent = new Intent(this, typeof(MySessionBookingsActivity));
+            StartActivity(intent);
         }
 
 

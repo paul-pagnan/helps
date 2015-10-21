@@ -10,6 +10,7 @@ namespace helps.Droid
         public static StudentService Student;
         public static WorkshopService Workshop;
         public static NotificationService Notification;
+        public static SessionService Session;
 
         static Services()
         {
@@ -18,6 +19,7 @@ namespace helps.Droid
             Student = new StudentService();
             Workshop = new WorkshopService();
             Notification = new NotificationService();
+            Session = new SessionService();
             Task.Factory.StartNew(HelpsService.Purge);
         }
     }

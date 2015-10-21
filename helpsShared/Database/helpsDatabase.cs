@@ -22,6 +22,9 @@ namespace helps.Shared.Database
             Database.CreateTable<WorkshopSet>();
             Database.CreateTable<WorkshopBooking>();
 
+            //Sessions
+            Database.CreateTable<SessionBooking>();
+
             //Notification
             Database.CreateTable<NotificationOption>();
             

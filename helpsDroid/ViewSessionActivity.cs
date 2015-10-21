@@ -16,7 +16,7 @@ using helps.Droid.Helpers;
 namespace helps.Droid
 {
     [Activity(Label = "My Information", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
-    public class ViewSessionActivity : Main
+    public class ViewSessionActivity : ViewSessionBase
     {
         private TextView lectureName;
         private TextView lectureEmailAddress;
@@ -36,8 +36,16 @@ namespace helps.Droid
             get { return Resource.Layout.Activity_ViewSession; }
         }
 
-        private void InitComponents()
+
+        protected override void OnCreate(Bundle bundle)
         {
+            base.OnCreate(bundle);
+            InitSessionComponents();
+        }
+
+        private void InitSessionComponents()
+        {
+            InitComponents();
             lectureName = FindViewById<TextView>(Resource.Id.textViewLectureNameValue);
 
             lectureEmailAddress = FindViewById<TextView>(Resource.Id.textViewLectureEmailValue);
@@ -63,12 +71,6 @@ namespace helps.Droid
             room = FindViewById<TextView>(Resource.Id.textViewRoomValue);
         }
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-           
-            InitComponents();
-        }
-
+     
     }
 }

@@ -150,12 +150,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\MyPagerAdapter.cs" />
     <Compile Include="Adapters\SessionListAdapter.cs" />
     <Compile Include="Adapters\DataObjects\MyList.cs" />
     <Compile Include="Adapters\SettingsCategoryListAdapter.cs" />
     <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
+    <Compile Include="MySessionBookingsActivity.cs" />
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
@@ -170,7 +172,7 @@
     <Compile Include="Services.cs" />
     <Compile Include="MakeBookingActivity.cs" />
     <Compile Include="Helpers\DialogHelper.cs" />
-    <Compile Include="TabFragment.cs" />
+    <Compile Include="BookingsTabFragment.cs" />
     <Compile Include="DetailsInputActivity.cs" />
     <Compile Include="MyBookingsFragment.cs" />
     <Compile Include="Main.cs" />

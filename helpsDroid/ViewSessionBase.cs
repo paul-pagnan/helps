@@ -215,6 +215,5 @@ namespace helps.Droid
             }
             notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
         }
-
     }
 }

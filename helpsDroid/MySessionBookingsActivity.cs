@@ -18,8 +18,8 @@ using helps.Droid.Adapters;
 
 namespace helps.Droid
 {
-    [Activity(Label = "Workshop Bookings", Theme = "@style/AppTheme.MyToolbar")]
-    public class MyWorkshopBookingsActivity : MyBookingsFragment
+    [Activity(Label = "Session Bookings", Theme = "@style/AppTheme.MyToolbar")]
+    public class MySessionBookingsActivity : MyBookingsFragment
     {
         private MyPagerAdapter adapter;
         private ViewPager pager;
@@ -36,11 +36,12 @@ namespace helps.Droid
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetDisplayShowHomeEnabled(true);
 
-            adapter = new MyPagerAdapter(FragmentManager, this.LayoutInflater, true);
+            adapter = new MyPagerAdapter(FragmentManager, this.LayoutInflater, false);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
             tabs = FindViewById<PagerSlidingTabStrip>(Resource.Id.tabs);
             pager.Adapter = adapter;
             tabs.SetViewPager(pager);
         }
     }
+
 }

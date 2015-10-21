@@ -33,17 +33,20 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BookingsService.cs" />
     <Compile Include="Consts\Status.cs" />
     <Compile Include="Consts\Degree.cs" />
     <Compile Include="Database\helpsDatabase.cs" />
     <Compile Include="Database\ISQLite.cs" />
-    <Compile Include="Database\WorkshopBookingTable.cs" />
-    <Compile Include="Database\CampusTable.cs" />
-    <Compile Include="Database\WorkshopSetTable.cs" />
-    <Compile Include="Database\UserTable.cs" />
-    <Compile Include="Database\NotificationTable.cs" />
-    <Compile Include="Database\WorkshopTable.cs" />
+    <Compile Include="Database\Tables\SessionBookingTable.cs" />
+    <Compile Include="Database\Tables\WorkshopBookingTable.cs" />
+    <Compile Include="Database\Tables\CampusTable.cs" />
+    <Compile Include="Database\Tables\WorkshopSetTable.cs" />
+    <Compile Include="Database\Tables\UserTable.cs" />
+    <Compile Include="Database\Tables\NotificationTable.cs" />
+    <Compile Include="Database\Tables\WorkshopTable.cs" />
     <Compile Include="DataObjects\Auth\DetailsInputRequest.cs" />
+    <Compile Include="DataObjects\Bookings\SessionBooking.cs" />
     <Compile Include="DataObjects\Generic\GetResponse.cs" />
     <Compile Include="DataObjects\Auth\HelpsResponse.cs" />
     <Compile Include="DataObjects\Auth\HelpsRegisterRequest.cs" />
@@ -53,11 +56,11 @@
     <Compile Include="DataObjects\Misc\Campus.cs" />
     <Compile Include="DataObjects\Misc\NotificationOption.cs" />
     <Compile Include="DataObjects\Workshops\Workshop.cs" />
-    <Compile Include="DataObjects\Workshops\WorkshopBookingUpdate.cs" />
+    <Compile Include="DataObjects\Bookings\WorkshopBookingUpdate.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopDetail.cs" />
     <Compile Include="DataObjects\Workshops\SessionPreview.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopPreview.cs" />
-    <Compile Include="DataObjects\Workshops\WorkshopBooking.cs" />
+    <Compile Include="DataObjects\Bookings\WorkshopBooking.cs" />
     <Compile Include="DataObjects\Auth\User.cs" />
     <Compile Include="DataObjects\Workshops\WorkshopSet.cs" />
     <Compile Include="Helpers\ResponseHelper.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="HelpsService.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionService.cs" />
     <Compile Include="WorkshopService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,24 @@ namespace helps.Shared.Helpers
             return translated;
         }
 
+        public static async Task<List<WorkshopPreview>> TranslatePreview(List<SessionBooking> list)
+        {
+            List<WorkshopPreview> translated = new List<WorkshopPreview>();
+            foreach (SessionBooking booking in list)
+            {
+                translated.Add(new WorkshopPreview
+                {
+                    Id = booking.SessionId,
+                    Name = booking.LecturerFirstName + " " + booking.LecturerLastName,
+                    Time = HumanizeTimeSpan(booking.StartDate, booking.EndDate),
+                    DateHumanFriendly = HumanizeDate(booking.StartDate),
+                    Location = booking.Campus,
+
+                });
+            }
+            return translated;
+        }
+
         public static WorkshopDetail TranslateDetail(List<Workshop> workshops)
         {
             List<SessionPreview> sessions = new List<SessionPreview>();

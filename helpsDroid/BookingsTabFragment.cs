@@ -16,10 +16,10 @@ using helps.Shared.DataObjects;
 
 namespace helps.Droid
 {
-    public class TabFragment : Fragment
+    public class BookingsTabFragment : Fragment
     {
         private int position;
-        private bool workshop;
+        private bool isWorkshop;
         private SwipeRefreshLayout refresher;
         private ListView listView;
         private BookingsListAdapter listAdapter;
@@ -27,12 +27,12 @@ namespace helps.Droid
         private LayoutInflater inflater;
         private readonly Activity activity = ViewHelper.CurrentActivity();
 
-        public static TabFragment NewInstance(int position, bool workshop)
+        public static BookingsTabFragment NewInstance(int position, bool workshop)
         {
-            var f = new TabFragment();
+            var f = new BookingsTabFragment();
             var b = new Bundle();
             b.PutInt("position", position);
-            b.PutBoolean("workshop", workshop);
+            b.PutBoolean("isWorkshop", workshop);
             f.Arguments = b;
             return f;
         }
@@ -41,7 +41,7 @@ namespace helps.Droid
         {
             base.OnCreate(savedInstanceState);
             position = Arguments.GetInt("position");
-            workshop = Arguments.GetBoolean("workshop");
+            isWorkshop = Arguments.GetBoolean("isWorkshop");
         }
 
         public override bool UserVisibleHint
@@ -53,7 +53,9 @@ namespace helps.Droid
                     var activity = ViewHelper.CurrentActivity();
                     activity.RunOnUiThread(() =>
                     {
-                        activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = ViewStates.Visible;
+                        activity.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Visible;
+                        activity.FindViewById<TextView>(Resource.Id.noBookings).Visibility = ViewStates.Gone;
+                        activity.FindViewById<RelativeLayout>(Resource.Id.centerWrap).Visibility = ViewStates.Visible;
                     });
                     InitList(root, inflater);
                 }
@@ -74,12 +76,14 @@ namespace helps.Droid
 
             listView.ItemClick += (sender, e) =>
             {
-                var intent = new Intent(container.Context, typeof(ViewWorkshopActivity));
-                intent.PutExtra("WorkshopId", (int)e.Id);
+                var intent = new Intent(container.Context, typeof(ViewSessionActivity));
+                if (isWorkshop)
+                    intent = new Intent(container.Context, typeof(ViewWorkshopActivity));
+
+                intent.PutExtra("Id", (int)e.Id);
                 intent.PutExtra("IsBooking", true);
                 StartActivity(intent);
             };
-
             return root;
         }
 
@@ -103,7 +107,7 @@ namespace helps.Droid
             var list = new List<WorkshopPreview>();
             try
             {
-                list = await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
+                list = await GetData(localOnly, force);
                 listAdapter.Clear();
                 listAdapter.AddAll(list);
                 NotifyListUpdate();
@@ -116,18 +120,29 @@ namespace helps.Droid
             }
         }
 
+        private async Task<List<WorkshopPreview>> GetData(bool localOnly, bool force)
+        {
+            if(isWorkshop)
+                return await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
+            return await Services.Session.GetBookings(PastOrCurrent(), localOnly, force);
+        }
+
         private void PostListUpdateView(bool localOnly, bool listEmpty)
         {
             activity.RunOnUiThread(() =>
             {
-                activity.FindViewById<RelativeLayout>(Resource.Id.loading).Visibility = (!listEmpty || !localOnly)
+                var notLoading = (!listEmpty || !localOnly);
+                var noBookings = (!localOnly && listEmpty);
+                activity.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = notLoading
                     ? ViewStates.Gone
                     : ViewStates.Visible;
-                var noBookings = (!localOnly && listEmpty);
                 activity.FindViewById<TextView>(Resource.Id.noBookings).Visibility = noBookings
                     ? ViewStates.Visible
                     : ViewStates.Gone;
-            });
+                activity.FindViewById<RelativeLayout>(Resource.Id.centerWrap).Visibility = (notLoading && noBookings)
+                   ? ViewStates.Visible
+                   : ViewStates.Gone;
+            });  
         }
 
         private void NotifyListUpdate()

@@ -64,7 +64,6 @@ namespace helps.Droid
                 ViewWorkshop((int)e.Id);
             };
 
-
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).Invalidate();
             //Get Local Data First, then update later
             await Task.Factory.StartNew(() => LoadSets(true));
