@@ -36,8 +36,18 @@ namespace helps.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-           
+
             InitComponents();
+
+            var extras = Intent.Extras;
+            if (extras != null)
+            {
+                var skip = extras.GetBoolean("Skip");
+                if (skip)
+                {
+                    viewFlipper.ShowNext();
+                }
+            }
         }
 
         private void InitComponents()
