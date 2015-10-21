@@ -9,6 +9,7 @@ using helps.Droid.Adapters.DataObjects;
 using Android.Graphics;
 using System.Linq;
 using Android.Content.Res;
+using helps.Shared;
 using helps.Shared.DataObjects;
 
 namespace helps.Droid.Adapters
@@ -43,14 +44,19 @@ namespace helps.Droid.Adapters
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var view = convertView ?? inflater.Inflate(ItemLayout, parent, false);
-            InitComponents(view);
-            TxtName.Text = Settings[position].title;
+            InitComponents(view, position);
             return view;
         }
         
-        private void InitComponents(View view)
+        private void InitComponents(View view, int position)
         {
-            TxtName = view.FindViewById<TextView>(Resource.Id.SettingsName);
+            view.FindViewById<TextView>(Resource.Id.SettingsName).Text = Settings[position].title;
+            if (position == 0)
+            {
+                view.FindViewById<CheckBox>(Resource.Id.notificationsEnabled).Checked = SettingService.notificationsEnbabled();
+                view.FindViewById<CheckBox>(Resource.Id.notificationsEnabled).Visibility = ViewStates.Visible;
+                view.FindViewById(Resource.Id.icoArrow).Visibility = ViewStates.Gone;
+            }
         }
     }
 }

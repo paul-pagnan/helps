@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using helps.Shared;
 
 namespace helps.Droid.Recievers
 {
@@ -14,11 +15,14 @@ namespace helps.Droid.Recievers
         public override void OnReceive(Context context, Intent intent)
         {
             Console.Out.WriteLine("HELPS: Spawning Notification");
-            NotificationManager notificationManager =
+            if (!SettingService.notificationsEnbabled())
+                return;
+
+            var notificationManager =
                 (NotificationManager) context.GetSystemService(Context.NotificationService);
 
-            Notification notification = (Notification) intent.GetParcelableExtra(NOTIFICATION);
-            int id = intent.GetIntExtra(NOTIFICATION_ID, 0);
+            var notification = (Notification) intent.GetParcelableExtra(NOTIFICATION);
+            var id = intent.GetIntExtra(NOTIFICATION_ID, 0);
             notificationManager.Notify(id, notification);
         }
     }

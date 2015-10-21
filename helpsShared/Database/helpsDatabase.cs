@@ -33,6 +33,8 @@ namespace helps.Shared.Database
 
             //Misc
             Database.CreateTable<Campus>();
+            Database.CreateTable<Setting>();
+            SettingTable.seed();
         }
 
         public static bool NeedsUpdating(DateTime lastUpdated, int UpdateBuffer)

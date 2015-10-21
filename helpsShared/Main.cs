@@ -9,26 +9,13 @@ namespace helps.Shared
 {
     public class Main
     {
-        public static UserTable userTable;
+        public static UserTable userTable = new UserTable();
         
-        public static WorkshopSetTable workshopSetTable;
-        public static WorkshopBookingTable workshopBookingTable;
-        public static SessionBookingTable sessionBookingTable;
-        public static WorkshopTable workshopTable;
-        public static CampusTable campusTable;
-        public static NotificationTable notificationTable;
-
-
-        public Main()
-        {
-            userTable = new UserTable();
-            workshopSetTable = new WorkshopSetTable();
-            workshopBookingTable = new WorkshopBookingTable();
-            sessionBookingTable = new SessionBookingTable();
-            workshopTable = new WorkshopTable();
-            campusTable = new CampusTable();
-            notificationTable = new NotificationTable();
-        }
-
+        public static readonly WorkshopSetTable workshopSetTable = new WorkshopSetTable();
+        public static readonly WorkshopBookingTable workshopBookingTable = new WorkshopBookingTable();
+        public static readonly SessionBookingTable sessionBookingTable = new SessionBookingTable();
+        public static readonly WorkshopTable workshopTable = new WorkshopTable();
+        public static readonly CampusTable campusTable = new CampusTable();
+        public static readonly NotificationTable notificationTable = new NotificationTable();
     }
 }

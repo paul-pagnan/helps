@@ -33,5 +33,17 @@
             android:layout_marginLeft="2dp"
             android:layout_marginRight="7dp"
             android:layout_alignParentRight="true" />
+        <CheckBox
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/notificationsEnabled"
+            android:visibility="gone"
+            android:layout_marginLeft="2dp"
+            android:textSize="18sp"
+            android:layout_marginRight="7dp"
+            android:layout_alignParentRight="true"
+            android:onClick="enableNotifications" />
     </RelativeLayout>
 </RelativeLayout>
