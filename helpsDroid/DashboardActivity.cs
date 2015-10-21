@@ -62,7 +62,8 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public void Settings(View view)
         {
-            DialogHelper.ShowDialog(this, "The settings menu has not yet been implemented", "Coming Soon");
+            var intent = new Intent(this, typeof(SettingsActivity));
+            StartActivity(intent);
         }
     }
 }

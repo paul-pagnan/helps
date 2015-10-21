@@ -151,9 +151,11 @@
   <ItemGroup>
     <Compile Include="Adapters\SessionListAdapter.cs" />
     <Compile Include="Adapters\DataObjects\MyList.cs" />
+    <Compile Include="Adapters\SettingsCategoryListAdapter.cs" />
     <Compile Include="Adapters\WorkshopCategoryListAdapter.cs" />
     <Compile Include="Adapters\BookingsListAdapter.cs" />
     <Compile Include="Adapters\ListBaseAdapter.cs" />
+    <Compile Include="SettingsActivity.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Recievers\BootReciever.cs" />
@@ -233,6 +235,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Activity_ViewSession.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_Settings.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListItem_SettingsCategory.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
