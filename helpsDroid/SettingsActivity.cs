@@ -45,10 +45,11 @@ namespace helps.Droid
             settingsListView = FindViewById<ListView>(Resource.Id.settingsList);
             settingsListView.Adapter = settingsListAdapter;
             var list = new List<MyList>();
-            list.Add(new MyList() { Id = 1, title = "Notifications Enabled" });
+            list.Add(new MyList() { Id = 1, title = "Notifications Enabled", hideArrow = true });
             list.Add(new MyList() { Id = 2, title = "Update My Information" });
             list.Add(new MyList() { Id = 3, title = "Font Size" });
             list.Add(new MyList() { Id = 4, title = "Change Skin" });
+            list.Add(new MyList() { Id = 5, title = "Logout", hideArrow = true });
             settingsListAdapter.AddAllSettings(list);
         }
 
@@ -74,6 +75,9 @@ namespace helps.Droid
                     case 4:
                         //Change Skin
                         break;
+                    case 5:
+                        Logout();
+                        break;
                     default:
                         break;
                 }
@@ -85,6 +89,15 @@ namespace helps.Droid
         public void enableNotifications(View view)
         {
             SettingService.toggleNotifications(FindViewById<CheckBox>(Resource.Id.notificationsEnabled).Checked);
+        }
+
+        public void Logout()
+        {
+            Services.Auth.Logout();
+            CurrentUser = null;
+            var intent = new Intent(this, typeof(SignInActivity));
+            StartActivity(intent);
+            Finish();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

@@ -55,8 +55,10 @@ namespace helps.Droid.Adapters
             {
                 view.FindViewById<CheckBox>(Resource.Id.notificationsEnabled).Checked = SettingService.notificationsEnbabled();
                 view.FindViewById<CheckBox>(Resource.Id.notificationsEnabled).Visibility = ViewStates.Visible;
-                view.FindViewById(Resource.Id.icoArrow).Visibility = ViewStates.Gone;
             }
+
+            if(Settings[position].hideArrow)
+                view.FindViewById(Resource.Id.icoArrow).Visibility = ViewStates.Gone;
         }
     }
 }

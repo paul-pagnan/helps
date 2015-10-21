@@ -38,12 +38,6 @@ namespace helps.Droid
             FindViewById<Button>(Resource.Id.btnSettings).Background.SetColorFilter(color, PorterDuff.Mode.SrcAtop);
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.logout, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
-
 
         [Java.Interop.Export()]
         public void MyWorkshopBookings(View view)

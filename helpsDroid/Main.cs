@@ -84,20 +84,6 @@ namespace helps.Droid
             return 0;
         }        
 
-        public void Logout()
-        {
-            Services.Auth.Logout();
-            CurrentUser = null;
-            var intent = new Intent(this, typeof(SignInActivity));
-            StartActivity(intent);
-            Finish();
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            if (item.ItemId == Resource.Id.menu_logout)
-                Logout();
-            return base.OnOptionsItemSelected(item);
-        }
+  
     }
 }

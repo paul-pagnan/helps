@@ -6,5 +6,6 @@ namespace helps.Droid.Adapters.DataObjects
     {
         public int Id { get; set; }
         public string title { get; set; }
+        public bool hideArrow { get; set; }
     }
 }

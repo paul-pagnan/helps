@@ -276,9 +276,6 @@
     <AndroidResource Include="Resources\values\themes_apptheme.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\menu\logout.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\dimen.xml">
       <SubType>Designer</SubType>
     </AndroidResource>

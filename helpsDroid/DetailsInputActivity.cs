@@ -166,16 +166,10 @@ namespace helps.Droid
             List<string> sortedList = list.ToList();
             sortedList.Sort();
             sortedList.Insert(0, DefaultValue);
-            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line, sortedList.ToArray<string>());
+            ArrayAdapter arr = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleDropDownItem1Line,
+                sortedList.ToArray<string>());
             arr.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
             return arr;
         }
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.logout, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
-
     }
 }
