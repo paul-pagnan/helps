@@ -46,6 +46,8 @@ namespace helps.Droid
                 if (skip)
                 {
                     viewFlipper.ShowNext();
+                    ActionBar.SetDisplayHomeAsUpEnabled(true);
+                    ActionBar.SetDisplayShowHomeEnabled(true);
                 }
             }
         }
