@@ -53,11 +53,12 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
-    <AndroidLinkSkip>Refractored.PagerSlidingTabStrip</AndroidLinkSkip>
-    <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidLinkSkip>
+    </AndroidLinkSkip>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
@@ -161,6 +162,7 @@
     <Compile Include="Recievers\BootReciever.cs" />
     <Compile Include="Recievers\NotificationPublisher.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
+    <Compile Include="ViewSessionBase.cs" />
     <Compile Include="ViewWorkshopActivity.cs" />
     <Compile Include="ViewSessionActivity.cs" />
     <Compile Include="Extensions\FontAwesome.cs" />
@@ -207,7 +209,7 @@
     <AndroidResource Include="Resources\layout\Activity_Dashboard.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Activity_MyBookings.axml">
+    <AndroidResource Include="Resources\layout\Activity_MyWorkshopBookings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Fragment_CurrentBookings.axml">

@@ -19,8 +19,8 @@ using helps.Droid.Adapters;
 
 namespace helps.Droid
 {
-    [Activity(Label = "My Bookings", Theme = "@style/AppTheme.MyToolbar")]
-    public class MyBookingsActivity : MyBookingsFragment
+    [Activity(Label = "My Workshop Bookings", Theme = "@style/AppTheme.MyToolbar")]
+    public class MyWorkshopBookingsActivity : MyBookingsFragment
     {
         private MyPagerAdapter adapter;
         private ViewPager pager;
@@ -28,16 +28,12 @@ namespace helps.Droid
 
         protected override int LayoutResource
         {
-            get { return Resource.Layout.Activity_MyBookings; }
+            get { return Resource.Layout.Activity_MyWorkshopBookings; }
         }
         
         protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            //Do a Sync now of bookings
-            await Services.Workshop.GetBookings(true, false);
-            await Services.Workshop.GetBookings(false, false);
 
             adapter = new MyPagerAdapter(FragmentManager, this.LayoutInflater);
             pager = FindViewById<ViewPager>(Resource.Id.pager);
@@ -76,7 +72,7 @@ namespace helps.Droid
 
         public override Fragment GetItem(int position)
         {
-            return TabFragment.NewInstance(position);
+            return TabFragment.NewInstance(position, true);
         }
     }
 }

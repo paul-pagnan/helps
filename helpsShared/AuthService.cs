@@ -6,6 +6,7 @@ using helps.Shared.DataObjects;
 using System.Net.Http;
 using System.Linq;
 using System.Web.Script.Serialization;
+using helps.Shared.Database;
 using Microsoft.WindowsAzure.MobileServices;
 using helps.Shared.Helpers;
 
@@ -114,6 +115,7 @@ namespace helps.Shared
         public void Logout()
         {
             userTable.ClearCurrentUser();
+            helpsDatabase.ClearDatabase();
         }
         
     }

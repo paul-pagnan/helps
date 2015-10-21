@@ -27,5 +27,6 @@ namespace helps.Shared
             campusTable = new CampusTable();
             notificationTable = new NotificationTable();
         }
+
     }
 }

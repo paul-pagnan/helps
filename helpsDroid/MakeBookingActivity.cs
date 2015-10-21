@@ -36,7 +36,6 @@ namespace helps.Droid
 
         private int CurrentWorkshopSet;
 
-
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_MakeBooking; }
@@ -78,7 +77,6 @@ namespace helps.Droid
         {
             var intent = new Intent(ApplicationContext, typeof(ViewWorkshopActivity));
             intent.PutExtra("WorkshopId", id);
-            intent.PutExtra("ExpandProgram", true);
             StartActivity(intent);
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using helps.Shared.DataObjects;
+using Xamarin.Forms;
 
 namespace helps.Shared.Database
 {
@@ -32,14 +33,14 @@ namespace helps.Shared.Database
             if (Current) { 
                 return 
                     helpsDatabase.Database.Table<WorkshopBooking>()
-                        .Where(x => x.starting > DateTime.Now)
-                        .OrderBy(x => x.starting)
+                        .Where(x => x.ending > DateTime.Now)
+                        .OrderBy(x => x.ending)
                         .ToList();
             }
             return
                 helpsDatabase.Database.Table<WorkshopBooking>()
-                    .Where(x => x.starting < DateTime.Now)
-                    .OrderByDescending(x => x.starting)
+                    .Where(x => x.ending < DateTime.Now)
+                    .OrderByDescending(x => x.ending)
                     .ToList();
     }
 
@@ -65,8 +66,14 @@ namespace helps.Shared.Database
 
             if (Current.HasValue)
             {
-                foreach (var booking in GetAll())
-                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.BookingId == booking.BookingId);
+                if (Current.Value)
+                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending > DateTime.Now);
+                else
+                {
+                    foreach (var item in list)
+                        helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.workshopId == item.workshopId);
+                    helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending < DateTime.Now);
+                }
             }
             helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
 
@@ -94,5 +101,7 @@ namespace helps.Shared.Database
                 helpsDatabase.Database.Update(record);
             }
         }
+
+      
     }
 }

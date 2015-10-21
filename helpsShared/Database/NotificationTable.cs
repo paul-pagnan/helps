@@ -12,7 +12,7 @@ namespace helps.Shared.Database
     {
         public List<NotificationOption> GetAll(int bookingId)
         {
-            return helpsDatabase.Database.Table<NotificationOption>().Where(x => x.workshopId == bookingId).ToList();
+            return helpsDatabase.Database.Table<NotificationOption>().Where(x => x.workshop == bookingId).ToList();
         }
 
         public List<NotificationOption> GetAll()
@@ -22,13 +22,13 @@ namespace helps.Shared.Database
 
         public void InsertAll(List<NotificationOption> notifications)
         {
-            Clear(notifications.First().workshopId);
+            Clear(notifications.First().workshop);
             helpsDatabase.Database.InsertAll(notifications);
         }
 
         public void Clear(int bookingId)
         {
-            helpsDatabase.Database.Table<NotificationOption>().Delete(x => x.workshopId == bookingId);
+            helpsDatabase.Database.Table<NotificationOption>().Delete(x => x.workshop == bookingId);
         }
     }
 }

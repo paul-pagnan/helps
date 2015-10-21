@@ -7,7 +7,7 @@ namespace helps.Shared.DataObjects
     {
         [PrimaryKey] [AutoIncrement]
         public int notificationId { get; set; }
-        public int workshopId { get; set; }
+        public int workshop { get; set; }
         public string title { get; set; }
         public int mins { get; set; }
         public DateTime ScheduledDate { get; set; }

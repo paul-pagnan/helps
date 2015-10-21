@@ -32,12 +32,9 @@ namespace helps.Droid
 
             //Check if the user has an active session
             if (CurrentUser != null)
-            {
                 SwitchActivity();
-            } else if (bundle == null)
-            {
+            else if (bundle == null)
                 SkipLogin();
-            }
         }
 
         public async void SkipLogin()
