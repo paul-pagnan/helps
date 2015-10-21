@@ -19,26 +19,6 @@
         app:pstsIndicatorColor="@android:color/white"
         app:pstsShouldExpand="true"
         android:textColor="#50FFFFFF" />
-    <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/centerWrap">
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_centerInParent="true" />
-        <TextView
-            android:text="No Bookings Found"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_dark"
-            android:id="@+id/noBookings"
-            android:visibility="gone"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"

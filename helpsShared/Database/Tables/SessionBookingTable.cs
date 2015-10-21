@@ -49,14 +49,13 @@ namespace helps.Shared.Database
 
             if (Current.HasValue)
             {
+                foreach (var item in list)
+                    helpsDatabase.Database.Table<SessionBooking>().Delete(x => x.SessionId == item.SessionId);
+
                 if (Current.Value)
                     helpsDatabase.Database.Table<SessionBooking>().Delete(x => x.EndDate > DateTime.Now);
                 else
-                {
-                    foreach (var item in list)
-                        helpsDatabase.Database.Table<SessionBooking>().Delete(x => x.SessionId == item.SessionId);
                     helpsDatabase.Database.Table<SessionBooking>().Delete(x => x.EndDate < DateTime.Now);
-                }
             }
             helpsDatabase.Database.RunInTransaction(() => { helpsDatabase.Database.InsertAll(updatedList); });
             return true;

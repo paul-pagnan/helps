@@ -55,6 +55,7 @@ namespace helps.Shared
             var result = await response.Content.ReadAsAsync<GetResponse<SessionBooking>>(Formatters());
             List<SessionBooking> decodedResponse = result.Results;
             if (decodedResponse != null)
+
                 await sessionBookingTable.SetAll(decodedResponse, Current);
         }
     }

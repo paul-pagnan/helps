@@ -53,9 +53,9 @@ namespace helps.Droid
                     var activity = ViewHelper.CurrentActivity();
                     activity.RunOnUiThread(() =>
                     {
-                        activity.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = ViewStates.Visible;
-                        activity.FindViewById<TextView>(Resource.Id.noBookings).Visibility = ViewStates.Gone;
-                        activity.FindViewById<RelativeLayout>(Resource.Id.centerWrap).Visibility = ViewStates.Visible;
+                        activity.FindViewById<ProgressBar>(loadingView()).Visibility = ViewStates.Visible;
+                        activity.FindViewById<TextView>(noBookingsView()).Visibility = ViewStates.Gone;
+                        activity.FindViewById<RelativeLayout>(centerWrapView()).Visibility = ViewStates.Visible;
                     });
                     InitList(root, inflater);
                 }
@@ -133,17 +133,32 @@ namespace helps.Droid
             {
                 var notLoading = (!listEmpty || !localOnly);
                 var noBookings = (!localOnly && listEmpty);
-                activity.FindViewById<ProgressBar>(Resource.Id.loading).Visibility = notLoading
+                activity.FindViewById<ProgressBar>(loadingView()).Visibility = notLoading
                     ? ViewStates.Gone
                     : ViewStates.Visible;
-                activity.FindViewById<TextView>(Resource.Id.noBookings).Visibility = noBookings
+                activity.FindViewById<TextView>(noBookingsView()).Visibility = noBookings
                     ? ViewStates.Visible
                     : ViewStates.Gone;
-                activity.FindViewById<RelativeLayout>(Resource.Id.centerWrap).Visibility = (notLoading && noBookings)
+                activity.FindViewById<RelativeLayout>(centerWrapView()).Visibility = (notLoading && noBookings)
                    ? ViewStates.Visible
                    : ViewStates.Gone;
             });  
         }
+
+        private int loadingView()
+        {
+            return PastOrCurrent() ? Resource.Id.loading : Resource.Id.loadingPast;
+        }
+        private int centerWrapView()
+        {
+            return PastOrCurrent() ? Resource.Id.centerWrap : Resource.Id.centerWrapPast;
+        }
+
+        private int noBookingsView()
+        {
+            return PastOrCurrent() ? Resource.Id.noBookings : Resource.Id.noBookingsPast;
+        }
+
 
         private void NotifyListUpdate()
         {

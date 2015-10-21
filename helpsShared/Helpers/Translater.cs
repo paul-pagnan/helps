@@ -1,6 +1,7 @@
 ﻿using helps.Shared.DataObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,12 +162,23 @@ namespace helps.Shared.Helpers
 
         private static string HumanizeTimeSpan(DateTime start, DateTime end)
         {
-            return To12Hour(start.Hour).ToString() + " - " + To12Hour(end.Hour).ToString() + " " + Meridiem(end.Hour);
+            return To12Hour(start) + " - " + To12Hour(end) + " " + Meridiem(end.Hour);
         }
 
-        private static int To12Hour(int Hour)
+        private static string FormatMinutes(DateTime dt)
         {
-            return (Hour > 12) ? (Hour - 12) : Hour;
+            if (dt.Minute > 0)
+            {
+                var formattedMinute = (dt.Minute >= 10) ? dt.Minute.ToString() : "0" + dt.Minute;
+                return ":" + formattedMinute;
+            }
+            return "";
+        }
+
+        private static string To12Hour(DateTime dt)
+        {
+            var hour = (dt.Hour > 12) ? (dt.Hour - 12) : dt.Hour;
+            return hour + FormatMinutes(dt);
         }
 
         private static string Meridiem(int Hour)
