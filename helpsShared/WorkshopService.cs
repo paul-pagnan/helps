@@ -15,6 +15,9 @@ using helps.Shared.DataObjects.Workshops;
 
 namespace helps.Shared
 {
+    /// <summary>
+    /// The Workshop 
+    /// </summary>
     public class WorkshopService : HelpsService
     {
 
@@ -22,6 +25,12 @@ namespace helps.Shared
         {
         }
 
+        /// <summary>
+        /// Test
+        /// </summary>
+        /// <param name="LocalOnly"></param>
+        /// <param name="ForceUpdate"></param>
+        /// <returns></returns>
         public async Task<List<WorkshopSet>> GetWorkshopSets(bool LocalOnly, bool ForceUpdate = false)
         {
             if (!LocalOnly && ((workshopSetTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
