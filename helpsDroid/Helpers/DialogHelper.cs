@@ -1,9 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.App;
 using Android.Content;
-using helps.Shared.DataObjects;
+using Android.Views;
+using Android.Widget;
+using Java.Util;
+using Exception = Java.Lang.Exception;
+using TimeZone = Java.Util.TimeZone;
 
 namespace helps.Droid.Helpers
 {
@@ -11,7 +13,7 @@ namespace helps.Droid.Helpers
     {
         public static void ShowDialog(Context context, string message, string title)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            var builder = new AlertDialog.Builder(context);
             builder.SetMessage(message);
             builder.SetTitle(title);
             builder.Create().Show();
@@ -19,7 +21,7 @@ namespace helps.Droid.Helpers
 
         public static ProgressDialog CreateProgressDialog(string message, Activity activity)
         {
-            ProgressDialog mProgressDialog = new ProgressDialog(activity, Resource.Style.LightDialog);
+            var mProgressDialog = new ProgressDialog(activity, Resource.Style.LightDialog);
             mProgressDialog.SetMessage(message);
             mProgressDialog.SetCancelable(false);
             mProgressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
@@ -35,6 +37,82 @@ namespace helps.Droid.Helpers
             builder.SetCancelable(false);
             builder.SetPositiveButton("Keep Editing", delegate { });
             return builder;
+        }
+
+        public static DatePickerDialog ShowDatePickerDialog(Context ctx, int textView)
+        {
+            try
+            {
+                var cal = Calendar.GetInstance(TimeZone.Default);
+                var listener = new OnDateSetListener(textView);
+                var datePicker = new DatePickerDialog(ctx, listener, 
+                    cal.Get(Calendar.Year),
+                    cal.Get(Calendar.Month),
+                    cal.Get(Calendar.DayOfMonth));
+                datePicker.SetCancelable(false);
+                datePicker.Show();
+            }
+            catch (Exception ex)
+            {
+                ShowDialog(ctx, "An error occured while showing Date Picker\n\n Error Details:\n" + ex, "Exception");
+            }
+            return null;
+        }
+
+        public static TimePickerDialog ShowTimePickerDialog(Context ctx, int textView)
+        {
+            try
+            {
+                var listener = new OnTimeSetListener(textView);
+                var timePicker = new TimePickerDialog(ctx, listener, DateTime.Now.Hour, 0, false);
+                timePicker.SetCancelable(false);
+                timePicker.Show();
+            }
+            catch (Exception ex)
+            {
+                ShowDialog(ctx, "An error occured while showing Time Picker\n\n Error Details:\n" + ex, "Exception");
+            }
+            return null;
+        }
+
+
+        private class OnDateSetListener : Java.Lang.Object, DatePickerDialog.IOnDateSetListener
+        {
+            private int textView;
+
+            public OnDateSetListener(int textView)
+            {
+                this.textView = textView;
+            }
+            
+            // when dialog box is closed, below method will be called.
+            public void OnDateSet(DatePicker view, int selectedYear,
+                int selectedMonth, int selectedDay)
+            {
+                var date = new DateTime(selectedYear, selectedMonth + 1, selectedDay);
+                var txt = ListActionHelper.filterView.FindViewById<TextView>(textView);
+                var formattedDateTime = date.ToString("ddd, dd MMM yyyy");
+                txt.Text = formattedDateTime;
+            }
+        }
+
+
+        private class OnTimeSetListener : Java.Lang.Object, TimePickerDialog.IOnTimeSetListener
+        {
+            private int textView;
+
+            public OnTimeSetListener(int textView)
+            {
+                this.textView = textView;
+            }
+
+            public void OnTimeSet(TimePicker view, int hourOfDay, int minute)
+            {
+                var date = new DateTime(10,10,10,hourOfDay, minute, 0);
+                var txt = ListActionHelper.filterView.FindViewById<TextView>(textView);
+                var formattedTime = date.ToString("hh:mm tt");
+                txt.Text = formattedTime;
+            }
         }
     }
 }

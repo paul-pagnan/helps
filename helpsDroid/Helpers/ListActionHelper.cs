@@ -5,9 +5,12 @@ using Android.App;
 using helps.Droid.Adapters;
 using helps.Shared.DataObjects;
 using Android.Content;
+using Android.Content.Res;
 using helps.Droid.Adapters.DataObjects;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
+using Android.Views;
+using Android.Widget;
 
 namespace helps.Droid.Helpers
 {
@@ -19,6 +22,8 @@ namespace helps.Droid.Helpers
         public List<MyList> items;
         private int selected;
         private bool isWorkshop;
+        private AlertDialog filterDialog;
+        public static Android.Views.View filterView;
 
         public ListActionHelper(BookingsListAdapter listAdapter, ListView listView, Context ctx, bool isWorkshop)
         {
@@ -44,17 +49,42 @@ namespace helps.Droid.Helpers
             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
             builder.SetTitle("Sort By");
             builder.SetSingleChoiceItems(items.Select(x => x.title).ToArray(), selected, new MultiClickListener(this));
-            var clickListener = new ActionClickListener(listAdapter, listView, list, this);
+            var clickListener = new ActionClickListener(listAdapter, listView, list, this, true);
             builder.SetPositiveButton("Sort", clickListener);
             builder.SetNegativeButton("Cancel", clickListener);
             builder.Create().Show();
         }
 
-        public void Filter()
+        public void Filter(List<WorkshopPreview> list, LayoutInflater inflater, Activity activity)
         {
-            throw new NotImplementedException();
+            if(filterDialog == null)
+                CreateFilterDialog(list, inflater, activity);
+            filterDialog.Show();
         }
 
+        public void CreateFilterDialog(List<WorkshopPreview> list, LayoutInflater inflater, Activity activity)
+        {
+            var builder = new AlertDialog.Builder(activity);
+            var dialogView = inflater.Inflate(Resource.Layout.AlertDialog_Filter, null);
+            builder.SetView(dialogView);
+            builder.SetTitle("Filter");
+            var clickListener = new ActionClickListener(listAdapter, listView, list, this, false);
+            builder.SetPositiveButton("Filter", clickListener);
+            builder.SetNegativeButton("Clear", clickListener);
+            SetDefaultVals(dialogView);
+            filterDialog = builder.Create();
+            filterView = dialogView;
+        }
+
+        private static void SetDefaultVals(Android.Views.View dialogView)
+        {
+            dialogView.FindViewById<TextView>(Resource.Id.startDate).Text = DateTime.Now.ToString("ddd, dd MMM yyyy");
+            dialogView.FindViewById<TextView>(Resource.Id.endDate).Text = DateTime.Now.AddDays(7).ToString("ddd, dd MMM yyyy");
+            dialogView.FindViewById<TextView>(Resource.Id.startTime).Text = DateTime.Now.ToString("h:00 tt");
+            dialogView.FindViewById<TextView>(Resource.Id.endTime).Text = DateTime.Now.ToString("h:00 tt");
+            dialogView.FindViewById<TextView>(Resource.Id.txtFilter_name).Text = "";
+            dialogView.FindViewById<TextView>(Resource.Id.txtFilter_location).Text = "";
+        }
 
         private class MultiClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
         {
@@ -77,13 +107,15 @@ namespace helps.Droid.Helpers
             private ListView listView;
             private List<WorkshopPreview> list;
             private ListActionHelper actionHelper;
+            private bool sorting;
 
-            public ActionClickListener(BookingsListAdapter listAdapter, ListView listView, List<WorkshopPreview> list, ListActionHelper actionHelper) : base()
+            public ActionClickListener(BookingsListAdapter listAdapter, ListView listView, List<WorkshopPreview> list, ListActionHelper actionHelper, bool sorting) : base()
             {
                 this.listAdapter = listAdapter;
                 this.listView = listView;
                 this.list = list;
                 this.actionHelper = actionHelper;
+                this.sorting = sorting;
             }
 
             public void OnClick(IDialogInterface dialog, int which)
@@ -92,13 +124,21 @@ namespace helps.Droid.Helpers
                 {
                     if (which == -1)
                     {
-                        var sortedList = GetSortedList(list);
-                        listAdapter.AddAll(sortedList);
+                        var adaptedList = (sorting) ? GetSortedList(list) : GetFilteredList(list);
+                        listAdapter.AddAll(adaptedList);
                         listAdapter.NotifyDataSetChanged();
                     }
+                    else if(!sorting)
+                        SetDefaultVals(filterView);
+                        
                 }
                 else
                     actionHelper.selected = 0;
+            }
+
+            private List<WorkshopPreview> GetFilteredList(List<WorkshopPreview> list)
+            {
+                return list;
             }
 
             private List<WorkshopPreview> GetSortedList(List<WorkshopPreview> list)

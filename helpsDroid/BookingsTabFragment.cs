@@ -212,7 +212,7 @@ namespace helps.Droid
             if (listActioner != null)
             {
                 if (item.ItemId == Resource.Id.menu_filter)
-                    listActioner.Filter();
+                    listActioner.Filter(list, activity.LayoutInflater, activity);
                 else if (item.ItemId == Resource.Id.menu_sort)
                     listActioner.Sort(list);
             }

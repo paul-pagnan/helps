@@ -17,6 +17,7 @@ using Android.Support.V4.Widget;
 using System.Threading.Tasks;
 using System.Threading;
 using Android.Graphics;
+using Java.Interop;
 using Java.Lang;
 
 namespace helps.Droid
@@ -226,10 +227,22 @@ namespace helps.Droid
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             if (item.ItemId == Resource.Id.menu_filter)
-                listActioner.Filter();
+                listActioner.Filter(workshopList, LayoutInflater, this);
             else if (item.ItemId == Resource.Id.menu_sort)
                 listActioner.Sort(workshopList);
             return base.OnOptionsItemSelected(item);
+        }
+
+        [Java.Interop.Export()]
+        public void EditDate(View view)
+        {
+            DialogHelper.ShowDatePickerDialog(this, view.Id);            
+        }
+
+        [Java.Interop.Export()]
+        public void EditTime(View view)
+        {
+            DialogHelper.ShowTimePickerDialog(this, view.Id);
         }
     }
 }
