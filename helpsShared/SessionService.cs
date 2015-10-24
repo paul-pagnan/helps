@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using helps.Shared.Helpers;
 using System.Diagnostics;
+using System.Threading;
 using System.Web.Script.Serialization;
 using Connectivity.Plugin;
 using helps.Shared.DataObjects.Workshops;
@@ -21,19 +22,17 @@ namespace helps.Shared
         {
         }
 
-        public async Task<List<WorkshopPreview>> GetBookings(bool Current, bool LocalOnly, bool ForceUpdate = false)
+        public async Task<List<WorkshopPreview>> GetBookings(CancellationToken ct, bool Current, bool LocalOnly, bool ForceUpdate = false)
         {
             //TODO Introduce Pagination
-            if (!LocalOnly && ((sessionBookingTable.NeedsUpdating(Current) || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && ((sessionBookingTable.NeedsUpdating(Current) || ForceUpdate)))
             {
                 TestConnection();
-                CurrentlyUpdating = true;
                 await BookingsService.UpdateBookings("session", Current);
             }
-            CurrentlyUpdating = false;
+            
             return await Translater.TranslatePreview(sessionBookingTable.GetAll(Current));
         }
-
         
         public async Task<GenericResponse> AddNotes(string notes, int workshopId)
         {

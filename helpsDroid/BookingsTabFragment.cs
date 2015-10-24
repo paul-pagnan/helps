@@ -8,6 +8,7 @@ using Android.Support.V4.View;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Content;
@@ -28,6 +29,7 @@ namespace helps.Droid
         private readonly Activity activity = ViewHelper.CurrentActivity();
         private List<WorkshopPreview> list;
         private ListActionHelper listActioner;
+        private static CancellationTokenSource cts = new CancellationTokenSource();
 
         public static BookingsTabFragment NewInstance(int position, bool workshop)
         {
@@ -110,6 +112,7 @@ namespace helps.Droid
         {
             try
             {
+                cts.Cancel();
                 list = await GetData(localOnly, force);
                 listAdapter.Clear();
                 listAdapter.AddAll(list);
@@ -125,9 +128,10 @@ namespace helps.Droid
 
         private async Task<List<WorkshopPreview>> GetData(bool localOnly, bool force)
         {
+            cts.Cancel();
             if(isWorkshop)
-                return await Services.Workshop.GetBookings(PastOrCurrent(), localOnly, force);
-            return await Services.Session.GetBookings(PastOrCurrent(), localOnly, force);
+                return await Services.Workshop.GetBookings(cts.Token, PastOrCurrent(), localOnly, force);
+            return await Services.Session.GetBookings(cts.Token, PastOrCurrent(), localOnly, force);
         }
 
         private void PostListUpdateView(bool localOnly, bool listEmpty)
@@ -162,7 +166,6 @@ namespace helps.Droid
             return PastOrCurrent() ? Resource.Id.noBookings : Resource.Id.noBookingsPast;
         }
 
-
         private void NotifyListUpdate()
         {
             activity.RunOnUiThread(() =>
@@ -174,6 +177,7 @@ namespace helps.Droid
 
         private async void InitList(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
+            cts.Cancel();
             //Load from local first
             await Task.Factory.StartNew(() => LoadData(true));
             listActioner = new ListActionHelper(listAdapter, listView, activity, isWorkshop);
@@ -220,5 +224,7 @@ namespace helps.Droid
                 Toast.MakeText(activity, "Please wait for the list to load first", ToastLength.Short);
             return base.OnOptionsItemSelected(item);
         }
+
+
     }
 }

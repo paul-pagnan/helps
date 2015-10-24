@@ -41,6 +41,7 @@ namespace helps.Droid
                 //Get vars from bundle
                 var workshopId = extras.GetInt("Id");
 
+                cts.Cancel();
                 //Get the Booking Details
                 if (extras.GetBoolean("IsBooking"))
                     workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
@@ -55,6 +56,7 @@ namespace helps.Droid
                 InitWorkshopComponents();
                 UpdateFields();
 
+                cts.Cancel();
                 //Load booking information so the buttons can be updated
                 //Get Local Data First, then update later
                 await Task.Factory.StartNew(() => LoadBooking(true));
@@ -87,7 +89,8 @@ namespace helps.Droid
      
         private async void LoadBooking(bool localOnly, bool force = false)
         {
-            booking = await Services.Workshop.GetBooking(workshop.Id, localOnly, force);
+            cts.Cancel();
+            booking = await Services.Workshop.GetBooking(cts.Token, workshop.Id, localOnly, force);
             RunOnUiThread(delegate { UpdateFields(); });
         }
 
@@ -129,6 +132,8 @@ namespace helps.Droid
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
             waitlistButton = FindViewById<Button>(Resource.Id.WaitlistBtn);
+            if (HideEdit)
+                FindViewById<FloatingActionButton>(Resource.Id.fab).Visibility = ViewStates.Gone;
         }
 
         [Export]
@@ -138,9 +143,9 @@ namespace helps.Droid
             dialog.Show();
             GenericResponse response = null;
             if (workshop.ProgramId.HasValue)
-                response = await Services.Workshop.BookProgram(workshop.ProgramId.Value);
+                response = await Services.Workshop.BookProgram(cts.Token, workshop.ProgramId.Value);
             else
-                response = await Services.Workshop.Book(workshop.Id);
+                response = await Services.Workshop.Book(cts.Token, workshop.Id);
             dialog.Hide();
 
             if (response.Success)
@@ -178,7 +183,8 @@ namespace helps.Droid
             var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
             GenericResponse response = null;
-            response = await Services.Workshop.CancelBooking(workshop.Id);
+            cts.Cancel();
+            response = await Services.Workshop.CancelBooking(cts.Token, workshop.Id);
             dialog.Hide();
 
             if (response.Success)

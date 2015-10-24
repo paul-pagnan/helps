@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using helps.Shared.Helpers;
 using System.Diagnostics;
+using System.Threading;
 using System.Web.Script.Serialization;
 using Connectivity.Plugin;
 using helps.Shared.DataObjects.Workshops;
@@ -25,18 +26,12 @@ namespace helps.Shared
         {
         }
 
-        /// <summary>
-        /// Test
-        /// </summary>
-        /// <param name="LocalOnly"></param>
-        /// <param name="ForceUpdate"></param>
-        /// <returns></returns>
-        public async Task<List<WorkshopSet>> GetWorkshopSets(bool LocalOnly, bool ForceUpdate = false)
+        public async Task<List<WorkshopSet>> GetWorkshopSets(CancellationToken ct, bool LocalOnly, bool ForceUpdate = false)
         {
-            if (!LocalOnly && ((workshopSetTable.NeedsUpdating() || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && (workshopSetTable.NeedsUpdating() || ForceUpdate))
             {
                 TestConnection();
-                CurrentlyUpdating = true;
+                
                 var response = await helpsClient.GetAsync("api/workshop/workshopSets/true");
 
                 if (response.IsSuccessStatusCode)
@@ -44,11 +39,11 @@ namespace helps.Shared
                     var result = await response.Content.ReadAsAsync<GetResponse<WorkshopSet>>();
                     List<WorkshopSet> decodedResponse = result.Results; 
                     workshopSetTable.SetAll(decodedResponse);
-                    CurrentlyUpdating = false;
+                    
                     return decodedResponse;
                 }
             }
-            CurrentlyUpdating = false;
+            
             return workshopSetTable.GetAll();
         }
 
@@ -72,14 +67,12 @@ namespace helps.Shared
             return Translater.TranslateDetailLocal(booking);
         }
 
-        public async Task<List<WorkshopPreview>> GetWorkshops(int workshopSet, bool LocalOnly, bool ForceUpdate)
+        public async Task<List<WorkshopPreview>> GetWorkshops(CancellationToken ct, int workshopSet, bool LocalOnly, bool ForceUpdate)
         {
             //TODO Introduce Pagination
-            if (!LocalOnly && ((workshopTable.NeedsUpdating(workshopSet) || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && (workshopTable.NeedsUpdating(workshopSet) || ForceUpdate))
             {
                 TestConnection();
-                CurrentlyUpdating = true;
-
                 var queryString = "workshopSetId=" + workshopSet + "&active=true" + "&startingDtBegin=" + DateTime.Now.ToString(DateFormat) + "&startingDtEnd=" + DateTime.MaxValue.AddMonths(-1).ToString(DateFormat) + "&pageSize=9999";
                 var response = await helpsClient.GetAsync("api/workshop/search?" + queryString);
                 if (response.IsSuccessStatusCode)
@@ -88,75 +81,73 @@ namespace helps.Shared
                     List<Workshop> decodedResponse = result.Results;
                     if (decodedResponse != null)
                         workshopTable.SetAllByWorkshopSet(decodedResponse, workshopSet);
-                    CurrentlyUpdating = false;
+                    
                     return Translater.TranslatePreview(decodedResponse);
                 }
             }
-            CurrentlyUpdating = false;
+            
             return Translater.TranslatePreview(workshopTable.GetAll(workshopSet));
         }
 
-        public async Task<List<WorkshopPreview>> GetBookings(bool Current, bool LocalOnly, bool ForceUpdate = false)
+        public async Task<List<WorkshopPreview>> GetBookings(CancellationToken ct, bool Current, bool LocalOnly, bool ForceUpdate = false)
         {
             //TODO Introduce Pagination
-            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(Current) || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && (workshopBookingTable.NeedsUpdating(Current) || ForceUpdate))
             {
                 TestConnection();
-                CurrentlyUpdating = true;
                 await BookingsService.UpdateBookings("workshop", Current);
             }
-            CurrentlyUpdating = false;
+            
             return await Translater.TranslatePreview(workshopBookingTable.GetAll(Current));
         }
 
-        public async Task<WorkshopBooking> GetBooking(int workshopId, bool LocalOnly, bool ForceUpdate = false)
+        public async Task<WorkshopBooking> GetBooking(CancellationToken ct, int workshopId, bool LocalOnly, bool ForceUpdate = false)
         {
-            if (!LocalOnly && ((workshopBookingTable.NeedsUpdating(workshopId) || ForceUpdate) && !CurrentlyUpdating))
+            if (!LocalOnly && (workshopBookingTable.NeedsUpdating(workshopId) || ForceUpdate))
             {
                 TestConnection();
-                CurrentlyUpdating = true;
                 await BookingsService.UpdateBookings("workshop", true);
             }
             return workshopBookingTable.GetByWorkshopId(workshopId);
         }
 
-        public async Task<GenericResponse> Book(int id)
+        public async Task<GenericResponse> Book(CancellationToken ct, int id)
         {
             var queryString = "workshop=" + id;
-            return await BookingBase("api/workshop/booking/create?", queryString);
+            return await BookingBase(ct, "api/workshop/booking/create?", queryString);
         }
 
-        public async Task<GenericResponse> CancelBooking(int id)
+        public async Task<GenericResponse> CancelBooking(CancellationToken ct, int id)
         {
             var workshop = workshopTable.Get(id);
             if (workshop != null && workshop.ProgramId.HasValue) 
-                return await CancelProgram(workshop.ProgramId.Value);
+                return await CancelProgram(ct, workshop.ProgramId.Value);
 
             var queryString = "workshop=" + id;
-            var response = await BookingBase("api/workshop/booking/cancel?", queryString);
+            var response = await BookingBase(ct, "api/workshop/booking/cancel?", queryString);
             if(response.Success)
                 workshopBookingTable.RemoveBookingByWorkshopId(id);
             return response;
         }
 
-        public async Task<GenericResponse> BookProgram(int programId)
+        public async Task<GenericResponse> BookProgram(CancellationToken ct, int programId)
         {
             var queryString = "programId=" + programId;
-            return await BookingBase("api/program/booking/create?", queryString);
+            return await BookingBase(ct, "api/program/booking/create?", queryString);
         }
 
-        public async Task<GenericResponse> CancelProgram(int programId)
+        public async Task<GenericResponse> CancelProgram(CancellationToken ct, int programId)
         {
             var queryString = "programId=" + programId;
            
-            var response = await BookingBase("api/program/booking/cancel?", queryString);
+            var response = await BookingBase(ct, "api/program/booking/cancel?", queryString);
             if (response.Success)
                 foreach (Workshop workshop in workshopTable.GetProgramWorkshops(programId))
                     workshopBookingTable.RemoveBookingByWorkshopId(workshop.WorkshopId);
             return response;
         }
 
-        private async Task<GenericResponse> BookingBase(string endpoint, string queryString)
+        private async Task<GenericResponse> BookingBase(CancellationToken ct, string endpoint, string queryString)
         {
             if (!IsConnected())
                 return ResponseHelper.CreateErrorResponse("No Network Connection", "Please check your network connection and try again");
@@ -167,7 +158,7 @@ namespace helps.Shared
                 var result = await response.Content.ReadAsAsync<GetResponse<GenericResponse>>();
                 if (result.IsSuccess)
                 {
-                    GetBookings(true, false, true);
+                    await GetBookings(ct, true, false, true);
                     return ResponseHelper.Success();
                 }
                 return ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);

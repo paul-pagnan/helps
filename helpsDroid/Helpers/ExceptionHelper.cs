@@ -30,7 +30,6 @@ namespace helps.Droid.Helpers
         public static void NoConnection()
         {
             var context = ViewHelper.CurrentActivity();
-            HelpsService.CurrentlyUpdating = false;
             context.RunOnUiThread(delegate
             {
                 var NoConnection = context.FindViewById(Resource.Id.NoConnection);

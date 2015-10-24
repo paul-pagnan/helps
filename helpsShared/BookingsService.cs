@@ -34,11 +34,11 @@ namespace helps.Shared
                         await DecodeAndUpdateWorkshop(response, Current.Value);
                     else
                         await DecodeAndUpdateSession(response, Current.Value);
-                    CurrentlyUpdating = false;
+                    
                     return true;
                 }
             }
-            CurrentlyUpdating = false;
+            
             return false;
         }
 

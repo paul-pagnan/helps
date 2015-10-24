@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Globalization;
+using com.refractored.fab;
 using helps.Shared.DataObjects;
 using helps.Shared.Consts;
 using helps.Droid.Helpers;
@@ -70,7 +71,5 @@ namespace helps.Droid
 
             room = FindViewById<TextView>(Resource.Id.textViewRoomValue);
         }
-
-     
     }
 }

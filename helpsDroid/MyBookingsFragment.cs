@@ -81,5 +81,17 @@ namespace helps.Droid
                 e.Handled = true;
             }
         }
+
+        [Java.Interop.Export()]
+        public void EditDate(View view)
+        {
+            DialogHelper.ShowDatePickerDialog(this, view.Id);
+        }
+
+        [Java.Interop.Export()]
+        public void EditTime(View view)
+        {
+            DialogHelper.ShowTimePickerDialog(this, view.Id);
+        }
     }
 }

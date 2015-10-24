@@ -69,6 +69,7 @@ namespace helps.Droid
             };
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).Invalidate();
+
             //Get Local Data First, then update later
             await Task.Factory.StartNew(() => LoadSets(true));
             //Do a background Sync now
@@ -116,7 +117,8 @@ namespace helps.Droid
 
         private async void LoadSets(bool localOnly, bool force = false)
         {
-            var list = await Services.Workshop.GetWorkshopSets(localOnly, force);
+            cts.Cancel();
+            var list = await Services.Workshop.GetWorkshopSets(cts.Token, localOnly, force);
             workshopSetListAdapter.Clear();
             workshopSetListAdapter.AddAll(list);
             if (workshopSetListAdapter.Count > 0)
@@ -133,7 +135,8 @@ namespace helps.Droid
         {
             if (CurrentWorkshopSet > 0)
             {
-                workshopList = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
+                cts.Cancel();
+                workshopList = await Services.Workshop.GetWorkshops(cts.Token, workshopSet, localOnly, force);
                 workshopListAdapter.Clear();
                 workshopListAdapter.AddAll(workshopList, position);
 

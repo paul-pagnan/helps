@@ -15,8 +15,6 @@ namespace helps.Shared
     /// </summary>
     public class HelpsService : Main
     {
-        public static bool CurrentlyUpdating = false;
-   
         protected readonly static HttpClient helpsClient;
 
         private const string helpsApplicationURL = @"http://helps.pagnan.com.au/";

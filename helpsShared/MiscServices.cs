@@ -19,7 +19,7 @@ namespace helps.Shared
             if (campusTable.GetCampus(id) == null)
             {
                 TestConnection();
-                CurrentlyUpdating = true;
+                
                 var response = await helpsClient.GetAsync("api/misc/campus/true");
 
                 if (response.IsSuccessStatusCode)
@@ -27,7 +27,7 @@ namespace helps.Shared
                     var result = await response.Content.ReadAsAsync<GetResponse<Campus>>();
                     List<Campus> decodedResponse = result.Results;
                     campusTable.SetAll(decodedResponse);
-                    CurrentlyUpdating = false;
+                    
                 }
             }
             return campusTable.GetCampus(id).campus;

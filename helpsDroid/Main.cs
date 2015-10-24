@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -26,7 +26,7 @@ namespace helps.Droid
         public User CurrentUser;
 
         public Toolbar Toolbar { get; set; }
-
+        protected static CancellationTokenSource cts = new CancellationTokenSource();
         protected abstract int LayoutResource { get; }
 
 
