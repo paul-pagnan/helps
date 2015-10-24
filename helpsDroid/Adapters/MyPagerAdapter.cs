@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Views;
 using helps.Droid;
 using Java.Lang;

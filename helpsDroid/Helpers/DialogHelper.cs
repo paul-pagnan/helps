@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
+using helps.Shared.DataObjects;
 
 namespace helps.Droid.Helpers
 {
@@ -20,6 +24,17 @@ namespace helps.Droid.Helpers
             mProgressDialog.SetCancelable(false);
             mProgressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
             return mProgressDialog;
+        }
+
+
+        public static AlertDialog.Builder CreateEditConfirmDialog(Activity activity)
+        {
+            var builder = new AlertDialog.Builder(activity);
+            builder.SetMessage(
+                "Are you sure you want to discard changes to this booking?");
+            builder.SetCancelable(false);
+            builder.SetPositiveButton("Keep Editing", delegate { });
+            return builder;
         }
     }
 }

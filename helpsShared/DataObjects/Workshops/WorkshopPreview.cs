@@ -1,3 +1,5 @@
+using System;
+
 namespace helps.Shared.DataObjects
 { 
     public class WorkshopPreview 
@@ -7,6 +9,7 @@ namespace helps.Shared.DataObjects
         public int WorkshopSetId { get; set; }
         public string Type { get; set; }
         public string Time { get; set; }
+        public DateTime Date { get; set; }
         public string DateHumanFriendly { get; set; }
         public string Location { get; set; }
         public int FilledPlaces { get; set; }

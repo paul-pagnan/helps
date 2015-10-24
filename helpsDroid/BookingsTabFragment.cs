@@ -26,6 +26,8 @@ namespace helps.Droid
         private View root;
         private LayoutInflater inflater;
         private readonly Activity activity = ViewHelper.CurrentActivity();
+        private List<WorkshopPreview> list;
+        private ListActionHelper listActioner;
 
         public static BookingsTabFragment NewInstance(int position, bool workshop)
         {
@@ -42,6 +44,7 @@ namespace helps.Droid
             base.OnCreate(savedInstanceState);
             position = Arguments.GetInt("position");
             isWorkshop = Arguments.GetBoolean("isWorkshop");
+            SetHasOptionsMenu(true);
         }
 
         public override bool UserVisibleHint
@@ -87,6 +90,7 @@ namespace helps.Droid
             return root;
         }
 
+
         private void InitElements(Android.Views.View context, Android.Views.LayoutInflater inflater)
         {
             listAdapter = new BookingsListAdapter(inflater, Resources, true);
@@ -104,7 +108,6 @@ namespace helps.Droid
 
         private async void LoadData(bool localOnly, bool force = false)
         {
-            var list = new List<WorkshopPreview>();
             try
             {
                 list = await GetData(localOnly, force);
@@ -173,6 +176,7 @@ namespace helps.Droid
         {
             //Load from local first
             await Task.Factory.StartNew(() => LoadData(true));
+            listActioner = new ListActionHelper(listAdapter, listView, activity, isWorkshop);
             //Do background refresh
             await Task.Factory.StartNew(() => LoadData(false));
         }
@@ -200,6 +204,21 @@ namespace helps.Droid
         private bool PastOrCurrent()
         {
             return (position == 0) ? true : false;
+        }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (listActioner != null)
+            {
+                if (item.ItemId == Resource.Id.menu_filter)
+                    listActioner.Filter();
+                else if (item.ItemId == Resource.Id.menu_sort)
+                    listActioner.Sort(list);
+            }
+            else
+                Toast.MakeText(activity, "Please wait for the list to load first", ToastLength.Short);
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

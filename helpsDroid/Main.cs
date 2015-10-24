@@ -82,8 +82,7 @@ namespace helps.Droid
             if (resourceId > 0)
                 return Resources.GetDimensionPixelSize(resourceId);
             return 0;
-        }        
+        }
 
-  
     }
 }

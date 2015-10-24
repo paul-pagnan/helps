@@ -152,11 +152,7 @@ namespace helps.Droid
         {
             if (flipper.DisplayedChild > 0)
             {
-                var builder = new AlertDialog.Builder(this);
-                builder.SetMessage(
-                    "Are you sure you want to discard changes to this booking?");
-                builder.SetCancelable(false);
-                builder.SetPositiveButton("Keep Editing", delegate { });
+                var builder = DialogHelper.CreateEditConfirmDialog(this);
                 builder.SetNegativeButton("Discard", delegate
                 {
                     IsEditing = !IsEditing;
@@ -214,9 +210,7 @@ namespace helps.Droid
             var nots = Services.Notification.GetNotifications(workshop.Id);
             notifications.Text = (nots.Any(x => x.selected)) ? "" : "No notifications set ";
             foreach (var notification in nots.Where(x => x.selected))
-            {
                 notifications.Text += notification.title + System.Environment.NewLine;
-            }
             notifications.Text = notifications.Text.Substring(0, notifications.Text.Length - 1);
         }
     }

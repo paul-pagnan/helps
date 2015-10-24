@@ -35,6 +35,9 @@ namespace helps.Droid
         private BookingsListAdapter workshopListAdapter;
 
         private int CurrentWorkshopSet;
+        private ListActionHelper listActioner;
+        private List<WorkshopPreview> workshopList;
+        private IMenu menu;
 
         protected override int LayoutResource
         {
@@ -129,10 +132,12 @@ namespace helps.Droid
         {
             if (CurrentWorkshopSet > 0)
             {
-                var list = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
+                workshopList = await Services.Workshop.GetWorkshops(workshopSet, localOnly, force);
                 workshopListAdapter.Clear();
-                workshopListAdapter.AddAll(list, position);
-                
+                workshopListAdapter.AddAll(workshopList, position);
+
+                listActioner = new ListActionHelper(workshopListAdapter, workshopListView, this, true);
+                ViewHelper.ToggleMenu(menu, true);
                 RunOnUiThread(delegate
                 {
                     if (workshopListAdapter.Count > 0)
@@ -180,12 +185,15 @@ namespace helps.Droid
       
         public bool Back()
         {
-            workshopListAdapter.Clear();
-            NotifyListUpdate();
-            CurrentWorkshopSet = 0;
             if (viewFlipper.DisplayedChild > 0)
+            {
+                workshopListAdapter.Clear();
+                NotifyListUpdate();
+                CurrentWorkshopSet = 0;
+                listActioner = null;
+                ViewHelper.ToggleMenu(menu, false);
                 return FlipView();
-
+            }
             return false;
         }
 
@@ -200,12 +208,27 @@ namespace helps.Droid
             if (index > 0)
                 viewFlipper.ShowPrevious();
             else
+            {
+                ViewHelper.ToggleMenu(menu, true);
                 viewFlipper.ShowNext();
+            }
             return true;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_list_actions, menu);
+            ViewHelper.ToggleMenu(menu, false);
+            this.menu = menu;
+            return base.OnCreateOptionsMenu(menu);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            if (item.ItemId == Resource.Id.menu_filter)
+                listActioner.Filter();
+            else if (item.ItemId == Resource.Id.menu_sort)
+                listActioner.Sort(workshopList);
             return base.OnOptionsItemSelected(item);
         }
     }

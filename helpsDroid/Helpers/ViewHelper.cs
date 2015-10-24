@@ -1,4 +1,6 @@
 ﻿using Android.App;
+using Android.Content.Res;
+using Android.Views;
 using Java.Lang;
 using Java.Lang.Reflect;
 
@@ -28,6 +30,13 @@ namespace helps.Droid.Helpers
                 }
             }
             return null;
+        }
+
+        public static void ToggleMenu(IMenu menu, bool showMenu)
+        {
+            if (menu == null)
+                return;
+            menu.SetGroupVisible(Resource.Id.list_actions_group, showMenu);
         }
     }
 }

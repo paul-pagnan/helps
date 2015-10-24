@@ -20,6 +20,7 @@ namespace helps.Shared.Helpers
                 {
                     Id = booking.workshopId,
                     Name = booking.topic,
+                    Date = booking.starting,
                     WorkshopSetId = booking.WorkShopSetID,
                     Type = (booking.type == "single") ? "Workshop" : "Program",
                     Time = HumanizeTimeSpan(booking.starting, booking.ending),
@@ -40,9 +41,10 @@ namespace helps.Shared.Helpers
                 translated.Add(new WorkshopPreview
                 {
                     Id = booking.SessionId,
+                    Date = booking.StartDate,
                     Name = booking.LecturerFirstName + " " + booking.LecturerLastName,
                     WorkshopSetId = booking.SessionType.Length,
-                    Type = "1-1 Session",
+                    Type = booking.SessionType,
                     Time = HumanizeTimeSpan(booking.StartDate, booking.EndDate),
                     DateHumanFriendly = HumanizeDate(booking.StartDate),
                     Location = booking.Campus,
@@ -132,6 +134,7 @@ namespace helps.Shared.Helpers
                     {
                         Id = workshop.WorkshopId,
                         Name = workshop.topic,
+                        Date = workshop.StartDate,
                         WorkshopSetId = workshop.WorkShopSetId,
                         Type = (workshop.type == "single") ? "Workshop" : "Program",
                         Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),

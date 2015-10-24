@@ -49,7 +49,7 @@ namespace helps.Droid.Helpers
         }
 
         public void ShowDialog(Context contxt, WorkshopDetail workshopBooking)
-        { 
+        {
             AlertDialog.Builder builder = new AlertDialog.Builder(contxt);
             builder.SetTitle("Set Notifications");
             builder.SetMultiChoiceItems(items.Select(x => x.title).ToArray(), items.Select(x => x.selected).ToArray(), new MultiClickListener());
@@ -128,7 +128,7 @@ namespace helps.Droid.Helpers
                 CreateAlarmManager(ctx, GetNotification(ctx, workshopId, notification), notification.ScheduledDate, notification, workshopId);
         }
 
-        private class MultiClickListener : Java.Lang.Object, IDialogInterfaceOnMultiChoiceClickListener
+        public class MultiClickListener : Java.Lang.Object, IDialogInterfaceOnMultiChoiceClickListener
         {
             public void OnClick(IDialogInterface dialog, int which, bool isChecked)
             {
@@ -136,7 +136,7 @@ namespace helps.Droid.Helpers
             }
         }
 
-        private class ActionClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
+        public class ActionClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
         {
             private WorkshopDetail workshop;
             private Context ctx;

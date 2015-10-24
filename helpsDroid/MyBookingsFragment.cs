@@ -22,7 +22,6 @@ namespace helps.Droid
 
         public MyBookingsFragment()
         {
-
         }
 
         public void setPadding(Toolbar toolbar)
@@ -68,9 +67,10 @@ namespace helps.Droid
             }
         }
 
-        public bool OnOptionsItemSelected(IMenuItem item)
+        public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            return base.OnOptionsItemSelected(item);
+            MenuInflater.Inflate(Resource.Menu.menu_list_actions, menu);
+            return base.OnCreateOptionsMenu(menu);
         }
 
         void HandleAndroidException(object sender, RaiseThrowableEventArgs e)

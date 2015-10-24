@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group
+      android:id="@+id/list_actions_group">  
+    <item
+         android:id="@+id/menu_filter"
+         android:showAsAction="ifRoom"
+         android:icon="@drawable/ic_filter"
+         android:title="Filter" />
+    <item
+         android:id="@+id/menu_sort"
+         android:showAsAction="ifRoom"
+         android:icon="@drawable/ic_sort"
+         android:title="Sort" />
+  </group>
+</menu>
