@@ -11,6 +11,7 @@ namespace helps.Shared.DataObjects
         public string Time { get; set; }
         public string DateHumanFriendly { get; set; }
         public DateTime Date { get; set; }
+        public DateTime DateEnd { get; set; }
         public string TargetGroup { get; set; }
         public string Description { get; set; }
         public int FilledPlaces { get; set; }

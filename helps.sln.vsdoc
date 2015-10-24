@@ -49,6 +49,27 @@
   <string>helpTitle</string>
   <string>customTopics</string>
   <string>emptyOutputFolder</string>
+  <string>comConstant</string>
+  <string>comEvent</string>
+  <string>comMethod</string>
+  <string>comStdModule</string>
+  <string>comObject</string>
+  <string>comForm</string>
+  <string>comProperty</string>
+  <string>comVariable</string>
+  <string>comEnumeration</string>
+  <string>comStructure</string>
+  <string>comDelegate</string>
+  <string>comInterface</string>
+  <string>comEventDecl</string>
+  <string>comDeclare</string>
+  <string>comPublic</string>
+  <string>comPrivate</string>
+  <string>comFriend</string>
+  <string>comProtected</string>
+  <string>comProtectedFriend</string>
+  <string>supportedNetFramework</string>
+  <string>supportedPortableClassLibrary</string>
 </ArrayOfString>]]></add>
       <add key="VBdocman_comNonCommented"><![CDATA[-1]]></add>
       <add key="VBdocman_comDeclare"><![CDATA[-1]]></add>
@@ -110,7 +131,6 @@
     </SettingsGroup>
     <add key="VBdocman_helps.Droid"><![CDATA[default]]></add>
     <add key="VBdocman_helps.iOS"><![CDATA[default]]></add>
-    <add key="VBdocman_helps.Service"><![CDATA[default]]></add>
     <add key="VBdocman_helps.Shared"><![CDATA[default]]></add>
   </appSettings>
 </configuration>

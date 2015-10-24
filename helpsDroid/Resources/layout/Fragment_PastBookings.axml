@@ -4,38 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+        <ProgressBar
+            android:id="@+id/loadingPast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_centerInParent="true" />
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/centerWrapPast"
+            android:layout_centerInParent="true">
+            <TextView
+                android:text="No Bookings Found"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_dark"
+                android:id="@+id/noBookingsPast"
+                android:visibility="gone"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent">
-            <ProgressBar
-                android:id="@+id/loadingPast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:layout_centerInParent="true" />
-            <ListView
-                android:id="@+id/pastBookingsList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
-            <RelativeLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/centerWrapPast"
-                android:layout_centerInParent="true">
-                <TextView
-                    android:text="No Bookings Found"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_dark"
-                    android:id="@+id/noBookingsPast"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
-        </RelativeLayout>
+        <ListView
+            android:id="@+id/pastBookingsList"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

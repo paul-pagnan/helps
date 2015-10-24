@@ -22,7 +22,7 @@ namespace helps.Droid.Adapters
 
         private ImageView ImgColor;
         private TextView TxtName;
-        private TextView TxtWorkshopSetName;
+        private TextView TxtWorkshopType;
         private TextView TxtDate;
         private TextView TxtTime;
         private TextView TxtLocation;
@@ -60,9 +60,10 @@ namespace helps.Droid.Adapters
         
         private void SetComponents(int position)
         {
-            ImgColor.SetBackgroundColor(GetColor(WorkshopList[position].WorkshopSet));
+            ImgColor.SetBackgroundColor(GetColor(WorkshopList[position].WorkshopSetId));
             TxtName.Text = WorkshopList[position].Name;
-            TxtWorkshopSetName.Text = WorkshopList[position].NumSessions;
+            TxtWorkshopType.Text = WorkshopList[position].Type;
+           
             TxtDate.Text = WorkshopList[position].DateHumanFriendly;
             TxtTime.Text = WorkshopList[position].Time;
 
@@ -86,7 +87,7 @@ namespace helps.Droid.Adapters
         {
             ImgColor = view.FindViewById<ImageView>(Resource.Id.BookingColor);
             TxtName = view.FindViewById<TextView>(Resource.Id.BookingName);
-            TxtWorkshopSetName = view.FindViewById<TextView>(Resource.Id.BookingWorkshopSetName);
+            TxtWorkshopType = view.FindViewById<TextView>(Resource.Id.BookingWorkshopSetName);
             TxtDate = view.FindViewById<TextView>(Resource.Id.BookingDate);
             TxtTime = view.FindViewById<TextView>(Resource.Id.BookingTime);
             TxtLocation = view.FindViewById<TextView>(Resource.Id.BookingLocation);

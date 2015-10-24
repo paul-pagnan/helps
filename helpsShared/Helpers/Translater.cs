@@ -20,8 +20,8 @@ namespace helps.Shared.Helpers
                 {
                     Id = booking.workshopId,
                     Name = booking.topic,
-                    WorkshopSet = booking.WorkShopSetID,
-                    NumSessions = booking.WorkShopSetName,
+                    WorkshopSetId = booking.WorkShopSetID,
+                    Type = (booking.type == "single") ? "Workshop" : "Program",
                     Time = HumanizeTimeSpan(booking.starting, booking.ending),
                     DateHumanFriendly = HumanizeDate(booking.starting),
                     Location = await MiscServices.GetCampus(booking.campusID),
@@ -41,6 +41,8 @@ namespace helps.Shared.Helpers
                 {
                     Id = booking.SessionId,
                     Name = booking.LecturerFirstName + " " + booking.LecturerLastName,
+                    WorkshopSetId = booking.SessionType.Length,
+                    Type = "1-1 Session",
                     Time = HumanizeTimeSpan(booking.StartDate, booking.EndDate),
                     DateHumanFriendly = HumanizeDate(booking.StartDate),
                     Location = booking.Campus,
@@ -79,6 +81,7 @@ namespace helps.Shared.Helpers
                 Description = workshop.description ?? "N/A",
                 FilledPlaces = workshop.BookingCount,
                 Date = workshop.StartDate,
+                DateEnd = workshop.EndDate,
                 TotalPlaces = workshop.maximum,
                 ProgramId = workshop.ProgramId,
                 Sessions = sessions,
@@ -100,6 +103,7 @@ namespace helps.Shared.Helpers
                 Description = booking.description ?? "N/A",
                 TotalPlaces = booking.maximum,
                 Date = booking.starting,
+                DateEnd = booking.ending,
                 FilledPlaces = -1,
                 Sessions = new List<SessionPreview>(),
                 Type = booking.type,
@@ -128,8 +132,8 @@ namespace helps.Shared.Helpers
                     {
                         Id = workshop.WorkshopId,
                         Name = workshop.topic,
-                        WorkshopSet = workshop.WorkShopSetId,
-                        NumSessions = (workshop.type == "multiple") ? "Num of Sessions: " + workshop.NumOfWeeks : "",
+                        WorkshopSetId = workshop.WorkShopSetId,
+                        Type = (workshop.type == "single") ? "Workshop" : "Program",
                         Time = HumanizeTimeSpan(workshop.StartDate, workshop.EndDate),
                         DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
                         Location = workshop.campus,
@@ -185,5 +189,6 @@ namespace helps.Shared.Helpers
         {
             return (Hour >= 12) ? "PM" : "AM";
         }
+
     }
 }

@@ -90,7 +90,7 @@ namespace helps.Droid.Helpers
                 .SetStyle(new Notification.BigTextStyle().SetSummaryText(workshop.Title).BigText(workshop.Time + " - " + workshop.DateHumanFriendly + System.Environment.NewLine + workshop.Room));
 
             Intent resultIntent = new Intent(ctx, new ViewWorkshopActivity().Class);
-            resultIntent.PutExtra("WorkshopId", workshopId);
+            resultIntent.PutExtra("Id", workshopId);
             resultIntent.PutExtra("IsBooking", true);
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.Create(ctx);

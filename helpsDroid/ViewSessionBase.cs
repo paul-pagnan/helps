@@ -96,6 +96,10 @@ namespace helps.Droid
                 }
                 else
                 {
+                    var enabled = DateTime.UtcNow.AddDays(-7) < workshop.DateEnd;
+                    editTxtNotes.Enabled = enabled;
+                    if (!enabled && editTxtNotes.Text == "")
+                        editTxtNotes.Text = "No notes";
                     IsEditing = !IsEditing;
                     AnimateButton();
                     FlipView();
