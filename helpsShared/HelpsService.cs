@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Net;
 
 namespace helps.Shared
 {
