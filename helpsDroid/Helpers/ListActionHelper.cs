@@ -52,7 +52,8 @@ namespace helps.Droid.Helpers
             var title = isWorkshop ? "Workshop" : "Tutor";
             items.Add(new MyList() {Id = 2, title = title + " Name" });
             items.Add(new MyList() {Id = 3, title = "Type" });
-            items.Add(new MyList() {Id = 4, title = "Workshop Category" });
+            if(isWorkshop)
+                items.Add(new MyList() {Id = 4, title = "Workshop Category" });
         }
 
         public void Sort(List<WorkshopPreview> list)
