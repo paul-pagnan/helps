@@ -70,7 +70,7 @@ namespace helps.Droid
                         UpdateMyInformation();
                         break;
                     case 3:
-                        //Font Size
+                        FontSize();
                         break;
                     case 4:
                         //Change Skin
@@ -81,8 +81,12 @@ namespace helps.Droid
                     default:
                         break;
                 }
-            };
-            
+            };            
+        }
+        public void FontSize()
+        {
+            var notifier = new NotificationHelper();
+            notifier.ShowFontSize(this);
         }
 
         [Java.Interop.Export()]

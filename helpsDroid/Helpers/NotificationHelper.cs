@@ -48,6 +48,18 @@ namespace helps.Droid.Helpers
             }
         }
 
+        public NotificationHelper()
+        {
+
+        }
+
+        public void ShowFontSize(Context cntext)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(cntext);
+            builder.SetTitle("Change Font Size");
+            builder.Create().Show();
+        }
+
         public void ShowDialog(Context contxt, WorkshopDetail workshopBooking)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(contxt);
