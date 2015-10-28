@@ -18,7 +18,7 @@ namespace helps.Droid.Adapters
     {
         private LayoutInflater inflater;
         private int ItemLayout = Resource.Layout.ListItem_SettingsCategory;
-        List<MyList> Settings;
+        private List<MyList> Settings;
 
         private TextView TxtName;
         private Resources resources;
