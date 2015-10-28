@@ -42,7 +42,6 @@ namespace helps.Droid
                 FirstName = FindViewById<EditText>(Resource.Id.registerFirstName).Text,
                 LastName = FindViewById<EditText>(Resource.Id.registerLastName).Text,
                 StudentId = FindViewById<EditText>(Resource.Id.registerStudentId).Text,
-                Email = FindViewById<EditText>(Resource.Id.registerEmail).Text,
                 Password = FindViewById<EditText>(Resource.Id.registerPassword).Text
             };
             
@@ -53,7 +52,7 @@ namespace helps.Droid
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, Resource.Style.LightDialog);
                 builder.SetTitle("Successfully Registered");
-                builder.SetMessage("Please check your emails to confirm your email address");
+                builder.SetMessage("Please check your UTS email for instructions to confirm your account");
                 builder.SetCancelable(false);
                 builder.SetPositiveButton("OK", delegate { Finish(); });
                 builder.Show();

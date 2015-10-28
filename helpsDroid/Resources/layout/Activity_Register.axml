@@ -61,19 +61,6 @@
                 p1:id="@+id/linearLayout4"
                 p1:layout_marginBottom="35dp">
                 <EditText
-                    p1:inputType="textEmailAddress"
-                    p1:id="@+id/registerEmail"
-                    p1:hint="Email"
-                    p1:layout_width="match_parent"
-                    p1:layout_height="match_parent" />
-            </LinearLayout>
-            <LinearLayout
-                p1:orientation="horizontal"
-                p1:layout_width="match_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout4"
-                p1:layout_marginBottom="35dp">
-                <EditText
                     p1:inputType="number"
                     p1:id="@+id/registerStudentId"
                     p1:hint="Student Id"

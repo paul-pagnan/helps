@@ -100,6 +100,7 @@ namespace helps.Droid
             Services.Auth.Logout();
             CurrentUser = null;
             var intent = new Intent(this, typeof(SignInActivity));
+            intent.PutExtra("logout", true);
             StartActivity(intent);
             Finish();
         }
