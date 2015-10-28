@@ -33,7 +33,13 @@ namespace helps.Shared
             
             return await Translater.TranslatePreview(sessionBookingTable.GetAll(Current));
         }
-        
+
+        public SessionDetail GetSession(int sessionId)
+        {
+            var session = sessionBookingTable.Get(sessionId);
+            return Translater.TranslateSession(session);
+        }
+
         public async Task<GenericResponse> AddNotes(string notes, int workshopId)
         {
             if (!IsConnected())

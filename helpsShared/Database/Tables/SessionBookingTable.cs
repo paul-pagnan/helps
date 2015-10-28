@@ -32,7 +32,12 @@ namespace helps.Shared.Database
                     .Where(x => x.EndDate < DateTime.Now)
                     .OrderByDescending(x => x.EndDate)
                     .ToList();
-    }
+        }
+
+        public SessionBooking Get(int sessionId)
+        {
+            return helpsDatabase.Database.Table<SessionBooking>().FirstOrDefault(x => x.SessionId == sessionId);
+        }
 
         public SessionBooking First(bool? Current = null)
         {

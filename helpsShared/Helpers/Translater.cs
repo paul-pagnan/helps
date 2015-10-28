@@ -54,6 +54,38 @@ namespace helps.Shared.Helpers
             return translated;
         }
 
+        internal static SessionDetail TranslateSession(SessionBooking session)
+        {
+            var numPeople = -1;
+            try
+            {
+                numPeople = int.Parse(session.NumPeople);
+            } catch(Exception ex) { }
+
+            return new SessionDetail()
+            {
+                Id = session.SessionId,
+                Title = session.LecturerFirstName + " " + session.LecturerLastName,
+                Room = session.Campus,
+                Time = HumanizeTimeSpan(session.StartDate, session.EndDate),
+                DateHumanFriendly =  HumanizeDate(session.StartDate, session.EndDate),
+                FilledPlaces = numPeople,
+                Date = session.StartDate,
+                DateEnd = session.EndDate,
+                Type = session.AppointmentType,
+                LecturerEmail = session.LecturerEmail,
+                AssignmentType = session.AssignmentType + ((session.AssignTypeOther != null) ? Environment.NewLine + session.AssignTypeOther : null),
+                AppointmentType = session.AppointmentType,
+                Cancel = session.Cancel,
+                Assistance = session.Assistance,
+                Reason = session.Reason,
+                IsGroup = session.IsGroup,
+                LecturerComment = session.LecturerComment,
+                Subject = session.Subject,
+                AssistanceText = session.AssistanceText
+            };
+        }
+
         public static WorkshopDetail TranslateDetail(List<Workshop> workshops)
         {
             List<SessionPreview> sessions = new List<SessionPreview>();

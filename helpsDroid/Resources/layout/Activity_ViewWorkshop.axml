@@ -166,6 +166,7 @@
                     p1:minHeight="25px"
                     p1:layout_marginBottom="@dimen/form_margin_body"
                     p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
                     p1:layout_width="fill_parent"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/linearLayout5">

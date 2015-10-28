@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Globalization;
+using System.Threading.Tasks;
 using com.refractored.fab;
+using helps.Droid.Adapters;
 using helps.Shared.DataObjects;
-using helps.Shared.Consts;
-using helps.Droid.Helpers;
+using Environment = System.Environment;
 
 namespace helps.Droid
 {
@@ -32,44 +26,55 @@ namespace helps.Droid
         private TextView date;
         private TextView room;
 
+        private static SessionDetail session;
+
+
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_ViewSession; }
         }
 
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            InitSessionComponents();
+            var extras = Intent.Extras;
+            if (extras != null)
+            {
+                //Get vars from bundle
+                var sessionId = extras.GetInt("Id");
+                cts.Cancel();
+                //Get the Session Details
+                session = Services.Session.GetSession(sessionId);
+                SetToolbarColor(ListBaseAdapter.GetColor(session.Type.Length));
+                UpdateFields();
+                cts.Cancel();
+            }
         }
 
-        private void InitSessionComponents()
+
+        private void UpdateFields()
         {
-            InitComponents();
-            lectureName = FindViewById<TextView>(Resource.Id.textViewLectureNameValue);
+            ShowNotifications(session.Id);
+            title.Text = session.Title;
+            editTxtNotes.Text = session.Notes;
 
-            lectureEmailAddress = FindViewById<TextView>(Resource.Id.textViewLectureEmailValue);
+            FindViewById<TextView>(Resource.Id.textViewRoomValue).Text = session.Room;
+            var TimeString = (session.Time != null) ? Environment.NewLine + session.Time : "";
+            FindViewById<TextView>(Resource.Id.textViewDateValue).Text = session.DateHumanFriendly + TimeString;
+            FindViewById<TextView>(Resource.Id.textViewTargetGroupValue).Text = session.TargetGroup;
+            FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue).Text = session.Description;
+        }
 
-            sessionType = FindViewById<TextView>(Resource.Id.textViewSessionTypeValue);
+        [Java.Interop.Export()]
+        public void Edit(View view)
+        {
+            EditNotes(session);
+        }
 
-            appointment = FindViewById<TextView>(Resource.Id.textViewAppointmentValue);
-
-            assignment = FindViewById<TextView>(Resource.Id.textViewAssignmentValue);
-
-            numberOfPeople = FindViewById<TextView>(Resource.Id.textViewNumberOfPeopleValue);
-
-            lectureComment = FindViewById<TextView>(Resource.Id.textViewLectureCommentValue);
-
-            subject = FindViewById<TextView>(Resource.Id.textViewSubjectValue);
-
-            appointmentsOther = FindViewById<TextView>(Resource.Id.textViewAppointmentsOtherValue);
-
-            assistanceText = FindViewById<TextView>(Resource.Id.textViewAssistanceTextValue);
-
-            date = FindViewById<TextView>(Resource.Id.textViewDateValue);
-
-            room = FindViewById<TextView>(Resource.Id.textViewRoomValue);
+        [Java.Interop.Export()]
+        public void ShowNotificationDialog(View view)
+        {
+            ShowNotificationDialog(session.Id, session.Date);
         }
     }
 }

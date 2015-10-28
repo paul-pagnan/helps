@@ -47,7 +47,8 @@
     <Compile Include="Database\Tables\NotificationTable.cs" />
     <Compile Include="Database\Tables\WorkshopTable.cs" />
     <Compile Include="DataObjects\Auth\DetailsInputRequest.cs" />
-    <Compile Include="DataObjects\Bookings\SessionBooking.cs" />
+    <Compile Include="DataObjects\Session\SessionDetail.cs" />
+    <Compile Include="DataObjects\Session\SessionBooking.cs" />
     <Compile Include="DataObjects\Generic\GetResponse.cs" />
     <Compile Include="DataObjects\Auth\HelpsResponse.cs" />
     <Compile Include="DataObjects\Auth\HelpsRegisterRequest.cs" />

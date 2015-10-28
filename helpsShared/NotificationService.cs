@@ -14,12 +14,12 @@ namespace helps.Shared
         {
         }
 
-        public void StoreNotifications(WorkshopDetail workshop, List<NotificationOption> notifications)
+        public void StoreNotifications(int id, DateTime notificationDate, List<NotificationOption> notifications)
         {
             notifications = notifications.Select(x =>
             {
-                x.workshop = workshop.Id;
-                x.ScheduledDate = workshop.Date.AddMinutes(x.mins * -1);
+                x.workshop = id;
+                x.ScheduledDate = notificationDate.AddMinutes(x.mins * -1);
                 return x;
             }).ToList();
 

@@ -1,11 +1,7 @@
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Graphics;
 using Android.OS;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
 using com.refractored.fab;
 using helps.Droid.Adapters;
@@ -19,20 +15,23 @@ namespace helps.Droid
     [Activity(Label = "", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class ViewWorkshopActivity : ViewSessionBase
     {
-        private LinearLayout sessionsList;        
+        private LinearLayout sessionsList;
         private RelativeLayout sessionContainer;
         private RelativeLayout bookingsContainer;
         private SessionListAdapter sessionsListAdapter;
         private Button bookButton;
         private Button cancelButton;
         private Button waitlistButton;
+        private static WorkshopDetail session;
+        private WorkshopBooking booking;
+
 
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_ViewWorkshop; }
         }
 
-        protected async override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             var extras = Intent.Extras;
@@ -44,15 +43,15 @@ namespace helps.Droid
                 cts.Cancel();
                 //Get the Booking Details
                 if (extras.GetBoolean("IsBooking"))
-                    workshop = await Services.Workshop.GetWorkshopFromBooking(workshopId);
+                    session = await Services.Workshop.GetWorkshopFromBooking(workshopId);
                 else
                 {
-                    workshop = Services.Workshop.GetWorkshop(workshopId);
+                    session = Services.Workshop.GetWorkshop(workshopId);
                     HideEdit = true;
                 }
 
                 ListBaseAdapter.InitColors(Resources);
-                SetToolbarColor(ListBaseAdapter.GetColor(workshop.WorkshopSetId));
+                SetToolbarColor(ListBaseAdapter.GetColor(session.WorkshopSetId));
                 InitWorkshopComponents();
                 UpdateFields();
 
@@ -65,17 +64,11 @@ namespace helps.Droid
             }
         }
 
-        private void ShowNotifications()
-        {
-            FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
-            UpdateNotifications();
-        }
-
         private void UpdateButtons()
         {
             bookButton.Visibility = ViewStates.Gone;
             cancelButton.Visibility = ViewStates.Gone;
-            if (workshop.FilledPlaces >= workshop.TotalPlaces)
+            if (session.FilledPlaces >= session.TotalPlaces)
             {
                 waitlistButton.Visibility = ViewStates.Visible;
                 return;
@@ -86,37 +79,39 @@ namespace helps.Droid
                 cancelButton.Visibility = ViewStates.Visible;
         }
 
-     
+
         private async void LoadBooking(bool localOnly, bool force = false)
         {
             cts.Cancel();
-            booking = await Services.Workshop.GetBooking(cts.Token, workshop.Id, localOnly, force);
+            booking = await Services.Workshop.GetBooking(cts.Token, session.Id, localOnly, force);
             RunOnUiThread(delegate { UpdateFields(); });
         }
 
         private void UpdateFields()
         {
             if (booking != null)
-                ShowNotifications();
-            title.Text = workshop.Title;
-            editTxtNotes.Text = workshop.Notes;
+                ShowNotifications(session.Id);
+            title.Text = session.Title;
+            editTxtNotes.Text = session.Notes;
 
-            FindViewById<TextView>(Resource.Id.textViewRoomValue).Text = workshop.Room;
-            var TimeString = (workshop.Time != null) ? Environment.NewLine + workshop.Time : "";
-            FindViewById<TextView>(Resource.Id.textViewDateValue).Text = workshop.DateHumanFriendly + TimeString;
-            FindViewById<TextView>(Resource.Id.textViewTargetGroupValue).Text = workshop.TargetGroup;
-            FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue).Text = workshop.Description;
-            FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue).Text = workshop.FilledPlaces + "/" + workshop.TotalPlaces;
+            FindViewById<TextView>(Resource.Id.textViewRoomValue).Text = session.Room;
+            var TimeString = (session.Time != null) ? Environment.NewLine + session.Time : "";
+            FindViewById<TextView>(Resource.Id.textViewDateValue).Text = session.DateHumanFriendly + TimeString;
+            FindViewById<TextView>(Resource.Id.textViewTargetGroupValue).Text = session.TargetGroup;
+            FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue).Text = session.Description;
+            FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue).Text = session.FilledPlaces + "/" +
+                                                                                   session.TotalPlaces;
             sessionsListAdapter.Clear();
-            sessionsListAdapter.AddAll(workshop.Sessions);
+            sessionsListAdapter.AddAll(session.Sessions);
             for (var i = 0; i < sessionsListAdapter.Count; i++)
             {
                 var view = sessionsListAdapter.GetView(i, null, sessionsList);
                 sessionsList.AddView(view);
             }
             UpdateButtons();
-            
+
         }
+
         private void InitWorkshopComponents()
         {
             InitComponents();
@@ -124,10 +119,10 @@ namespace helps.Droid
             sessionsList.Orientation = Orientation.Vertical;
             sessionsListAdapter = new SessionListAdapter(LayoutInflater);
             sessionContainer = FindViewById<RelativeLayout>(Resource.Id.sessionContainer);
-            if (workshop.Sessions.Count == 0)
+            if (session.Sessions.Count == 0)
                 sessionContainer.Visibility = ViewStates.Gone;
             bookingsContainer = FindViewById<RelativeLayout>(Resource.Id.bookingsContainer);
-            if (workshop.FilledPlaces == -1)
+            if (session.FilledPlaces == -1)
                 bookingsContainer.Visibility = ViewStates.Gone;
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
@@ -136,16 +131,16 @@ namespace helps.Droid
                 FindViewById<FloatingActionButton>(Resource.Id.fab).Visibility = ViewStates.Gone;
         }
 
-        [Export]
+        [Java.Interop.Export()]
         public async void Book(View view)
         {
             var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
             dialog.Show();
             GenericResponse response = null;
-            if (workshop.ProgramId.HasValue)
-                response = await Services.Workshop.BookProgram(cts.Token, workshop.ProgramId.Value);
+            if (session.ProgramId.HasValue)
+                response = await Services.Workshop.BookProgram(cts.Token, session.ProgramId.Value);
             else
-                response = await Services.Workshop.Book(cts.Token, workshop.Id);
+                response = await Services.Workshop.Book(cts.Token, session.Id);
             dialog.Hide();
 
             if (response.Success)
@@ -154,18 +149,18 @@ namespace helps.Droid
                 builder.SetTitle("Booked Successfully");
                 builder.SetMessage("Would you like to set up notifications now?");
                 builder.SetCancelable(false);
-                builder.SetPositiveButton("Create Notifications", delegate { ShowNotificationDialog(null); });
+                builder.SetPositiveButton("Create Notifications", delegate { ShowNotificationDialog(session.Id, session.Date); });
                 builder.SetNegativeButton("Close", delegate { });
                 builder.Show();
                 booking = new WorkshopBooking();
                 UpdateButtons();
-                ShowNotifications();                
+                ShowNotifications(session.Id);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
         }
 
-        [Export]
+        [Java.Interop.Export()]
         public void Cancel(View view)
         {
             var builder = new AlertDialog.Builder(this);
@@ -184,19 +179,31 @@ namespace helps.Droid
             dialog.Show();
             GenericResponse response = null;
             cts.Cancel();
-            response = await Services.Workshop.CancelBooking(cts.Token, workshop.Id);
+            response = await Services.Workshop.CancelBooking(cts.Token, session.Id);
             dialog.Hide();
 
             if (response.Success)
             {
                 DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
-                NotificationHelper.Cancel(this, workshop.Id);
+                NotificationHelper.Cancel(this, session.Id);
                 booking = null;
                 UpdateButtons();
                 FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Gone;
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
+        }
+
+        [Java.Interop.Export()]
+        public void Edit(View view)
+        {
+            EditNotes(session);
+        }
+
+        [Java.Interop.Export()]
+        public void ShowNotificationDialog(View view)
+        {
+            ShowNotificationDialog(session.Id, session.Date);
         }
     }
 }

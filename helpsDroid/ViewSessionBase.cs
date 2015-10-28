@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
+using Android.Support.V7.Widget;
 using Android.Views.Animations;
 using Android.Widget;
 using helps.Droid.Adapters;
@@ -19,8 +20,6 @@ namespace helps.Droid
     {
         private bool IsEditing;
         protected bool HideEdit;
-        protected static WorkshopDetail workshop;
-        protected WorkshopBooking booking;
         private ViewFlipper flipper;
         private RelativeLayout toolbarLayout;
         protected EditText editTxtNotes;
@@ -28,7 +27,7 @@ namespace helps.Droid
         protected TextView title;
         private static TextView notifications;
         private Color color;
-        private readonly int colorDiff = 35;
+        private const int colorDiff = 35;
 
         protected override int LayoutResource { get; }
 
@@ -59,7 +58,13 @@ namespace helps.Droid
             }
         }
 
-        public void InitComponents()
+        protected void ShowNotifications(int id)
+        {
+            FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
+            UpdateNotifications(id);
+        }
+
+        protected void InitComponents()
         {
             title = FindViewById<TextView>(Resource.Id.title);
             notifications = FindViewById<TextView>(Resource.Id.textViewnotification);
@@ -72,8 +77,7 @@ namespace helps.Droid
             }
         }
 
-        [Export]
-        public void Edit(View view)
+        protected void EditNotes(WorkshopDetail session)
         {
             var animOut = AnimationUtils.LoadAnimation(this, Resource.Animation.fadeout);
             fab.StartAnimation(animOut);
@@ -83,7 +87,7 @@ namespace helps.Droid
                 {
                     var dialog = DialogHelper.CreateProgressDialog("Saving...", this);
                     dialog.Show();
-                    var response = await Services.Workshop.AddNotes(editTxtNotes.Text, workshop.Id);
+                    var response = await Services.Workshop.AddNotes(editTxtNotes.Text, session.Id);
                     dialog.Hide();
                     if (response.Success)
                     {
@@ -96,7 +100,7 @@ namespace helps.Droid
                 }
                 else
                 {
-                    var enabled = DateTime.UtcNow.AddDays(-7) < workshop.DateEnd;
+                    var enabled = DateTime.UtcNow.AddDays(-7) < session.DateEnd;
                     editTxtNotes.Enabled = enabled;
                     if (!enabled && editTxtNotes.Text == "")
                         editTxtNotes.Text = "No notes";
@@ -107,14 +111,13 @@ namespace helps.Droid
             };
         }
 
-        [Export]
-        public void ShowNotificationDialog(View view)
+        protected void ShowNotificationDialog(int id, DateTime startDate)
         {
-            var notifier = new NotificationHelper(workshop);
-            notifier.ShowDialog(this, workshop);
+            var notifier = new NotificationHelper(id, startDate);
+            notifier.ShowDialog(this, id, startDate);
         }
 
-        protected void AnimateButton()
+        private void AnimateButton()
         {
             if (IsEditing)
                 fab.SetImageDrawable(GetDrawable(Resource.Drawable.ic_check_24px));
@@ -127,7 +130,7 @@ namespace helps.Droid
         }
 
 
-        protected void FlipView(bool trash = false)
+        private void FlipView(bool trash = false)
         {
             var index = flipper.DisplayedChild;
             var InAnimation = (index > 0)
@@ -148,7 +151,7 @@ namespace helps.Droid
                 flipper.ShowNext();
         }
 
-        protected bool Back()
+        private bool Back()
         {
             if (flipper.DisplayedChild > 0)
             {
@@ -172,7 +175,7 @@ namespace helps.Droid
             base.OnBackPressed();
         }
 
-        protected void SetButtonColor()
+        private void SetButtonColor()
         {
             var opp = (IsEditing) ? (255 / 2) : 0;
             fab.ColorNormal = Color.Argb(color.A, color.R + colorDiff + opp, color.G + opp + colorDiff,
@@ -205,9 +208,9 @@ namespace helps.Droid
             SetButtonColor();
         }
 
-        public static void UpdateNotifications()
+        public static void UpdateNotifications(int id)
         {
-            var nots = Services.Notification.GetNotifications(workshop.Id);
+            var nots = Services.Notification.GetNotifications(id);
             notifications.Text = (nots.Any(x => x.selected)) ? "" : "No notifications set ";
             foreach (var notification in nots.Where(x => x.selected))
                 notifications.Text += notification.title + System.Environment.NewLine;

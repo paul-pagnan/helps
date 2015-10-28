@@ -33,9 +33,9 @@ namespace helps.Droid.Helpers
             selected = true
         };
 
-        public NotificationHelper(WorkshopDetail workshop)
+        public NotificationHelper(int id, DateTime startDate)
         {
-            items = Services.Notification.GetNotifications(workshop.Id);
+            items = Services.Notification.GetNotifications(id);
             if (items.Count == 0)
             {
                 items.Clear();
@@ -44,7 +44,7 @@ namespace helps.Droid.Helpers
                 items.Add(new NotificationOption() { title = "1 hour before", mins = 60 });
                 items.Add(new NotificationOption() { title = "1 day before", mins = 1440 });
                 items.Add(new NotificationOption() { title = "1 week before", mins = 10080 });
-                items.Add(new NotificationOption() { title = "Test Notification", mins = (int)(workshop.Date.AddMinutes(-1) - DateTime.Now).TotalMinutes });
+                items.Add(new NotificationOption() { title = "Test Notification", mins = (int)(startDate.AddMinutes(-1) - DateTime.Now).TotalMinutes });
             }
         }
 
@@ -60,12 +60,12 @@ namespace helps.Droid.Helpers
             builder.Create().Show();
         }
 
-        public void ShowDialog(Context contxt, WorkshopDetail workshopBooking)
+        public void ShowDialog(Context contxt, int id, DateTime sessionDate)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(contxt);
             builder.SetTitle("Set Notifications");
             builder.SetMultiChoiceItems(items.Select(x => x.title).ToArray(), items.Select(x => x.selected).ToArray(), new MultiClickListener());
-            var clickListener = new ActionClickListener(contxt, workshopBooking);
+            var clickListener = new ActionClickListener(contxt, id, sessionDate);
             builder.SetPositiveButton("OK", clickListener);
             builder.SetNegativeButton("Cancel", clickListener);
             builder.Create().Show();
@@ -118,7 +118,8 @@ namespace helps.Droid.Helpers
         {
             var notifications = new List<NotificationOption>();
             notifications.Add(notification);
-            Services.Notification.StoreNotifications(Services.Workshop.GetWorkshop(workshopId), notifications);
+            var workshop = Services.Workshop.GetWorkshop(workshopId);
+            Services.Notification.StoreNotifications(workshop.Id, workshop.Date, notifications);
             Schedule(ctx, workshopId, notifications);
         }
 
@@ -150,12 +151,14 @@ namespace helps.Droid.Helpers
 
         public class ActionClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
         {
-            private WorkshopDetail workshop;
             private Context ctx;
+            private int id;
+            private DateTime sessionDate;
 
-            public ActionClickListener(Context ctx, WorkshopDetail workshop) : base()
+            public ActionClickListener(Context ctx, int id, DateTime sessionDate) : base()
             {
-                this.workshop = workshop;
+                this.id = id;
+                this.sessionDate = sessionDate;
                 this.ctx = ctx;
             }
 
@@ -163,12 +166,12 @@ namespace helps.Droid.Helpers
             {
                 if (which == -1)
                 {
-                    Cancel(ctx, workshop.Id);
-                    Services.Notification.StoreNotifications(workshop, items);
-                    ScheduleNotifications(ctx, workshop.Id);
+                    Cancel(ctx, id);
+                    Services.Notification.StoreNotifications(id, sessionDate, items);
+                    ScheduleNotifications(ctx, id);
                     ViewHelper.CurrentActivity().RunOnUiThread(() =>
                     {
-                        ViewSessionBase.UpdateNotifications();
+                        ViewSessionBase.UpdateNotifications(id);
                     });
                 }
             }
