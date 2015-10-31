@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Database.Sqlite;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.Widget;
@@ -28,6 +29,7 @@ namespace helps.Droid
         private static TextView notifications;
         private Color color;
         private const int colorDiff = 35;
+        private bool locked;
 
         protected override int LayoutResource { get; }
 
@@ -42,7 +44,6 @@ namespace helps.Droid
             {              
                 //Update the view
                 InitComponents();
-
                 // Maintain view once the view has been rotated
                 if (bundle != null)
                 {
@@ -100,9 +101,9 @@ namespace helps.Droid
                 }
                 else
                 {
-                    var enabled = DateTime.UtcNow.AddDays(-7) < session.DateEnd;
-                    editTxtNotes.Enabled = enabled;
-                    if (!enabled && editTxtNotes.Text == "")
+                    locked = DateTime.UtcNow.AddDays(-7) > session.DateEnd;
+                    editTxtNotes.Enabled = !locked;
+                    if (locked && editTxtNotes.Text == "")
                         editTxtNotes.Text = "No notes";
                     IsEditing = !IsEditing;
                     AnimateButton();
@@ -153,7 +154,7 @@ namespace helps.Droid
 
         private bool Back()
         {
-            if (flipper.DisplayedChild > 0)
+            if (flipper.DisplayedChild > 0 && !locked)
             {
                 var builder = DialogHelper.CreateEditConfirmDialog(this);
                 builder.SetNegativeButton("Discard", delegate

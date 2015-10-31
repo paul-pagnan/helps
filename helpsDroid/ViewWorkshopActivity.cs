@@ -25,7 +25,6 @@ namespace helps.Droid
         private static WorkshopDetail session;
         private WorkshopBooking booking;
 
-
         protected override int LayoutResource
         {
             get { return Resource.Layout.Activity_ViewWorkshop; }

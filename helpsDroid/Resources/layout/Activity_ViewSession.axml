@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     p1:orientation="vertical"
     p1:minWidth="25px"
     p1:minHeight="25px"
@@ -13,317 +14,425 @@
         p1:layout_height="wrap_content"
         p1:layout_width="match_parent"
         layout="@layout/toolbar" />
-    <ScrollView
+    <RelativeLayout
         p1:layout_width="fill_parent"
-        p1:layout_height="fill_parent"
+        p1:id="@+id/layouttoolbarLarge"
+        p1:layout_height="@dimen/large_toolbar"
+        p1:gravity="bottom"
         p1:minWidth="25px"
         p1:minHeight="25px"
         p1:layout_below="@id/Ttoolbar">
-        <LinearLayout
-            p1:orientation="vertical"
-            p1:minWidth="25px"
-            p1:minHeight="25px"
+        <RelativeLayout
+            p1:paddingLeft="50dp"
+            p1:paddingBottom="20dp"
             p1:layout_width="fill_parent"
             p1:layout_height="wrap_content"
-            p1:layout_below="@id/Ttoolbar"
-            p1:padding="@dimen/layout_padding"
-            p1:id="@+id/linearLayout1">
-            <RelativeLayout
-                p1:orientation="horizontal"
+            p1:layout_alignParentBottom="true">
+            <ScrollView
+                p1:layout_width="fill_parent"
+                p1:layout_height="fill_parent">
+                <TextView
+                    p1:text=""
+                    p1:textAppearance="?android:attr/textAppearanceLarge"
+                    p1:layout_width="fill_parent"
+                    p1:textColor="@color/text_white"
+                    p1:layout_height="wrap_content"
+                    p1:minHeight="80dp"
+                    p1:gravity="bottom"
+                    p1:id="@+id/title" />
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+    <com.refractored.fab.FloatingActionButton
+        p1:id="@+id/fab"
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:layout_gravity="bottom|right"
+        p1:layout_alignParentRight="true"
+        p1:layout_marginTop="@dimen/large_toolbar_fab_margin"
+        p1:layout_marginRight="16dp"
+        p1:layout_below="@id/Ttoolbar"
+        p1:src="@drawable/ic_mode_edit_24px"
+        fab:fab_colorNormal="@color/primary"
+        fab:fab_colorPressed="@color/primaryDark"
+        fab:fab_colorRipple="@color/primaryDark"
+        p1:visibility="gone"
+        p1:onClick="Edit" />
+    <ViewFlipper
+        p1:id="@+id/flipper"
+        p1:layout_width="fill_parent"
+        p1:layout_height="fill_parent"
+        p1:layout_below="@id/layouttoolbarLarge">
+        <ScrollView
+            p1:id="@+id/mainLayout"
+            p1:layout_width="fill_parent"
+            p1:layout_height="fill_parent"
+            p1:minWidth="25px"
+            p1:elevation="6dp"
+            p1:minHeight="25px">
+            <LinearLayout
+                p1:orientation="vertical"
                 p1:minWidth="25px"
                 p1:minHeight="25px"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout2"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Lecture Name"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewLectureName"
-                    p1:layout_width="wrap_content"
+                p1:layout_below="@id/Ttoolbar"
+                p1:id="@+id/linearLayout1">
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_width="fill_parent"
+                    p1:paddingTop="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Lecture Name Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewLectureNameValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
+                    p1:id="@+id/linearLayout4">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoClock"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_clock_o"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="DateValue"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewDateValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoClock" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:id="@+id/linearLayout2">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoRoom"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_map_marker"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="RoomValue"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewRoomValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoRoom" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/placesContainer">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoPlaces"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_users"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Places Available"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewPlaceAvailableValue"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoPlaces" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/emailContainer">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoEmail"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_at"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="Email"
+                        p1:layout_width="wrap_content"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewEmail"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoEmail" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:orientation="horizontal"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:paddingLeft="@dimen/layout_padding"
+                    p1:paddingRight="@dimen/layout_padding"
+                    p1:layout_width="fill_parent"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/notifications"
+                    p1:visibility="gone">
+                    <helps.Droid.Extensions.FontAwesome
+                        p1:id="@+id/icoBell"
+                        p1:layout_width="@dimen/icon_size"
+                        p1:layout_height="wrap_content"
+                        p1:text="@string/fa_bell"
+                        p1:textSize="@dimen/icon_size"
+                        p1:layout_marginRight="@dimen/icon_margin" />
+                    <TextView
+                        p1:text="10 minutes before"
+                        p1:layout_width="fill_parent"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/textViewnotification"
+                        p1:textColor="@color/text_dark"
+                        p1:paddingTop="2dp"
+                        p1:clickable="true"
+                        p1:background="?android:attr/selectableItemBackground"
+                        p1:onClick="ShowNotificationDialog"
+                        p1:lineSpacingMultiplier="2"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoBell" />
+                    <TextView
+                        p1:text="Add another notification"
+                        p1:layout_width="fill_parent"
+                        p1:layout_height="wrap_content"
+                        p1:paddingTop="15dp"
+                        p1:paddingBottom="15dp"
+                        p1:clickable="true"
+                        p1:id="@+id/textViewDateValue"
+                        p1:background="?android:attr/selectableItemBackground"
+                        p1:lineSpacingMultiplier="2"
+                        p1:onClick="ShowNotificationDialog"
+                        p1:textSize="@dimen/text_size"
+                        p1:layout_toRightOf="@id/icoBell"
+                        p1:layout_below="@id/textViewnotification" />
+                </RelativeLayout>
+                <RelativeLayout
+                    p1:id="@+id/otherContainer"
+                    p1:minWidth="25px"
+                    p1:minHeight="25px"
+                    p1:layout_width="fill_parent"
+                    p1:layout_height="wrap_content">
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:layout_width="fill_parent"
+                        p1:layout_height="1dip"
+                        p1:background="#D6D6D6"
+                        p1:id="@+id/divider"
+                        p1:layout_marginBottom="@dimen/form_margin" />
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="fill_parent"
+                        p1:layout_below="@id/divider"
+                        p1:layout_marginBottom="@dimen/form_margin_body"
+                        p1:layout_height="wrap_content"
+                        p1:id="@+id/appointmentType">
+                        <TextView
+                            p1:text="Appointment Type"
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginBottom="7dp"
+                            p1:id="@+id/AppointmentTypeTitle"
+                            p1:textSize="@dimen/text_size" />
+                        <TextView
+                            p1:text=""
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/textViewAppointmentType"
+                            p1:textColor="@color/text_dark"
+                            p1:paddingLeft="15dp"
+                            p1:paddingTop="2dp"
+                            p1:layout_below="@id/AppointmentTypeTitle"
+                            p1:textSize="@dimen/text_size" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="fill_parent"
+                        p1:layout_marginBottom="@dimen/form_margin_body"
+                        p1:layout_height="wrap_content"
+                        p1:layout_below="@id/appointmentType"
+                        p1:id="@+id/assignmentType">
+                        <TextView
+                            p1:text="Assignment Type"
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginBottom="7dp"
+                            p1:id="@+id/AssignmentTypeTitle"
+                            p1:textSize="@dimen/text_size" />
+                        <TextView
+                            p1:text=""
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/textViewAssignmentType"
+                            p1:textColor="@color/text_dark"
+                            p1:paddingLeft="15dp"
+                            p1:paddingTop="2dp"
+                            p1:layout_below="@id/AssignmentTypeTitle"
+                            p1:textSize="@dimen/text_size" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="fill_parent"
+                        p1:layout_marginBottom="@dimen/form_margin_body"
+                        p1:layout_height="wrap_content"
+                        p1:layout_below="@id/assignmentType"
+                        p1:id="@+id/subject">
+                        <TextView
+                            p1:text="Subject"
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginBottom="7dp"
+                            p1:id="@+id/SubjectTitle"
+                            p1:textSize="@dimen/text_size" />
+                        <TextView
+                            p1:text=""
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/textViewSubject"
+                            p1:textColor="@color/text_dark"
+                            p1:paddingLeft="15dp"
+                            p1:paddingTop="2dp"
+                            p1:layout_below="@id/SubjectTitle"
+                            p1:textSize="@dimen/text_size" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="fill_parent"
+                        p1:layout_marginBottom="@dimen/form_margin_body"
+                        p1:layout_height="wrap_content"
+                        p1:layout_below="@id/subject"
+                        p1:id="@+id/lecturerComment">
+                        <TextView
+                            p1:text="Lecturer Comment"
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginBottom="7dp"
+                            p1:id="@+id/CommentTitle"
+                            p1:textSize="@dimen/text_size" />
+                        <TextView
+                            p1:text=""
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/textViewLecturerComment"
+                            p1:textColor="@color/text_dark"
+                            p1:paddingLeft="15dp"
+                            p1:paddingTop="2dp"
+                            p1:layout_below="@id/CommentTitle"
+                            p1:textSize="@dimen/text_size" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        p1:orientation="horizontal"
+                        p1:minWidth="25px"
+                        p1:minHeight="25px"
+                        p1:paddingLeft="@dimen/layout_padding"
+                        p1:paddingRight="@dimen/layout_padding"
+                        p1:layout_width="fill_parent"
+                        p1:layout_marginBottom="@dimen/form_margin_body"
+                        p1:layout_height="wrap_content"
+                        p1:layout_below="@id/lecturerComment"
+                        p1:id="@+id/reason">
+                        <TextView
+                            p1:text="Reason"
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:layout_marginBottom="7dp"
+                            p1:id="@+id/ReasonTitle"
+                            p1:textSize="@dimen/text_size" />
+                        <TextView
+                            p1:text=""
+                            p1:layout_width="fill_parent"
+                            p1:layout_height="wrap_content"
+                            p1:id="@+id/textViewReason"
+                            p1:textColor="@color/text_dark"
+                            p1:paddingLeft="15dp"
+                            p1:paddingTop="2dp"
+                            p1:layout_below="@id/ReasonTitle"
+                            p1:textSize="@dimen/text_size" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+        <ScrollView
+            p1:id="@+id/editLayout"
+            p1:layout_width="fill_parent"
+            p1:layout_height="fill_parent"
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:elevation="6dp"
+            p1:fillViewport="true"
+            p1:layout_below="@id/layouttoolbarLarge">
             <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
+                p1:paddingLeft="@dimen/layout_padding"
+                p1:layout_marginBottom="@dimen/form_margin_body"
+                p1:paddingRight="@dimen/layout_padding"
                 p1:layout_width="fill_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout3"
-                p1:layout_marginBottom="@dimen/list_session_height">
+                p1:id="@+id/bookingsContainer">
                 <TextView
-                    p1:text="Lecture Email address"
+                    p1:text="Make Notes"
                     p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewLectureEmail"
-                    p1:layout_width="wrap_content"
+                    p1:layout_width="match_parent"
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Lecture Email"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewLectureEmailValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout4"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Session Type"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewSessionType"
-                    p1:layout_width="wrap_content"
+                    p1:layout_marginBottom="@dimen/form_margin_body"
+                    p1:layout_marginTop="@dimen/form_margin"
+                    p1:textColor="@color/text_dark"
+                    p1:id="@+id/txt12" />
+                <EditText
+                    p1:inputType="textCapSentences|textMultiLine"
+                    p1:layout_width="fill_parent"
+                    p1:fillViewport="true"
+                    p1:hint="Tap to type..."
                     p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Session Type Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewSessionTypeValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
+                    p1:layout_below="@id/txt12"
+                    p1:id="@+id/editTxtNotes"
+                    p1:scrollHorizontally="false" />
             </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout5"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Appointment"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewAppointment"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Appointment Type Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewAppointmentValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout6"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Assignment"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewAssignment"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Assignment Type Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewAssignmentValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout7"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="N Of People"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewLectureName"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="NOfPeople Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewNumberOfPeopleValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout8"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Lec Comment"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewLectureComment"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Lec Comment Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewLectureCommentValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout9"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Subject"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textSubject"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Subject Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewSubjectValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout10"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Appoints Other"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewAppointmentsOther"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Appoints O Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewAppointmentsOtherValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout11"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Assist Text"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewAssistanceText"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Assist Text Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewAssistanceTextValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout12"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Date"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewDate"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="Date Value"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewDateValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <RelativeLayout
-                p1:orientation="horizontal"
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="fill_parent"
-                p1:layout_height="wrap_content"
-                p1:id="@+id/linearLayout13"
-                p1:layout_marginBottom="@dimen/list_session_height">
-                <TextView
-                    p1:text="Room"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:id="@+id/textViewRoom"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:layout_marginRight="10dp" />
-                <TextView
-                    p1:text="RoomValue"
-                    p1:textAppearance="?android:attr/textAppearanceMedium"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="35.5dp"
-                    p1:id="@+id/textViewRoomValue"
-                    p1:layout_alignParentRight="true"
-                    p1:gravity="right" />
-            </RelativeLayout>
-            <ListView
-                p1:minWidth="25px"
-                p1:minHeight="25px"
-                p1:layout_width="match_parent"
-                p1:layout_height="match_parent"
-                p1:id="@+id/listViewSession" />
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </ViewFlipper>
     <include
         p1:id="@+id/NoConnection"
         p1:layout_height="wrap_content"

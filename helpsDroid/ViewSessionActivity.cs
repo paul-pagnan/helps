@@ -10,7 +10,7 @@ using Environment = System.Environment;
 
 namespace helps.Droid
 {
-    [Activity(Label = "My Information", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
+    [Activity(Label = "", WindowSoftInputMode = SoftInput.AdjustPan, Theme = "@style/AppTheme.MyToolbar")]
     public class ViewSessionActivity : ViewSessionBase
     {
         private TextView lectureName;
@@ -51,7 +51,6 @@ namespace helps.Droid
             }
         }
 
-
         private void UpdateFields()
         {
             ShowNotifications(session.Id);
@@ -61,8 +60,31 @@ namespace helps.Droid
             FindViewById<TextView>(Resource.Id.textViewRoomValue).Text = session.Room;
             var TimeString = (session.Time != null) ? Environment.NewLine + session.Time : "";
             FindViewById<TextView>(Resource.Id.textViewDateValue).Text = session.DateHumanFriendly + TimeString;
-            FindViewById<TextView>(Resource.Id.textViewTargetGroupValue).Text = session.TargetGroup;
-            FindViewById<TextView>(Resource.Id.textViewWhatItCoversValue).Text = session.Description;
+            FindViewById<TextView>(Resource.Id.textViewPlaceAvailableValue).Text = session.FilledPlaces.ToString();
+            if(session.IsGroup <= 0)
+                FindViewById<RelativeLayout>(Resource.Id.placesContainer).Visibility = ViewStates.Gone;
+            FindViewById<TextView>(Resource.Id.textViewEmail).Text = session.LecturerEmail;
+            FindViewById<TextView>(Resource.Id.textViewAppointmentType).Text = session.AppointmentType;
+            FindViewById<TextView>(Resource.Id.textViewAssignmentType).Text = session.AssignmentType;
+            FindViewById<TextView>(Resource.Id.textViewSubject).Text = session.Subject;
+            FindViewById<TextView>(Resource.Id.textViewLecturerComment).Text = session.LecturerComment;
+            FindViewById<TextView>(Resource.Id.textViewReason).Text = session.Reason;
+
+
+            if (session.AppointmentType == null)
+                FindViewById<RelativeLayout>(Resource.Id.appointmentType).Visibility = ViewStates.Gone;
+
+            if (session.AssignmentType == null)
+                FindViewById<RelativeLayout>(Resource.Id.assignmentType).Visibility = ViewStates.Gone;
+
+            if (session.Subject == null)
+                FindViewById<RelativeLayout>(Resource.Id.subject).Visibility = ViewStates.Gone;
+
+            if (session.LecturerComment == null)
+                FindViewById<RelativeLayout>(Resource.Id.lecturerComment).Visibility = ViewStates.Gone;
+
+            if (session.Reason == null)
+                FindViewById<RelativeLayout>(Resource.Id.reason).Visibility = ViewStates.Gone;
         }
 
         [Java.Interop.Export()]

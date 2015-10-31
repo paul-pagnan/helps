@@ -68,7 +68,7 @@ namespace helps.Shared.Helpers
                 Title = session.LecturerFirstName + " " + session.LecturerLastName,
                 Room = session.Campus,
                 Time = HumanizeTimeSpan(session.StartDate, session.EndDate),
-                DateHumanFriendly =  HumanizeDate(session.StartDate, session.EndDate),
+                DateHumanFriendly =  HumanizeDate(session.StartDate),
                 FilledPlaces = numPeople,
                 Date = session.StartDate,
                 DateEnd = session.EndDate,
