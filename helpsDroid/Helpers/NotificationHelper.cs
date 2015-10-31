@@ -15,6 +15,7 @@ using Java.Lang;
 using AlertDialog = Android.App.AlertDialog;
 using Android.Support.V7.App;
 using helps.Droid.Recievers;
+using helps.Shared;
 using Java.Security;
 using Java.Util;
 using Java.Util.Concurrent.Atomic;
@@ -26,31 +27,19 @@ namespace helps.Droid.Helpers
         private static List<NotificationOption> items = new List<NotificationOption>();
         private static AtomicInteger counter = new AtomicInteger();
 
-        public static NotificationOption DefaultNotification = new NotificationOption()
-        {
-            title = "10 minutes before",
-            mins = 10,
-            selected = true
-        };
-
-        public NotificationHelper(int id, DateTime startDate)
+        public NotificationHelper(int id, bool isWorkshop)
         {
             items = Services.Notification.GetNotifications(id);
             if (items.Count == 0)
             {
-                items.Clear();
-                items.Add(new NotificationOption() { title = "10 minutes before", mins = 10 });
-                items.Add(new NotificationOption() { title = "30 minutes before", mins = 30 });
-                items.Add(new NotificationOption() { title = "1 hour before", mins = 60 });
-                items.Add(new NotificationOption() { title = "1 day before", mins = 1440 });
-                items.Add(new NotificationOption() { title = "1 week before", mins = 10080 });
-                items.Add(new NotificationOption() { title = "Test Notification", mins = (int)(startDate.AddMinutes(-1) - DateTime.Now).TotalMinutes });
+                items = (isWorkshop) ? 
+                    NotificationService.DefaultWorkshopNotifications : 
+                    NotificationService.DefaultSessionNotifications;
             }
         }
 
         public NotificationHelper()
         {
-
         }
 
         public void ShowFontSize(Context cntext)
@@ -60,88 +49,106 @@ namespace helps.Droid.Helpers
             builder.Create().Show();
         }
 
-        public void ShowDialog(Context contxt, int id, DateTime sessionDate)
+        public void ShowDialog(Context contxt, int id, DateTime sessionDate, bool isWorkshop)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(contxt);
             builder.SetTitle("Set Notifications");
             builder.SetMultiChoiceItems(items.Select(x => x.title).ToArray(), items.Select(x => x.selected).ToArray(), new MultiClickListener());
-            var clickListener = new ActionClickListener(contxt, id, sessionDate);
+            var clickListener = new ActionClickListener(contxt, id, sessionDate, isWorkshop);
             builder.SetPositiveButton("OK", clickListener);
             builder.SetNegativeButton("Cancel", clickListener);
             builder.Create().Show();
         }
 
-        private static void CreateAlarmManager(Context ctx, Notification notification, DateTime date, NotificationOption not, int workhopId)
+        private static void CreateAlarmManager(Context ctx, Notification notification, DateTime date, NotificationOption not, int sessionId)
         {
             DateTime dtBasis = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             AlarmManager alarmManager = (AlarmManager) ctx.GetSystemService(Context.AlarmService);
-            alarmManager.Set(AlarmType.RtcWakeup, (long) date.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds, GetPendingIntent(ctx, notification, not, workhopId));
+            alarmManager.Set(AlarmType.RtcWakeup, (long) date.ToUniversalTime().Subtract(dtBasis).TotalMilliseconds, GetPendingIntent(ctx, notification, not, sessionId));
         }
 
-        private static PendingIntent GetPendingIntent(Context ctx, Notification notification, NotificationOption not, int workshopId)
+        private static PendingIntent GetPendingIntent(Context ctx, Notification notification, NotificationOption not, int sessionId)
         {
             // Creates an explicit intent for an Activity in your app
             Intent notificationIntent = new Intent(ctx, typeof(NotificationPublisher));
-            int notificationId = Integer.ParseInt(workshopId.ToString() + not.mins);
+            int identifier = (not.isWorkshop) ? 1 : 0;
+            int notificationId = Integer.ParseInt(identifier + sessionId.ToString() + not.mins);
             notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION_ID, notificationId);
             notificationIntent.PutExtra(NotificationPublisher.NOTIFICATION, notification);
             return PendingIntent.GetBroadcast(ctx, notificationId, notificationIntent, PendingIntentFlags.UpdateCurrent);
         }
 
-        private static Notification GetNotification(Context ctx, int workshopId, NotificationOption not)
+        private static Notification GetNotification(Context ctx, int sessionId, NotificationOption not)
         {
-            var workshop = Services.Workshop.GetWorkshopFromBookingLocal(workshopId);
+            WorkshopDetail session = null;
+            if (not.isWorkshop)
+                session = Services.Workshop.GetWorkshopFromBookingLocal(sessionId);
+            else
+                session = Services.Session.GetSession(sessionId);
+
+            var prefix = (not.isWorkshop) ? "" : "Session with ";
             Notification.Builder mBuilder =
                 new Notification.Builder(ctx)
-                .SetSmallIcon(Resource.Drawable.notificationIcon)
-                .SetContentTitle(workshop.Title)
-                .SetContentText(workshop.Time + " - " + workshop.DateHumanFriendly)
-                .SetAutoCancel(true)
-                .SetColor(ctx.Resources.GetColor(Resource.Color.primary))
-                .SetDefaults(NotificationDefaults.All)
-                .SetStyle(new Notification.BigTextStyle().SetSummaryText(workshop.Title).BigText(workshop.Time + " - " + workshop.DateHumanFriendly + System.Environment.NewLine + workshop.Room));
+                    .SetSmallIcon(Resource.Drawable.notificationIcon)
+                    .SetContentTitle(prefix + session.Title)
+                    .SetContentText(session.Time + " - " + session.DateHumanFriendly)
+                    .SetAutoCancel(true)
+                    .SetColor(ctx.Resources.GetColor(Resource.Color.primary))
+                    .SetDefaults(NotificationDefaults.All)
+                    .SetStyle(
+                        new Notification.BigTextStyle().SetSummaryText(session.Title)
+                            .BigText(session.Time + " - " + session.DateHumanFriendly + System.Environment.NewLine +
+                                     session.Room));
+            try
+            {
+                Looper.Prepare();
+            }
+            catch (System.Exception ex) { }
 
-            Intent resultIntent = new Intent(ctx, new ViewWorkshopActivity().Class);
-            resultIntent.PutExtra("Id", workshopId);
+            Intent resultIntent = new Intent(ctx, new ViewSessionActivity().Class);
+            if (not.isWorkshop)
+                resultIntent = new Intent(ctx, new ViewWorkshopActivity().Class);
+            resultIntent.PutExtra("Id", sessionId);
             resultIntent.PutExtra("IsBooking", true);
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.Create(ctx);
             stackBuilder.AddParentStack(new ViewWorkshopActivity().Class);
             stackBuilder.AddNextIntent(resultIntent);
-            int notificationId = Integer.ParseInt(workshopId.ToString() + not.mins);
+            int identifier = (not.isWorkshop) ? 1 : 0;
+            int notificationId = Integer.ParseInt(identifier + sessionId.ToString() + not.mins);
             PendingIntent resultPendingIntent = stackBuilder.GetPendingIntent(notificationId, PendingIntentFlags.UpdateCurrent);
             mBuilder.SetContentIntent(resultPendingIntent);
             return mBuilder.Build();
         }
 
-        public static void ScheduleNotification(Context ctx, int workshopId, NotificationOption notification)
+        public static void ScheduleNotifications(Context ctx, int sessionId, bool isWorkshop)
         {
-            var notifications = new List<NotificationOption>();
-            notifications.Add(notification);
-            var workshop = Services.Workshop.GetWorkshop(workshopId);
-            Services.Notification.StoreNotifications(workshop.Id, workshop.Date, notifications);
-            Schedule(ctx, workshopId, notifications);
-        }
-
-        public static void ScheduleNotifications(Context ctx, int workshopId)
-        {
-            Schedule(ctx, workshopId, Services.Notification.GetNotifications(workshopId));
+            Schedule(ctx, Services.Notification.GetNotifications(sessionId, isWorkshop));
         }
 
         public static void ScheduleAllNotifications(Context ctx)
         {
-            var notifications = Services.Notification.GetAll();
+            var notifications = Services.Notification.GetSelected();
             Console.Out.WriteLine("HELPS: Notifications Found - " + notifications.Count);
-            Schedule(ctx, notifications.First().workshop, notifications);
+            Schedule(ctx, notifications);
         }
 
-        private static void Schedule(Context ctx, int workshopId, List<NotificationOption> notifications)
+        public static void ScheduleAllNotifications(Context ctx, bool isWorkshop)
+        {
+            var notifications = Services.Notification.GetNotifications(isWorkshop);
+            Schedule(ctx, notifications);
+        }
+
+        private static void Schedule(Context ctx, List<NotificationOption> notifications)
         {
             foreach (var notification in notifications.Where(x => x.selected))
-                CreateAlarmManager(ctx, GetNotification(ctx, workshopId, notification), notification.ScheduledDate, notification, workshopId);
+            {
+                CreateAlarmManager(ctx, GetNotification(ctx, notification.sessionId, notification),
+                    notification.ScheduledDate, notification, notification.sessionId);
+            }
         }
-
-        public class MultiClickListener : Java.Lang.Object, IDialogInterfaceOnMultiChoiceClickListener
+      
+        private class MultiClickListener : Java.Lang.Object, IDialogInterfaceOnMultiChoiceClickListener
         {
             public void OnClick(IDialogInterface dialog, int which, bool isChecked)
             {
@@ -149,17 +156,19 @@ namespace helps.Droid.Helpers
             }
         }
 
-        public class ActionClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
+        private class ActionClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
         {
             private Context ctx;
             private int id;
+            private bool isWorkshop;
             private DateTime sessionDate;
 
-            public ActionClickListener(Context ctx, int id, DateTime sessionDate) : base()
+            public ActionClickListener(Context ctx, int id, DateTime sessionDate, bool isWorkshop) : base()
             {
                 this.id = id;
                 this.sessionDate = sessionDate;
                 this.ctx = ctx;
+                this.isWorkshop = isWorkshop;
             }
 
             public void OnClick(IDialogInterface dialog, int which)
@@ -168,10 +177,10 @@ namespace helps.Droid.Helpers
                 {
                     Cancel(ctx, id);
                     Services.Notification.StoreNotifications(id, sessionDate, items);
-                    ScheduleNotifications(ctx, id);
+                    ScheduleNotifications(ctx, id, isWorkshop);
                     ViewHelper.CurrentActivity().RunOnUiThread(() =>
                     {
-                        ViewSessionBase.UpdateNotifications(id);
+                        ViewSessionBase.UpdateNotifications(id, isWorkshop);
                     });
                 }
             }

@@ -89,7 +89,7 @@ namespace helps.Droid
         private void UpdateFields()
         {
             if (booking != null)
-                ShowNotifications(session.Id);
+                ShowNotifications(session.Id, true);
             title.Text = session.Title;
             editTxtNotes.Text = session.Notes;
 
@@ -148,12 +148,12 @@ namespace helps.Droid
                 builder.SetTitle("Booked Successfully");
                 builder.SetMessage("Would you like to set up notifications now?");
                 builder.SetCancelable(false);
-                builder.SetPositiveButton("Create Notifications", delegate { ShowNotificationDialog(session.Id, session.Date); });
+                builder.SetPositiveButton("Create Notifications", delegate { ShowNotificationDialog(session.Id, session.Date, true); });
                 builder.SetNegativeButton("Close", delegate { });
                 builder.Show();
                 booking = new WorkshopBooking();
                 UpdateButtons();
-                ShowNotifications(session.Id);
+                ShowNotifications(session.Id, true);
             }
             else
                 DialogHelper.ShowDialog(this, response.Message, response.Title);
@@ -183,7 +183,7 @@ namespace helps.Droid
 
             if (response.Success)
             {
-                DialogHelper.ShowDialog(this, "The workshop has been successfully cancelled", "Workshop Cancelled");
+                DialogHelper.ShowDialog(this, "The sessionId has been successfully cancelled", "Workshop Cancelled");
                 NotificationHelper.Cancel(this, session.Id);
                 booking = null;
                 UpdateButtons();
@@ -202,7 +202,7 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public void ShowNotificationDialog(View view)
         {
-            ShowNotificationDialog(session.Id, session.Date);
+            ShowNotificationDialog(session.Id, session.Date, true);
         }
     }
 }

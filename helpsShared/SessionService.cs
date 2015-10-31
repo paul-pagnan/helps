@@ -51,7 +51,7 @@ namespace helps.Shared
                 userId = AuthService.GetCurrentUser().StudentId,
                 notes = notes
             };
-            var response = await helpsClient.PutAsJsonAsync("api/workshop/booking/update", request);
+            var response = await helpsClient.PutAsJsonAsync("api/sessionId/booking/update", request);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsAsync<GetResponse<GenericResponse>>();

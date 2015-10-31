@@ -113,7 +113,7 @@ namespace helps.Shared
 
         public async Task<GenericResponse> Book(CancellationToken ct, int id)
         {
-            var queryString = "workshop=" + id;
+            var queryString = "workshopId=" + id;
             return await BookingBase(ct, "api/workshop/booking/create?", queryString);
         }
 
@@ -123,7 +123,7 @@ namespace helps.Shared
             if (workshop != null && workshop.ProgramId.HasValue) 
                 return await CancelProgram(ct, workshop.ProgramId.Value);
 
-            var queryString = "workshop=" + id;
+            var queryString = "workshopId=" + id;
             var response = await BookingBase(ct, "api/workshop/booking/cancel?", queryString);
             if(response.Success)
                 workshopBookingTable.RemoveBookingByWorkshopId(id);

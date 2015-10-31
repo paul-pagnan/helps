@@ -93,22 +93,22 @@ namespace helps.Droid
         }
 
 
-        private void InitElements(Android.Views.View context, Android.Views.LayoutInflater inflater)
+        private void InitElements(Android.Views.View view, Android.Views.LayoutInflater inflater)
         {
             listAdapter = new BookingsListAdapter(inflater, Resources, true);
-            listView = context.FindViewById<ListView>(GetListView());
+            listView = view.FindViewById<ListView>(GetListView());
             listView.Adapter = listAdapter;
 
-            refresher = context.FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefresh);
+            refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefresh);
             refresher.Refresh += async (sender, e) =>
             {
-                await Task.Factory.StartNew(() => LoadData(false, true));
+                await Task.Factory.StartNew(() => LoadData(view, false, true));
                 NotifyListUpdate();
                 refresher.Refreshing = false;
             };
         }
 
-        private async void LoadData(bool localOnly, bool force = false)
+        private async void LoadData(Android.Views.View view, bool localOnly, bool force = false)
         {
             try
             {
@@ -118,6 +118,7 @@ namespace helps.Droid
                 listAdapter.AddAll(list);
                 NotifyListUpdate();
                 PostListUpdateView(localOnly, list.Count == 0);
+                NotificationHelper.ScheduleAllNotifications(view.Context, isWorkshop);
             }
             catch (Exception ex)
             {
@@ -179,10 +180,10 @@ namespace helps.Droid
         {
             cts.Cancel();
             //Load from local first
-            await Task.Factory.StartNew(() => LoadData(true));
+            await Task.Factory.StartNew(() => LoadData(context, true));
             listActioner = new ListActionHelper(listAdapter, listView, activity, isWorkshop);
             //Do background refresh
-            await Task.Factory.StartNew(() => LoadData(false));
+            await Task.Factory.StartNew(() => LoadData(context, false));
         }
 
         private int GetLayout()

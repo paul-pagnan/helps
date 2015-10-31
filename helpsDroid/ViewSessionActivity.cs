@@ -53,7 +53,7 @@ namespace helps.Droid
 
         private void UpdateFields()
         {
-            ShowNotifications(session.Id);
+            ShowNotifications(session.Id, false);
             title.Text = session.Title;
             editTxtNotes.Text = session.Notes;
 
@@ -96,7 +96,7 @@ namespace helps.Droid
         [Java.Interop.Export()]
         public void ShowNotificationDialog(View view)
         {
-            ShowNotificationDialog(session.Id, session.Date);
+            ShowNotificationDialog(session.Id, session.Date, false);
         }
     }
 }

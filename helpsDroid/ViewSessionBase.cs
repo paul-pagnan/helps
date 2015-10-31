@@ -59,10 +59,10 @@ namespace helps.Droid
             }
         }
 
-        protected void ShowNotifications(int id)
+        protected void ShowNotifications(int id, bool isWorkshop)
         {
             FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Visible;
-            UpdateNotifications(id);
+            UpdateNotifications(id, isWorkshop);
         }
 
         protected void InitComponents()
@@ -112,10 +112,10 @@ namespace helps.Droid
             };
         }
 
-        protected void ShowNotificationDialog(int id, DateTime startDate)
+        protected void ShowNotificationDialog(int id, DateTime startDate, bool isWorkshop)
         {
-            var notifier = new NotificationHelper(id, startDate);
-            notifier.ShowDialog(this, id, startDate);
+            var notifier = new NotificationHelper(id, isWorkshop);
+            notifier.ShowDialog(this, id, startDate, isWorkshop);
         }
 
         private void AnimateButton()
@@ -196,7 +196,7 @@ namespace helps.Droid
         protected void SetToolbarColor(Color toolbarColor)
         {
             color = toolbarColor;
-            //Style the view to match workshop
+            //Style the view to match sessionId
             Toolbar.SetBackgroundColor(color);
             toolbarLayout = FindViewById<RelativeLayout>(Resource.Id.layouttoolbarLarge);
             toolbarLayout.SetBackgroundColor(color);
@@ -209,9 +209,9 @@ namespace helps.Droid
             SetButtonColor();
         }
 
-        public static void UpdateNotifications(int id)
+        public static void UpdateNotifications(int id, bool isWorkshop)
         {
-            var nots = Services.Notification.GetNotifications(id);
+            var nots = Services.Notification.GetNotifications(id, isWorkshop);
             notifications.Text = (nots.Any(x => x.selected)) ? "" : "No notifications set ";
             foreach (var notification in nots.Where(x => x.selected))
                 notifications.Text += notification.title + System.Environment.NewLine;

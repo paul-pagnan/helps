@@ -67,6 +67,13 @@ namespace helps.Shared.Database
             if (Current.HasValue)
             {
                 foreach (var item in list)
+                {
+                    if(NotificationTable.GetAllWorkshopNotifications(item.workshopId).Count == 0)
+                        NotificationTable.InsertAll(NotificationService.DefaultWorkshopNotifications, item.workshopId,
+                            item.starting);
+                }
+
+                foreach (var item in list)
                     helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.workshopId == item.workshopId);
                 if (Current.Value)
                     helpsDatabase.Database.Table<WorkshopBooking>().Delete(x => x.ending > DateTime.Now);
