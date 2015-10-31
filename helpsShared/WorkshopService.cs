@@ -33,7 +33,6 @@ namespace helps.Shared
                 TestConnection();
                 
                 var response = await helpsClient.GetAsync("api/workshop/workshopSets/true");
-
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<GetResponse<WorkshopSet>>();
@@ -47,6 +46,32 @@ namespace helps.Shared
             return workshopSetTable.GetAll();
         }
 
+        public async Task<int> GetWaitListCount(CancellationToken ct, int workshopId)
+        {
+            TestConnection();
+            var response = await helpsClient.GetAsync("api/workshop/wait/count?workshopId=" + workshopId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsAsync<WaitListCount>();
+                return result.Count;
+            }
+            return -1;
+        }
+
+        public async Task<bool> IsWaitlisted(int id)
+        {
+            TestConnection();
+            var response = await helpsClient.GetAsync("api/workshop/wait?workshopId=" + id + "&studentId=" + AuthService.GetCurrentUser().StudentId);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsAsync<WaitList>();
+                return result.IsWaitListed;
+            }
+            return false;
+        }
+
+
         public WorkshopDetail GetWorkshop(int workshopId)
         {
             var workshop = workshopTable.Get(workshopId);
@@ -54,6 +79,7 @@ namespace helps.Shared
                 return Translater.TranslateDetail(workshopTable.GetProgramWorkshops(workshop.ProgramId.GetValueOrDefault()));
             return Translater.TranslateDetail(new List<Workshop>() { workshop });
         }
+
 
         public async Task<WorkshopDetail> GetWorkshopFromBooking(int workshopId)
         {
@@ -192,6 +218,20 @@ namespace helps.Shared
                 return ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);
             }
             return ResponseHelper.CreateErrorResponse("Error", "An unknown error occurred, please try again");
+        }
+
+        public async Task<GenericResponse> JoinWaitlist(int id)
+        {
+            if (!IsConnected())
+                return ResponseHelper.CreateErrorResponse("No Network Connection", "Please check your network connection and try again");
+            var response = await helpsClient.PostAsync("api/workshop/wait/create?" + "workshopId=" + id + "&studentId=" + AuthService.GetCurrentUser().StudentId + "&userId=" + AuthService.GetCurrentUser().StudentId, null);
+            if (!response.IsSuccessStatusCode)
+                return ResponseHelper.CreateErrorResponse("Error", "An unknown error occured");
+
+            var result = await response.Content.ReadAsAsync<GetResponse<GenericResponse>>();
+            return (result.IsSuccess) ? 
+                ResponseHelper.Success() :
+                ResponseHelper.CreateErrorResponse("Error", result.DisplayMessage);
         }
     }
 }

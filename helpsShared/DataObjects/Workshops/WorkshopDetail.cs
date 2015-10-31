@@ -21,6 +21,6 @@ namespace helps.Shared.DataObjects
         public string Type { get; set; }
         public int WorkshopSetId { get; set; }
         public string Notes { get; set; }
-        public int Attended { get; set; }
+        public bool Attended { get; set; }
     }
 }

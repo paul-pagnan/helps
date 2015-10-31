@@ -27,7 +27,7 @@ namespace helps.Shared.Helpers
                     DateHumanFriendly = HumanizeDate(booking.starting),
                     Location = await MiscServices.GetCampus(booking.campusID),
                     FilledPlaces = -1,
-                    TotalPlaces = booking.maximum
+                    TotalPlaces = booking.cutoff ?? booking.maximum
                 });
             }
             return translated;
@@ -82,7 +82,8 @@ namespace helps.Shared.Helpers
                 IsGroup = session.IsGroup,
                 LecturerComment = session.LecturerComment,
                 Subject = session.Subject,
-                AssistanceText = session.AssistanceText
+                AssistanceText = session.AssistanceText,
+                Attended = session.Attended == 1
             };
         }
 
@@ -116,7 +117,7 @@ namespace helps.Shared.Helpers
                 FilledPlaces = workshop.BookingCount,
                 Date = workshop.StartDate,
                 DateEnd = workshop.EndDate,
-                TotalPlaces = workshop.maximum,
+                TotalPlaces = workshop.cutoff ?? workshop.maximum,
                 ProgramId = workshop.ProgramId,
                 Sessions = sessions,
                 Type = workshop.type,
@@ -135,14 +136,15 @@ namespace helps.Shared.Helpers
                 DateHumanFriendly = HumanizeDate(booking.starting),
                 TargetGroup = booking.targetingGroup ?? "N/A",
                 Description = booking.description ?? "N/A",
-                TotalPlaces = booking.maximum,
+                TotalPlaces = booking.cutoff ?? booking.maximum,
                 Date = booking.starting,
                 DateEnd = booking.ending,
                 FilledPlaces = -1,
                 Sessions = new List<SessionPreview>(),
                 Type = booking.type,
                 WorkshopSetId = booking.WorkShopSetID,
-                Notes = booking.notes
+                Notes = booking.notes,
+                Attended = booking.attended.HasValue 
             };
         }
 
@@ -173,7 +175,7 @@ namespace helps.Shared.Helpers
                         DateHumanFriendly = (workshop.type == "multiple") ? HumanizeDate(workshop.ProgramStartDate.GetValueOrDefault(), workshop.ProgramEndDate.GetValueOrDefault()) : HumanizeDate(workshop.StartDate),
                         Location = workshop.campus,
                         FilledPlaces = workshop.BookingCount,
-                        TotalPlaces = workshop.maximum
+                        TotalPlaces = workshop.cutoff ?? workshop.maximum
                     });
                 }
             }

@@ -334,6 +334,10 @@
                     p1:textAppearance="?android:attr/textAppearanceMedium"
                     p1:layout_width="match_parent"
                     p1:layout_height="wrap_content"
+                    p1:gravity="center"
+                    p1:padding="10dp"
+                    p1:textColor="@color/warning"
+                    p1:textStyle="bold"
                     p1:id="@+id/txtWaitlist"
                     p1:visibility="gone" />
             </LinearLayout>

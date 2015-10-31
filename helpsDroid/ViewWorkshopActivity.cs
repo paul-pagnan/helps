@@ -22,8 +22,10 @@ namespace helps.Droid
         private Button bookButton;
         private Button cancelButton;
         private Button waitlistButton;
+        private TextView waitlistText;
         private static WorkshopDetail session;
         private WorkshopBooking booking;
+        private bool isWaitlisted;
 
         protected override int LayoutResource
         {
@@ -58,6 +60,10 @@ namespace helps.Droid
                 //Load booking information so the buttons can be updated
                 //Get Local Data First, then update later
                 await Task.Factory.StartNew(() => LoadBooking(true));
+
+                if(!extras.GetBoolean("IsBooking"))
+                    isWaitlisted = await Services.Workshop.IsWaitlisted(session.Id);
+
                 //Do a background Sync now
                 await Task.Factory.StartNew(() => LoadBooking(false, false));
             }
@@ -66,12 +72,21 @@ namespace helps.Droid
         private void UpdateButtons()
         {
             bookButton.Visibility = ViewStates.Gone;
+            waitlistButton.Visibility = ViewStates.Gone;
             cancelButton.Visibility = ViewStates.Gone;
+
+            if (isWaitlisted)
+            {
+                waitlistText.Visibility = ViewStates.Visible;
+                return;
+            }
+
             if (session.FilledPlaces >= session.TotalPlaces)
             {
                 waitlistButton.Visibility = ViewStates.Visible;
                 return;
             }
+  
             if (booking == null)
                 bookButton.Visibility = ViewStates.Visible;
             else
@@ -108,7 +123,6 @@ namespace helps.Droid
                 sessionsList.AddView(view);
             }
             UpdateButtons();
-
         }
 
         private void InitWorkshopComponents()
@@ -126,6 +140,7 @@ namespace helps.Droid
             bookButton = FindViewById<Button>(Resource.Id.BookBtn);
             cancelButton = FindViewById<Button>(Resource.Id.CancelBtn);
             waitlistButton = FindViewById<Button>(Resource.Id.WaitlistBtn);
+            waitlistText = FindViewById<TextView>(Resource.Id.txtWaitlist);
             if (HideEdit)
                 FindViewById<FloatingActionButton>(Resource.Id.fab).Visibility = ViewStates.Gone;
         }
@@ -203,6 +218,44 @@ namespace helps.Droid
         public void ShowNotificationDialog(View view)
         {
             ShowNotificationDialog(session.Id, session.Date, true);
+        }
+
+        [Java.Interop.Export()]
+        public async void Waitlist(View view)
+        {
+            var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            dialog.Show();
+            cts.Cancel();
+            var count = await Services.Workshop.GetWaitListCount(cts.Token, session.Id);
+            dialog.Hide();
+
+            var builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Are you sure?");
+            builder.SetMessage("There are currently " + count + " other students on the waitlist" + Environment.NewLine + "You will be added to the waitlist at position " + (count + 1) + Environment.NewLine + "Are you sure you want to join?");
+            builder.SetCancelable(false);
+            builder.SetPositiveButton("Yes", delegate { ActuallyWaitlist(); });
+            builder.SetNegativeButton("No", delegate { });
+            builder.Show();
+        }
+
+        private async void ActuallyWaitlist()
+        {
+            var dialog = DialogHelper.CreateProgressDialog("Please wait...", this);
+            dialog.Show();
+            GenericResponse response = null;
+            cts.Cancel();
+            response = await Services.Workshop.JoinWaitlist(session.Id);
+            dialog.Hide();
+
+            if (response.Success)
+            {
+                DialogHelper.ShowDialog(this, "You have been placed on the waitlist successfully", "Success");
+                isWaitlisted = true;
+                FindViewById<RelativeLayout>(Resource.Id.notifications).Visibility = ViewStates.Gone;
+            }
+            else
+                DialogHelper.ShowDialog(this, response.Message, response.Title);
+            UpdateButtons();
         }
     }
 }
