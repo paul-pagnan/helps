@@ -340,6 +340,28 @@
                     p1:textStyle="bold"
                     p1:id="@+id/txtWaitlist"
                     p1:visibility="gone" />
+                <TextView
+                    p1:text="Attended"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:gravity="center"
+                    p1:padding="10dp"
+                    p1:textColor="@color/success"
+                    p1:textStyle="bold"
+                    p1:id="@+id/txtAttended"
+                    p1:visibility="gone" />
+                <TextView
+                    p1:text="Did Not Attended"
+                    p1:textAppearance="?android:attr/textAppearanceMedium"
+                    p1:layout_width="match_parent"
+                    p1:layout_height="wrap_content"
+                    p1:gravity="center"
+                    p1:padding="10dp"
+                    p1:textColor="@color/error"
+                    p1:textStyle="bold"
+                    p1:id="@+id/txtNotAttended"
+                    p1:visibility="gone" />
             </LinearLayout>
         </ScrollView>
         <ScrollView

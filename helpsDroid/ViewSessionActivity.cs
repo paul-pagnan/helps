@@ -1,3 +1,4 @@
+using System;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -85,6 +86,14 @@ namespace helps.Droid
 
             if (session.Reason == null)
                 FindViewById<RelativeLayout>(Resource.Id.reason).Visibility = ViewStates.Gone;
+
+            if (session.Date < DateTime.Now)
+            {
+                if (session.Attended)
+                    FindViewById<TextView>(Resource.Id.txtAttended).Visibility = ViewStates.Visible;
+                else
+                    FindViewById<TextView>(Resource.Id.txtNotAttended).Visibility = ViewStates.Visible;
+            }
         }
 
         [Java.Interop.Export()]

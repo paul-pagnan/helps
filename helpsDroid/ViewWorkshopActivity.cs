@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
@@ -75,22 +76,34 @@ namespace helps.Droid
             waitlistButton.Visibility = ViewStates.Gone;
             cancelButton.Visibility = ViewStates.Gone;
 
-            if (isWaitlisted)
+            if (session.Date > DateTime.Now)
             {
-                waitlistText.Visibility = ViewStates.Visible;
-                return;
-            }
+                if (isWaitlisted)
+                {
+                    waitlistText.Visibility = ViewStates.Visible;
+                    return;
+                }
 
-            if (session.FilledPlaces >= session.TotalPlaces)
-            {
-                waitlistButton.Visibility = ViewStates.Visible;
-                return;
+                if (session.FilledPlaces >= session.TotalPlaces)
+                {
+                    waitlistButton.Visibility = ViewStates.Visible;
+                    return;
+                }
+
+                if (booking == null)
+                    bookButton.Visibility = ViewStates.Visible;
+                else
+                    cancelButton.Visibility = ViewStates.Visible;
             }
-  
-            if (booking == null)
-                bookButton.Visibility = ViewStates.Visible;
             else
-                cancelButton.Visibility = ViewStates.Visible;
+            {
+                if (booking == null)
+                    return;
+                if (booking.attended.HasValue)
+                    FindViewById<TextView>(Resource.Id.txtAttended).Visibility = ViewStates.Visible;
+                else
+                    FindViewById<TextView>(Resource.Id.txtNotAttended).Visibility = ViewStates.Visible;
+            }
         }
 
 
