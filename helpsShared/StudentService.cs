@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using helps.Shared.Helpers;
+using SQLite;
 
 namespace helps.Shared
 {
@@ -39,6 +40,18 @@ namespace helps.Shared
                     return ResponseHelper.CreateErrorResponse("Registration Failed", decodedResponse.DisplayMessage);
             }
             return ResponseHelper.CreateErrorResponse("Registration Failed", "An unknown error occurred");            
+        }
+
+        public async Task<Student> GetStudent()
+        {
+            var response = await helpsClient.GetAsync("api/student?studentId=" + AuthService.GetCurrentUser().StudentId);
+            if (response.IsSuccessStatusCode)
+            {
+                var decodedResponse = await response.Content.ReadAsAsync<StudentResponse>();
+                if (decodedResponse.IsSuccess)
+                    return decodedResponse.Student;
+            }
+            return null;
         }
     }
 }

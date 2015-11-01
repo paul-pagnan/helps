@@ -54,29 +54,50 @@ namespace helps.Droid
 
         private void InitComponents()
         {
-
             name = FindViewById<TextView>(Resource.Id.textViewNameValue);
             name.Text = CurrentUser.FirstName + " " + CurrentUser.LastName;
-
             country = FindViewById<Spinner>(Resource.Id.country);
             country.Adapter = GetCountries();
-
             language = FindViewById<Spinner>(Resource.Id.language);
             language.Adapter = GetLanguages();
-
             date = FindViewById<EditText>(Resource.Id.studentDateDOB);
-
             month = FindViewById<EditText>(Resource.Id.studentMonthDOB);
-
             year = FindViewById<EditText>(Resource.Id.studentYearDOB);
-
             degree = (RadioGroup)FindViewById(Resource.Id.radioGroupDegree);
-
             status = (RadioGroup)FindViewById(Resource.Id.radioGroupStatus);
-
             viewFlipper = FindViewById<ViewFlipper>(Resource.Id.welcomeviewflipper);
+            Populate();
         }
 
+        private async void Populate()
+        {
+            var student = await Services.Student.GetStudent();
+            if (student != null)
+            {
+                if (student.dob.HasValue)
+                {
+                    date.Text = ParseTwoDigits(student.dob.Value.Day.ToString());
+                    month.Text = ParseTwoDigits(student.dob.Value.Month.ToString());
+                    year.Text = student.dob.Value.Year.ToString();
+                }
+                if (student.country_origin != null)
+                    country.Adapter = GetCountries(student.country_origin);
+
+                if (student.first_language != null)
+                    language.Adapter = GetLanguages(student.first_language);
+
+                if (student.degree != null)
+                    degree.Check(degree.GetChildAt((student.degree.Trim() == "UG") ? 0 : 1).Id);
+
+                if (student.status != null)
+                    status.Check(status.GetChildAt((student.status.Trim() == "Permanent") ? 0 : 1).Id);
+            }
+        }
+
+        private string ParseTwoDigits(string v)
+        {
+            return (v.Length > 1) ? v : "0" + v;
+        }
 
         [Java.Interop.Export()]
         public void Flip(View view)
@@ -123,7 +144,7 @@ namespace helps.Droid
             }
         }
 
-        private ArrayAdapter GetCountries()
+        private ArrayAdapter GetCountries(string overrideValue = "Australia")
         {
             
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
@@ -139,10 +160,10 @@ namespace helps.Droid
                 }
                 catch { }
             }
-            return SortAndAssign(countries, "Australia");
+            return SortAndAssign(countries, overrideValue);
         }
 
-        private ArrayAdapter GetLanguages()
+        private ArrayAdapter GetLanguages(string overrideValue = "English")
         {
 
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
@@ -158,7 +179,7 @@ namespace helps.Droid
                 }
                 catch { }
             }
-            return SortAndAssign(languages, "English");
+            return SortAndAssign(languages, overrideValue);
         }
 
         private ArrayAdapter SortAndAssign(LinkedList<string> list, string DefaultValue)
