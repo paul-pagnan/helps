@@ -33,8 +33,8 @@ namespace helps.Droid
             //Check if the user has an active session
             if (CurrentUser != null)
                 SwitchActivity();
-            else if (!Intent.HasExtra("logout"))
-                SkipLogin();
+            //else if (!Intent.HasExtra("logout"))
+            //    SkipLogin();
         }
 
         public async void SkipLogin()
