@@ -47,6 +47,8 @@
     <Compile Include="Database\Tables\NotificationTable.cs" />
     <Compile Include="Database\Tables\WorkshopTable.cs" />
     <Compile Include="DataObjects\Auth\DetailsInputRequest.cs" />
+    <Compile Include="DataObjects\Generic\StudentResponse.cs" />
+    <Compile Include="DataObjects\Misc\Student.cs" />
     <Compile Include="DataObjects\Misc\WaitList.cs" />
     <Compile Include="DataObjects\Misc\WaitListCount.cs" />
     <Compile Include="DataObjects\Session\SessionDetail.cs" />

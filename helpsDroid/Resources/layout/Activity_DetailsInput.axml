@@ -108,7 +108,7 @@
                             p1:layout_height="wrap_content"
                             p1:layout_marginRight="10dp" />
                         <TextView
-                            p1:text="Gender"
+                            p1:text="Name"
                             p1:textAppearance="?android:attr/textAppearanceMedium"
                             p1:layout_width="wrap_content"
                             p1:layout_height="35.5dp"
@@ -132,19 +132,22 @@
                             p1:layout_width="wrap_content"
                             p1:layout_height="wrap_content"
                             p1:id="@+id/studentDateDOB"
-                            p1:hint="DD" />
+                            p1:hint="DD"
+                            p1:maxLength="2" />
                         <EditText
                             p1:inputType="number"
                             p1:layout_width="wrap_content"
                             p1:layout_height="wrap_content"
                             p1:id="@+id/studentMonthDOB"
-                            p1:hint="MM" />
+                            p1:hint="MM"
+                            p1:maxLength="2" />
                         <EditText
                             p1:inputType="number"
                             p1:layout_width="wrap_content"
                             p1:layout_height="wrap_content"
                             p1:id="@+id/studentYearDOB"
-                            p1:hint="YYYY" />
+                            p1:hint="YYYY"
+                            p1:maxLength="4" />
                     </LinearLayout>
                     <TextView
                         p1:text="Degree"

@@ -47,8 +47,8 @@ namespace helps.Droid
             var list = new List<MyList>();
             list.Add(new MyList() { Id = 1, title = "Notifications Enabled", hideArrow = true });
             list.Add(new MyList() { Id = 2, title = "Update My Information" });
-            list.Add(new MyList() { Id = 3, title = "Font Size" });
-            list.Add(new MyList() { Id = 4, title = "Change Skin" });
+            //list.Add(new MyList() { Id = 3, title = "Font Size" });
+            //list.Add(new MyList() { Id = 4, title = "Change Skin" });
             list.Add(new MyList() { Id = 5, title = "Logout", hideArrow = true });
             settingsListAdapter.AddAllSettings(list);
         }
